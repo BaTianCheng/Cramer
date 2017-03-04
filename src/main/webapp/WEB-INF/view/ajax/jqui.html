@@ -1,0 +1,886 @@
+	<div class="row ">
+    		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+    <h1 class="page-title txt-color-blueDark"> 
+				<i class="fa fa-desktop fa-fw"></i>
+ UI 组件 
+			<span>
+    > JQuery UI 
+</span>
+		
+</h1>
+</div>
+
+			<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+    		<ul id="sparks" >
+    			<li class="sparks-info">
+    				 <h5> 个人收入 <span class="txt-color-blue">$47,171</span></h5>
+				<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+    					1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+				
+</div>
+			
+</li>
+			<li class="sparks-info">
+    				<h5> 站点流量 <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+				<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+    					110,150,300,130,400,240,220,310,220,300, 270, 210
+				
+</div>
+			
+</li>
+			<li class="sparks-info">
+    				<h5> 站点营收 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+				<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+    					110,150,300,130,400,240,220,310,220,300, 270, 210
+				
+</div>
+			
+</li>
+		
+</ul>
+	
+</div>
+	
+</div>
+ 
+<div class="row">
+    	<div class="col-sm-6 col-md-6 col-lg-6">
+    		<div class="well well-sm well-light"">
+    			<h3>对话框</h3>
+			<a href="#" id="dialog_link" class="btn btn-info">打开对话框</a>
+			&nbsp;
+			<a href="#" id="modal_link" class="btn bg-color-purple txt-color-white">打开模型对话框</a>
+		
+</div>
+
+		<div class="well well-sm well-light"">
+    			<h3>
+				Jquery 标签
+				<br>
+				<small>简单标签</small>
+			</h3>
+			<div id="tabs">
+				<ul>
+					<li>
+    <a href="#tabs-a">标签1</a>
+</li>
+					<li>
+    <a href="#tabs-b">标签2</a>
+</li>
+					<li>
+    <a href="#tabs-c">标签3</a>
+</li>
+				
+</ul>
+				
+				<div id="tabs-a">
+					<p>此前，李克强和梅德韦杰夫共同主持了中俄总理第十九次定期会晤。会晤后，两国总理签署联合公报，并见证经贸、投资、能源、金融等领域近40项重要文件的签署。</p>
+				
+</div>
+				
+				<div id="tabs-b">
+					<p>李克强是在和俄罗斯总理梅德韦杰夫共同会见记者时提到“套娃”的。这是一种俄罗斯特产的木制玩具，由多个一样图案的空心木娃娃一个套一个组成，最多可达十多个。</p>
+				
+</div>
+				
+				<div id="tabs-c">
+					<p>中国总理回忆起在农村生活的经历。“我年轻时在中国农村生活多年，亲身经历过吃不饱饭的艰难岁月。”李克强说，吃一顿饱饭可能很快就会忘记，但饥饿留下的印象永生难忘。</p>
+				
+</div>
+			
+</div>
+<script>
+    $(document).ready(function(){
+        $('#tabs').tabs();
+    });
+</script>
+
+			<hr class="simple">
+			<h3>动态标签
+				<br>
+				<small>点击按钮以添加另外一个Tab页</small>
+			</h3> 
+			<p>
+				<button id="add_tab" class="btn btn-primary">增加标签</button>
+			</p>
+
+			<div id="tabs2">
+				<ul>
+					<li>
+    <a href="#tabs-1">标签1</a>
+</li>
+				
+</ul>
+				<div id="tabs-1">
+					<p>
+						周小平，1981年4月出生。四川自贡人，知名网络写手、评论人。现在新浪微博上的实名注册账号中拥有近47万粉丝，自我注明身份为’互联网资深分析师‘，’网权力‘+’文化冷战九大绝招‘概念提出者“。代表作品有知名博文《请不要辜负这个时代》、《你的中国你的党》、《美国对华文化冷战的九大绝招》等。
+					</p>
+				
+</div>
+			
+</div>
+<script>
+    $(document).ready(function(){
+        $('#tabs2').tabs();
+    });
+</script>
+
+							<div id="addtab" title="这里是新建标签提示">
+					<form id="addtabForm">
+						<fieldset >
+								<input name="authenticity_token" type="hidden">
+							<div class="form-group ">
+									<label>标签标题</label> 
+								<input class="form-control" id="tab_title" value="" placeholder="文本域" type="text">
+							
+</div>
+
+							<div class="form-group ">
+									<label>内容</label>
+								<textarea class="form-control" name="tab_content" id="tab_content" placeholder="标签内容" rows="3"></textarea>
+							
+</div>
+						
+</fieldset>
+					</form>
+				
+</div>
+				<script>
+$(document).ready(function(){
+    $('#addtab').dialog({
+        					autoOpen : false
+,
+					width : 600
+,
+					resizable : false
+,
+					modal : true
+,
+					buttons : [
+						{
+    html : "<i class='fa fa-times'></i>&nbsp; 取消",
+    class : "btn btn-default",
+    click : function() {
+							$(this).dialog("close");
+						
+    }
+}
+,
+						{
+    html : "<i class='fa fa-plus'></i>&nbsp; 增加",
+    class : "btn btn-danger",
+    click : function() {
+							addTab();
+							$(this).dialog("close");
+						
+    }
+}
+					
+]
+				
+    });
+});
+</script>
+			
+		
+</div>
+
+		<div class="well well-sm well-light"">
+    			<h3>滑条
+				<br>
+				<small>带进度提示的水平滑条</small>
+			</h3> 
+			<input type="text" class="slider slider-primary" id="g1"
+    data-slider-handle="round"
+				    data-slider-max="500"
+				    data-slider-value="185"
+			 >
+
+			<input type="text" class="slider slider-success" id="g1" value=""
+    data-slider-handle="square"
+    				    data-slider-max="1000"
+				    data-slider-step="1"
+				    data-slider-value="[150,760]"
+			 >
+			
+			<h3>用法 <small>非常简单...</small> </h3>
+			
+<pre><code><strong>&lt;input class="slider slider-primary" data-slider-min="10" ..  /&gt;</strong></code>
+
+data-slider-min="10"       <span class="text-muted"> // slider min value</span>
+data-slider-max="500"      <span class="text-muted"> // slider max value</span>
+data-slider-value="315"    <span class="text-muted"> // handler position on slider</span>
+data-slider-handle="round" <span class="text-muted"> // round or square</span> </pre>
+
+		
+</div>
+
+		<div class="well well-sm well-light"">
+    			<h3>微调</h3> 
+			<div class="row">
+    				<div class="col-sm-6 col-md-6 col-lg-6">
+    					<div class="form-group">
+						<label for="h-input">右侧微调</label>
+						<input type="text" class="form-control "  id="spinner-decimal" name="spinner-decimal" value="7.99">
+<script>
+    $(document).ready(function(){
+        $("#spinner-decimal").spinner({step : 0.01,numberFormat : "n"});
+    });
+</script>
+					</div> 
+				
+</div>
+ 
+				<div class="col-sm-6 col-md-6 col-lg-6">
+    					<div class="form-group">
+						<label for="h-input">左侧右侧</label>
+						<input type="text" class="form-control spinner-left "  id="spinner" name="spinner" value="1">
+<script>
+    $(document).ready(function(){
+        $("#spinner").spinner({});
+    });
+</script>
+					</div> 
+				
+</div>
+			
+</div>
+		
+</div>
+	
+</div>
+	
+	<div class="col-sm-6 col-md-6 col-lg-6">
+    		<div class="well well-sm well-light"">
+    			<h3>菜单 <br> <small>简单菜单列表</small></h3>
+			<ul id="menu">
+    				<li>
+    <a href="javascript:void(0);"
+       class="ui-state-disabled $juiMenuItemClass">一级条目</a>
+</li>
+				<li>
+    <a href="javascript:void(0);">一级条目</a>
+</li>
+				<li>
+    <a href="javascript:void(0);">一级条目</a>
+</li>
+				<li>
+    <a href="javascript:void(0);">一级条目</a>
+</li>
+				<li>
+    <a href="javascript:void(0);">一级条目</a>
+    <ul>
+        					<li>
+    <a href="javascript:void(0);">二级条目</a>
+</li>
+					<li>
+    <a href="javascript:void(0);">二级条目</a>
+</li>
+					<li>
+    <a href="javascript:void(0);">二级条目</a>
+</li>
+				
+    </ul>
+</li>
+				<li>
+    <a href="javascript:void(0);">一级条目</a>
+</li>
+				<li>
+    <a href="javascript:void(0);">一级条目</a>
+    <ul>
+        					<li>
+    <a href="javascript:void(0);">二级条目</a>
+    <ul>
+        						<li>
+    <a href="javascript:void(0);"
+       class="ui-state-disabled $juiMenuItemClass">三级条目</a>
+</li>
+						<li>
+    <a href="javascript:void(0);">三级条目</a>
+</li>
+						<li>
+    <a href="javascript:void(0);">三级条目</a>
+</li>
+					
+    </ul>
+</li>
+					<li>
+    <a href="javascript:void(0);">二级条目</a>
+    <ul>
+        						<li>
+    <a href="javascript:void(0);"
+       class="ui-state-disabled $juiMenuItemClass">三级条目</a>
+</li>
+						<li>
+    <a href="javascript:void(0);">三级条目</a>
+</li>
+						<li>
+    <a href="javascript:void(0);">三级条目</a>
+</li>
+					
+    </ul>
+</li>
+				
+    </ul>
+</li>
+			
+</ul>
+$(document).ready(function(){
+    $("#menu").menu();
+});
+
+		
+</div>
+		
+		<div class="well well-sm well-light"">
+    			<h3>自动完成输入
+				<br>
+				<small>输入部分文字，会提示你完成剩下部分内容的输入</small>
+			</h3>
+			
+			<input id="" name="" value="" class="form-control " placeholder="编程语言..." type="text"
+        data-autocomplete='[
+			  "ActionScript",
+				"AppleScript",
+				"Asp",
+				"BASIC",
+				"C",
+				"C++",
+				"Clojure",
+				"COBOL",
+				"ColdFusion",
+				"Erlang",
+				"Fortran",
+				"Groovy",
+				"Haskell",
+				"Java",
+				"JavaScript",
+				"Lisp",
+				"Perl",
+				"PHP",
+				"Python",
+				"Ruby",
+				"Scala",
+				"Scheme"
+			
+    ]'>
+
+			<p class="note">
+				使用方法: data-autocomplete= ' ["this", "message", "bold", "text"] '
+			</p>
+
+			<h3>自动完成 Ajax
+				<br>
+				<small>从JSON url获取数据</small>
+			</h3>
+
+			<input id="city" name="city" value="" class="form-control " placeholder="搜索内容..." type="text">
+<script>
+    $(document).ready(function(){
+        $("#city").autocomplete({
+				source : function(request, response) {
+					$.ajax({
+					url : "https://www.google.com.hk/complete/search",
+					dataType : "jsonp",
+					data : {
+					client : "hp",
+					hl : "zh-CN",
+					gs_rn : "40",
+					gs_ri : "hp",
+					style : "full",
+					tok : "ad5FSakWClPtCHvyi8OUhQ",
+					cp : "7",
+					gs_id : "d3",
+					xhr : "t",
+					q : request.term
+					},
+					success : function(data) {
+					response($.map(data[1], function(item) {
+					return {
+					label : item[0],
+					value : item[0]
+					}
+					}));
+					}
+					});
+				
+}
+,
+				select : function(event, ui) {
+    					log(ui.item ? "选择: " + ui.item.label : "没有选择任何内容, 输入是:" + this.value);
+				
+}
+			
+        });
+    });
+</script>
+							<div id="log" class="font-xs margin-top-10 text-danger"></div>
+		
+</div>
+
+		<div class="well well-sm well-light"">
+    			<h3>可折叠
+				<br>
+				<small>带有fontawesome图标</small>
+			</h3>
+			<div id="accordion">
+				<div>
+    <h4>标签1</h4>
+    <div class="padding-10">
+					例如在博文《谣害天下，无人忏悔》中，周小平对另一位网络知名人士＠薛蛮子提出公开批评，说”薛蛮子为净水器推销，诋毁中国水质有毒，造成舟山带鱼养鱼场滞销，当地无数养殖农户面临破产“。而广大网友在查证后发现，根本不存在”带鱼养殖“这种事情，周小平也因此获得了”周带鱼“的绰号。
+				
+    </div>
+</div>
+				<div>
+    <h4>标签2</h4>
+    <div class="padding-10">
+					然而对于二人，尤其是周小平，互联网上还存在较大的争议。支持者认为他的文章思路独特，呼吁理性思考，在现今的网络环境下给大家提供了一个看待问题新的方向。但批评者认为，除去争议较大的价值倾向，周小平文章不仅逻辑混乱，在最基本的事实和常识方面也有多低级的错误。
+				
+    </div>
+</div>
+				<div>
+    <h4>标签3</h4>
+    <div class="padding-10">
+					一位微博认证大V北大中文系教授＠张颐武曾经这样评价过周小平：这是一个瘦弱的中国年轻人，但他却表现出很坚强的意志力和在复杂的网络环境中表达自己的能力，文章有着独到的风格和力量。
+				
+    </div>
+</div>
+			
+</div>
+<script>
+    $(document).ready(function(){
+        $("#accordion").accordion({
+            autoHeight : true,
+            heightStyle : "content",
+            collapsible : true,
+            animate : 300,
+            icons: {
+                header: "fa fa-plus",    // custom icon class
+                activeHeader: "fa fa-minus" // custom icon class
+            },
+            header : "h4",
+        });
+    });
+</script>
+		
+</div>
+		<div class="well well-sm well-light"">
+    			<h3>进度条
+			<br>
+			<small>默认进度条.</small></h3>
+			
+			<div id="progressbar"></div>
+			<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="ui-progressbar-value ui-widget-header progress-bar progress-bar-success" style="width: 25%;"></div></div>
+		
+</div>
+	
+</div>
+
+</div>
+
+    <div id="dialog_simple" title="Dialog Simple Title">
+		<p>
+			在一个框架中，许多地方都要用到上下文(Context)，可以说上下文的实现是否到位，直接关系到开发的便捷性及访问效率。
+		</p>
+    
+</div>
+    <script>
+$(document).ready(function(){
+    $('#dialog_simple').dialog({
+                autoOpen : false
+,
+        width : 600
+,
+        resizable : false
+,
+        modal : true
+,
+        title : "强悍的上下文Context"
+,
+        buttons : [
+            {
+    html : "<i class='fa fa-trash-o'></i>&nbsp; 全部删除",
+    class : "btn btn-danger",
+    click : function() {
+				$(this).dialog("close");
+            
+    }
+}
+,
+            {
+    html : "<i class='fa fa-times'></i>&nbsp; 取消",
+    class : "btn btn-default",
+    click : function() {
+				$(this).dialog("close");
+            
+    }
+}
+        
+]
+    
+    });
+});
+</script>
+
+ 
+    <div id="dialog_message" title="Dialog Simple Title">
+		<p>这是默认对话框中显示的信息。对话窗口可以移动，调整大小和，并且可以通过右上角的'x' icon图表关闭。</p> 
+		<div class="hr hr-12 hr-double"></div> 
+		<p>
+			当前已使用容量<b>36%</b>
+			<div class="progress progress-striped active no-margin">
+				<div class="progress-bar progress-bar-primary"  role="progressbar" style="width: 36%">
+
+</div>
+			</div>
+		</p>
+    
+</div>
+    <script>
+$(document).ready(function(){
+    $('#dialog_message').dialog({
+                autoOpen : false
+,
+        modal : true
+,
+        title : "这里是标题"
+,
+        buttons : [
+            {
+    html : "取消",
+    class : "btn btn-defaul",
+    click : function() {
+            $(this).dialog("close");
+            
+    }
+}
+,
+            {
+    html : "<i class='fa fa-check'></i>&nbsp; 确定",
+    class : "btn btn-primary",
+    click : function() {
+            $(this).dialog("close");
+            
+    }
+}
+        
+]
+    
+    });
+});
+</script>
+
+
+<!-- #dialog_message -->
+
+
+<script type="text/javascript">
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+	
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 * TO LOAD A SCRIPT:
+	 * var pagefunction = function (){ 
+	 *  loadScript(".../plugin.js", run_after_loaded);	
+	 * }
+	 * 
+	 * OR
+	 * 
+	 * loadScript(".../plugin.js", run_after_loaded);
+	 */
+	
+
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+	
+	var pagefunction = function() {
+
+		// menu
+		$("#menu").menu();
+	
+		/*
+		 * AUTO COMPLETE AJAX
+		 */
+	
+		function log(message) {
+			$("<div>").text(message).prependTo("#log");
+			$("#log").scrollTop(0);
+		}
+	
+		$("#city").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					url : "http://ws.geonames.org/searchJSON",
+					dataType : "jsonp",
+					data : {
+						featureClass : "P",
+						style : "full",
+						maxRows : 12,
+						name_startsWith : request.term
+					},
+					success : function(data) {
+						response($.map(data.geonames, function(item) {
+							return {
+								label : item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+								value : item.name
+							}
+						}));
+					}
+				});
+			},
+			minLength : 2,
+			select : function(event, ui) {
+				log(ui.item ? "Selected: " + ui.item.label : "Nothing selected, input was " + this.value);
+			}
+		});
+	
+		/*
+		 * Spinners
+		 */
+		$("#spinner").spinner();
+		$("#spinner-decimal").spinner({
+			step : 0.01,
+			numberFormat : "n"
+		});
+	
+		$("#spinner-currency").spinner({
+			min : 5,
+			max : 2500,
+			step : 25,
+			start : 1000,
+			numberFormat : "C"
+		});
+	
+		/*
+		 * CONVERT DIALOG TITLE TO HTML
+		 * REF: http://stackoverflow.com/questions/14488774/using-html-in-a-dialogs-title-in-jquery-ui-1-10
+		 */
+		$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+			_title : function(title) {
+				if (!this.options.title) {
+					title.html("&#160;");
+				} else {
+					title.html(this.options.title);
+				}
+			}
+		}));
+	
+		/*
+		* DIALOG SIMPLE
+		*/
+	
+		// Dialog click
+		$('#dialog_link').click(function() {
+			$('#dialog_simple').dialog('open');
+			return false;
+	
+		});
+	
+		$('#dialog_simple').dialog({
+			autoOpen : false,
+			width : 600,
+			resizable : false,
+			modal : true,
+			title : "<div class='widget-header'><h4><i class='fa fa-warning'></i> Empty the recycle bin?</h4></div>",
+			buttons : [{
+				html : "<i class='fa fa-trash-o'></i>&nbsp; Delete all items",
+				"class" : "btn btn-danger",
+				click : function() {
+					$(this).dialog("close");
+				}
+			}, {
+				html : "<i class='fa fa-times'></i>&nbsp; Cancel",
+				"class" : "btn btn-default",
+				click : function() {
+					$(this).dialog("close");
+				}
+			}]
+		});
+	
+		/*
+		* DIALOG HEADER ICON
+		*/
+	
+		// Modal Link
+		$('#modal_link').click(function() {
+			$('#dialog-message').dialog('open');
+			return false;
+		});
+	
+		$("#dialog-message").dialog({
+			autoOpen : false,
+			modal : true,
+			title : "<div class='widget-header'><h4><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
+			buttons : [{
+				html : "Cancel",
+				"class" : "btn btn-default",
+				click : function() {
+					$(this).dialog("close");
+				}
+			}, {
+				html : "<i class='fa fa-check'></i>&nbsp; OK",
+				"class" : "btn btn-primary",
+				click : function() {
+					$(this).dialog("close");
+				}
+			}]
+	
+		});
+	
+		/*
+		 * Remove focus from buttons
+		 */
+		$('.ui-dialog :button').blur();
+	
+		/*
+		 * Just Tabs
+		 */
+	
+		$('#tabs').tabs();
+	
+		/*
+		 *  Simple tabs adding and removing
+		 */
+	
+		$('#tabs2').tabs();
+	
+		// Dynamic tabs
+		var tabTitle = $("#tab_title"), tabContent = $("#tab_content"), tabTemplate = "<li style='position:relative;'> <span class='air air-top-left delete-tab' style='top:7px; left:7px;'><button class='btn btn-xs font-xs btn-default hover-transparent'><i class='fa fa-times'></i></button></span></span><a href='#{href}'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #{label}</a></li>", tabCounter = 2;
+	
+		var tabs = $("#tabs2").tabs();
+	
+		// modal dialog init: custom buttons and a "close" callback reseting the form inside
+		var dialog = $("#addtab").dialog({
+			autoOpen : false,
+			width : 600,
+			resizable : false,
+			modal : true,
+			buttons : [{
+				html : "<i class='fa fa-times'></i>&nbsp; Cancel",
+				"class" : "btn btn-default",
+				click : function() {
+					$(this).dialog("close");
+	
+				}
+			}, {
+	
+				html : "<i class='fa fa-plus'></i>&nbsp; Add",
+				"class" : "btn btn-danger",
+				click : function() {
+					addTab();
+					$(this).dialog("close");
+				}
+			}]
+		});
+	
+		// addTab form: calls addTab function on submit and closes the dialog
+		var form = dialog.find("form").submit(function(event) {
+			addTab();
+			dialog.dialog("close");
+			event.preventDefault();
+		});
+	
+		// actual addTab function: adds new tab using the input from the form above
+		function addTab() {
+			var label = tabTitle.val() || "Tab " + tabCounter, id = "tabs-" + tabCounter, li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label)), tabContentHtml = tabContent.val() || "Tab " + tabCounter + " content.";
+	
+			tabs.find(".ui-tabs-nav").append(li);
+			tabs.append("<div id='" + id + "'><p>" + tabContentHtml + "</p></div>");
+			tabs.tabs("refresh");
+			tabCounter++;
+	
+			// clear fields
+			$("#tab_title").val("");
+			$("#tab_content").val("");
+		}
+	
+		// addTab button: just opens the dialog
+		$("#add_tab").button().click(function() {
+			dialog.dialog("open");
+		});
+	
+		// close icon: removing the tab on click
+		$("#tabs2").on("click", 'span.delete-tab', function() {
+	
+			var panelId = $(this).closest("li").remove().attr("aria-controls");
+			$("#" + panelId).remove();
+			tabs.tabs("refresh");
+		});
+	
+		/*
+		* ACCORDION
+		*/
+		//jquery accordion
+		
+	     var accordionIcons = {
+	         header: "fa fa-plus",    // custom icon class
+	         activeHeader: "fa fa-minus" // custom icon class
+	     };
+	     
+		$("#accordion").accordion({
+			autoHeight : false,
+			heightStyle : "content",
+			collapsible : true,
+			animate : 300,
+			icons: accordionIcons,
+			header : "h4",
+		})
+	
+		/*
+		 * PROGRESS BAR
+		 */
+		$("#progressbar").progressbar({
+	     	value: 25,
+	     	create: function( event, ui ) {
+	     		$(this).removeClass("ui-corner-all").addClass('progress').find(">:first-child").removeClass("ui-corner-left").addClass('progress-bar progress-bar-success');
+			}
+		});
+
+		
+	};
+	
+	// end pagefunction
+	
+	// run pagefunction on load
+
+	pagefunction();
+
+</script>

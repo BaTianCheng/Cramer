@@ -1,0 +1,581 @@
+
+
+	<div class="row ">
+    		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+    <h1 class="page-title txt-color-blueDark"> 
+				<i class="fa fa-fw fa-home"></i>
+ 表单
+			<span>
+    > 验证示例 
+</span>
+		
+</h1>
+</div>
+
+			<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+    		<ul id="sparks" >
+    			<li class="sparks-info">
+    				 <h5> 个人收入 <span class="txt-color-blue">$47,171</span></h5>
+				<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+    					1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+				
+</div>
+			
+</li>
+			<li class="sparks-info">
+    				<h5> 站点流量 <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+				<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+    					110,150,300,130,400,240,220,310,220,300, 270, 210
+				
+</div>
+			
+</li>
+			<li class="sparks-info">
+    				<h5> 站点营收 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+				<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+    					110,150,300,130,400,240,220,310,220,300, 270, 210
+				
+</div>
+			
+</li>
+		
+</ul>
+	
+</div>
+	
+</div>
+
+<div class="alert alert-block alert-info">
+    	<a class="close" data-dismiss="alert" href="#">×</a> 
+	<h4 class="alert-heading"> 请注意! </h4> 
+    <p>
+		该页仅显示各种表单元素正确或错误输入的状态，如果需要查看全部的表单元素验证示例，请点击以下链接到<strong>表单布局页</strong>的链接按钮
+    </p>
+    <br>
+    <a href="#ajax/form-templates.pagelet" class="btn btn-primary"><strong><i class="fa fa-arrow-circle-right"></i>表单布局页</strong></a>
+
+</div>
+
+<section id="widget-grid" class="">
+    	<div class="row">
+    		<article class="col-sm-12 col-md-12 col-lg-6">
+    			<div class="jarviswidget " id="wid-id-0"
+    				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				>
+<header>
+    <span class="widget-icon"><i class="fa fa-exclamation txt-color-red"></i></span>    <h2>错误状态</h2>
+    
+</header>
+				<div>
+    					<div class="jarviswidget-editbox">
+    
+</div>
+					<div class="widget-body no-padding" id="">
+    		                <form action="" class="smart-form " >
+			                    <header>
+	 各种元素验证的错误状态 
+</header>
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">文本输入</label>
+		                            <label class="input state-error">
+											<input type="text"     >
+									
+</label>
+		                            <div class="note note-error">
+	这是一个请求域.
+</div>
+		                        
+</section>
+		
+		                        <section >
+			                            <label class="label">文件输入</label>
+		                            <label class="input input-file state-error">
+			                            	<div class="button"> 
+											<input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">浏览
+										</div>
+										<input type="text" readonly>
+		                            
+</label>
+		                            <div class="note note-error">
+	文件尺寸大小必须小于3Mb.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">选择框</label>
+		                            <label class="select state-error">
+											<select     placeholder="" >
+												<option value="0">请选择一个名字</option>
+		                                   	<option value="0">悠悠然然</option>
+	<option value="1">塔罗大道</option>
+	<option value="2">nishihe</option>
+	<option value="3">atizose</option> 
+		                                
+</select>
+		                                <i></i>
+		                            
+</label>
+		                            <div class="note note-error">
+	你必须选择一个选项.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">Textarea</label>
+		                            <label class="textarea state-error">
+											<textarea  rows="3"  id=""  name=""  value=""  placeholder="" ></textarea>
+		                            
+</label>
+		                            <div class="note note-error">
+	这是一个请求域.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">单选</label>
+		                            <div class="row ">
+    		                                <div class="col col-4">
+		                                	<label class="radio state-error">
+	<input type="radio" name="radio"><i></i>Alexandra
+</label>
+		                                	<label class="radio state-error">
+	<input type="radio" name="radio"><i></i>Alice
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="radio state-error">
+	<input type="radio" name="radio"><i></i>Avelina
+</label>
+		                                	<label class="radio state-error">
+	<input type="radio" name="radio"><i></i>Basilia
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="radio state-error">
+	<input type="radio" name="radio"><i></i>Cassandra
+</label>
+		                                	<label class="radio state-error">
+	<input type="radio" name="radio"><i></i>Clemencia
+</label>
+		                                </div>
+		                            
+</div>
+		                            <div class="note note-error">
+	你必须选择一个选项
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">复选</label>
+		                            <div class="row ">
+    		                                <div class="col col-4">
+		                                	<label class="checkbox state-error">
+	<input type="checkbox" name="checkbox"><i></i>Alexandra 
+</label>
+		                                	<label class="checkbox state-error">
+	<input type="checkbox" name="checkbox"><i></i>Alice 
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="checkbox state-error">
+	<input type="checkbox" name="checkbox"><i></i>Avelina 
+</label>
+		                                	<label class="checkbox state-error">
+	<input type="checkbox" name="checkbox"><i></i>Basilia 
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="checkbox state-error">
+	<input type="checkbox" name="checkbox"><i></i>Cassandra 
+</label>
+		                                	<label class="checkbox state-error">
+	<input type="checkbox" name="checkbox"><i></i>Clemencia 
+</label>
+		                                </div>
+		                            
+</div>
+		                            <div class="note note-error">
+	你必须最少选择一个选项
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <div class="row ">
+    		                            <section class="col col-5 ">
+			                                <label class="label">可切换的单选</label>
+		                                <label class="toggle state-error">
+	<input type="radio" name="radio-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Alexandra
+</label>
+		                                <label class="toggle state-error">
+	<input type="radio" name="radio-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Anastasia
+</label>
+		                                <label class="toggle state-error">
+	<input type="radio" name="radio-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Avelina
+</label>
+		                                <div class="note note-error">
+	你必须选择一个选项.
+</div>
+		                            
+</section>
+		
+		                            <div class="col col-2"></div>
+		
+		                            <section class="col col-5 ">
+			                                <label class="label">可切换的复选</label>
+		                                <label class="toggle state-error">
+	<input type="checkbox" name="checkbox-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Cassandra
+</label>
+		                                <label class="toggle state-error">
+	<input type="checkbox" name="checkbox-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Clemencia
+</label>
+		                                <label class="toggle state-error">
+	<input type="checkbox" name="checkbox-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Desiderata
+</label>
+		                                <div class="note note-error">
+	你必须至少选择一个选项 
+</div>
+		                            
+</section>
+		                        
+</div>
+		                    
+</fieldset>
+		
+		                    <footer>
+		                        <button type="submit" class="btn btn-primary">提交</button>
+		                        <button type="button" class="btn btn-default" onclick="window.history.back();">回退</button>
+		                    </footer>
+		                
+</form>
+					
+</div>
+ <!-- end widgetContent -->
+				
+</div>
+ <!-- end jarvisWidgetBody -->
+			
+</div>
+<!-- end widget -->
+ <!-- end jarvisWidget -->
+		
+</article>
+ <!-- end widgetGridCol -->
+
+		<article class="col-sm-12 col-md-12 col-lg-6">
+    			<div class="jarviswidget " id="wid-id-2"
+    				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				>
+<header>
+    <span class="widget-icon"><i class="fa fa-check txt-color-green"></i></span>    <h2>成功状态</h2>
+    
+</header>
+				<div>
+    					<div class="jarviswidget-editbox">
+    
+</div>
+					<div class="widget-body no-padding" id="">
+    		                <form action="" class="smart-form " >
+			                    <header>
+	 各种元素验证的成功状态 
+</header>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">文本输入</label>
+		                            <label class="input state-success">
+	 <input type="text"     >
+ 
+</label>
+		                            <div class="note note-success">
+	这是一个请求域.
+</div>
+		                        
+</section>
+		
+		                        <section >
+			                            <label class="label">文件输入</label>
+		                            <label class="input input-file state-success">
+			                                <div class="button"><input type="file" id="file" onchange="this.parentNode.nextSibling.value = this.value">浏览</div>
+										<input type="text" readonly>
+		                            
+</label>
+		                            <div class="note note-success">
+	文件尺寸大小必须小于3Mb.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">选择框</label>
+		                            <label class="select state-success">
+			                                <select name="" id="">
+		                                    <option value="0">请选择一个名字</option>
+												<option value="0">悠悠然然</option>
+	<option value="1">塔罗大道</option>
+	<option value="2">nishihe</option>
+	<option value="3">atizose</option> 
+		                                </select>
+		                                <i></i>
+		                            
+</label>
+		                            <div class="note note-success">
+	谢谢选择.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">Textarea</label>
+		                            <label class="textarea state-success">
+			                                <textarea rows="3"></textarea>
+		                            
+</label>
+		                            <div class="note note-success">
+	谢谢选择.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">单选</label>
+		                            <div class="row ">
+    		                                <div class="col col-4">
+		                                	<label class="radio state-success">
+	<input type="radio" name="radio"><i></i>Alexandra
+</label>
+		                                	<label class="radio state-success">
+	<input type="radio" name="radio"><i></i>Alice
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="radio state-success">
+	<input type="radio" name="radio" checked><i></i>Avelina
+</label>
+		                                	<label class="radio state-success">
+	<input type="radio" name="radio"><i></i>Basilia
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="radio state-success">
+	<input type="radio" name="radio"><i></i>Cassandra
+</label>
+		                                	<label class="radio state-success">
+	<input type="radio" name="radio"><i></i>Clemencia
+</label>
+		                                </div>
+		                            
+</div>
+		                            <div class="note note-success">
+	谢谢选择.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <section >
+			                            <label class="label">复选</label>
+		                            <div class="row ">
+    		                                <div class="col col-4">
+		                                	<label class="checkbox state-success">
+	<input type="checkbox" name="checkbox"><i></i>Alexandra 
+</label>
+		                                	<label class="checkbox state-success">
+	<input type="checkbox" name="checkbox" checked><i></i>Alice 
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="checkbox state-success">
+	<input type="checkbox" name="checkbox"><i></i>Avelina 
+</label>
+		                                	<label class="checkbox state-success">
+	<input type="checkbox" name="checkbox"><i></i>Basilia 
+</label>
+		                                </div>
+		                                <div class="col col-4">
+		                                	<label class="checkbox state-success">
+	<input type="checkbox" name="checkbox" checked><i></i>Cassandra 
+</label>
+		                                	<label class="checkbox state-success">
+	<input type="checkbox" name="checkbox"><i></i>Clemencia 
+</label>
+		                                </div>
+		                            
+</div>
+		                            <div class="note note-success">
+	谢谢选择.
+</div>
+		                        
+</section>
+		                    
+</fieldset>
+		
+		                    <fieldset >
+			                        <div class="row ">
+    		                            <section class="col col-5 ">
+			                                <label class="label">可切换的单选</label>
+		                                <label class="toggle state-success">
+	<input type="radio" name="radio-toggle" checked><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Alexandra
+</label>
+		                                <label class="toggle state-success">
+	<input type="radio" name="radio-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Anastasia
+</label>
+		                                <label class="toggle state-success">
+	<input type="radio" name="radio-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Avelina
+</label>
+		                                <div class="note note-success">
+	谢谢选择.
+</div>
+		                            
+</section>
+		
+		                            <div class="col col-2"></div>
+		
+		                            <section class="col col-5 ">
+			                                <label class="label">可切换复选</label>
+		                                <label class="toggle state-success">
+	<input type="checkbox" name="checkbox-toggle" checked><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Cassandra
+</label>
+		                                <label class="toggle state-success">
+	<input type="checkbox" name="checkbox-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Clemencia
+</label>
+		                                <label class="toggle state-success">
+	<input type="checkbox" name="checkbox-toggle"><i data-swchon-text="ON" data-swchoff-text="OFF"></i>Desiderata
+</label>
+		                                <div class="note note-success">
+	谢谢选择.
+</div>
+		                            
+</section>
+		                        
+</div>
+		                    
+</fieldset>
+		
+		                    <footer>
+		                        <button type="submit" class="btn btn-primary">提交</button>
+		                        <button type="button" class="btn btn-default" onclick="window.history.back();">回退</button>
+		                    </footer>
+		                
+</form>
+					
+</div>
+ <!-- end widgetContent -->
+				
+</div>
+ <!-- end jarvisWidgetBody -->
+			
+</div>
+<!-- end widget -->
+ <!-- end jarvisWidget -->
+		
+</article>
+ <!-- end widgetGridCol -->
+	
+</div>
+ <!-- end widgetGridRow -->
+
+</section>
+ <!-- end widgetGrid -->
+
+<script type="text/javascript">
+	
+	/* DO NOT REMOVE : GLOBAL FUNCTIONS!
+	 *
+	 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+	 *
+	 * // activate tooltips
+	 * $("[rel=tooltip]").tooltip();
+	 *
+	 * // activate popovers
+	 * $("[rel=popover]").popover();
+	 *
+	 * // activate popovers with hover states
+	 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+	 *
+	 * // activate inline charts
+	 * runAllCharts();
+	 *
+	 * // setup widgets
+	 * setup_widgets_desktop();
+	 *
+	 * // run form elements
+	 * runAllForms();
+	 *
+	 ********************************
+	 *
+	 * pageSetUp() is needed whenever you load a page.
+	 * It initializes and checks for all basic elements of the page
+	 * and makes rendering easier.
+	 *
+	 */
+
+	pageSetUp();
+	
+	/*
+	 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+	 * eg alert("my home function");
+	 * 
+	 * var pagefunction = function() {
+	 *   ...
+	 * }
+	 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+	 * 
+	 * TO LOAD A SCRIPT:
+	 * var pagefunction = function (){ 
+	 *  loadScript(".../plugin.js", run_after_loaded);	
+	 * }
+	 * 
+	 * OR
+	 * 
+	 * loadScript(".../plugin.js", run_after_loaded);
+	 */
+	
+	
+	// PAGE RELATED SCRIPTS
+
+	// pagefunction
+	
+	var pagefunction = function() {
+		
+	};
+	
+	// end pagefunction
+	
+	// run pagefunction on load
+
+	pagefunction();
+	
+</script>

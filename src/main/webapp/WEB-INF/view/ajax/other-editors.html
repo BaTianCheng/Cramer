@@ -1,0 +1,331 @@
+#@	<div class="row ">
+    		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+    <h1 class="page-title txt-color-blueDark"> 
+				<i class="fa fa-fw fa-home"></i>
+ 表单
+			<span>
+    > 编辑器 
+</span>
+		
+</h1>
+</div>
+
+			<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+    		<ul id="sparks" >
+    			<li class="sparks-info">
+    				 <h5> 个人收入 <span class="txt-color-blue">$47,171</span></h5>
+				<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+    					1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+				
+</div>
+			
+</li>
+			<li class="sparks-info">
+    				<h5> 站点流量 <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+				<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+    					110,150,300,130,400,240,220,310,220,300, 270, 210
+				
+</div>
+			
+</li>
+			<li class="sparks-info">
+    				<h5> 站点营收 <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+				<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+    					110,150,300,130,400,240,220,310,220,300, 270, 210
+				
+</div>
+			
+</li>
+		
+</ul>
+	
+</div>
+	
+</div>
+ 
+<section id="widget-grid" class="">
+    	<div class="row">
+    		<article class="col-sm-12 col-md-12 col-lg-6">
+    			<div class="jarviswidget jarviswidget-color-purple" id="wid-id-2"
+    				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-sortable="false"
+				>
+<header>
+    <span class="widget-icon"><i class="fa fa-pencil"></i></span>    <h2>Markdown编辑器</h2>
+    
+</header>
+				<div>
+    					<div class="jarviswidget-editbox">
+    
+</div>
+					<div class="widget-body no-padding" id="">
+    		                <textarea id="mymarkdown" class="custom-scroll md-input" style="max-height: 180px; resize: none;" rows="14">	正在手机上聊天，突然蹦出一个陌生人：我喜欢你，你有女朋友吗？
+我：对不起我有女朋友了。
+陌生人：怪不得你最近天天抱着手机玩，我是你爸。晚上回来谈谈！
+我：呜……！						
+						</textarea>
+					
+</div>
+ <!-- end widgetContent -->
+				
+</div>
+ <!-- end jarvisWidgetBody -->
+			
+</div>
+<!-- end widget -->
+ <!-- end jarvisWidget -->
+		
+			<div class="jarviswidget well" id="wid-id-4"
+    				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-sortable="false"
+ ) 
+				>
+<header>
+    <span class="widget-icon"><i class="fa fa-pencil"></i></span>    <h2>Markdown 编辑器API</h2>
+    
+</header>
+				<div>
+    					<div class="jarviswidget-editbox">
+    
+</div>
+					<div class="widget-body ">
+    		                <h3>Markdown API</h3>
+		                <table class="table table-bordered table-striped">
+		                    <thead>
+		                    <tr>
+		                        <th>方法名</th>
+		                        <th>描述</th>
+		                    </tr>
+		                    </thead>
+		                    <tbody>
+		                    <tr>
+		                        <td><code>showEditor()</code></td>
+		                        <td>显示编辑器</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>showPreview()</code></td>
+		                        <td>显示预览</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>hidePreview()</code></td>
+		                        <td>隐藏编辑器</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>isDirty()</code></td>
+		                        <td>检查编辑的内容状态，如果内容改变了，则返回true，否则返回false</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>getContent()</code></td>
+		                        <td>获取编辑内容</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>setContent(<em>string</em> content)</code></td>
+		                        <td>设置编辑内容</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>findSelection(<em>string</em> words)</code></td>
+		                        <td>在编辑器内查找单词或句子，并返回找到的结果(包含文字的位置和其他有用的信息)。</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>getSelection()</code></td>
+		                        <td>在在编辑器中获取当前选定的内容。</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>setSelection(<em>int</em> start, <em>int</em> end)</code></td>
+		                        <td>通知编辑，选择一个span的文字，从<code> start </code>到<code> end </code>.</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>
+		                            replaceSelection(<em>string</em> content)</code></td>
+		                        <td>在编辑器中，将当前选择的内容替换为其他内容.</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>getNextTab()</code></td>
+		                        <td>获取下一个tab memory，并返回选择的对象(包含文字的位置和其他有用的信息).</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>setNextTab(<em>int</em> start, <em>int</em> end)</code></td>
+		                        <td>通知编辑，选择一个span的文字，从<code>
+		                            start</code> to <code>
+		                            end</code> at next <code>
+		                            tab</code> keypress event.
+								</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>enableButtons(<em>string</em> name)</code></td>
+		                        <td>通过传入<code>name</code>参数(该参数在<code>buttons</code>
+									或<code>additionalButtons</code>队列中描述)，激活相应的按钮，
+									传入参数<code>all</code>，则激活所有按钮 
+								</td>
+		                    </tr>
+		                    <tr>
+		                        <td><code>disableButtons(<em>string</em> name)</code></td>
+		                        <td>通过传入<code>name</code>参数(该参数在<code>buttons</code>
+									或<code>additionalButtons</code>队列中描述)，禁用相应的按钮，
+									传入参数<code>all</code>，则禁用所有按钮 
+								</td>
+		                    </tr>
+		                    </tbody>
+		                </table>
+					
+</div>
+ <!-- end widgetContent -->
+				
+</div>
+ <!-- end jarvisWidgetBody -->
+			
+</div>
+<!-- end widget -->
+ <!-- end jarvisWidget -->
+		
+</article>
+ <!-- end widgetGridCol -->
+
+		<article class="col-sm-12 col-md-12 col-lg-6">
+    			<div class="jarviswidget jarviswidget-color-blue" id="wid-id-0"
+    				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-sortable="false"
+				>
+<header>
+    <span class="widget-icon"><i class="fa fa-pencil"></i></span>    <h2>Summernote编辑器(轻量级的)</h2>
+    
+</header>
+				<div>
+    					<div class="jarviswidget-editbox">
+    
+</div>
+					<div class="widget-body no-padding" id="">
+    		                <div class="summernote">
+		
+		                </div>
+		
+		                <div class="widget-footer smart-form">
+		
+		                    <div class="btn-group">
+		
+		                        <button class="btn btn-sm btn-primary" type="button">
+		                            <i class="fa fa-times"></i> 取消
+		                        </button>
+		
+		                    </div>
+		                    <div class="btn-group">
+		
+		                        <button class="btn btn-sm btn-success" type="button">
+		                            <i class="fa fa-check"></i> 保存
+		                        </button>
+		
+		                    </div>
+		
+		                    <label class="checkbox pull-left">
+		                        <input type="checkbox" checked="checked" name="autosave" id="autosave">
+		                        <i></i>自动保存
+		                    </label>
+		
+		                </div>
+					
+</div>
+ <!-- end widgetContent -->
+				
+</div>
+ <!-- end jarvisWidgetBody -->
+			
+</div>
+<!-- end widget -->
+ <!-- end jarvisWidget -->
+
+			<div class="jarviswidget well" id="wid-id-1"
+    				>
+<header>
+    <span class="widget-icon"><i class="fa fa-pencil"></i></span>    <h2>Example </h2>
+    
+</header>
+				<div>
+    					<div class="jarviswidget-editbox">
+    
+</div>
+					<div class="widget-body ">
+                    <h3>Summernote 编辑器示例</h3>
+                <p>
+                    <button id="edit" class="btn btn-primary" onclick="edit()" type="button">
+                        编辑
+                    </button>
+                    <button id="save" class="btn btn-primary" onclick="save()" type="button">
+                        保存
+                    </button>
+                </p>
+                <p></p>
+                <div class="click2edit">
+                    <pre><code class="javascript">var edit = function() { $('.click2edit').summernote() };</code></pre>
+                </div>
+
+                <h5>HTML:</h5>
+				<pre><code class="xml">&lt;button id="edit" class="btn btn-primary" onclick="edit()" type="button"&gt;Edit 1&lt;/button&gt;
+&lt;button id="save" class="btn btn-primary" onclick="save()" type="button"&gt;保存 2&lt;/button&gt;
+&lt;div class="click2edit"&gt;click2edit&lt;/div&gt;</code></pre>
+                <h5>脚本:</h5>
+				<pre><code class="javascript">var edit = function() {
+  $('.click2edit').summernote({focus: true});
+};
+var save = function() {
+  var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
+  $('.click2edit').destroy();
+};</code></pre>
+                <script>
+                    var edit = function() {
+                        $('.click2edit').summernote({
+                            focus : true
+                        });
+                    };
+                    var save = function() {
+                        $('.click2edit').destroy();
+                    };
+                </script>
+
+                <h5>文档:</h5>
+                <p class="alert alert-info">
+                        完整的Summernote.js API, 包括keybored shortcuts, PHP Examples, Django installation, and Rails (gem) integration，可以从以下链接查找 <a href="http://hackerwins.github.io/summernote/features.html#api"></a>
+                
+</p>
+					
+</div>
+ <!-- end widgetContent -->
+				
+</div>
+ <!-- end jarvisWidgetBody -->
+			
+</div>
+<!-- end widget -->
+ <!-- end jarvisWidget -->
+		
+</article>
+ <!-- end widgetGridCol -->
+	
+</div>
+ <!-- end widgetGridRow -->
+
+</section>
+ <!-- end widgetGrid -->
+
+
+
+		<!-- Your GOOGLE ANALYTICS CODE Below -->
+		
+<script>
+							var edit = function() {
+								$('.click2edit').summernote({
+									focus : true
+								});
+							};
+							var save = function() {
+								$('.click2edit').destroy();
+							};
+						</script>
