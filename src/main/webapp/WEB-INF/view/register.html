@@ -205,10 +205,6 @@
 						username : {
 							required : true
 						},
-						email : {
-							required : true,
-							email : true
-						},
 						password : {
 							required : true,
 							minlength : 3,
@@ -220,15 +216,6 @@
 							maxlength : 20,
 							equalTo : '#password'
 						},
-						firstname : {
-							required : true
-						},
-						lastname : {
-							required : true
-						},
-						gender : {
-							required : true
-						},
 						terms : {
 							required : true
 						}
@@ -237,30 +224,17 @@
 					// Messages for form validation
 					messages : {
 						login : {
-							required : 'Please enter your login'
-						},
-						email : {
-							required : 'Please enter your email address',
-							email : 'Please enter a VALID email address'
+							required : '请输入你的帐号'
 						},
 						password : {
-							required : 'Please enter your password'
+							required : '请输入你的密码'
 						},
 						passwordConfirm : {
-							required : 'Please enter your password one more time',
-							equalTo : 'Please enter the same password as above'
-						},
-						firstname : {
-							required : 'Please select your first name'
-						},
-						lastname : {
-							required : 'Please select your last name'
-						},
-						gender : {
-							required : 'Please select your gender'
+							required : '请再一次输入你的密码',
+							equalTo : '请确认两次密码是否相同'
 						},
 						terms : {
-							required : 'You must agree with Terms and Conditions'
+							required : '请阅读用户使用协议，并勾选同意'
 						}
 					},
 

@@ -1,105 +1,115 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.cw</groupId>
-  <artifactId>cramer</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>cramer Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
- 
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-core</artifactId>
-        <version>3.0.7.RELEASE</version>
-    </dependency>
-  
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-        <version>3.0.7.RELEASE</version>
-    </dependency>
-  
-    <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-webmvc</artifactId>
-        <version>3.0.7.RELEASE</version>
-    </dependency>
- 
-    <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.7.1</version>
-    </dependency>
-    
-    <dependency>
-		<groupId>org.apache.shiro</groupId>
-		<artifactId>shiro-core</artifactId>
-		<version>1.2.0</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.shiro</groupId>
-		<artifactId>shiro-web</artifactId>
-		<version>1.2.0</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.shiro</groupId>
-		<artifactId>shiro-ehcache</artifactId>
-		<version>1.2.0</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.shiro</groupId>
-		<artifactId>shiro-spring</artifactId>
-		<version>1.2.0</version>
-	</dependency>
-	<dependency>  
-            <groupId>org.apache.shiro</groupId>  
-            <artifactId>shiro-cas</artifactId>  
-            <version>1.2.0</version>  
-        </dependency>  
-	<dependency>
-		<groupId>net.sf.ehcache</groupId>
-		<artifactId>ehcache-core</artifactId>
-		<version>2.5.3</version>
-	</dependency>
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-jdk14</artifactId>
-		<version>1.6.4</version>
-	</dependency>
-    
-  	<!-- 添加Servlet -->  
-    <dependency>    
-        <groupId>javax.servlet</groupId>    
-        <artifactId>servlet-api</artifactId>    
-        <version>2.5</version>    
-        <scope>provided</scope>    
-    </dependency>
-    
-    <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>5.1.24</version>
-    </dependency>
-    
-<dependency>
-    <groupId>org.mybatis</groupId>
-    <artifactId>mybatis</artifactId>
-    <version>3.2.3</version>
-</dependency>
-    
-  
-  </dependencies>
-  
-  
-  <build>
-    <finalName>cramer</finalName>
-  </build>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cw</groupId>
+	<artifactId>cramer</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>cramer Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		
+		<!-- 框架类引用 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>3.0.7.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>3.0.7.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>3.0.7.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-cas</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		
+		<!-- 数据库类引用 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.24</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.3</version>
+		</dependency>
+		
+		<!-- 缓存类引用 -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		
+		<!-- 工具类引用 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.7.1</version>
+		</dependency>
+
+		<!-- 测试类引用 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>cramer</finalName>
+	</build>
+	
 </project>
