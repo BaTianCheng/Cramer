@@ -7,25 +7,48 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cramer Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	<!-- 设定主仓库，按设定顺序进行查找。 -->
+	<repositories>
+	
+		<repository>
+			<id>jeesite-repos</id>
+			<name>Jeesite Repository</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</repository>
+		
+	</repositories>
+	
+	<!-- 设定插件仓库 -->
+	<pluginRepositories> 
+	
+		<pluginRepository>
+			<id>jeesite-repos</id>
+			<name>Jeesite Repository</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</pluginRepository>
+		
+	</pluginRepositories> 
+	
 	<dependencies>
 		
 		<!-- 框架类引用 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>3.0.7.RELEASE</version>
+			<version>4.1.9.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.0.7.RELEASE</version>
+			<version>4.1.9.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.0.7.RELEASE</version>
+			<version>4.1.9.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -37,38 +60,57 @@
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.3</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-ehcache</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.3</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.3</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-cas</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.3</version>
 		</dependency>
 		
 		<!-- 数据库类引用 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.24</version>
+			<version>5.1.30</version>
 		</dependency>
-
+		
+		<dependency>
+		  <groupId>com.oracle</groupId>
+		  <artifactId>ojdbc14</artifactId>
+		  <version>10.2.0.4.0</version>
+		  <type>pom</type>
+		</dependency>
+ 	
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.2.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		
+		<dependency>
+		     <groupId>com.alibaba</groupId>
+		     <artifactId>druid</artifactId>
+		     <version>1.0.18</version>
 		</dependency>
 		
 		<!-- 缓存类引用 -->
@@ -96,6 +138,24 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.7.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.40</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>17.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper</artifactId>
+		    <version>4.0.0</version>
 		</dependency>
 
 		<!-- 测试类引用 -->
