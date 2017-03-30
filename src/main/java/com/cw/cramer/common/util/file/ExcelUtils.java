@@ -1,4 +1,4 @@
-package com.cw.cramer.common.util;
+package com.cw.cramer.common.util.file;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +15,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.cw.cramer.common.util.LogUtils;
+
 /**
  * EXCEL操作工具类
  * @author wicks
@@ -27,7 +29,7 @@ public class ExcelUtils {
 	public static List<String[]> readeExcel(String path, String filename) {
 		List<String[]> excelList = new ArrayList<String[]>();
 		try {
-			String excelFilePath = path + FileUtils.inputPath + filename;
+			String excelFilePath = path + filename;
 			File file = new File(excelFilePath);
 			FileInputStream fIP = new FileInputStream(file);
 			XSSFWorkbook workbook = new XSSFWorkbook(fIP);
@@ -66,7 +68,7 @@ public class ExcelUtils {
 	 */
 	public static String writeExcel(String path, String filename, List<String[]> excelList) {
 		try {
-			String excelFilePath = path + FileUtils.outputPath + filename;
+			String excelFilePath = path + filename;
 			if (excelList != null && excelList.size() > 0) {
 				XSSFWorkbook workbook = new XSSFWorkbook();
 				XSSFSheet spreadsheet = workbook.createSheet("结果数据");

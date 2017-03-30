@@ -1,4 +1,4 @@
-package com.cw.cramer.common.util;
+package com.cw.cramer.common.util.file;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.cw.cramer.common.helper.CsvReader;
 import com.cw.cramer.common.helper.CsvWriter;
+import com.cw.cramer.common.util.LogUtils;
 
 /**
  * CSV文件操作类
@@ -20,7 +21,7 @@ public class CSVUtils {
 	public static List<String[]> readeCsv(String path, String filename) {
 		List<String[]> csvList = new ArrayList<String[]>(); 
 		try {
-			String csvFilePath = path + FileUtils.inputPath + filename;
+			String csvFilePath = path + filename;
 			CsvReader reader = new CsvReader(csvFilePath, ',', Charset.forName("GBK")); 
 			reader.readHeaders();
 			csvList.add(reader.getValues());
@@ -44,8 +45,7 @@ public class CSVUtils {
 	 */
 	public static String writeCsv(String path, String filename, List<String[]> csvList) {
 		try {
-
-			String csvFilePath = path + FileUtils.outputPath + filename;
+			String csvFilePath = path + filename;
 			CsvWriter wr = new CsvWriter(csvFilePath, ',', Charset.forName("GBK"));
 			if(csvList != null && csvList.size() > 0){
 				for(String[] strs : csvList){

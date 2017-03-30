@@ -1,5 +1,8 @@
 package com.cw.cramer.common.util;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
@@ -8,7 +11,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * 对称性加密算法
+ * 加密算法工具类
  * @author wicks
  */
 public class EncryptionUtils {
@@ -19,12 +22,12 @@ public class EncryptionUtils {
 	private static final String password = "jinying@025-84707089";
 	
 	/**
-	 * 加密算法
+	 * AES加密算法
 	 * @param content
 	 * @return
 	 */
-	public static String encrypt(String content) {  
-        try {             
+	public static String encryptAES(String content) {  
+        try { 
                 KeyGenerator kgen = KeyGenerator.getInstance("AES");  
                 kgen.init(128, new SecureRandom(password.getBytes()));  
                 SecretKey secretKey = kgen.generateKey();  
@@ -34,7 +37,7 @@ public class EncryptionUtils {
                 byte[] byteContent = content.getBytes("utf-8");  
                 cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化  
                 byte[] result = cipher.doFinal(byteContent);  
-                return parseByte2HexStr(result); // 加密  
+                return ConvertUtils.parseByte2HexStr(result); // 加密  
         } catch (Exception e) {  
                 e.printStackTrace();  
         } 
@@ -42,11 +45,11 @@ public class EncryptionUtils {
 	}
 	
 	/**
-	 * 解密 
+	 * AES解密 
 	 * @param content  待解密内容 
 	 * @return 
 	 */  
-	public static String decrypt(String content) {  
+	public static String decryptAES(String content) {  
 	        try {  
 	                 KeyGenerator kgen = KeyGenerator.getInstance("AES");  
 	                 kgen.init(128, new SecureRandom(password.getBytes()));  
@@ -55,7 +58,7 @@ public class EncryptionUtils {
 	                 SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");              
 	                 Cipher cipher = Cipher.getInstance("AES");// 创建密码器  
 	                cipher.init(Cipher.DECRYPT_MODE, key);// 初始化  
-	                byte[] byteContent = parseHexStr2Byte(content);  
+	                byte[] byteContent = ConvertUtils.parseHexStr2Byte(content);  
 	                byte[] result = cipher.doFinal(byteContent);  
 	                return new String(result); // 解密  
 	        } catch (Exception e) {  
@@ -64,46 +67,36 @@ public class EncryptionUtils {
 	        return null;  
 	}
 	
-	/**
-	 * 将二进制转换成16进制 
-	 * @param buf 
-	 * @return 
-	 */  
-	public static String parseByte2HexStr(byte buf[]) {  
-	        StringBuffer sb = new StringBuffer();  
-	        for (int i = 0; i < buf.length; i++) {  
-	                String hex = Integer.toHexString(buf[i] & 0xFF);  
-	                if (hex.length() == 1) {  
-	                        hex = '0' + hex;  
-	                }  
-	                sb.append(hex.toUpperCase());  
-	        }  
-	        return sb.toString();  
-	}
-	
-	/**
-	 * 将16进制转换为二进制 
-	 * @param hexStr 
-	 * @return 
-	 */  
-	public static byte[] parseHexStr2Byte(String hexStr) {  
-	        if (hexStr.length() < 1)  
-	                return null;  
-	        byte[] result = new byte[hexStr.length()/2];  
-	        for (int i = 0;i< hexStr.length()/2; i++) {  
-	                int high = Integer.parseInt(hexStr.substring(i*2, i*2+1), 16);  
-	                int low = Integer.parseInt(hexStr.substring(i*2+1, i*2+2), 16);  
-	                result[i] = (byte) (high * 16 + low);  
-	        }  
-	        return result;  
-	}
-	
-	public static void main(String[] args){
-		String x = encrypt("123.34");
-		System.out.println(x +">"+decrypt(x));
-		x = encrypt("89536646");
-		System.out.println(x +">"+decrypt(x));
-	}
-	
+	 /**
+	  * MD5进行加密
+     * @param str  待加密的字符串
+     * @return  加密后的字符串
+     * @throws NoSuchAlgorithmException  没有这种产生消息摘要的算法
+     * @throws UnsupportedEncodingException  
+     */
+    public static String EncoderByMd5(String str) {
+    	try{
+    		MessageDigest md = MessageDigest.getInstance("MD5");  
+            md.update(str.getBytes());  
+            byte b[] = md.digest();  
+  
+            int i;  
+  
+            StringBuffer buf = new StringBuffer("");  
+            for (int offset = 0; offset < b.length; offset++) {  
+                i = b[offset];  
+                if (i < 0)  
+                    i += 256;  
+                if (i < 16)  
+                    buf.append("0");  
+                buf.append(Integer.toHexString(i));  
+            }  
+            //32位加密  
+            return buf.toString();  
+    	} 
+    	catch(Exception ex){
+    		return null;
+    	}
+    }
 	
 }

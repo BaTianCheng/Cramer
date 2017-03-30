@@ -6,14 +6,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
+import com.cw.cramer.common.util.file.CSVUtils;
+import com.cw.cramer.common.util.file.ExcelUtils;
+
 /**
  * 文件操作类
  * @author wicks
  */
 public class FileUtils extends org.apache.commons.io.FileUtils {
 	
-	public static String inputPath = "files\\input\\";
-	public static String outputPath = "files\\output\\";
+	/**
+	 * 特定文件格式操作类
+	 */
+	public CSVUtils csvFileOpeartor;
+	public ExcelUtils excelFileOpeartor;
 	
 	/**
 	 * 文件写入
@@ -23,9 +29,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 * @return
 	 */
 	public static boolean copyInputStreamToFile(InputStream inputStream, String path, String fileName){
-		//获取子目录
-		path = path + inputPath ;
-		
 		try{
 			File file = new File(path, fileName);
 			if(!file.exists()){//判断文件是否存在  
@@ -61,9 +64,9 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 * @param fileType
 	 * @return
 	 */
-	public static String generateFileName(String userId, String fileType){
+	public static String generateFileName(String code, String fileType){
 		String fileName = "";
-		fileName += userId;
+		fileName += code;
 		fileName += System.currentTimeMillis();
 		fileName += new Random().nextInt(1000);
 		fileName += "." + fileType;

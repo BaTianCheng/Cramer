@@ -27,11 +27,9 @@ public class CalculatorUtils {
 			expression = transform(expression);
 			result = cal.calculate(expression);
 		} catch (Exception e) {
-			// e.printStackTrace();
 			// 运算错误返回NaN
 			return 0.0 / 0.0;
 		}
-		// return new String().valueOf(result);
 		return result;
 	}
 
@@ -184,9 +182,4 @@ public class CalculatorUtils {
 		}
 		return result;
 	}
-	
-	public static void main(String[] args){
-		System.out.println(CalculatorUtils.conversion("5*6+90/6-(90+89)*7"));
-	}
-	
 }

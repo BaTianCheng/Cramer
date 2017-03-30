@@ -1,4 +1,4 @@
-package com.cw.cramer.common.util;
+package com.cw.cramer.common.util.deprecated;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
