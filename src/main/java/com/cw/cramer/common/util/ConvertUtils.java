@@ -14,7 +14,7 @@ import com.google.common.base.Strings;
  * 数据类型转换工具类
  * @author wicks
  */
-public class ConvertUtils {
+public final class ConvertUtils {
 
 	/**
 	 * 将字符串转换为Double

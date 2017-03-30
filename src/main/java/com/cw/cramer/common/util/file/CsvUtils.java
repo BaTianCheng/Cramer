@@ -13,7 +13,7 @@ import com.cw.cramer.common.util.LogUtils;
  * CSV文件操作类
  * @author wicks
  */
-public class CSVUtils {
+public class CsvUtils {
 
 	/**
 	 * 读取CSV文件

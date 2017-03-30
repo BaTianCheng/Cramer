@@ -9,7 +9,7 @@ import com.cw.cramer.common.helper.ArithHelpers;
  * 计算表达试解析工具类
  * @author wicks
  */
-public class CalculatorUtils {
+public final class CalculatorUtils {
 
 	private Stack<String> postfixStack = new Stack<String>();// 后缀式栈
 	private Stack<Character> opStack = new Stack<Character>();// 运算符栈

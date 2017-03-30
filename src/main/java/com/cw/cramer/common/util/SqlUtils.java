@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import com.github.pagehelper.Dialect;
 
-public class SqlUtils {
+public final class SqlUtils {
 	
 	/**
 	 * 数据库方言

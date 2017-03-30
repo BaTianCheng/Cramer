@@ -3,7 +3,7 @@ package com.cw.cramer.common.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LogUtils {
+public final class LogUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger("com.cw.cramer");
 	

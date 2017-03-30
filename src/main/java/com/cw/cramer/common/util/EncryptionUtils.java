@@ -14,7 +14,7 @@ import javax.crypto.spec.SecretKeySpec;
  * 加密算法工具类
  * @author wicks
  */
-public class EncryptionUtils {
+public final class EncryptionUtils {
 	
 	/**
 	 * 对称性加密密码

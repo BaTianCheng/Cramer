@@ -6,19 +6,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
-import com.cw.cramer.common.util.file.CSVUtils;
+import com.cw.cramer.common.util.file.CsvUtils;
 import com.cw.cramer.common.util.file.ExcelUtils;
 
 /**
  * 文件操作类
  * @author wicks
  */
-public class FileUtils extends org.apache.commons.io.FileUtils {
+public final class FileUtils extends org.apache.commons.io.FileUtils {
 	
 	/**
 	 * 特定文件格式操作类
 	 */
-	public CSVUtils csvFileOpeartor;
+	public CsvUtils csvFileOpeartor;
 	public ExcelUtils excelFileOpeartor;
 	
 	/**
