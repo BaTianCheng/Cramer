@@ -4,7 +4,6 @@ package com.cw.cramer.common.util;
 //import org.slf4j.LoggerFactory;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 public final class LogUtils {
 	

@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+	default-lazy-init="true">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
-
-	<!-- dataSource 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/etao_java" />
-		<property name="username" value="root" />
-		<property name="password" value="cope9020" />
-	</bean>
--->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
 
 	<!-- 数据库保存的密码是使用MD5算法加密的，所以这里需要配置一个密码匹配对象 -->
@@ -26,7 +17,7 @@
 	  使用Shiro自带的JdbcRealm类
       指定密码匹配所需要用到的加密对象
 	  指定存储用户、角色、权限许可的数据源及相关查询语句
-	 -->
+
 	<bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"></property>
 		<property name="permissionsLookupEnabled" value="true"></property>
@@ -38,11 +29,15 @@
 		<property name="permissionsQuery"
 			value="SELECT permission_name FROM sec_role_permission left join sec_role using(role_id) left join sec_permission using(permission_id) WHERE role_name = ?"></property>
 	</bean>
+		 -->
 
 	<!-- Shiro安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="jdbcRealm"></property>
+		<property name="realm" ref="shiroRealm"></property>
 		<property name="cacheManager" ref="cacheManager"></property>
+	</bean>
+	
+	<bean id="shiroRealm" class="com.cw.cramer.core.security.ShiroRealm">
 	</bean>
 
 	<!-- 
