@@ -16,9 +16,6 @@ import com.cw.cramer.auth.dao.SysUserDAO;
 
 @Controller
 public class IndexController {
-	
-	@Resource
-	private SysUserDAO sysUserDAO;
 
 	/**
 	 * 页面
@@ -28,10 +25,8 @@ public class IndexController {
 	 */
 	@RequestMapping(value = "/")
 	public ModelAndView  toIndex(HttpServletRequest request, Model model) {
-		System.out.println(sysUserDAO.selectByExample(null));
-
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
+		UsernamePasswordToken token = new UsernamePasswordToken("admin", "123456");
 
 		try {
 			subject.login(token);

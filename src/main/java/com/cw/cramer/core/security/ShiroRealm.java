@@ -15,12 +15,16 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
-import com.cw.cramer.auth.dao.SysUserDAO;
+import com.cw.cramer.auth.service.SysUserService;
 
+/**
+ * 安全身份管理类
+ * @author wicks
+ */
 public class ShiroRealm extends AuthorizingRealm{
 	
 	@Resource
-	private SysUserDAO sysUserDAO;
+	private SysUserService sysUserService;
 
 	/**
 	 * 获得权限
@@ -41,9 +45,9 @@ public class ShiroRealm extends AuthorizingRealm{
 		UsernamePasswordToken token = (UsernamePasswordToken)authcToken;  
         System.out.println("验证当前Subject时获取到token为" + token);
         
-        if("zhang".equals(token.getUsername()) && "123".equals(String.valueOf(token.getPassword()))){  
-            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("zhang", "123", this.getName());  
-            this.setSession("currentUser", "zhang");  
+        if(sysUserService.checkPassWord(token.getUsername(), String.valueOf(token.getPassword())) == 1){  
+            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), this.getName());  
+            this.setSession("currentUser", token.getUsername());  
             return authcInfo;  
         }
 
