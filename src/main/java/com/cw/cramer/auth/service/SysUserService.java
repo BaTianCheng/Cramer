@@ -56,6 +56,9 @@ public class SysUserService {
 	 * @return
 	 */
 	public int checkPassWord(String userName, String passWord){
+		//缺少对锁定用户，不存在用户的校验
+		//throw new UnknownAccountException();//没找到帐号
+		//throw new LockedAccountException(); //帐号锁定
 		int status = 0;
 		SysUser user = getSysUser(userName);
 		if(user != null && user.getPassword() != null){

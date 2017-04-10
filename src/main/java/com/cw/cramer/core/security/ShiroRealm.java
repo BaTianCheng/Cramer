@@ -43,7 +43,24 @@ public class ShiroRealm extends AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken)authcToken;  
-        System.out.println("验证当前Subject时获取到token为" + token);
+		
+//		String username = (String)token.getPrincipal();
+//		User user = userService.findByUsername(username);
+//		if(user == null) {
+//		throw new UnknownAccountException();//没找到帐号
+//		}
+//		if(Boolean.TRUE.equals(user.getLocked())) {
+//		throw new LockedAccountException(); //帐号锁定
+//		}
+//		//交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家
+//		的不好可以在此判断或自定义实现
+//		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+//		user.getUsername(), //用户名
+//		user.getPassword(), //密码
+//		ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
+//		getName() //realm name
+//		);
+//		return authenticationInfo;
         
         if(sysUserService.checkPassWord(token.getUsername(), String.valueOf(token.getPassword())) == 1){  
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), this.getName());  
@@ -62,7 +79,6 @@ public class ShiroRealm extends AuthorizingRealm{
         Subject currentUser = SecurityUtils.getSubject();  
         if(null != currentUser){  
             Session session = currentUser.getSession();  
-            System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");  
             if(null != session){  
                 session.setAttribute(key, value);  
             }  
