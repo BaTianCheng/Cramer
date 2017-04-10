@@ -31,7 +31,7 @@ public class SysUserService {
 	 */
 	public SysUser getSysUser(String userName){
 		SysUserExample example = new SysUserExample();
-		example.or().andUserNameEqualTo(userName);
+		example.or().andNameEqualTo(userName);
 		List<SysUser> users = sysUserDAO.selectByExample(example);
 		if(users.isEmpty()){
 			return null;

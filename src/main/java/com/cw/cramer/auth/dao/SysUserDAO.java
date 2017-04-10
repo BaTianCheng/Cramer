@@ -10,7 +10,7 @@ public interface SysUserDAO {
 
     int deleteByExample(SysUserExample example);
 
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(SysUser record);
 
@@ -18,7 +18,7 @@ public interface SysUserDAO {
 
     List<SysUser> selectByExample(SysUserExample example);
 
-    SysUser selectByPrimaryKey(Integer userId);
+    SysUser selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") SysUser record, @Param("example") SysUserExample example);
 

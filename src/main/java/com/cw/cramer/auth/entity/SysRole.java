@@ -1,25 +1,25 @@
 package com.cw.cramer.auth.entity;
 
-public class SysUser {
+public class SysRole {
     private Integer id;
 
     private String name;
 
-    private String password;
+    private String code;
 
     private Integer type;
 
     private Integer status;
 
+    private Integer parentId;
+
+    private Integer dapartmentId;
+
     private Integer sort;
 
-    private String loginIp;
+    private Integer createBy;
 
-    private String loginTime;
-
-    private String createBy;
-
-    private String createTime;
+    private Integer createTime;
 
     private Integer updateBy;
 
@@ -43,12 +43,12 @@ public class SysUser {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getCode() {
+        return code;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
     }
 
     public Integer getType() {
@@ -67,6 +67,22 @@ public class SysUser {
         this.status = status;
     }
 
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getDapartmentId() {
+        return dapartmentId;
+    }
+
+    public void setDapartmentId(Integer dapartmentId) {
+        this.dapartmentId = dapartmentId;
+    }
+
     public Integer getSort() {
         return sort;
     }
@@ -75,36 +91,20 @@ public class SysUser {
         this.sort = sort;
     }
 
-    public String getLoginIp() {
-        return loginIp;
-    }
-
-    public void setLoginIp(String loginIp) {
-        this.loginIp = loginIp == null ? null : loginIp.trim();
-    }
-
-    public String getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(String loginTime) {
-        this.loginTime = loginTime == null ? null : loginTime.trim();
-    }
-
-    public String getCreateBy() {
+    public Integer getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy == null ? null : createBy.trim();
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
     }
 
-    public String getCreateTime() {
+    public Integer getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreateTime(Integer createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getUpdateBy() {
