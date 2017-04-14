@@ -48,18 +48,18 @@
 		<!-- Shiro的核心安全接口，这个属性是必须的 -->
 		<property name="securityManager" ref="securityManager"></property>
 		<!-- 要求登录时的链接(登录页面地址)，非必须的属性，默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
-		<property name="loginUrl" value="/security/login"></property>
-		<!-- 登录成功后要跳转的连接(本例中此属性用不到，因为登录成功后的处理逻辑在LoginController里硬编码) -->
-		<!-- <property name="successUrl" value="/" ></property> -->
+		<property name="loginUrl" value="/login"></property>
 		<!-- 用户访问未对其授权的资源时，所显示的连接 -->
 		<property name="unauthorizedUrl" value="/"></property>
 		<property name="filterChainDefinitions">
 			<value>
 				/security/*=anon
 				/testauth=authc
+				/=authc
 			</value>
 		</property>
 	</bean>
+	
 
 	<!-- 
 	   开启Shiro的注解(如@RequiresRoles，@RequiresPermissions)，需借助SpringAOP扫描使用Shiro注解的类，

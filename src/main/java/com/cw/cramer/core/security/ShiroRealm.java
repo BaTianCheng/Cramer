@@ -6,7 +6,10 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -15,6 +18,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.service.SysUserService;
 
 /**
@@ -42,33 +46,28 @@ public class ShiroRealm extends AuthorizingRealm{
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-		UsernamePasswordToken token = (UsernamePasswordToken)authcToken;  
+		UsernamePasswordToken token = (UsernamePasswordToken)authcToken;
+		String userName = (String)token.getPrincipal();
+		SysUser user = sysUserService.getSysUser(userName);
 		
-//		String username = (String)token.getPrincipal();
-//		User user = userService.findByUsername(username);
-//		if(user == null) {
-//		throw new UnknownAccountException();//没找到帐号
-//		}
-//		if(Boolean.TRUE.equals(user.getLocked())) {
-//		throw new LockedAccountException(); //帐号锁定
-//		}
-//		//交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家
-//		的不好可以在此判断或自定义实现
-//		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-//		user.getUsername(), //用户名
-//		user.getPassword(), //密码
-//		ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
-//		getName() //realm name
-//		);
-//		return authenticationInfo;
-        
-        if(sysUserService.checkPassWord(token.getUsername(), String.valueOf(token.getPassword())) == 1){  
+		//没找到帐号
+		if(user == null || user.getStatus() == -1) {
+			throw new UnknownAccountException();
+		} 
+		//帐号锁定
+		if(user.getStatus() == -2) {
+			throw new LockedAccountException(); 
+		}
+		
+		//验证密码
+        if(sysUserService.checkPassWord(token.getUsername(), String.valueOf(token.getPassword()))){  
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), this.getName());  
             this.setSession("currentUser", token.getUsername());  
             return authcInfo;  
+        } else {
+        	throw new IncorrectCredentialsException();
         }
 
-		return null;
 	}
 	
     /** 

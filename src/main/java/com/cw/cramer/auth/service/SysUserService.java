@@ -55,18 +55,14 @@ public class SysUserService {
 	 * @param passWord
 	 * @return
 	 */
-	public int checkPassWord(String userName, String passWord){
-		//缺少对锁定用户，不存在用户的校验
-		//throw new UnknownAccountException();//没找到帐号
-		//throw new LockedAccountException(); //帐号锁定
-		int status = 0;
+	public boolean checkPassWord(String userName, String passWord){
 		SysUser user = getSysUser(userName);
 		if(user != null && user.getPassword() != null){
 			if(user.getPassword().equals(EncryptionUtils.EncoderByMd5(passWord))){
-				status = 1;
+				return true;
 			}
 		}
-		return status;
+		return false;
 	}
 
 }

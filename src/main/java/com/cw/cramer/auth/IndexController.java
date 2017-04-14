@@ -44,7 +44,7 @@ public class IndexController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/security/login")
+	@RequestMapping(value = "/login")
 	public ModelAndView  toLogin(HttpServletRequest request, Model model) {
 		return new ModelAndView("login");
 	}
