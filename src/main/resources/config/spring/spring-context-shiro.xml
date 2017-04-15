@@ -55,7 +55,7 @@
 			<value>
 				/security/*=anon
 				/testauth=authc
-				/=authc
+				/=anon
 			</value>
 		</property>
 	</bean>

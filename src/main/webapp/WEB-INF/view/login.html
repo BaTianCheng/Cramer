@@ -56,14 +56,14 @@
 									<section>
 										<label class="label">用户名称</label>
 										<label class="input"> <i class="icon-append fa fa-user"></i>
-											<input type="text" name="username">
+											<input type="text" name="username" id="username">
 											<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> 请输入用户名称</b></label>
 									</section>
 
 									<section>
 										<label class="label">用户密码</label>
 										<label class="input"> <i class="icon-append fa fa-lock"></i>
-											<input type="password" name="password">
+											<input type="password" name="password" id="password">
 											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> 请输入用户密码</b> </label>
 										<div class="note">
 											<a href="forgotpassword.html">忘记密码?</a>
@@ -77,7 +77,7 @@
 									</section>
 								</fieldset>
 								<footer>
-									<button type="submit" class="btn btn-primary">
+									<button type="submit" class="btn btn-primary" onClick='Auth.CheckLogin($("#username").val(),$("#password").val());'>
 										登录
 									</button>
 								</footer>
@@ -134,6 +134,8 @@
 
 		<!-- MAIN APP JS FILE -->
 		<script src="js/app.min.js"></script>
+		
+		<script src="assets/js/auth/auth.js"></script>
 
 		<script type="text/javascript">
 			runAllForms();
