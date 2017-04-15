@@ -1,0 +1,1 @@
+var CTX_PATH = location.pathname.substring(0,location.pathname.substr(1).indexOf('/')+1);

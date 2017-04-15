@@ -1,5 +1,8 @@
 package com.cw.cramer.auth;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -7,7 +10,10 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +25,8 @@ import com.cw.cramer.common.util.LogUtils;
 
 @Controller
 public class AuthController {
+	@Autowired  
+	private SessionDAO sessionDAO;  
 	
 	/**
 	 * 页面
@@ -61,6 +69,21 @@ public class AuthController {
 			LogUtils.error("login faile: " + e);
 			return "0";
 		}
+	}
+	
+	/**
+	 * 获取当前用户
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/getUser")
+	@ResponseBody
+	public String getCurrentUser(HttpServletRequest request, Model model) {
+		Subject currentUser = SecurityUtils.getSubject();//获取当前用户
+		Collection<Session> sessions = sessionDAO.getActiveSessions();  
+		System.out.println(sessions);
+		return currentUser.getPrincipal().toString();
 	}
 
 }

@@ -9,7 +9,7 @@ Auth.CheckLogin = function(userName, passWord){
 		},
 		function(result){
 			if(result == "1"){
-				location.href='/cramer/';
+				location.href='/cramer/index';
 			} else {
 				alert('Login fail!');
 			}

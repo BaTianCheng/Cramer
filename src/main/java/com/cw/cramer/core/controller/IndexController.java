@@ -21,4 +21,15 @@ public class IndexController {
 		return new ModelAndView("index");
 	}
 	
+	/**
+	 * 页面
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/index")
+	public ModelAndView  toIndex(HttpServletRequest request, Model model) {
+		return new ModelAndView("index");
+	}
+	
 }
