@@ -32,7 +32,7 @@
 	    </property>  
 	</bean>  
  
- 	<!--  
+ 	 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="exposeRequestAttributes" value="true" />
         <property name="exposeSessionAttributes" value="true" />
@@ -45,12 +45,13 @@
             <value>text/html; charset=UTF-8</value>
         </property>
     </bean>  
-    -->
-    
+   
+    <!-- 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="prefix" value="/WEB-INF/view/"></property>  
         <property name="suffix" value=".jsp"></property>  
     </bean> 
+     -->
     
     <!-- 配置文件上传，如果没有使用文件上传可以不用配置 -->  
     <bean id="multipartResolver"    

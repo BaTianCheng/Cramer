@@ -1,6 +1,5 @@
 package com.cw.cramer.auth;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +83,17 @@ public class AuthController {
 		Collection<Session> sessions = sessionDAO.getActiveSessions();  
 		System.out.println(sessions);
 		return currentUser.getPrincipal().toString();
+	}
+	
+	/**
+	 * 页面
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/users")
+	public ModelAndView totest1(HttpServletRequest request, Model model) {
+		return new ModelAndView("auth/table");
 	}
 
 }
