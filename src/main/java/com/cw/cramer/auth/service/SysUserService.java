@@ -9,6 +9,7 @@ import com.cw.cramer.auth.dao.SysUserDAO;
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.entity.SysUserExample;
 import com.cw.cramer.common.constant.SequenceConstant;
+import com.cw.cramer.common.constant.StatusConstant;
 import com.cw.cramer.common.util.EncryptionUtils;
 import com.cw.cramer.sys.SysAPI;
 import com.github.pagehelper.PageHelper;
@@ -106,12 +107,18 @@ public class SysUserService {
 	}
 	
 	/**
-	 * 删除用户
-	 * @param user
+	 * 删除用户(更新标志位)
+	 * @param userId
 	 * @return
 	 */
 	public boolean delete(int userId){
-		return sysUserDAO.deleteByPrimaryKey(userId)>0 ? true : false;
+		SysUser user = getSysUser(userId);
+		if(user != null){
+			user.setStatus(StatusConstant.STATUS_DELETED);
+			return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
+		} else {
+			return false;
+		}
 	}
 
 }
