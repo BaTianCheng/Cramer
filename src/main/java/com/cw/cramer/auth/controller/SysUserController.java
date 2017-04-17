@@ -31,7 +31,7 @@ public class SysUserController extends BaseController{
 	 */
 	@RequestMapping(value = "/users")
 	public ModelAndView totest1(HttpServletRequest request, Model model) {
-		return new ModelAndView("auth/table");
+		return new ModelAndView("auth/users");
 	}
 	
 	/**
