@@ -8,7 +8,8 @@ Auth.CheckLogin = function(userName, passWord){
 			passWord:passWord
 		},
 		function(result){
-			if(result == "1"){
+			var code = JSON.parse(result).resultCode;
+			if(code == "200"){
 				location.href='/cramer/index';
 			} else {
 				alert('Login fail!');

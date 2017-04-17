@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.cw.cramer.auth.service.SysUserService;
+import com.cw.cramer.common.base.BaseController;
 
 /**
  * 系统用户控制器
  * @author wicks
  */
 @Controller
-public class SysUserController {
+public class SysUserController extends BaseController{
 	
 	@Autowired
 	private SysUserService sysUserService;
@@ -43,7 +43,7 @@ public class SysUserController {
 	@RequestMapping(value = "/auth/users/list", method=RequestMethod.POST)
 	@ResponseBody
 	public String getUsers(HttpServletRequest request, Model model, int pageNum, int pageSize, String userName) {
-		return JSON.toJSONString(sysUserService.getSysUsers(pageNum, pageSize, userName));
+		return this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName));
 	}
 
 }

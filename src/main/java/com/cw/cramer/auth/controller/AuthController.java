@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cw.cramer.common.base.BaseController;
 import com.cw.cramer.common.util.LogUtils;
 
 /**
@@ -22,7 +23,7 @@ import com.cw.cramer.common.util.LogUtils;
  * @author wicks
  */
 @Controller
-public class AuthController {
+public class AuthController extends BaseController{
 	
 	/**
 	 * 登录页面
@@ -51,19 +52,19 @@ public class AuthController {
 
 		try {
 			subject.login(token);
-			return "1";
+			return this.renderSuccessJson(null);
 		}catch (UnknownAccountException e) {
 			LogUtils.error("login faile: " + e);
-			return "-3";
+			return this.renderFailJson(null);
 		}catch (LockedAccountException e) {
 			LogUtils.error("login faile: " + e);
-			return "-2";
+			return this.renderFailJson(null);
 		}catch (IncorrectCredentialsException e) {
 			LogUtils.error("login faile: " + e);
-			return "-1";
+			return this.renderFailJson(null);
 		}catch (Exception e) {
 			LogUtils.error("login faile: " + e);
-			return "0";
+			return this.renderFailJson(null);
 		}
 	}
 
