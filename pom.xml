@@ -100,6 +100,12 @@
 			<version>1.2.3</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-quartz</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		
 		<!-- 数据库类引用 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -224,6 +230,12 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-schemas</artifactId>
 			<version>3.9</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>commons-collections</groupId>
+		  <artifactId>commons-collections</artifactId>
+		  <version>3.2.1</version>
 		</dependency>
 		
 		<!-- 映射转换工具 -->
