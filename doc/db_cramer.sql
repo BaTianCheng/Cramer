@@ -10,10 +10,73 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-04-07 17:22:48
+Date: 2017-04-17 08:53:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `sys_dapartment`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dapartment`;
+CREATE TABLE `sys_dapartment` (
+  `id` int(11) NOT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `code` varchar(128) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `area_id` varchar(16) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_time` int(11) DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `undate_time` int(11) DEFAULT NULL,
+  `remarks` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_dapartment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `sys_department_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_department_role`;
+CREATE TABLE `sys_department_role` (
+  `department_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_department_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `sys_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role` (
+  `id` int(11) NOT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `code` varchar(128) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `dapartment_id` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `create_by` int(11) DEFAULT NULL,
+  `create_time` int(11) DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `remarks` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `sys_sequence`
@@ -36,38 +99,67 @@ INSERT INTO `sys_sequence` VALUES ('seq_sys_user_id', '21', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
-  `User_id` int(11) NOT NULL AUTO_INCREMENT,
-  `User_name` varchar(32) DEFAULT NULL,
-  `Password` varchar(32) DEFAULT NULL,
-  `User_type` int(11) DEFAULT NULL,
-  `Login_ip` varchar(32) DEFAULT NULL,
-  `Login_time` varchar(32) DEFAULT NULL,
-  `User_status` int(11) DEFAULT NULL,
-  `Create_by` varchar(32) DEFAULT NULL,
-  `Create_time` varchar(32) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `login_ip` varchar(32) DEFAULT NULL,
+  `login_time` varchar(32) DEFAULT NULL,
+  `create_by` varchar(32) DEFAULT NULL,
+  `create_time` varchar(32) DEFAULT NULL,
+  `update_by` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
   `Remarks` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`User_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', null, null, '0', null, null, null);
-INSERT INTO `sys_user` VALUES ('2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', '1', null, null, '0', null, null, null);
-INSERT INTO `sys_user` VALUES ('7', 't1', 'e10adc3949ba59abbe56e057f20f883e', '0', null, null, '0', '1', '20170379112218', null);
-INSERT INTO `sys_user` VALUES ('8', 't1', 'e10adc3949ba59abbe56e057f20f883e', '0', null, null, '0', '1', '20170379112511', null);
-INSERT INTO `sys_user` VALUES ('9', 't1', 'e10adc3949ba59abbe56e057f20f883e', '0', null, null, '0', '1', '20170379112630', null);
-INSERT INTO `sys_user` VALUES ('10', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379113745', null);
-INSERT INTO `sys_user` VALUES ('12', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379113954', null);
-INSERT INTO `sys_user` VALUES ('13', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379114052', null);
-INSERT INTO `sys_user` VALUES ('14', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379114314', null);
-INSERT INTO `sys_user` VALUES ('15', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379120128', null);
-INSERT INTO `sys_user` VALUES ('16', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379014330', null);
-INSERT INTO `sys_user` VALUES ('17', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379014505', null);
-INSERT INTO `sys_user` VALUES ('18', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379014527', null);
-INSERT INTO `sys_user` VALUES ('19', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379015437', null);
-INSERT INTO `sys_user` VALUES ('20', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379015558', null);
-INSERT INTO `sys_user` VALUES ('21', 't2', '96e79218965eb72c92a549dd5a330112', null, null, null, '0', '1', '20170379015857', null);
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('2', 'admin2', 'e10adc3949ba59abbe56e057f20f883e', '1', '0', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('7', 't1', 'e10adc3949ba59abbe56e057f20f883e', '0', '0', null, null, null, '1', '20170379112218', null, null, null);
+INSERT INTO `sys_user` VALUES ('8', 't1', 'e10adc3949ba59abbe56e057f20f883e', '0', '0', null, null, null, '1', '20170379112511', null, null, null);
+INSERT INTO `sys_user` VALUES ('9', 't1', 'e10adc3949ba59abbe56e057f20f883e', '0', '0', null, null, null, '1', '20170379112630', null, null, null);
+INSERT INTO `sys_user` VALUES ('10', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379113745', null, null, null);
+INSERT INTO `sys_user` VALUES ('12', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379113954', null, null, null);
+INSERT INTO `sys_user` VALUES ('13', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379114052', null, null, null);
+INSERT INTO `sys_user` VALUES ('14', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379114314', null, null, null);
+INSERT INTO `sys_user` VALUES ('15', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379120128', null, null, null);
+INSERT INTO `sys_user` VALUES ('16', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379014330', null, null, null);
+INSERT INTO `sys_user` VALUES ('17', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379014505', null, null, null);
+INSERT INTO `sys_user` VALUES ('18', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379014527', null, null, null);
+INSERT INTO `sys_user` VALUES ('19', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379015437', null, null, null);
+INSERT INTO `sys_user` VALUES ('20', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379015558', null, null, null);
+INSERT INTO `sys_user` VALUES ('21', 't2', '96e79218965eb72c92a549dd5a330112', null, '0', null, null, null, '1', '20170379015857', null, null, null);
+
+-- ----------------------------
+-- Table structure for `sys_user_department`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_department`;
+CREATE TABLE `sys_user_department` (
+  `user_id` int(11) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_user_department
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `sys_user_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role` (
+  `user_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
 
 -- ----------------------------
 -- Function structure for `currval`

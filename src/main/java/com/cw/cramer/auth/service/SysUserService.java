@@ -9,13 +9,12 @@ import com.cw.cramer.auth.dao.SysUserDAO;
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.entity.SysUserExample;
 import com.cw.cramer.common.util.EncryptionUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.base.Strings;
 
 /**
  * 系统操作用户服务类
- * @author wicks
- */
-/**
- * 
  * @author wicks
  */
 @Service(value="sysUserService")
@@ -63,6 +62,50 @@ public class SysUserService {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * 获取用户列表
+	 * @param pageNum
+	 * @param pageSize
+	 * @param userName
+	 * @return
+	 */
+	public PageInfo<SysUser> getSysUsers(int pageNum, int pageSize, String userName) {
+		PageHelper.startPage(pageNum, pageSize);
+		SysUserExample example = new SysUserExample();
+		if(!Strings.isNullOrEmpty(userName)){
+			example.or().andNameEqualTo(userName);
+		}
+		List<SysUser> users = sysUserDAO.selectByExample(example);
+		return new PageInfo<SysUser>(users);
+	}
+	
+	/**
+	 * 添加用户
+	 * @param user
+	 * @return
+	 */
+	public boolean insert(SysUser user){
+		return sysUserDAO.insert(user)>0 ? true : false;
+	}
+	
+	/**
+	 * 修改用户
+	 * @param user
+	 * @return
+	 */
+	public boolean update(SysUser user){
+		return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
+	}
+	
+	/**
+	 * 删除用户
+	 * @param user
+	 * @return
+	 */
+	public boolean delete(int userId){
+		return sysUserDAO.deleteByPrimaryKey(userId)>0 ? true : false;
 	}
 
 }
