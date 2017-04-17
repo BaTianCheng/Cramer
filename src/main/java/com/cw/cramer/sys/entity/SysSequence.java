@@ -1,4 +1,4 @@
-package com.cw.cramer.auth.entity;
+package com.cw.cramer.sys.entity;
 
 public class SysSequence {
     private String seqName;

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.cw.cramer.auth.dao.SysUserDAO;
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.entity.SysUserExample;
+import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.util.EncryptionUtils;
+import com.cw.cramer.sys.SysAPI;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
@@ -22,6 +24,9 @@ public class SysUserService {
 	
 	@Autowired
 	private SysUserDAO sysUserDAO;
+	
+	@Autowired
+	private SysAPI sysAPI;
 	
 	/**
 	 * 获取用户
@@ -87,6 +92,7 @@ public class SysUserService {
 	 * @return
 	 */
 	public boolean insert(SysUser user){
+		user.setId(sysAPI.getNextSeq(SequenceConstant.SEQ_SYSUSERID));
 		return sysUserDAO.insert(user)>0 ? true : false;
 	}
 	

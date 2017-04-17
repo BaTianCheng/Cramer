@@ -1,4 +1,4 @@
-package com.cw.cramer.auth.entity;
+package com.cw.cramer.sys.entity;
 
 import java.util.ArrayList;
 import java.util.List;

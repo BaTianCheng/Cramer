@@ -1,9 +1,10 @@
-package com.cw.cramer.auth.dao;
+package com.cw.cramer.sys.dao;
 
-import com.cw.cramer.auth.entity.SysSequence;
-import com.cw.cramer.auth.entity.SysSequenceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import com.cw.cramer.sys.entity.SysSequence;
+import com.cw.cramer.sys.entity.SysSequenceExample;
 
 public interface SysSequenceDAO {
     long countByExample(SysSequenceExample example);
@@ -27,4 +28,6 @@ public interface SysSequenceDAO {
     int updateByPrimaryKeySelective(SysSequence record);
 
     int updateByPrimaryKey(SysSequence record);
+    
+    int selectNext(String seqName);
 }

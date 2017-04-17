@@ -179,4 +179,7 @@
       increment_val = #{incrementVal,jdbcType=INTEGER}
     where seq_name = #{seqName,jdbcType=VARCHAR}
   </update>
+  <select id="selectNext" parameterType="java.lang.String" resultType="java.lang.Long">
+    select nextval(#{seqName,jdbcType=VARCHAR})
+  </select>
 </mapper>
