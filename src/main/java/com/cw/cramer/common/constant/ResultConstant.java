@@ -8,8 +8,10 @@ public class ResultConstant {
 	
 	public static String CODE_SUCCESS = "200";
 	public static String CODE_FAIL = "500";
+	public static String CODE_INVOEERROR = "501";
 	
 	public static String CODE_SUCCESS_DESC = "请求成功";
 	public static String CODE_FAIL_DESC = "请求失败";
+	public static String CODE_INVOEERROR_DESC = "操作失败";
 
 }

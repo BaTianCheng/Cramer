@@ -39,7 +39,15 @@ public class BaseController {
 	 * @return
 	 */
 	public String renderSuccessJson(Object data){
-		return renderJson(ResultConstant.CODE_SUCCESS, ResultConstant.CODE_SUCCESS_DESC, data);
+		if(data instanceof Boolean){
+			if((Boolean)data){
+				return renderJson(ResultConstant.CODE_SUCCESS, ResultConstant.CODE_SUCCESS_DESC, data);
+			} else {
+				return renderJson(ResultConstant.CODE_INVOEERROR, ResultConstant.CODE_INVOEERROR_DESC, data);
+			}
+		} else {
+			return renderJson(ResultConstant.CODE_SUCCESS, ResultConstant.CODE_SUCCESS_DESC, data);
+		}
 	}
 	
 	/**

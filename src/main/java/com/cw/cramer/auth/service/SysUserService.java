@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import com.cw.cramer.auth.dao.SysUserDAO;
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.entity.SysUserExample;
+import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.common.util.EncryptionUtils;
-import com.cw.cramer.sys.SysAPI;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
@@ -21,14 +22,11 @@ import com.google.common.base.Strings;
  * @author wicks
  */
 @Service(value="sysUserService")
-public class SysUserService {
+public class SysUserService extends BaseService{
 	
 	@Autowired
 	private SysUserDAO sysUserDAO;
-	
-	@Autowired
-	private SysAPI sysAPI;
-	
+		
 	/**
 	 * 获取用户
 	 * @param userName
@@ -93,7 +91,7 @@ public class SysUserService {
 	 * @return
 	 */
 	public boolean insert(SysUser user){
-		user.setId(sysAPI.getNextSeq(SequenceConstant.SEQ_SYSUSERID));
+		user.setId(getNextSeq(SequenceConstant.SEQ_SYSUSERID));
 		return sysUserDAO.insert(user)>0 ? true : false;
 	}
 	
@@ -103,7 +101,48 @@ public class SysUserService {
 	 * @return
 	 */
 	public boolean update(SysUser user){
+		user.setUpdateBy(this.getCurrentUser().getId());
+		user.setUpdateTime(DateTimeUtils.getCurrentTime());
 		return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
+	}
+	
+	/**
+	 * 更新用户密码
+	 * @param userId
+	 * @param newPassword
+	 * @return
+	 */
+	public boolean updatePassword(String newPassword){
+		SysUser user = getSysUser(this.getCurrentUser().getId());
+		user.setPassword(EncryptionUtils.EncoderByMd5(newPassword));
+		return update(user);
+	}
+	
+	/**
+	 * 更新用户密码
+	 * @param userId
+	 * @param newPassword
+	 * @return
+	 */
+	public boolean updatePassword(int userId, String newPassword){
+		SysUser user = getSysUser(userId);
+		user.setPassword(EncryptionUtils.EncoderByMd5(newPassword));
+		return update(user);
+	}
+	
+	/**
+	 * 更新用户基本信息
+	 * @param editedUser
+	 * @return
+	 */
+	public boolean updateInfo(SysUser editedUser){
+		SysUser user = getSysUser(editedUser.getId());
+		user.setName(editedUser.getName());
+		user.setSort(editedUser.getSort());
+		user.setStatus(editedUser.getStatus());
+		user.setType(editedUser.getType());
+		user.setRemarks(editedUser.getRemarks());
+		return update(user);
 	}
 	
 	/**

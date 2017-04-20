@@ -165,5 +165,13 @@ public final class DateTimeUtils extends org.apache.commons.lang3.time.DateUtils
 			long afterTime = after.getTime();
 			return (afterTime - beforeTime) / (1000 * 60 * 60 * 24);
 		}
+		
+		/**
+		 * 获取当前事件
+		 * @return
+		 */
+		public static int getCurrentTime(){
+			return Integer.valueOf(String.valueOf(System.currentTimeMillis()));
+		}
 
 }
