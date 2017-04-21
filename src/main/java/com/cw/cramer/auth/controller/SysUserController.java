@@ -31,8 +31,19 @@ public class SysUserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = "/users")
-	public ModelAndView totest1(HttpServletRequest request, Model model) {
+	public ModelAndView toIndex(HttpServletRequest request, Model model) {
 		return new ModelAndView("auth/users");
+	}
+	
+	/**
+	 * 测试页面
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/test")
+	public ModelAndView totest2(HttpServletRequest request, Model model) {
+		return new ModelAndView("auth/test");
 	}
 	
 	/**

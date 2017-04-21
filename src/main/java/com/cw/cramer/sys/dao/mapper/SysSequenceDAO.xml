@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cw.cramer.auth.dao.SysSequenceDAO">
-  <resultMap id="BaseResultMap" type="com.cw.cramer.auth.entity.SysSequence">
+<mapper namespace="com.cw.cramer.sys.dao.SysSequenceDAO">
+  <resultMap id="BaseResultMap" type="com.cw.cramer.sys.entity.SysSequence">
     <id column="seq_name" jdbcType="VARCHAR" property="seqName" />
     <result column="current_val" jdbcType="INTEGER" property="currentVal" />
     <result column="increment_val" jdbcType="INTEGER" property="incrementVal" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     seq_name, current_val, increment_val
   </sql>
-  <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysSequenceExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cw.cramer.sys.entity.SysSequenceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,19 +92,19 @@
     delete from sys_sequence
     where seq_name = #{seqName,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysSequenceExample">
+  <delete id="deleteByExample" parameterType="com.cw.cramer.sys.entity.SysSequenceExample">
     delete from sys_sequence
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cw.cramer.auth.entity.SysSequence">
+  <insert id="insert" parameterType="com.cw.cramer.sys.entity.SysSequence">
     insert into sys_sequence (seq_name, current_val, increment_val
       )
     values (#{seqName,jdbcType=VARCHAR}, #{currentVal,jdbcType=INTEGER}, #{incrementVal,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cw.cramer.auth.entity.SysSequence">
+  <insert id="insertSelective" parameterType="com.cw.cramer.sys.entity.SysSequence">
     insert into sys_sequence
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="seqName != null">
@@ -129,7 +129,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cw.cramer.auth.entity.SysSequenceExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cw.cramer.sys.entity.SysSequenceExample" resultType="java.lang.Long">
     select count(*) from sys_sequence
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -161,7 +161,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cw.cramer.auth.entity.SysSequence">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.cramer.sys.entity.SysSequence">
     update sys_sequence
     <set>
       <if test="currentVal != null">
@@ -173,7 +173,7 @@
     </set>
     where seq_name = #{seqName,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cw.cramer.auth.entity.SysSequence">
+  <update id="updateByPrimaryKey" parameterType="com.cw.cramer.sys.entity.SysSequence">
     update sys_sequence
     set current_val = #{currentVal,jdbcType=INTEGER},
       increment_val = #{incrementVal,jdbcType=INTEGER}
