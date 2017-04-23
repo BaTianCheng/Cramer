@@ -10,7 +10,7 @@ User.List = function (){
 		colNames : [ '编号', '名称', '密码', '状态', '备注', '操作'],
 		colModel : 
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
-			 {name : 'name',index : 'name asc, id',width : 100}, 
+			 {name : 'name',index : 'name asc, id',width : 100,editable :true,editoptions:{readonly:true}}, 
 			 {name : 'password',index : 'password',width : 200}, 
 			 {name : 'status',index : 'status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
@@ -65,15 +65,13 @@ User.List = function (){
             	  	actions : be + de + se + ce
                   });
             }
-        },
-        edit: {
-        	closeAfterEdit: true,
-        	closeAfterAdd: true,
-        	viewPagerButtons: false
         }
 	});
 
-	$("#main-table").jqGrid('navGrid', '#pager', {edit : true,add : true,del : true});
+	$("#main-table").jqGrid('navGrid', '#pager', 
+		{edit : true,add : true,del : true},
+		{closeAfterEdit: true,closeAfterAdd: true,viewPagerButtons: false}
+	);
 }
 
 function editRow(cl){
