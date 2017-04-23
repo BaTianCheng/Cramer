@@ -11,7 +11,6 @@ import com.cw.cramer.auth.entity.SysUserExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.common.util.EncryptionUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -79,7 +78,9 @@ public class SysUserService extends BaseService{
 		PageHelper.startPage(pageNum, pageSize);
 		SysUserExample example = new SysUserExample();
 		if(!Strings.isNullOrEmpty(userName)){
-			example.or().andNameEqualTo(userName);
+			example.or().andNameEqualTo(userName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+		} else {
+			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		}
 		List<SysUser> users = sysUserDAO.selectByExample(example);
 		return new PageInfo<SysUser>(users);
@@ -102,7 +103,7 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean update(SysUser user){
 		user.setUpdateBy(this.getCurrentUser().getId());
-		user.setUpdateTime(DateTimeUtils.getCurrentTime());
+		//user.setUpdateTime(DateTimeUtils.getCurrentTime());
 		return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
 	}
 	
@@ -137,10 +138,7 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean updateInfo(SysUser editedUser){
 		SysUser user = getSysUser(editedUser.getId());
-		user.setName(editedUser.getName());
-		user.setSort(editedUser.getSort());
 		user.setStatus(editedUser.getStatus());
-		user.setType(editedUser.getType());
 		user.setRemarks(editedUser.getRemarks());
 		return update(user);
 	}

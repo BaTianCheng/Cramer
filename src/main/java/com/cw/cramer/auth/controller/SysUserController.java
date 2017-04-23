@@ -36,17 +36,6 @@ public class SysUserController extends BaseController{
 	}
 	
 	/**
-	 * 测试页面
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/test")
-	public ModelAndView totest2(HttpServletRequest request, Model model) {
-		return new ModelAndView("auth/test");
-	}
-	
-	/**
 	 * 获取用户列表
 	 * @param request
 	 * @param model
@@ -78,8 +67,12 @@ public class SysUserController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/users/update/info", method=RequestMethod.POST)
 	@ResponseBody
-	public String updateUser(HttpServletRequest request, Model model, SysUser user) {
-		return this.renderSuccessJson(sysUserService.updateInfo(user));
+	public String updateUser(HttpServletRequest request, Model model, String oper, SysUser user) {
+		if("del".equals(oper)){
+			return this.renderSuccessJson(sysUserService.delete(user.getId()));
+		} else {
+			return this.renderSuccessJson(sysUserService.updateInfo(user));
+		}
 	}
 	
 	/**
