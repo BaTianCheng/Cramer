@@ -14,7 +14,12 @@ User.List = function (){
 			 {name : 'password',index : 'password',width : 200}, 
 			 {name : 'status',index : 'status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
-					 return cellValue == 0 ? "可用" : "不可用"; } ,
+					switch(cellValue){
+						case 0 : return '可用';
+						case 1 : return '不可用';
+						default	: return cellValue;
+					}
+				 } ,
 			 	 edittype:'select', editoptions:{value:{0:'可用', 1:'不可用'}}
 			 },
 			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
@@ -69,8 +74,11 @@ User.List = function (){
 	});
 
 	$("#main-table").jqGrid('navGrid', '#pager', 
-		{edit : true,add : true,del : true},
-		{closeAfterEdit: true,closeAfterAdd: true,viewPagerButtons: false}
+		{edit : true,add : true,del : true,search:false},
+		{closeAfterEdit: true,closeAfterAdd: true,viewPagerButtons: false},
+		{beforeShowForm:function(frm){
+				frm.find("input[name='name']").attr('readonly',false);}
+		}
 	);
 }
 

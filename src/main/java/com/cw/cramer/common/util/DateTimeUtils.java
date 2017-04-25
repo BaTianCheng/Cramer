@@ -171,7 +171,7 @@ public final class DateTimeUtils extends org.apache.commons.lang3.time.DateUtils
 		 * @return
 		 */
 		public static int getCurrentTime(){
-			return Integer.valueOf(String.valueOf(System.currentTimeMillis()));
+			return Integer.valueOf(String.valueOf(System.currentTimeMillis()/1000));
 		}
 
 }

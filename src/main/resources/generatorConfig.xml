@@ -34,13 +34,13 @@
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>  
 
-        <table tableName="sys_user" domainObjectName="SysUser" mapperName="SysUserDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+       <!-- <table tableName="sys_user" domainObjectName="SysUser" mapperName="SysUserDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_sequence" domainObjectName="SysSequence" mapperName="SysSequenceDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_role" domainObjectName="SysRole" mapperName="SysRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-        <table tableName="sys_department" domainObjectName="SysDepartment" mapperName="SysDepartmentDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-        <table tableName="sys_user_role" domainObjectName="SysUserRole" mapperName="SysUserRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        -->  <table tableName="sys_department" domainObjectName="SysDepartment" mapperName="SysDepartmentDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <!-- <table tableName="sys_user_role" domainObjectName="SysUserRole" mapperName="SysUserRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_user_department" domainObjectName="SysDepartment" mapperName="SysDepartmentDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_department_role" domainObjectName="SysDepartmentRole" mapperName="SysDepartmentRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-        
+        -->
     </context>  
 </generatorConfiguration>  

@@ -1,4 +1,4 @@
-package com.cw.cramer.auth.controller;
+package com.cw.cramer.sys.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

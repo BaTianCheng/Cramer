@@ -30,7 +30,7 @@ public class SysUserController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/users")
+	@RequestMapping(value = "/auth/users")
 	public ModelAndView toIndex(HttpServletRequest request, Model model) {
 		return new ModelAndView("auth/users");
 	}
@@ -41,9 +41,10 @@ public class SysUserController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/auth/users/list", method=RequestMethod.POST)
+	@RequestMapping(value = "/auth/users/list")
 	@ResponseBody
 	public String getUsers(HttpServletRequest request, Model model, int pageNum, int pageSize, String userName) {
+		System.out.println(this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName)));
 		return this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName));
 	}
 	
@@ -68,10 +69,15 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/update/info", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateUser(HttpServletRequest request, Model model, String oper, SysUser user) {
-		if("del".equals(oper)){
-			return this.renderSuccessJson(sysUserService.delete(user.getId()));
-		} else {
-			return this.renderSuccessJson(sysUserService.updateInfo(user));
+		switch (oper) {
+			case "add":
+				return this.renderSuccessJson(sysUserService.insert(user));
+			case "edit":
+				return this.renderSuccessJson(sysUserService.updateInfo(user));
+			case "del":
+				return this.renderSuccessJson(sysUserService.delete(user.getId()));
+			default:
+				return this.renderFailJson("操作无效");
 		}
 	}
 	

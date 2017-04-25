@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="zh-cn">
 
 	<head>
@@ -27,7 +26,7 @@
 	<body class="">
 
 		<!-- #HEADER -->
-		<header id="header">
+		<header id="header" style="display:none;">
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
@@ -51,7 +50,7 @@
 				<ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
 					<li class="">
 						<a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-							<img src="img/avatars/sunny.png" alt="John Doe" class="online" />
+							<!-- <img src="img/avatars/sunny.png" alt="John Doe" class="online" /> -->
 						</a>
 						<ul class="dropdown-menu pull-right">
 							<li>
@@ -115,14 +114,14 @@
 		<!-- #NAVIGATION -->
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
-		<aside id="left-panel">
+		<aside id="left-panel" style="display:none;">
 
 			<!-- User info -->
 			<div class="login-info">
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it -->
 
 					<a href="javascript:void(0);" id="show-shortcut">
-                        <img src="img/avatars/sunny.png" alt="me" class="online">
+                        <!--<img src="img/avatars/sunny.png" alt="me" class="online">  -->
 						<span>
 							wicks
 						</span>
@@ -132,24 +131,18 @@
 				</span>
 			</div>
 			<!-- end user info -->
-
-			<!-- NAVIGATION : This navigation is also responsive
-
-    To make this navigation dynamic please make sure to link the node
-    (the reference to the nav > ul) after page load. Or the navigation
-    will not initialize.
-    -->
+			
 			<nav>
 				<ul>
 					<li>
-						<a href="ajax/dashboard.html" title="仪表盘"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">仪表盘</span></a>
+						
 					</li>
 					<li>
 						<a href="#" title="权限管理"><i class="fa fa-lg fa-fw fa-drivers-license"></i> <span class="menu-item-parent">权限管理</span></a>
 							<ul>
-								<li>
-									<a href="users"><i class="fa fa-lg fa-fw fa-user"></i> 用户管理</a>
-								</li>
+								<li><a href="auth/users"><i class="fa fa-lg fa-fw fa-user"></i> 用户管理</a></li>
+								<li><a href="auth/departments"><i class="fa fa-lg fa-fw fa-user"></i> 部门管理</a></li>
+								<li><a href="auth/roles"><i class="fa fa-lg fa-fw fa-user"></i> 角色管理</a></li>
 							</ul>
 					</li>
 					<li>
@@ -161,6 +154,9 @@
 					<li>
 						<a href="#" title="测试页面"><i class="fa fa-lg fa-fw fa-drivers-license"></i> <span class="menu-item-parent">测试页面</span></a>
 							<ul>
+								<li>
+									<a href="ajax/dashboard.html" title="仪表盘"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">仪表盘</span></a>
+								</li>
 								<li>
 									<a href="test/users"><i class="fa fa-lg fa-fw fa-user"></i> 基本表格</a>
 								</li>
@@ -183,7 +179,7 @@
 		<div id="main" role="main">
 
 			<!-- RIBBON -->
-			<div id="ribbon">
+			<div id="ribbon" style="display:none;">
 
 				<span class="ribbon-button-alignment"> 
 					<span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true" data-reset-msg="Would you like to RESET all your saved widgets and clear LocalStorage?"><i class="fa fa-refresh"></i></span>

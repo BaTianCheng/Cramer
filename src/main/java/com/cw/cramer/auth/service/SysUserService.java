@@ -11,6 +11,7 @@ import com.cw.cramer.auth.entity.SysUserExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.common.util.EncryptionUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -103,7 +104,7 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean update(SysUser user){
 		user.setUpdateBy(this.getCurrentUser().getId());
-		//user.setUpdateTime(DateTimeUtils.getCurrentTime());
+		user.setUpdateTime(DateTimeUtils.getCurrentTime());
 		return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
 	}
 	
