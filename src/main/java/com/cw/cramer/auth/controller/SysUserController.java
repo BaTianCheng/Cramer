@@ -44,7 +44,6 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/list")
 	@ResponseBody
 	public String getUsers(HttpServletRequest request, Model model, int pageNum, int pageSize, String userName) {
-		System.out.println(this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName)));
 		return this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName));
 	}
 	

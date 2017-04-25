@@ -41,7 +41,7 @@ public class SysDepartmentController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/auth/Departments/list")
+	@RequestMapping(value = "/auth/departments/list")
 	@ResponseBody
 	public String list(HttpServletRequest request, Model model, int pageNum, int pageSize, String departmentName) {
 		return this.renderSuccessJson(sysDepartmentService.getSysDepartments(pageNum, pageSize, departmentName));
