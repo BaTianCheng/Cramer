@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cw.cramer.auth.dao.SysDepartmentDAO">
   <resultMap id="BaseResultMap" type="com.cw.cramer.auth.entity.SysDepartment">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="area_id" jdbcType="VARCHAR" property="areaId" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="create_by" jdbcType="INTEGER" property="createBy" />
-    <result column="create_time" jdbcType="INTEGER" property="createTime" />
-    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
-    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <id column="department_id" jdbcType="INTEGER" property="id" />
+    <result column="department_name" jdbcType="VARCHAR" property="name" />
+    <result column="department_code" jdbcType="VARCHAR" property="code" />
+    <result column="department_type" jdbcType="INTEGER" property="type" />
+    <result column="department_status" jdbcType="INTEGER" property="status" />
+    <result column="department_parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="department_area_id" jdbcType="VARCHAR" property="areaId" />
+    <result column="department_sort" jdbcType="INTEGER" property="sort" />
+    <result column="department_create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="department_create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="department_update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="department_update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="department_remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +75,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, code, type, status, parent_id, area_id, sort, create_by, create_time, update_by, 
-    update_time, remarks
+    department.id as department_id, department.name as department_name, department.code as department_code, 
+    department.type as department_type, department.status as department_status, department.parent_id as department_parent_id, 
+    department.area_id as department_area_id, department.sort as department_sort, department.create_by as department_create_by, 
+    department.create_time as department_create_time, department.update_by as department_update_by, 
+    department.update_time as department_update_time, department.remarks as department_remarks
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentExample" resultMap="BaseResultMap">
     select
@@ -85,7 +88,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_department
+    from sys_department department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,15 +99,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_department
-    where id = #{id,jdbcType=INTEGER}
+    from sys_department department
+    where department.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_department
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentExample">
-    delete from sys_department
+    delete from sys_department department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -207,52 +210,52 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentExample" resultType="java.lang.Long">
-    select count(*) from sys_department
+    select count(*) from sys_department department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sys_department
+    update sys_department department
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        department.id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+        department.name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+        department.code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        department.type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
+        department.status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=INTEGER},
+        department.parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
       <if test="record.areaId != null">
-        area_id = #{record.areaId,jdbcType=VARCHAR},
+        department.area_id = #{record.areaId,jdbcType=VARCHAR},
       </if>
       <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
+        department.sort = #{record.sort,jdbcType=INTEGER},
       </if>
       <if test="record.createBy != null">
-        create_by = #{record.createBy,jdbcType=INTEGER},
+        department.create_by = #{record.createBy,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=INTEGER},
+        department.create_time = #{record.createTime,jdbcType=INTEGER},
       </if>
       <if test="record.updateBy != null">
-        update_by = #{record.updateBy,jdbcType=INTEGER},
+        department.update_by = #{record.updateBy,jdbcType=INTEGER},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=INTEGER},
+        department.update_time = #{record.updateTime,jdbcType=INTEGER},
       </if>
       <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=VARCHAR},
+        department.remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -260,20 +263,20 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sys_department
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      parent_id = #{record.parentId,jdbcType=INTEGER},
-      area_id = #{record.areaId,jdbcType=VARCHAR},
-      sort = #{record.sort,jdbcType=INTEGER},
-      create_by = #{record.createBy,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=INTEGER},
-      update_by = #{record.updateBy,jdbcType=INTEGER},
-      update_time = #{record.updateTime,jdbcType=INTEGER},
-      remarks = #{record.remarks,jdbcType=VARCHAR}
+    update sys_department department
+    set department.id = #{record.id,jdbcType=INTEGER},
+      department.name = #{record.name,jdbcType=VARCHAR},
+      department.code = #{record.code,jdbcType=VARCHAR},
+      department.type = #{record.type,jdbcType=INTEGER},
+      department.status = #{record.status,jdbcType=INTEGER},
+      department.parent_id = #{record.parentId,jdbcType=INTEGER},
+      department.area_id = #{record.areaId,jdbcType=VARCHAR},
+      department.sort = #{record.sort,jdbcType=INTEGER},
+      department.create_by = #{record.createBy,jdbcType=INTEGER},
+      department.create_time = #{record.createTime,jdbcType=INTEGER},
+      department.update_by = #{record.updateBy,jdbcType=INTEGER},
+      department.update_time = #{record.updateTime,jdbcType=INTEGER},
+      department.remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

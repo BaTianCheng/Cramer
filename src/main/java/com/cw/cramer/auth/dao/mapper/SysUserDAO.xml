@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cw.cramer.auth.dao.SysUserDAO">
   <resultMap id="BaseResultMap" type="com.cw.cramer.auth.entity.SysUser">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
-    <result column="login_time" jdbcType="VARCHAR" property="loginTime" />
-    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
-    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
-    <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
+    <id column="user_id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="name" />
+    <result column="user_password" jdbcType="VARCHAR" property="password" />
+    <result column="user_type" jdbcType="INTEGER" property="type" />
+    <result column="user_status" jdbcType="INTEGER" property="status" />
+    <result column="user_sort" jdbcType="INTEGER" property="sort" />
+    <result column="user_login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="user_login_time" jdbcType="VARCHAR" property="loginTime" />
+    <result column="user_create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="user_create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="user_update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="user_update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="user_Remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +75,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password, type, status, sort, login_ip, login_time, create_by, create_time, 
-    update_by, update_time, Remarks
+    user.id as user_id, user.name as user_name, user.password as user_password, user.type as user_type, 
+    user.status as user_status, user.sort as user_sort, user.login_ip as user_login_ip, 
+    user.login_time as user_login_time, user.create_by as user_create_by, user.create_time as user_create_time, 
+    user.update_by as user_update_by, user.update_time as user_update_time, user.Remarks as user_Remarks
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysUserExample" resultMap="BaseResultMap">
     select
@@ -85,7 +87,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_user
+    from sys_user user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,15 +98,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_user
-    where id = #{id,jdbcType=INTEGER}
+    from sys_user user
+    where user.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysUserExample">
-    delete from sys_user
+    delete from sys_user user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -207,52 +209,52 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.cw.cramer.auth.entity.SysUserExample" resultType="java.lang.Long">
-    select count(*) from sys_user
+    select count(*) from sys_user user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sys_user
+    update sys_user user
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        user.id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+        user.name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+        user.password = #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        user.type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
+        user.status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
+        user.sort = #{record.sort,jdbcType=INTEGER},
       </if>
       <if test="record.loginIp != null">
-        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+        user.login_ip = #{record.loginIp,jdbcType=VARCHAR},
       </if>
       <if test="record.loginTime != null">
-        login_time = #{record.loginTime,jdbcType=VARCHAR},
+        user.login_time = #{record.loginTime,jdbcType=VARCHAR},
       </if>
       <if test="record.createBy != null">
-        create_by = #{record.createBy,jdbcType=VARCHAR},
+        user.create_by = #{record.createBy,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=VARCHAR},
+        user.create_time = #{record.createTime,jdbcType=VARCHAR},
       </if>
       <if test="record.updateBy != null">
-        update_by = #{record.updateBy,jdbcType=INTEGER},
+        user.update_by = #{record.updateBy,jdbcType=INTEGER},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=INTEGER},
+        user.update_time = #{record.updateTime,jdbcType=INTEGER},
       </if>
       <if test="record.remarks != null">
-        Remarks = #{record.remarks,jdbcType=VARCHAR},
+        user.Remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -260,20 +262,20 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sys_user
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      sort = #{record.sort,jdbcType=INTEGER},
-      login_ip = #{record.loginIp,jdbcType=VARCHAR},
-      login_time = #{record.loginTime,jdbcType=VARCHAR},
-      create_by = #{record.createBy,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
-      update_by = #{record.updateBy,jdbcType=INTEGER},
-      update_time = #{record.updateTime,jdbcType=INTEGER},
-      Remarks = #{record.remarks,jdbcType=VARCHAR}
+    update sys_user user
+    set user.id = #{record.id,jdbcType=INTEGER},
+      user.name = #{record.name,jdbcType=VARCHAR},
+      user.password = #{record.password,jdbcType=VARCHAR},
+      user.type = #{record.type,jdbcType=INTEGER},
+      user.status = #{record.status,jdbcType=INTEGER},
+      user.sort = #{record.sort,jdbcType=INTEGER},
+      user.login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      user.login_time = #{record.loginTime,jdbcType=VARCHAR},
+      user.create_by = #{record.createBy,jdbcType=VARCHAR},
+      user.create_time = #{record.createTime,jdbcType=VARCHAR},
+      user.update_by = #{record.updateBy,jdbcType=INTEGER},
+      user.update_time = #{record.updateTime,jdbcType=INTEGER},
+      user.Remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

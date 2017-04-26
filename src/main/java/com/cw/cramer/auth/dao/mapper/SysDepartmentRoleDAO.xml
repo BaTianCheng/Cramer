@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cw.cramer.auth.dao.SysDepartmentRoleDAO">
   <resultMap id="BaseResultMap" type="com.cw.cramer.auth.entity.SysDepartmentRole">
-    <result column="department_id" jdbcType="INTEGER" property="departmentId" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="department_role_department_id" jdbcType="INTEGER" property="departmentId" />
+    <result column="department_role_role_id" jdbcType="INTEGER" property="roleId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    department_id, role_id
+    department_role.department_id as department_role_department_id, department_role.role_id as department_role_role_id
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentRoleExample" resultMap="BaseResultMap">
     select
@@ -73,7 +73,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_department_role
+    from sys_department_role department_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,7 +82,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentRoleExample">
-    delete from sys_department_role
+    delete from sys_department_role department_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -111,19 +111,19 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentRoleExample" resultType="java.lang.Long">
-    select count(*) from sys_department_role
+    select count(*) from sys_department_role department_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sys_department_role
+    update sys_department_role department_role
     <set>
       <if test="record.departmentId != null">
-        department_id = #{record.departmentId,jdbcType=INTEGER},
+        department_role.department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
       <if test="record.roleId != null">
-        role_id = #{record.roleId,jdbcType=INTEGER},
+        department_role.role_id = #{record.roleId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -131,9 +131,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sys_department_role
-    set department_id = #{record.departmentId,jdbcType=INTEGER},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    update sys_department_role department_role
+    set department_role.department_id = #{record.departmentId,jdbcType=INTEGER},
+      department_role.role_id = #{record.roleId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

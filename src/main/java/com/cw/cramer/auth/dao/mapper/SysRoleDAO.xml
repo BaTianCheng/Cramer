@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cw.cramer.auth.dao.SysRoleDAO">
   <resultMap id="BaseResultMap" type="com.cw.cramer.auth.entity.SysRole">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="dapartment_id" jdbcType="INTEGER" property="dapartmentId" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="create_by" jdbcType="INTEGER" property="createBy" />
-    <result column="create_time" jdbcType="INTEGER" property="createTime" />
-    <result column="update_by" jdbcType="INTEGER" property="updateBy" />
-    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
-    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <id column="role_id" jdbcType="INTEGER" property="id" />
+    <result column="role_name" jdbcType="VARCHAR" property="name" />
+    <result column="role_code" jdbcType="VARCHAR" property="code" />
+    <result column="role_type" jdbcType="INTEGER" property="type" />
+    <result column="role_status" jdbcType="INTEGER" property="status" />
+    <result column="role_parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="role_dapartment_id" jdbcType="INTEGER" property="dapartmentId" />
+    <result column="role_sort" jdbcType="INTEGER" property="sort" />
+    <result column="role_create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="role_create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="role_update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="role_update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="role_remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +75,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, code, type, status, parent_id, dapartment_id, sort, create_by, create_time, 
-    update_by, update_time, remarks
+    role.id as role_id, role.name as role_name, role.code as role_code, role.type as role_type, 
+    role.status as role_status, role.parent_id as role_parent_id, role.dapartment_id as role_dapartment_id, 
+    role.sort as role_sort, role.create_by as role_create_by, role.create_time as role_create_time, 
+    role.update_by as role_update_by, role.update_time as role_update_time, role.remarks as role_remarks
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysRoleExample" resultMap="BaseResultMap">
     select
@@ -85,7 +87,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_role
+    from sys_role role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,15 +98,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_role
-    where id = #{id,jdbcType=INTEGER}
+    from sys_role role
+    where role.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysRoleExample">
-    delete from sys_role
+    delete from sys_role role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -207,52 +209,52 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.cw.cramer.auth.entity.SysRoleExample" resultType="java.lang.Long">
-    select count(*) from sys_role
+    select count(*) from sys_role role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sys_role
+    update sys_role role
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        role.id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+        role.name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.code != null">
-        code = #{record.code,jdbcType=VARCHAR},
+        role.code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        role.type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
+        role.status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=INTEGER},
+        role.parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
       <if test="record.dapartmentId != null">
-        dapartment_id = #{record.dapartmentId,jdbcType=INTEGER},
+        role.dapartment_id = #{record.dapartmentId,jdbcType=INTEGER},
       </if>
       <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
+        role.sort = #{record.sort,jdbcType=INTEGER},
       </if>
       <if test="record.createBy != null">
-        create_by = #{record.createBy,jdbcType=INTEGER},
+        role.create_by = #{record.createBy,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=INTEGER},
+        role.create_time = #{record.createTime,jdbcType=INTEGER},
       </if>
       <if test="record.updateBy != null">
-        update_by = #{record.updateBy,jdbcType=INTEGER},
+        role.update_by = #{record.updateBy,jdbcType=INTEGER},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=INTEGER},
+        role.update_time = #{record.updateTime,jdbcType=INTEGER},
       </if>
       <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=VARCHAR},
+        role.remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -260,20 +262,20 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sys_role
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      parent_id = #{record.parentId,jdbcType=INTEGER},
-      dapartment_id = #{record.dapartmentId,jdbcType=INTEGER},
-      sort = #{record.sort,jdbcType=INTEGER},
-      create_by = #{record.createBy,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=INTEGER},
-      update_by = #{record.updateBy,jdbcType=INTEGER},
-      update_time = #{record.updateTime,jdbcType=INTEGER},
-      remarks = #{record.remarks,jdbcType=VARCHAR}
+    update sys_role role
+    set role.id = #{record.id,jdbcType=INTEGER},
+      role.name = #{record.name,jdbcType=VARCHAR},
+      role.code = #{record.code,jdbcType=VARCHAR},
+      role.type = #{record.type,jdbcType=INTEGER},
+      role.status = #{record.status,jdbcType=INTEGER},
+      role.parent_id = #{record.parentId,jdbcType=INTEGER},
+      role.dapartment_id = #{record.dapartmentId,jdbcType=INTEGER},
+      role.sort = #{record.sort,jdbcType=INTEGER},
+      role.create_by = #{record.createBy,jdbcType=INTEGER},
+      role.create_time = #{record.createTime,jdbcType=INTEGER},
+      role.update_by = #{record.updateBy,jdbcType=INTEGER},
+      role.update_time = #{record.updateTime,jdbcType=INTEGER},
+      role.remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

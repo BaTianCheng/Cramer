@@ -1,4 +1,4 @@
-package com.cw.cramer.auth.dao.mapper;
+package com.cw.cramer.auth.dao;
 
 import com.cw.cramer.auth.entity.SysUserDepartment;
 import com.cw.cramer.auth.entity.SysUserDepartmentExample;

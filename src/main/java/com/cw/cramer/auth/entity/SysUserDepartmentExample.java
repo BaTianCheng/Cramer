@@ -105,122 +105,122 @@ public class SysUserDepartmentExample {
         }
 
         public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
+            addCriterion("user_department.user_id is null");
             return (Criteria) this;
         }
 
         public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
+            addCriterion("user_department.user_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andUserIdEqualTo(Integer value) {
-            addCriterion("user_id =", value, "userId");
+            addCriterion("user_department.user_id =", value, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotEqualTo(Integer value) {
-            addCriterion("user_id <>", value, "userId");
+            addCriterion("user_department.user_id <>", value, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdGreaterThan(Integer value) {
-            addCriterion("user_id >", value, "userId");
+            addCriterion("user_department.user_id >", value, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("user_id >=", value, "userId");
+            addCriterion("user_department.user_id >=", value, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdLessThan(Integer value) {
-            addCriterion("user_id <", value, "userId");
+            addCriterion("user_department.user_id <", value, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("user_id <=", value, "userId");
+            addCriterion("user_department.user_id <=", value, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("user_id in", values, "userId");
+            addCriterion("user_department.user_id in", values, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("user_id not in", values, "userId");
+            addCriterion("user_department.user_id not in", values, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("user_id between", value1, value2, "userId");
+            addCriterion("user_department.user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
         public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
+            addCriterion("user_department.user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdIsNull() {
-            addCriterion("department_id is null");
+            addCriterion("user_department.department_id is null");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdIsNotNull() {
-            addCriterion("department_id is not null");
+            addCriterion("user_department.department_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdEqualTo(Integer value) {
-            addCriterion("department_id =", value, "departmentId");
+            addCriterion("user_department.department_id =", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdNotEqualTo(Integer value) {
-            addCriterion("department_id <>", value, "departmentId");
+            addCriterion("user_department.department_id <>", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdGreaterThan(Integer value) {
-            addCriterion("department_id >", value, "departmentId");
+            addCriterion("user_department.department_id >", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("department_id >=", value, "departmentId");
+            addCriterion("user_department.department_id >=", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdLessThan(Integer value) {
-            addCriterion("department_id <", value, "departmentId");
+            addCriterion("user_department.department_id <", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdLessThanOrEqualTo(Integer value) {
-            addCriterion("department_id <=", value, "departmentId");
+            addCriterion("user_department.department_id <=", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdIn(List<Integer> values) {
-            addCriterion("department_id in", values, "departmentId");
+            addCriterion("user_department.department_id in", values, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdNotIn(List<Integer> values) {
-            addCriterion("department_id not in", values, "departmentId");
+            addCriterion("user_department.department_id not in", values, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdBetween(Integer value1, Integer value2) {
-            addCriterion("department_id between", value1, value2, "departmentId");
+            addCriterion("user_department.department_id between", value1, value2, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("department_id not between", value1, value2, "departmentId");
+            addCriterion("user_department.department_id not between", value1, value2, "departmentId");
             return (Criteria) this;
         }
     }

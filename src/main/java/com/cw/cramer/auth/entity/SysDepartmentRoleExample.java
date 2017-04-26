@@ -105,122 +105,122 @@ public class SysDepartmentRoleExample {
         }
 
         public Criteria andDepartmentIdIsNull() {
-            addCriterion("department_id is null");
+            addCriterion("department_role.department_id is null");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdIsNotNull() {
-            addCriterion("department_id is not null");
+            addCriterion("department_role.department_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdEqualTo(Integer value) {
-            addCriterion("department_id =", value, "departmentId");
+            addCriterion("department_role.department_id =", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdNotEqualTo(Integer value) {
-            addCriterion("department_id <>", value, "departmentId");
+            addCriterion("department_role.department_id <>", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdGreaterThan(Integer value) {
-            addCriterion("department_id >", value, "departmentId");
+            addCriterion("department_role.department_id >", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("department_id >=", value, "departmentId");
+            addCriterion("department_role.department_id >=", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdLessThan(Integer value) {
-            addCriterion("department_id <", value, "departmentId");
+            addCriterion("department_role.department_id <", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdLessThanOrEqualTo(Integer value) {
-            addCriterion("department_id <=", value, "departmentId");
+            addCriterion("department_role.department_id <=", value, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdIn(List<Integer> values) {
-            addCriterion("department_id in", values, "departmentId");
+            addCriterion("department_role.department_id in", values, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdNotIn(List<Integer> values) {
-            addCriterion("department_id not in", values, "departmentId");
+            addCriterion("department_role.department_id not in", values, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdBetween(Integer value1, Integer value2) {
-            addCriterion("department_id between", value1, value2, "departmentId");
+            addCriterion("department_role.department_id between", value1, value2, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andDepartmentIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("department_id not between", value1, value2, "departmentId");
+            addCriterion("department_role.department_id not between", value1, value2, "departmentId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdIsNull() {
-            addCriterion("role_id is null");
+            addCriterion("department_role.role_id is null");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdIsNotNull() {
-            addCriterion("role_id is not null");
+            addCriterion("department_role.role_id is not null");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdEqualTo(Integer value) {
-            addCriterion("role_id =", value, "roleId");
+            addCriterion("department_role.role_id =", value, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdNotEqualTo(Integer value) {
-            addCriterion("role_id <>", value, "roleId");
+            addCriterion("department_role.role_id <>", value, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdGreaterThan(Integer value) {
-            addCriterion("role_id >", value, "roleId");
+            addCriterion("department_role.role_id >", value, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("role_id >=", value, "roleId");
+            addCriterion("department_role.role_id >=", value, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdLessThan(Integer value) {
-            addCriterion("role_id <", value, "roleId");
+            addCriterion("department_role.role_id <", value, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("role_id <=", value, "roleId");
+            addCriterion("department_role.role_id <=", value, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdIn(List<Integer> values) {
-            addCriterion("role_id in", values, "roleId");
+            addCriterion("department_role.role_id in", values, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdNotIn(List<Integer> values) {
-            addCriterion("role_id not in", values, "roleId");
+            addCriterion("department_role.role_id not in", values, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdBetween(Integer value1, Integer value2) {
-            addCriterion("role_id between", value1, value2, "roleId");
+            addCriterion("department_role.role_id between", value1, value2, "roleId");
             return (Criteria) this;
         }
 
         public Criteria andRoleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("role_id not between", value1, value2, "roleId");
+            addCriterion("department_role.role_id not between", value1, value2, "roleId");
             return (Criteria) this;
         }
     }
