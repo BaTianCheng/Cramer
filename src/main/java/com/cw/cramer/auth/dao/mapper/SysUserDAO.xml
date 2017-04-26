@@ -15,7 +15,19 @@
     <result column="user_update_by" jdbcType="INTEGER" property="updateBy" />
     <result column="user_update_time" jdbcType="INTEGER" property="updateTime" />
     <result column="user_Remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="department_id" jdbcType="INTEGER" property="department.id" />
+    <result column="department_name" jdbcType="VARCHAR" property="department.name" />
+    <collection property="roles" ofType="com.cw.cramer.auth.entity.SysRole" column="user_id">  
+        <id column="role_id" property="id"/>  
+        <result column="role_name" property="name"/>  
+    </collection> 
   </resultMap>
+  <sql id="Joins">
+		LEFT JOIN sys_user_department user_department ON user.id = user_department.user_id 
+		LEFT JOIN sys_department department ON user_department.department_id = department.id 
+		LEFT JOIN sys_user_role user_role ON user.id = user_role.user_id 
+		LEFT JOIN sys_role role ON user_role.role_id = role.id
+    </sql>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -78,7 +90,9 @@
     user.id as user_id, user.name as user_name, user.password as user_password, user.type as user_type, 
     user.status as user_status, user.sort as user_sort, user.login_ip as user_login_ip, 
     user.login_time as user_login_time, user.create_by as user_create_by, user.create_time as user_create_time, 
-    user.update_by as user_update_by, user.update_time as user_update_time, user.Remarks as user_Remarks
+    user.update_by as user_update_by, user.update_time as user_update_time, user.Remarks as user_Remarks, 
+    department.id as department_id, department.name as department_name, 
+    role.id as role_id, role.name as role_name
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysUserExample" resultMap="BaseResultMap">
     select
@@ -87,7 +101,8 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_user user
+    from sys_user user 
+    <include refid="Joins"/>
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -98,7 +113,8 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_user user
+    from sys_user user 
+    <include refid="Joins"/>
     where user.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

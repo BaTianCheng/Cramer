@@ -1,5 +1,9 @@
 package com.cw.cramer.auth.entity;
 
+import java.util.List;
+
+import com.alibaba.fastjson.JSON;
+
 public class SysUser {
     private Integer id;
 
@@ -26,6 +30,10 @@ public class SysUser {
     private Integer updateTime;
 
     private String remarks;
+    
+    private SysDepartment department;
+    
+    private List<SysRole> roles;
 
     public Integer getId() {
         return id;
@@ -130,4 +138,24 @@ public class SysUser {
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
     }
+
+	public SysDepartment getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(SysDepartment department) {
+		this.department = department;
+	}
+    
+	public List<SysRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SysRole> roles) {
+		this.roles = roles;
+	}
+
+	public String toString(){
+		return JSON.toJSONString(this);
+	}
 }

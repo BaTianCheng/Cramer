@@ -7,11 +7,28 @@ User.List = function (){
 		datatype : "json",
 		autowidth:true,
 		height:'auto',
-		colNames : [ '编号', '名称', '密码', '状态', '备注', '操作'],
+		colNames : [ '编号', '名称', '密码', '部门', '角色', '状态', '备注', '操作'],
 		colModel : 
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
 			 {name : 'name',index : 'name asc, id',width : 100}, 
 			 {name : 'password',index : 'password',width : 200,editrules:{required:true}}, 
+			 {name : 'department.name',index : 'department_name',width : 80}, 
+			 {name : 'roles',index : 'role_name',width : 100,
+				 formatter:function(cellvalue, options, rowObject){
+					 if(cellvalue != null){
+						 var temp = '';
+						 for(var i=0;i<cellvalue.length;i++){
+							 temp += cellvalue[i].name;
+							 if(i <cellvalue.length-1){
+								 temp += ',';
+							 }
+						 }
+						 return temp;
+					 } else {
+						 return '';
+					 }
+				 }
+			 }, 
 			 {name : 'status',index : 'status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
 					switch(cellValue){
