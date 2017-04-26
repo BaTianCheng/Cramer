@@ -68,16 +68,19 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/update/info", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateUser(HttpServletRequest request, Model model, String oper, SysUser user) {
-		switch (oper) {
-			case "add":
-				return this.renderSuccessJson(sysUserService.insert(user));
-			case "edit":
-				return this.renderSuccessJson(sysUserService.updateInfo(user));
-			case "del":
-				return this.renderSuccessJson(sysUserService.delete(user.getId()));
-			default:
-				return this.renderFailJson("操作无效");
-		}
+		return this.renderSuccessJson(sysUserService.updateInfo(user));
+	}
+	
+	/**
+	 * 添加用户
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/users/add", method=RequestMethod.POST)
+	@ResponseBody
+	public String add(HttpServletRequest request, Model model, SysUser user) {
+		return this.renderSuccessJson(sysUserService.insert(user));
 	}
 	
 	/**
@@ -100,8 +103,8 @@ public class SysUserController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/users/delete", method=RequestMethod.POST)
 	@ResponseBody
-	public String deleteUser(HttpServletRequest request, Model model, int userId) {
-		return this.renderSuccessJson(sysUserService.delete(userId));
+	public String deleteUser(HttpServletRequest request, Model model, int id) {
+		return this.renderSuccessJson(sysUserService.delete(id));
 	}
 
 }

@@ -45,7 +45,7 @@ Department.List = function (){
 		mtype : "post",
 		viewrecords : true,
 		emptyrecords: "暂无任何数据",
-		editurl : CTX_PATH+"/auth/departs/update/info",
+		editurl : CTX_PATH+"/auth/departments/update",
 		gridComplete : function() {
             var ids = jQuery("#main-table").jqGrid('getDataIDs');
             for ( var i = 0; i < ids.length; i++) {
@@ -64,7 +64,9 @@ Department.List = function (){
 
 	$("#main-table").jqGrid('navGrid', '#pager', 
 		{edit : true,add : true,del : true,search:false},
-		{closeAfterEdit: true,closeAfterAdd: true,viewPagerButtons: false}
+		{closeAfterEdit: true,viewPagerButtons: false},
+		{url:CTX_PATH+"/auth/departments/add",closeAfterAdd: true},
+		{url:CTX_PATH+"/auth/departments/delte"}
 	);
 }
 

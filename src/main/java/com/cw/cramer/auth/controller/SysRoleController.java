@@ -60,24 +60,27 @@ public class SysRoleController extends BaseController{
 	}
 	
 	/**
-	 * 更新角色信息
+	 * 更新角色
 	 * @param request
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/auth/roles/update/info", method=RequestMethod.POST)
+	@RequestMapping(value = "/auth/roles/update", method=RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpServletRequest request, Model model, String oper, SysRole role) {
-		switch (oper) {
-			case "add":
-				return this.renderSuccessJson(sysRoleService.insert(role));
-			case "edit":
-				return this.renderSuccessJson(sysRoleService.updateInfo(role));
-			case "del":
-				return this.renderSuccessJson(sysRoleService.delete(role.getId()));
-			default:
-				return this.renderFailJson("操作无效");
-		}
+		return this.renderSuccessJson(sysRoleService.updateInfo(role));
+	}
+	
+	/**
+	 * 增加角色
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/roles/add", method=RequestMethod.POST)
+	@ResponseBody
+	public String add(HttpServletRequest request, Model model, String oper, SysRole role) {
+		return this.renderSuccessJson(sysRoleService.insert(role));
 	}
 	
 	/**

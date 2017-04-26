@@ -94,6 +94,9 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean insert(SysUser user){
 		user.setId(getNextSeq(SequenceConstant.SEQ_SYSUSERID));
+		if(!Strings.isNullOrEmpty(user.getPassword())){
+			user.setPassword(EncryptionUtils.EncoderByMd5(user.getPassword()));
+		}
 		return sysUserDAO.insert(user)>0 ? true : false;
 	}
 	

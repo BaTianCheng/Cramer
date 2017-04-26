@@ -10,8 +10,8 @@ User.List = function (){
 		colNames : [ '编号', '名称', '密码', '状态', '备注', '操作'],
 		colModel : 
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
-			 {name : 'name',index : 'name asc, id',width : 100,editable :true,editoptions:{readonly:true}}, 
-			 {name : 'password',index : 'password',width : 200}, 
+			 {name : 'name',index : 'name asc, id',width : 100}, 
+			 {name : 'password',index : 'password',width : 200,editrules:{required:true}}, 
 			 {name : 'status',index : 'status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
 					switch(cellValue){
@@ -73,13 +73,37 @@ User.List = function (){
         }
 	});
 
-	$("#main-table").jqGrid('navGrid', '#pager', 
-		{edit : true,add : true,del : true,search:false},
-		{closeAfterEdit: true,closeAfterAdd: true,viewPagerButtons: false},
-		{beforeShowForm:function(frm){
-				frm.find("input[name='name']").attr('readonly',false);}
+	$("#main-table").jqGrid('navGrid', '#pager', {
+		edit : true,
+		add : true,
+		del : true,
+		search : false
+	}, {
+		closeAfterEdit : true,
+		viewPagerButtons : false
+	}, {
+		url : CTX_PATH+'/auth/users/add',
+		recreateForm : true,
+		closeAfterAdd : true,
+		beforeInitData : function(formid){
+			var cols = $("#main-table").jqGrid('getGridParam','colModel');
+			cols[1].editable = true;
+			cols[2].editable = true;
+			return true;
+		},
+		onClose : function(formid){
+			var cols = $("#main-table").jqGrid('getGridParam','colModel');
+			cols[1].editable = false;
+			cols[2].editable = false;
+			return true;
+		},
+		beforeSubmit : function(postdata, formid) {
+			postdata.id = null;
+			return [ true, '' ];
 		}
-	);
+	},{
+		url : CTX_PATH+'/auth/users/delete'
+	});
 }
 
 function editRow(cl){

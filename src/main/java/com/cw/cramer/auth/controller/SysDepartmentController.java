@@ -65,19 +65,22 @@ public class SysDepartmentController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/auth/departments/update/info", method=RequestMethod.POST)
+	@RequestMapping(value = "/auth/departments/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String updateUser(HttpServletRequest request, Model model, String oper, SysDepartment department) {
-		switch (oper) {
-			case "add":
-				return this.renderSuccessJson(sysDepartmentService.insert(department));
-			case "edit":
-				return this.renderSuccessJson(sysDepartmentService.updateInfo(department));
-			case "del":
-				return this.renderSuccessJson(sysDepartmentService.delete(department.getId()));
-			default:
-				return this.renderFailJson("操作无效");
-		}
+	public String update(HttpServletRequest request, Model model, String oper, SysDepartment department) {
+		return this.renderSuccessJson(sysDepartmentService.updateInfo(department));
+	}
+	
+	/**
+	 * 新增部门
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/departments/add", method=RequestMethod.POST)
+	@ResponseBody
+	public String add(HttpServletRequest request, Model model, String oper, SysDepartment department) {
+		return this.renderSuccessJson(sysDepartmentService.insert(department));
 	}
 	
 	/**
