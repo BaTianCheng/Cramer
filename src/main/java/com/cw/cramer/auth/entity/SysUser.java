@@ -1,8 +1,7 @@
 package com.cw.cramer.auth.entity;
 
+import java.util.Date;
 import java.util.List;
-
-import com.alibaba.fastjson.JSON;
 
 public class SysUser {
     private Integer id;
@@ -12,6 +11,8 @@ public class SysUser {
     private String password;
 
     private Integer type;
+
+    private String img;
 
     private Integer status;
 
@@ -23,11 +24,11 @@ public class SysUser {
 
     private String createBy;
 
-    private String createTime;
+    private Date createTime;
 
     private Integer updateBy;
 
-    private Integer updateTime;
+    private Date updateTime;
 
     private String remarks;
     
@@ -65,6 +66,14 @@ public class SysUser {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 
     public Integer getStatus() {
@@ -107,12 +116,12 @@ public class SysUser {
         this.createBy = createBy == null ? null : createBy.trim();
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getUpdateBy() {
@@ -123,11 +132,11 @@ public class SysUser {
         this.updateBy = updateBy;
     }
 
-    public Integer getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Integer updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -146,7 +155,7 @@ public class SysUser {
 	public void setDepartment(SysDepartment department) {
 		this.department = department;
 	}
-    
+
 	public List<SysRole> getRoles() {
 		return roles;
 	}
@@ -155,7 +164,4 @@ public class SysUser {
 		this.roles = roles;
 	}
 
-	public String toString(){
-		return JSON.toJSONString(this);
-	}
 }

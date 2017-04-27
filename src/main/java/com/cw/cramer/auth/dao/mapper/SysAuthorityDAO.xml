@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cw.cramer.auth.dao.SysAuthorityDAO">
+  <resultMap id="BaseResultMap" type="com.cw.cramer.auth.entity.SysAuthority">
+    <result column="authority_id" jdbcType="INTEGER" property="id" />
+    <result column="authority_name" jdbcType="VARCHAR" property="name" />
+    <result column="authority_code" jdbcType="VARCHAR" property="code" />
+    <result column="authority_type" jdbcType="INTEGER" property="type" />
+    <result column="authority_status" jdbcType="INTEGER" property="status" />
+    <result column="authority_parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="authority_href" jdbcType="VARCHAR" property="href" />
+    <result column="authority_target" jdbcType="VARCHAR" property="target" />
+    <result column="authority_icon" jdbcType="VARCHAR" property="icon" />
+    <result column="authority_sort" jdbcType="INTEGER" property="sort" />
+    <result column="authority_create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="authority_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="authority_update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="authority_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="authority_remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    authority.id as authority_id, authority.name as authority_name, authority.code as authority_code, 
+    authority.type as authority_type, authority.status as authority_status, authority.parent_id as authority_parent_id, 
+    authority.href as authority_href, authority.target as authority_target, authority.icon as authority_icon, 
+    authority.sort as authority_sort, authority.create_by as authority_create_by, authority.create_time as authority_create_time, 
+    authority.update_by as authority_update_by, authority.update_time as authority_update_time, 
+    authority.remarks as authority_remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysAuthorityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_authority authority
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysAuthorityExample">
+    delete from sys_authority authority
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.cramer.auth.entity.SysAuthority">
+    insert into sys_authority (id, name, code, 
+      type, status, parent_id, 
+      href, target, icon, 
+      sort, create_by, create_time, 
+      update_by, update_time, remarks
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{href,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.cramer.auth.entity.SysAuthority">
+    insert into sys_authority
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="href != null">
+        href,
+      </if>
+      <if test="target != null">
+        target,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="href != null">
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null">
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.cramer.auth.entity.SysAuthorityExample" resultType="java.lang.Long">
+    select count(*) from sys_authority authority
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_authority authority
+    <set>
+      <if test="record.id != null">
+        authority.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        authority.name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        authority.code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        authority.type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        authority.status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null">
+        authority.parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.href != null">
+        authority.href = #{record.href,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null">
+        authority.target = #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        authority.icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        authority.sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.createBy != null">
+        authority.create_by = #{record.createBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        authority.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        authority.update_by = #{record.updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        authority.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        authority.remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_authority authority
+    set authority.id = #{record.id,jdbcType=INTEGER},
+      authority.name = #{record.name,jdbcType=VARCHAR},
+      authority.code = #{record.code,jdbcType=VARCHAR},
+      authority.type = #{record.type,jdbcType=INTEGER},
+      authority.status = #{record.status,jdbcType=INTEGER},
+      authority.parent_id = #{record.parentId,jdbcType=INTEGER},
+      authority.href = #{record.href,jdbcType=VARCHAR},
+      authority.target = #{record.target,jdbcType=VARCHAR},
+      authority.icon = #{record.icon,jdbcType=VARCHAR},
+      authority.sort = #{record.sort,jdbcType=INTEGER},
+      authority.create_by = #{record.createBy,jdbcType=INTEGER},
+      authority.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      authority.update_by = #{record.updateBy,jdbcType=INTEGER},
+      authority.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      authority.remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

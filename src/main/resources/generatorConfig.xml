@@ -43,6 +43,8 @@
         <table tableName="sys_user_role" alias="user_role" domainObjectName="SysUserRole" mapperName="SysUserRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_user_department" alias="user_department" domainObjectName="SysUserDepartment" mapperName="SysUserDepartmentDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_department_role" alias="department_role" domainObjectName="SysDepartmentRole" mapperName="SysDepartmentRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-         
+        <table tableName="sys_authority" alias="authority" domainObjectName="SysAuthority" mapperName="SysAuthorityDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="sys_role_authority" alias="role_authority" domainObjectName="SysRoleAuthority" mapperName="SysRoleAuthorityDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
     </context>  
 </generatorConfiguration>  

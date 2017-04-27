@@ -1,6 +1,7 @@
 package com.cw.cramer.auth.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SysDepartmentExample {
@@ -684,52 +685,52 @@ public class SysDepartmentExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(Integer value) {
+        public Criteria andCreateTimeEqualTo(Date value) {
             addCriterion("department.create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(Integer value) {
+        public Criteria andCreateTimeNotEqualTo(Date value) {
             addCriterion("department.create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(Integer value) {
+        public Criteria andCreateTimeGreaterThan(Date value) {
             addCriterion("department.create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("department.create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(Integer value) {
+        public Criteria andCreateTimeLessThan(Date value) {
             addCriterion("department.create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
             addCriterion("department.create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIn(List<Integer> values) {
+        public Criteria andCreateTimeIn(List<Date> values) {
             addCriterion("department.create_time in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<Integer> values) {
+        public Criteria andCreateTimeNotIn(List<Date> values) {
             addCriterion("department.create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(Integer value1, Integer value2) {
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
             addCriterion("department.create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("department.create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
@@ -804,52 +805,52 @@ public class SysDepartmentExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeEqualTo(Integer value) {
+        public Criteria andUpdateTimeEqualTo(Date value) {
             addCriterion("department.update_time =", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotEqualTo(Integer value) {
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
             addCriterion("department.update_time <>", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeGreaterThan(Integer value) {
+        public Criteria andUpdateTimeGreaterThan(Date value) {
             addCriterion("department.update_time >", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("department.update_time >=", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeLessThan(Integer value) {
+        public Criteria andUpdateTimeLessThan(Date value) {
             addCriterion("department.update_time <", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
             addCriterion("department.update_time <=", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeIn(List<Integer> values) {
+        public Criteria andUpdateTimeIn(List<Date> values) {
             addCriterion("department.update_time in", values, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotIn(List<Integer> values) {
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
             addCriterion("department.update_time not in", values, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeBetween(Integer value1, Integer value2) {
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
             addCriterion("department.update_time between", value1, value2, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("department.update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }

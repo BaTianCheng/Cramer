@@ -2,7 +2,7 @@ package com.cw.cramer.auth.entity;
 
 import java.util.Date;
 
-public class SysDepartment {
+public class SysAuthority {
     private Integer id;
 
     private String name;
@@ -15,7 +15,11 @@ public class SysDepartment {
 
     private Integer parentId;
 
-    private String areaId;
+    private String href;
+
+    private String target;
+
+    private String icon;
 
     private Integer sort;
 
@@ -77,12 +81,28 @@ public class SysDepartment {
         this.parentId = parentId;
     }
 
-    public String getAreaId() {
-        return areaId;
+    public String getHref() {
+        return href;
     }
 
-    public void setAreaId(String areaId) {
-        this.areaId = areaId == null ? null : areaId.trim();
+    public void setHref(String href) {
+        this.href = href == null ? null : href.trim();
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target == null ? null : target.trim();
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
     }
 
     public Integer getSort() {

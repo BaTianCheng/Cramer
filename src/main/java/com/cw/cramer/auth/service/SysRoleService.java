@@ -50,6 +50,7 @@ public class SysRoleService extends BaseService{
 		} else {
 			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		}
+		example.setOrderByClause("role_sort");
 		List<SysRole> roles = sysRoleDAO.selectByExample(example);
 		return new PageInfo<SysRole>(roles);
 	}
@@ -76,7 +77,7 @@ public class SysRoleService extends BaseService{
 	}
 	
 	/**
-	 * 更新用户基本信息
+	 * 更新角色基本信息
 	 * @param editedUser
 	 * @return
 	 */

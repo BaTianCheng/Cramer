@@ -35,7 +35,8 @@ public class SysUserService extends BaseService{
 	public SysUser getSysUser(String userName){
 		SysUserExample example = new SysUserExample();
 		example.or().andNameEqualTo(userName);
-		List<SysUser> users = sysUserDAO.selectByExample(example);
+		List<SysUser> users =  sysUserDAO.selectByExample(example);
+		
 		if(users.isEmpty()){
 			return null;
 		} else {
@@ -83,6 +84,7 @@ public class SysUserService extends BaseService{
 		} else {
 			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		}
+		example.setOrderByClause("user_sort");
 		List<SysUser> users = sysUserDAO.selectByExample(example);
 		return new PageInfo<SysUser>(users);
 	}

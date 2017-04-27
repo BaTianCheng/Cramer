@@ -6,14 +6,15 @@
     <result column="user_name" jdbcType="VARCHAR" property="name" />
     <result column="user_password" jdbcType="VARCHAR" property="password" />
     <result column="user_type" jdbcType="INTEGER" property="type" />
+    <result column="user_img" jdbcType="VARCHAR" property="img" />
     <result column="user_status" jdbcType="INTEGER" property="status" />
     <result column="user_sort" jdbcType="INTEGER" property="sort" />
     <result column="user_login_ip" jdbcType="VARCHAR" property="loginIp" />
     <result column="user_login_time" jdbcType="VARCHAR" property="loginTime" />
     <result column="user_create_by" jdbcType="VARCHAR" property="createBy" />
-    <result column="user_create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="user_create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="user_update_by" jdbcType="INTEGER" property="updateBy" />
-    <result column="user_update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="user_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="user_Remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="department_id" jdbcType="INTEGER" property="department.id" />
     <result column="department_name" jdbcType="VARCHAR" property="department.name" />
@@ -22,12 +23,14 @@
         <result column="role_name" property="name"/>  
     </collection> 
   </resultMap>
+  
   <sql id="Joins">
 		LEFT JOIN sys_user_department user_department ON user.id = user_department.user_id 
 		LEFT JOIN sys_department department ON user_department.department_id = department.id 
 		LEFT JOIN sys_user_role user_role ON user.id = user_role.user_id 
 		LEFT JOIN sys_role role ON user_role.role_id = role.id
-    </sql>
+  </sql>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -88,9 +91,9 @@
   </sql>
   <sql id="Base_Column_List">
     user.id as user_id, user.name as user_name, user.password as user_password, user.type as user_type, 
-    user.status as user_status, user.sort as user_sort, user.login_ip as user_login_ip, 
+    user.img as user_img, user.status as user_status, user.sort as user_sort, user.login_ip as user_login_ip, 
     user.login_time as user_login_time, user.create_by as user_create_by, user.create_time as user_create_time, 
-    user.update_by as user_update_by, user.update_time as user_update_time, user.Remarks as user_Remarks, 
+    user.update_by as user_update_by, user.update_time as user_update_time, user.Remarks as user_Remarks,
     department.id as department_id, department.name as department_name, 
     role.id as role_id, role.name as role_name
   </sql>
@@ -101,8 +104,8 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_user user 
-    <include refid="Joins"/>
+    from sys_user user
+    <include refid="Joins" />
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -113,8 +116,8 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sys_user user 
-    <include refid="Joins"/>
+    from sys_user user
+    <include refid="Joins" />
     where user.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -129,15 +132,15 @@
   </delete>
   <insert id="insert" parameterType="com.cw.cramer.auth.entity.SysUser">
     insert into sys_user (id, name, password, 
-      type, status, sort, 
-      login_ip, login_time, create_by, 
-      create_time, update_by, update_time, 
-      Remarks)
+      type, img, status, 
+      sort, login_ip, login_time, 
+      create_by, create_time, update_by, 
+      update_time, Remarks)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, 
-      #{remarks,jdbcType=VARCHAR})
+      #{type,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, #{loginTime,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cw.cramer.auth.entity.SysUser">
     insert into sys_user
@@ -153,6 +156,9 @@
       </if>
       <if test="type != null">
         type,
+      </if>
+      <if test="img != null">
+        img,
       </if>
       <if test="status != null">
         status,
@@ -195,6 +201,9 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
@@ -211,13 +220,13 @@
         #{createBy,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateBy != null">
         #{updateBy,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=INTEGER},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
@@ -245,6 +254,9 @@
       <if test="record.type != null">
         user.type = #{record.type,jdbcType=INTEGER},
       </if>
+      <if test="record.img != null">
+        user.img = #{record.img,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         user.status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -261,13 +273,13 @@
         user.create_by = #{record.createBy,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
-        user.create_time = #{record.createTime,jdbcType=VARCHAR},
+        user.create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateBy != null">
         user.update_by = #{record.updateBy,jdbcType=INTEGER},
       </if>
       <if test="record.updateTime != null">
-        user.update_time = #{record.updateTime,jdbcType=INTEGER},
+        user.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.remarks != null">
         user.Remarks = #{record.remarks,jdbcType=VARCHAR},
@@ -283,14 +295,15 @@
       user.name = #{record.name,jdbcType=VARCHAR},
       user.password = #{record.password,jdbcType=VARCHAR},
       user.type = #{record.type,jdbcType=INTEGER},
+      user.img = #{record.img,jdbcType=VARCHAR},
       user.status = #{record.status,jdbcType=INTEGER},
       user.sort = #{record.sort,jdbcType=INTEGER},
       user.login_ip = #{record.loginIp,jdbcType=VARCHAR},
       user.login_time = #{record.loginTime,jdbcType=VARCHAR},
       user.create_by = #{record.createBy,jdbcType=VARCHAR},
-      user.create_time = #{record.createTime,jdbcType=VARCHAR},
+      user.create_time = #{record.createTime,jdbcType=TIMESTAMP},
       user.update_by = #{record.updateBy,jdbcType=INTEGER},
-      user.update_time = #{record.updateTime,jdbcType=INTEGER},
+      user.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       user.Remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -308,6 +321,9 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
@@ -324,13 +340,13 @@
         create_by = #{createBy,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateBy != null">
         update_by = #{updateBy,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=INTEGER},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remarks != null">
         Remarks = #{remarks,jdbcType=VARCHAR},
@@ -343,14 +359,15 @@
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       login_ip = #{loginIp,jdbcType=VARCHAR},
       login_time = #{loginTime,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       Remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

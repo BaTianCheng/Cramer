@@ -27,7 +27,7 @@ public class SysDepartmentService extends BaseService{
 	private SysDepartmentDAO sysDepartmentDAO;
 	
 	/**
-	 * 获取角色
+	 * 获取部门
 	 * @param id
 	 * @return
 	 */
@@ -36,7 +36,7 @@ public class SysDepartmentService extends BaseService{
 	}
 	
 	/**
-	 * 获取角色列表
+	 * 获取部门列表
 	 * @param pageNum
 	 * @param pageSize
 	 * @param DepartmentName
@@ -50,12 +50,13 @@ public class SysDepartmentService extends BaseService{
 		} else {
 			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		}
+		example.setOrderByClause("department_sort");
 		List<SysDepartment> Departments = sysDepartmentDAO.selectByExample(example);
 		return new PageInfo<SysDepartment>(Departments);
 	}
 	
 	/**
-	 * 添加角色
+	 * 添加部门
 	 * @param Department
 	 * @return
 	 */
@@ -65,7 +66,7 @@ public class SysDepartmentService extends BaseService{
 	}
 	
 	/**
-	 * 修改角色
+	 * 修改部门
 	 * @param Department
 	 * @return
 	 */
@@ -76,7 +77,7 @@ public class SysDepartmentService extends BaseService{
 	}
 	
 	/**
-	 * 更新用户基本信息
+	 * 更新部门基本信息
 	 * @param editedUser
 	 * @return
 	 */
@@ -90,7 +91,7 @@ public class SysDepartmentService extends BaseService{
 	}
 	
 	/**
-	 * 删除角色(更新标志位)
+	 * 删除部门(更新标志位)
 	 * @param userId
 	 * @return
 	 */

@@ -167,10 +167,18 @@ public final class DateTimeUtils extends org.apache.commons.lang3.time.DateUtils
 		}
 		
 		/**
-		 * 获取当前事件
+		 * 获取当前时间
 		 * @return
 		 */
-		public static int getCurrentTime(){
+		public static Date getCurrentTime(){
+			return new Date();
+		}
+		
+		/**
+		 * 获取当前时间戳
+		 * @return
+		 */
+		public static int getCurrentTimeStamp(){
 			return Integer.valueOf(String.valueOf(System.currentTimeMillis()/1000));
 		}
 

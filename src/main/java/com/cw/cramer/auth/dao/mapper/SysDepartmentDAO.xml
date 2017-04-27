@@ -11,9 +11,9 @@
     <result column="department_area_id" jdbcType="VARCHAR" property="areaId" />
     <result column="department_sort" jdbcType="INTEGER" property="sort" />
     <result column="department_create_by" jdbcType="INTEGER" property="createBy" />
-    <result column="department_create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="department_create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="department_update_by" jdbcType="INTEGER" property="updateBy" />
-    <result column="department_update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="department_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="department_remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -121,7 +121,7 @@
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
       #{areaId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=INTEGER}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{remarks,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cw.cramer.auth.entity.SysDepartment">
@@ -196,13 +196,13 @@
         #{createBy,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateBy != null">
         #{updateBy,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=INTEGER},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
@@ -246,13 +246,13 @@
         department.create_by = #{record.createBy,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
-        department.create_time = #{record.createTime,jdbcType=INTEGER},
+        department.create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateBy != null">
         department.update_by = #{record.updateBy,jdbcType=INTEGER},
       </if>
       <if test="record.updateTime != null">
-        department.update_time = #{record.updateTime,jdbcType=INTEGER},
+        department.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.remarks != null">
         department.remarks = #{record.remarks,jdbcType=VARCHAR},
@@ -273,9 +273,9 @@
       department.area_id = #{record.areaId,jdbcType=VARCHAR},
       department.sort = #{record.sort,jdbcType=INTEGER},
       department.create_by = #{record.createBy,jdbcType=INTEGER},
-      department.create_time = #{record.createTime,jdbcType=INTEGER},
+      department.create_time = #{record.createTime,jdbcType=TIMESTAMP},
       department.update_by = #{record.updateBy,jdbcType=INTEGER},
-      department.update_time = #{record.updateTime,jdbcType=INTEGER},
+      department.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       department.remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -309,13 +309,13 @@
         create_by = #{createBy,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateBy != null">
         update_by = #{updateBy,jdbcType=INTEGER},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=INTEGER},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
@@ -333,9 +333,9 @@
       area_id = #{areaId,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

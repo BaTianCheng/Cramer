@@ -1,6 +1,7 @@
 package com.cw.cramer.auth.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SysUserExample {
@@ -364,6 +365,76 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
+        public Criteria andImgIsNull() {
+            addCriterion("user.img is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgIsNotNull() {
+            addCriterion("user.img is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgEqualTo(String value) {
+            addCriterion("user.img =", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotEqualTo(String value) {
+            addCriterion("user.img <>", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgGreaterThan(String value) {
+            addCriterion("user.img >", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgGreaterThanOrEqualTo(String value) {
+            addCriterion("user.img >=", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLessThan(String value) {
+            addCriterion("user.img <", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLessThanOrEqualTo(String value) {
+            addCriterion("user.img <=", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgLike(String value) {
+            addCriterion("user.img like", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotLike(String value) {
+            addCriterion("user.img not like", value, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgIn(List<String> values) {
+            addCriterion("user.img in", values, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotIn(List<String> values) {
+            addCriterion("user.img not in", values, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgBetween(String value1, String value2) {
+            addCriterion("user.img between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgNotBetween(String value1, String value2) {
+            addCriterion("user.img not between", value1, value2, "img");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("user.status is null");
             return (Criteria) this;
@@ -704,62 +775,52 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(String value) {
+        public Criteria andCreateTimeEqualTo(Date value) {
             addCriterion("user.create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(String value) {
+        public Criteria andCreateTimeNotEqualTo(Date value) {
             addCriterion("user.create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(String value) {
+        public Criteria andCreateTimeGreaterThan(Date value) {
             addCriterion("user.create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(String value) {
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("user.create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(String value) {
+        public Criteria andCreateTimeLessThan(Date value) {
             addCriterion("user.create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(String value) {
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
             addCriterion("user.create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLike(String value) {
-            addCriterion("user.create_time like", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotLike(String value) {
-            addCriterion("user.create_time not like", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIn(List<String> values) {
+        public Criteria andCreateTimeIn(List<Date> values) {
             addCriterion("user.create_time in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<String> values) {
+        public Criteria andCreateTimeNotIn(List<Date> values) {
             addCriterion("user.create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(String value1, String value2) {
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
             addCriterion("user.create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(String value1, String value2) {
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("user.create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
@@ -834,52 +895,52 @@ public class SysUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeEqualTo(Integer value) {
+        public Criteria andUpdateTimeEqualTo(Date value) {
             addCriterion("user.update_time =", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotEqualTo(Integer value) {
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
             addCriterion("user.update_time <>", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeGreaterThan(Integer value) {
+        public Criteria andUpdateTimeGreaterThan(Date value) {
             addCriterion("user.update_time >", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("user.update_time >=", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeLessThan(Integer value) {
+        public Criteria andUpdateTimeLessThan(Date value) {
             addCriterion("user.update_time <", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
             addCriterion("user.update_time <=", value, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeIn(List<Integer> values) {
+        public Criteria andUpdateTimeIn(List<Date> values) {
             addCriterion("user.update_time in", values, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotIn(List<Integer> values) {
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
             addCriterion("user.update_time not in", values, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeBetween(Integer value1, Integer value2) {
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
             addCriterion("user.update_time between", value1, value2, "updateTime");
             return (Criteria) this;
         }
 
-        public Criteria andUpdateTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("user.update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }

@@ -55,7 +55,7 @@ public class ShiroRealm extends AuthorizingRealm{
 			throw new UnknownAccountException();
 		} 
 		//帐号锁定
-		if(user.getStatus() == -2) {
+		if(user.getStatus() == 2) {
 			throw new LockedAccountException(); 
 		}
 		
