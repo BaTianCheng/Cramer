@@ -8,6 +8,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.common.base.BaseController;
 import com.cw.cramer.common.util.LogUtils;
+import com.cw.cramer.core.security.SecurityService;
 
 /**
  * 权限总控制器
@@ -24,6 +27,9 @@ import com.cw.cramer.common.util.LogUtils;
  */
 @Controller
 public class AuthController extends BaseController{
+	
+	@Autowired
+	private SecurityService securityService;
 	
 	/**
 	 * 登录页面
@@ -66,6 +72,26 @@ public class AuthController extends BaseController{
 			LogUtils.error("login faile: " + e);
 			return this.renderFailJson(null);
 		}
+	}
+	
+	/**
+	 * 获取本人权限
+	 * @param request
+	 * @param model
+	 * @param userName
+	 * @param passWord
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/authorities/current", method=RequestMethod.POST)
+	@ResponseBody
+	public String getAuthorities(HttpServletRequest request, Model model) {
+		SysUser user = securityService.getCurrentUser();
+		if(user == null){
+			return this.renderFailJson(null);
+		} else {
+			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
+		}
+		
 	}
 
 }

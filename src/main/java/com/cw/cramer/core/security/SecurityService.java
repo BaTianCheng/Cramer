@@ -1,5 +1,6 @@
 package com.cw.cramer.core.security;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -9,7 +10,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cw.cramer.auth.entity.SysAuthority;
 import com.cw.cramer.auth.entity.SysUser;
+import com.cw.cramer.auth.service.SysAuthorityService;
 import com.cw.cramer.auth.service.SysUserService;
 import com.google.common.collect.Lists;
 
@@ -21,6 +24,9 @@ public class SecurityService {
 	
 	@Autowired
 	private SysUserService sysUserService;
+	
+	@Autowired
+	private SysAuthorityService sysAuthorityService;
 	
 	/**
 	 * 获取当前用户
@@ -37,6 +43,20 @@ public class SecurityService {
 	 */
 	public List<Session> getOnlineSessions(){
 		return Lists.newArrayList(sessionDAO.getActiveSessions());
+	}
+	
+	/**
+	 * 获取权限编码集合
+	 * @param userId
+	 * @return
+	 */
+	public List<String> getAuthorityCodes(int userId){
+		List<String> authorityCodes = new ArrayList<String>();
+		List<SysAuthority> sysAuthorities = sysAuthorityService.getUserAuthorities(userId);
+		for(SysAuthority sysAuthority : sysAuthorities){
+			authorityCodes.add(sysAuthority.getCode());
+		}
+		return authorityCodes;
 	}
 
 }
