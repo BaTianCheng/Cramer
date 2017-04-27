@@ -1,6 +1,7 @@
 package com.cw.cramer.auth.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysRole {
     private Integer id;
@@ -28,6 +29,10 @@ public class SysRole {
     private Date updateTime;
 
     private String remarks;
+    
+    private String dapartmentName;
+    
+    private List<SysAuthority> authorities;
 
     public Integer getId() {
         return id;
@@ -132,4 +137,20 @@ public class SysRole {
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
     }
+
+	public String getDapartmentName() {
+		return dapartmentName;
+	}
+
+	public void setDapartmentName(String dapartmentName) {
+		this.dapartmentName = dapartmentName;
+	}
+
+	public List<SysAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<SysAuthority> authorities) {
+		this.authorities = authorities;
+	}
 }

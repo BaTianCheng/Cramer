@@ -12,13 +12,13 @@ User.List = function (){
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
 			 {name : 'name',index : 'name asc, id',width : 100}, 
 			 {name : 'password',index : 'password',width : 200,editrules:{required:true}}, 
-			 {name : 'department.name',index : 'department_name',width : 80}, 
-			 {name : 'roles',index : 'role_name',width : 100,
+			 {name : 'departmentName',index : 'department_name',width : 80}, 
+			 {name : 'roleNames',index : 'role_name',width : 100,
 				 formatter:function(cellvalue, options, rowObject){
 					 if(cellvalue != null){
 						 var temp = '';
 						 for(var i=0;i<cellvalue.length;i++){
-							 temp += cellvalue[i].name;
+							 temp += cellvalue[i];
 							 if(i <cellvalue.length-1){
 								 temp += ',';
 							 }
@@ -32,8 +32,8 @@ User.List = function (){
 			 {name : 'status',index : 'status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
 					switch(cellValue){
-						case 0 : return '可用';
-						case 1 : return '不可用';
+						case 1 : return '可用';
+						case 2 : return '锁定';
 						default	: return cellValue;
 					}
 				 } ,

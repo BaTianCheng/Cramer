@@ -5,7 +5,9 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Strings;
@@ -51,6 +53,23 @@ public final class ConvertUtils {
 		BigDecimal b = new BigDecimal(num);
 		double newNum = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return newNum;
+	}
+	
+	/**
+	 * 转换字符串数组
+	 * @param list
+	 * @return
+	 */
+	public static List<String> toStrings(List<Integer> list){
+		List<String> strs = new ArrayList<String>();
+		if(list == null){
+			return strs;
+		} else {
+			for(Object obj : list){
+				strs.add(obj.toString());
+			}
+			return strs;
+		}
 	}
 
 	/**

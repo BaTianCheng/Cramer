@@ -1,6 +1,7 @@
 package com.cw.cramer.auth.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysDepartment {
     private Integer id;
@@ -28,6 +29,12 @@ public class SysDepartment {
     private Date updateTime;
 
     private String remarks;
+    
+    private List<Integer> roleIds;
+    
+    private List<String> roleCodes;
+    
+    private List<String> roleNames;
 
     public Integer getId() {
         return id;
@@ -132,4 +139,29 @@ public class SysDepartment {
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
     }
+
+	public List<Integer> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(List<Integer> roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public List<String> getRoleCodes() {
+		return roleCodes;
+	}
+
+	public void setRoleCodes(List<String> roleCodes) {
+		this.roleCodes = roleCodes;
+	}
+
+	public List<String> getRoleNames() {
+		return roleNames;
+	}
+
+	public void setRoleNames(List<String> roleNames) {
+		this.roleNames = roleNames;
+	}
+    
 }

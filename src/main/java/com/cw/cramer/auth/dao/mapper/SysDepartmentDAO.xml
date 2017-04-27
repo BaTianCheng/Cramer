@@ -15,7 +15,22 @@
     <result column="department_update_by" jdbcType="INTEGER" property="updateBy" />
     <result column="department_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="department_remarks" jdbcType="VARCHAR" property="remarks" />
+    <collection property="roleIds" ofType="java.lang.Integer" column="user_id">  
+        <id column="role_id" property="id"/>  
+    </collection>
+    <collection property="roleCodes" ofType="java.lang.String" column="user_id">  
+        <result column="role_code" property="code"/>  
+    </collection> 
+    <collection property="roleNames" ofType="java.lang.String" column="user_id">  
+        <result column="role_name" property="name"/>  
+    </collection>
   </resultMap>
+  
+  <sql id="Joins">
+		LEFT JOIN sys_department_role department_role ON department_role.department_id = department.id 
+		LEFT JOIN sys_role role ON department_role.role_id = role.id
+  </sql>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -79,7 +94,8 @@
     department.type as department_type, department.status as department_status, department.parent_id as department_parent_id, 
     department.area_id as department_area_id, department.sort as department_sort, department.create_by as department_create_by, 
     department.create_time as department_create_time, department.update_by as department_update_by, 
-    department.update_time as department_update_time, department.remarks as department_remarks
+    department.update_time as department_update_time, department.remarks as department_remarks,
+    role.id as role_id, role.code as role_code, role.name as role_name
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentExample" resultMap="BaseResultMap">
     select
@@ -89,6 +105,7 @@
     'true' as QUERYID,
     <include refid="Base_Column_List" />
     from sys_department department
+    <include refid="Joins" />
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,6 +117,7 @@
     select 
     <include refid="Base_Column_List" />
     from sys_department department
+    <include refid="Joins" />
     where department.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

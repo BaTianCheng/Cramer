@@ -15,7 +15,32 @@
     <result column="role_update_by" jdbcType="INTEGER" property="updateBy" />
     <result column="role_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="role_remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="department_name" jdbcType="VARCHAR" property="department.name" />
+    <collection property="authorities" ofType="com.cw.cramer.auth.entity.SysAuthority" column="role_id">  
+        <id column="authority_id" jdbcType="INTEGER" property="id" />
+	    <result column="authority_name" jdbcType="VARCHAR" property="name" />
+	    <result column="authority_code" jdbcType="VARCHAR" property="code" />
+	    <result column="authority_type" jdbcType="INTEGER" property="type" />
+	    <result column="authority_status" jdbcType="INTEGER" property="status" />
+	    <result column="authority_parent_id" jdbcType="INTEGER" property="parentId" />
+	    <result column="authority_href" jdbcType="VARCHAR" property="href" />
+	    <result column="authority_target" jdbcType="VARCHAR" property="target" />
+	    <result column="authority_icon" jdbcType="VARCHAR" property="icon" />
+	    <result column="authority_sort" jdbcType="INTEGER" property="sort" />
+	    <result column="authority_create_by" jdbcType="INTEGER" property="createBy" />
+	    <result column="authority_create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="authority_update_by" jdbcType="INTEGER" property="updateBy" />
+	    <result column="authority_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	    <result column="authority_remarks" jdbcType="VARCHAR" property="remarks" />
+    </collection> 
   </resultMap>
+  
+  <sql id="Joins">
+		LEFT JOIN sys_department department ON role.dapartment_id = department.id 
+		LEFT JOIN sys_role_authority role_authority ON role.id = role_authority.role_id 
+		LEFT JOIN sys_authority authority ON role_authority.role_id = authority.id
+  </sql>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -78,7 +103,9 @@
     role.id as role_id, role.name as role_name, role.code as role_code, role.type as role_type, 
     role.status as role_status, role.parent_id as role_parent_id, role.dapartment_id as role_dapartment_id, 
     role.sort as role_sort, role.create_by as role_create_by, role.create_time as role_create_time, 
-    role.update_by as role_update_by, role.update_time as role_update_time, role.remarks as role_remarks
+    role.update_by as role_update_by, role.update_time as role_update_time, role.remarks as role_remarks,
+    department.name as department_name,
+    authoritiy.id as authoritiy_id, authoritiy.name as authoritiy_name, authoritiy.id as authoritiy_name
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysRoleExample" resultMap="BaseResultMap">
     select
@@ -88,6 +115,7 @@
     'true' as QUERYID,
     <include refid="Base_Column_List" />
     from sys_role role
+    <include refid="Joins" />
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -99,6 +127,7 @@
     select 
     <include refid="Base_Column_List" />
     from sys_role role
+    <include refid="Joins" />
     where role.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

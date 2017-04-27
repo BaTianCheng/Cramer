@@ -16,10 +16,15 @@
     <result column="user_update_by" jdbcType="INTEGER" property="updateBy" />
     <result column="user_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="user_Remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="department_id" jdbcType="INTEGER" property="department.id" />
-    <result column="department_name" jdbcType="VARCHAR" property="department.name" />
-    <collection property="roles" ofType="com.cw.cramer.auth.entity.SysRole" column="user_id">  
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <collection property="roleIds" ofType="java.lang.Integer" column="user_id">  
         <id column="role_id" property="id"/>  
+    </collection>
+    <collection property="roleCodes" ofType="java.lang.String" column="user_id">  
+        <result column="role_code" property="code"/>  
+    </collection> 
+    <collection property="roleNames" ofType="java.lang.String" column="user_id">  
         <result column="role_name" property="name"/>  
     </collection> 
   </resultMap>
@@ -95,7 +100,7 @@
     user.login_time as user_login_time, user.create_by as user_create_by, user.create_time as user_create_time, 
     user.update_by as user_update_by, user.update_time as user_update_time, user.Remarks as user_Remarks,
     department.id as department_id, department.name as department_name, 
-    role.id as role_id, role.name as role_name
+    role.id as role_id, role.code as role_code, role.name as role_name
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysUserExample" resultMap="BaseResultMap">
     select

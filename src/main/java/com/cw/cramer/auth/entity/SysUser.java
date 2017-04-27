@@ -32,9 +32,15 @@ public class SysUser {
 
     private String remarks;
     
-    private SysDepartment department;
+    private Integer departmentId;
     
-    private List<SysRole> roles;
+    private String departmentName;
+    
+    private List<Integer> roleIds;
+    
+    private List<String> roleCodes;
+    
+    private List<String> roleNames;
 
     public Integer getId() {
         return id;
@@ -148,20 +154,44 @@ public class SysUser {
         this.remarks = remarks == null ? null : remarks.trim();
     }
 
-	public SysDepartment getDepartment() {
-		return department;
+	public Integer getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartment(SysDepartment department) {
-		this.department = department;
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 
-	public List<SysRole> getRoles() {
-		return roles;
+	public String getDepartmentName() {
+		return departmentName;
 	}
 
-	public void setRoles(List<SysRole> roles) {
-		this.roles = roles;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public List<Integer> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(List<Integer> roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public List<String> getRoleCodes() {
+		return roleCodes;
+	}
+
+	public void setRoleCodes(List<String> roleCodes) {
+		this.roleCodes = roleCodes;
+	}
+
+	public List<String> getRoleNames() {
+		return roleNames;
+	}
+
+	public void setRoleNames(List<String> roleNames) {
+		this.roleNames = roleNames;
 	}
 
 }

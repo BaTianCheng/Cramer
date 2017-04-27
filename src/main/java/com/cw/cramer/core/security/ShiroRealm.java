@@ -1,5 +1,7 @@
 package com.cw.cramer.core.security;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
@@ -17,9 +19,13 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.cw.cramer.auth.entity.SysAuthority;
 import com.cw.cramer.auth.entity.SysUser;
+import com.cw.cramer.auth.service.SysAuthorityService;
 import com.cw.cramer.auth.service.SysUserService;
+import com.cw.cramer.common.util.ConvertUtils;
 
 /**
  * 安全身份管理类
@@ -29,6 +35,9 @@ public class ShiroRealm extends AuthorizingRealm{
 	
 	@Resource
 	private SysUserService sysUserService;
+	
+	@Autowired
+	private SysAuthorityService sysAuthorityService;
 
 	/**
 	 * 获得权限
@@ -36,8 +45,15 @@ public class ShiroRealm extends AuthorizingRealm{
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		authorizationInfo.addRole("admin");
-		authorizationInfo.addStringPermission("admin:manger");
+		String userName = (String)principals.getPrimaryPrincipal();
+		SysUser user = sysUserService.getSysUser(userName);
+		if(user != null){
+			authorizationInfo.addRoles(user.getRoleCodes());
+			List<SysAuthority> sysAuthorities = sysAuthorityService.getUserAuthorities(user.getId());
+			for(SysAuthority sysAuthority : sysAuthorities){
+				authorizationInfo.addStringPermission(sysAuthority.getCode());
+			}
+		}
 		return authorizationInfo;
 	}
 
