@@ -26,6 +26,8 @@ public class SysDepartmentService extends BaseService{
 	@Autowired
 	private SysDepartmentDAO sysDepartmentDAO;
 	
+
+	
 	/**
 	 * 获取部门
 	 * @param id

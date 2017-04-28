@@ -1,13 +1,20 @@
 package com.cw.cramer.auth.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cw.cramer.auth.dao.SysUserDAO;
+import com.cw.cramer.auth.dao.SysUserDepartmentDAO;
+import com.cw.cramer.auth.dao.SysUserRoleDAO;
 import com.cw.cramer.auth.entity.SysUser;
+import com.cw.cramer.auth.entity.SysUserDepartment;
+import com.cw.cramer.auth.entity.SysUserDepartmentExample;
 import com.cw.cramer.auth.entity.SysUserExample;
+import com.cw.cramer.auth.entity.SysUserRole;
+import com.cw.cramer.auth.entity.SysUserRoleExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
@@ -26,6 +33,12 @@ public class SysUserService extends BaseService{
 	
 	@Autowired
 	private SysUserDAO sysUserDAO;
+	
+	@Autowired
+	private SysUserDepartmentDAO sysUserDepartmentDAO;
+	
+	@Autowired
+	private SysUserRoleDAO sysUserRoleDAO;
 		
 	/**
 	 * 获取用户
@@ -162,6 +175,44 @@ public class SysUserService extends BaseService{
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * 根据部门获取用户
+	 * @param departmentId
+	 * @return
+	 */
+	public List<SysUser> getUsersByDepartment(int departmentId){
+		SysUserDepartmentExample userDepartmentExample = new SysUserDepartmentExample();
+		userDepartmentExample.or().andDepartmentIdEqualTo(departmentId);
+		List<SysUserDepartment> userDepartments = sysUserDepartmentDAO.selectByExample(userDepartmentExample);
+		List<Integer> userIds = new ArrayList<Integer>();
+		for(SysUserDepartment userDepartment : userDepartments){
+			userIds.add(userDepartment.getUserId());
+		}
+		SysUserExample userExample = new SysUserExample();
+		userExample.or().andIdIn(userIds);
+		List<SysUser> users = sysUserDAO.selectByExample(userExample);
+		return users;
+	}
+	
+	/**
+	 * 根据角色获取用户
+	 * @param roleId
+	 * @return
+	 */
+	public List<SysUser> getUsersByRole(int roleId){
+		SysUserRoleExample userRoleExample = new SysUserRoleExample();
+		userRoleExample.or().andRoleIdEqualTo(roleId);
+		List<SysUserRole> userRoles = sysUserRoleDAO.selectByExample(userRoleExample);
+		List<Integer> userIds = new ArrayList<Integer>();
+		for(SysUserRole userRole : userRoles){
+			userIds.add(userRole.getUserId());
+		}
+		SysUserExample userExample = new SysUserExample();
+		userExample.or().andIdIn(userIds);
+		List<SysUser> users = sysUserDAO.selectByExample(userExample);
+		return users;
 	}
 
 }

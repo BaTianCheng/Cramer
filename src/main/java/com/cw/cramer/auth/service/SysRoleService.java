@@ -1,11 +1,15 @@
 package com.cw.cramer.auth.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cw.cramer.auth.dao.SysDepartmentRoleDAO;
 import com.cw.cramer.auth.dao.SysRoleDAO;
+import com.cw.cramer.auth.entity.SysDepartmentRole;
+import com.cw.cramer.auth.entity.SysDepartmentRoleExample;
 import com.cw.cramer.auth.entity.SysRole;
 import com.cw.cramer.auth.entity.SysRoleExample;
 import com.cw.cramer.common.base.BaseService;
@@ -25,6 +29,9 @@ public class SysRoleService extends BaseService{
 	
 	@Autowired
 	private SysRoleDAO sysRoleDAO;
+	
+	@Autowired
+	private SysDepartmentRoleDAO sysDepartmentRoleDAO;
 	
 	/**
 	 * 获取角色
@@ -103,6 +110,25 @@ public class SysRoleService extends BaseService{
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * 根据部门获取角色
+	 * @param departmentId
+	 * @return
+	 */
+	public List<SysRole> getRolesByDepartment(int departmentId){
+		SysDepartmentRoleExample departmentRoleExample = new SysDepartmentRoleExample();
+		departmentRoleExample.or().andDepartmentIdEqualTo(departmentId);
+		List<SysDepartmentRole> departmentRoles = sysDepartmentRoleDAO.selectByExample(departmentRoleExample);
+		List<Integer> roleIds = new ArrayList<Integer>();
+		for(SysDepartmentRole departmentRole : departmentRoles){
+			roleIds.add(departmentRole.getRoleId());
+		}
+		SysRoleExample roleExample = new SysRoleExample();
+		roleExample.or().andIdIn(roleIds);
+		List<SysRole> roles = sysRoleDAO.selectByExample(roleExample);
+		return roles;
 	}
 
 }

@@ -53,4 +53,15 @@ public class SysAuthorityService {
 		
 		return authorities;
 	}
+	
+	/**
+	 * 获取角色拥有的权限集合
+	 * @param userId
+	 * @return
+	 */
+	public List<SysAuthority> getAuthoritiesByRole(int roleId){
+		return sysRoleDAO.selectByPrimaryKey(roleId).getAuthorities();
+	}
+	
+	
 }
