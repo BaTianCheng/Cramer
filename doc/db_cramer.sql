@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-04-27 11:07:55
+Date: 2017-04-28 17:58:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,19 +41,19 @@ CREATE TABLE `sys_authority` (
 -- ----------------------------
 -- Records of sys_authority
 -- ----------------------------
-INSERT INTO `sys_authority` VALUES ('1', '权限菜单', null, '1', '1', '0', '/auth', null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('2', '用户管理', null, '1', '1', '1', '/auth/users', null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('3', '添加用户', null, '2', '1', '2', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('4', '修改用户', null, '2', '1', '2', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('5', '删除用户', null, '2', '1', '2', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('6', '角色管理', null, '1', '1', '1', '/auth/roles', null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('7', '添加角色', null, '2', '1', '6', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('8', '修改角色', null, '2', '1', '6', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('9', '删除角色', null, '2', '1', '6', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('10', '部门管理', null, '1', '1', '1', '/auth/departments', null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('11', '添加部门', null, '2', '1', '10', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('12', '修改部门', null, '2', '1', '10', null, null, null, null, null, null, null, null, null);
-INSERT INTO `sys_authority` VALUES ('13', '删除部门', null, '2', '1', '10', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('1', '权限菜单', 'auth', '1', '1', '0', '/auth', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('2', '用户管理', 'user', '1', '1', '1', '/auth/users', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('3', '添加用户', 'user:add', '2', '1', '2', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('4', '修改用户', 'user:eidt', '2', '1', '2', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('5', '删除用户', 'user:delete', '2', '1', '2', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('6', '角色管理', 'role', '1', '1', '1', '/auth/roles', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('7', '添加角色', 'role:add', '2', '1', '6', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('8', '修改角色', 'role:edit', '2', '1', '6', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('9', '删除角色', 'role:delete', '2', '1', '6', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('10', '部门管理', 'departrment', '1', '1', '1', '/auth/departments', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('11', '添加部门', 'department:add', '2', '1', '10', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('12', '修改部门', 'department:edit', '2', '1', '10', null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_authority` VALUES ('13', '删除部门', 'department:delete', '2', '1', '10', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `sys_department`
@@ -79,7 +79,7 @@ CREATE TABLE `sys_department` (
 -- ----------------------------
 -- Records of sys_department
 -- ----------------------------
-INSERT INTO `sys_department` VALUES ('1', '系统', 'SYS', null, '1', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_department` VALUES ('1', '系统', 'SYS', '1', '1', '0', null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `sys_department_role`
@@ -120,8 +120,8 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '管理员', null, null, '1', null, null, null, null, null, null, null, null);
-INSERT INTO `sys_role` VALUES ('2', '用户', null, null, '1', null, null, null, null, null, null, null, null);
+INSERT INTO `sys_role` VALUES ('1', '管理员', 'administrator', '1', '1', '0', '1', null, null, null, null, null, null);
+INSERT INTO `sys_role` VALUES ('2', '用户', 'user', '2', '1', '0', '1', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `sys_role_authority`
@@ -135,6 +135,18 @@ CREATE TABLE `sys_role_authority` (
 -- ----------------------------
 -- Records of sys_role_authority
 -- ----------------------------
+INSERT INTO `sys_role_authority` VALUES ('1', '1');
+INSERT INTO `sys_role_authority` VALUES ('1', '2');
+INSERT INTO `sys_role_authority` VALUES ('1', '3');
+INSERT INTO `sys_role_authority` VALUES ('1', '4');
+INSERT INTO `sys_role_authority` VALUES ('1', '5');
+INSERT INTO `sys_role_authority` VALUES ('1', '6');
+INSERT INTO `sys_role_authority` VALUES ('1', '7');
+INSERT INTO `sys_role_authority` VALUES ('1', '8');
+INSERT INTO `sys_role_authority` VALUES ('1', '9');
+INSERT INTO `sys_role_authority` VALUES ('1', '10');
+INSERT INTO `sys_role_authority` VALUES ('1', '11');
+INSERT INTO `sys_role_authority` VALUES ('1', '12');
 
 -- ----------------------------
 -- Table structure for `sys_sequence`
@@ -190,8 +202,7 @@ DROP TABLE IF EXISTS `sys_user_department`;
 CREATE TABLE `sys_user_department` (
   `user_id` int(11) DEFAULT NULL,
   `department_id` int(11) DEFAULT NULL,
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `sys_user_department_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
