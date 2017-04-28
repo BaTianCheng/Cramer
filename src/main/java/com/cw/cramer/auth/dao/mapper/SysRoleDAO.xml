@@ -15,7 +15,7 @@
     <result column="role_update_by" jdbcType="INTEGER" property="updateBy" />
     <result column="role_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="role_remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="department_name" jdbcType="VARCHAR" property="department.name" />
+    <result column="department_name" jdbcType="VARCHAR" property="dapartmentName" />
     <collection property="authorities" ofType="com.cw.cramer.auth.entity.SysAuthority" column="role_id">  
         <id column="authority_id" jdbcType="INTEGER" property="id" />
 	    <result column="authority_name" jdbcType="VARCHAR" property="name" />
@@ -38,7 +38,7 @@
   <sql id="Joins">
 		LEFT JOIN sys_department department ON role.dapartment_id = department.id 
 		LEFT JOIN sys_role_authority role_authority ON role.id = role_authority.role_id 
-		LEFT JOIN sys_authority authority ON role_authority.role_id = authority.id
+		LEFT JOIN sys_authority authority ON role_authority.authority_id = authority.id
   </sql>
   
   <sql id="Example_Where_Clause">
@@ -105,7 +105,7 @@
     role.sort as role_sort, role.create_by as role_create_by, role.create_time as role_create_time, 
     role.update_by as role_update_by, role.update_time as role_update_time, role.remarks as role_remarks,
     department.name as department_name,
-    authoritiy.id as authoritiy_id, authoritiy.name as authoritiy_name, authoritiy.id as authoritiy_name
+    authority.id as authority_id, authority.name as authority_name, authority.code as authority_code
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.auth.entity.SysRoleExample" resultMap="BaseResultMap">
     select

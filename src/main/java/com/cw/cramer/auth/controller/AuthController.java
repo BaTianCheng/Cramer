@@ -58,7 +58,8 @@ public class AuthController extends BaseController{
 
 		try {
 			subject.login(token);
-			return this.renderSuccessJson(null);
+			SysUser user = securityService.getCurrentUser();
+			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
 		}catch (UnknownAccountException e) {
 			LogUtils.error("login faile: " + e);
 			return this.renderFailJson(null);
@@ -91,7 +92,6 @@ public class AuthController extends BaseController{
 		} else {
 			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
 		}
-		
 	}
 
 }

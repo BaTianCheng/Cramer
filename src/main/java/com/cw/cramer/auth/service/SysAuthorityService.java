@@ -42,7 +42,7 @@ public class SysAuthorityService {
 		List<Integer> authorityIds = new ArrayList<Integer>();
 		for(SysRole role : roles){
 			if(role.getAuthorities() != null){
-				for(SysAuthority authority : authorities){
+				for(SysAuthority authority : role.getAuthorities()){
 					if(!authorityIds.contains(authority.getId())){
 						authorityIds.add(authority.getId());
 						authorities.add(authority);
@@ -62,6 +62,5 @@ public class SysAuthorityService {
 	public List<SysAuthority> getAuthoritiesByRole(int roleId){
 		return sysRoleDAO.selectByPrimaryKey(roleId).getAuthorities();
 	}
-	
 	
 }

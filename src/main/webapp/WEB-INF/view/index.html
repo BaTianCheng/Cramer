@@ -8,7 +8,8 @@
 		<meta name="author" content="">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+		
+		<link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/LayerUI/css/layui.css">
 		<!-- #CSS Links -->
 		<!-- Basic Styles -->
 		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
@@ -21,6 +22,8 @@
 		<!-- #FAVICONS -->
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		
+		<link rel="stylesheet" type="text/css" media="screen" href="css/app.css">
 
 	</head>
 
@@ -144,16 +147,16 @@
 					<li>
 						<a href="ajax/dashboard.html" title="仪表盘"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">仪表盘</span></a>
 					</li>
-					<li>
+					<li class="auth" data-auth="[auth]">
 						<a href="#" title="权限管理"><i class="fa fa-lg fa-fw fa-drivers-license"></i> <span class="menu-item-parent">权限管理</span></a>
 							<ul>
-								<li>
+								<li class="auth" data-auth="[user]">
 									<a href="auth/users"><i class="fa fa-lg fa-fw fa-user"></i> 用户管理</a>
 								</li>
-								<li>
+								<li class="auth" data-auth="[role]">
 									<a href="auth/roles"><i class="fa fa-lg fa-fw fa-user"></i> 角色管理</a>
 								</li>
-								<li>
+								<li class="auth" data-auth="[department]">
 									<a href="auth/departments"><i class="fa fa-lg fa-fw fa-user"></i> 部门管理</a>
 								</li>
 							</ul>
@@ -387,8 +390,8 @@
 
 		<!-- MAIN APP JS FILE -->
 		<script src="js/app.js"></script>
-		<script src="assets/plugins/LayerUI/layer.js"></script>
-
+		<script src="assets/plugins/LayerUI/layui.js"></script>
+		<script src="assets/plugins/LayerUI/lay/modules/layer.js"></script>
 		
 	</body>
 
