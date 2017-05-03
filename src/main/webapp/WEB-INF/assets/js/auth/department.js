@@ -104,3 +104,22 @@ function delRow(cl){
 	$("#main-table").trigger("reloadGrid");
 }
 
+//获取全部部门
+Department.GetAllList = function (){
+	$.post(CTX_PATH + "/auth/departments/list", {
+		pageNum : 0, 
+		pageSize : 0
+	}, function(msg) {
+		var result = JSON.parse(msg);
+		if(result.resultCode == '200'){
+			return result.data;
+		} else {
+			alert("程序异常");
+			return [];
+		}
+	}).error(function(xhr,errorText,errorType){
+		alert("系统错误");
+		return [];
+	});
+}
+

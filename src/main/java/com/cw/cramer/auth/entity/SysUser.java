@@ -9,6 +9,12 @@ public class SysUser {
     private String name;
 
     private String password;
+    
+    private String code;
+    
+    private String realName;
+    
+    private String nickName;
 
     private Integer type;
 
@@ -66,7 +72,31 @@ public class SysUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getType() {
+    public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public Integer getType() {
         return type;
     }
 

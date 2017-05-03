@@ -220,7 +220,8 @@ Lay.fn.link = function(href, fn, cssname){
 
 //css内部加载器
 Lay.fn.addcss = function(firename, fn, cssname){
-  return layui.link(config.dir + 'css/' + firename, fn, cssname);
+  //return layui.link(config.dir + 'css/' + firename, fn, cssname);
+	return layui.link('assets/plugins/LayerUI/' + 'css/' + firename, fn, cssname);
 };
 
 //图片预加载

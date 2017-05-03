@@ -71,6 +71,24 @@ Role.List = function (){
 	);
 }
 
+//角色列表
+Role.ListByDepartment = function (departmentId, callback){
+	$.post(CTX_PATH + "/auth/roles/list/department", {
+		departmentId : departmentId
+	},function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				callback(result.data);
+			} else {
+				alert("程序异常");
+				callback(null);
+			}
+	}).error(function(xhr,errorText,errorType){
+		alert("系统错误");
+		callback(null);
+	});
+}
+
 function editRow(cl){
 	$("#td-edit-"+cl).hide();
 	$("#td-del-"+cl).hide();

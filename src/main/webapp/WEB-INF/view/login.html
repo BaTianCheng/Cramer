@@ -2,27 +2,19 @@
 <html lang="en-us" id="extr-page">
 	<head>
 		<meta charset="utf-8">
-		<title> SmartAdmin</title>
-		<meta name="description" content="">
-		<meta name="author" content="">
+		<title>Cramer</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		
-		<!-- #CSS Links -->
-		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
-
-		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
-
-		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
-
-		<!-- #FAVICONS -->
+		<!-- 插件样式 -->
+		<link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/LayerUI/css/layui.css">
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
-
+		<!-- 基本样式 -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+		<!-- 定制样式 -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/app.css">
 	</head>
 	
 	<body class="animated fadeInDown">
@@ -87,50 +79,33 @@
 
 		</div>
 
-		<!--================================================== -->	
-
-		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-		<script src="js/plugin/pace/pace.min.js"></script>
-
-	    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-        <script src="js/jquery-2.0.2.min.js"></script>
-				<script>
-			if (!window.jQuery) {
-				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
-			}
-		</script>
-
+		<!-- 组件JS -->
+		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/jquery-ui-1.10.3.min.js"></script>
-		<script>
-			if (!window.jQuery.ui) {
-				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-			}
-		</script>
-
-		<!-- IMPORTANT: APP CONFIG -->
 		<script src="js/app.config.js"></script>
-		<script src="js/app.js"></script>
-
-		<!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
-		<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
-
-		<!-- BOOTSTRAP JS -->		
 		<script src="js/bootstrap/bootstrap.min.js"></script>
-
-		<!-- JQUERY VALIDATE -->
+		<script src="js/notification/SmartNotification.min.js"></script>
+		<script src="js/smartwidgets/jarvis.widget.min.js"></script>
+		<script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+		<script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
 		<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
-		
-		<!-- JQUERY MASKED INPUT -->
 		<script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+		<script src="js/plugin/select2/select2.min.js"></script>
+		<script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+		<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+		<script src="js/plugin/fastclick/fastclick.min.js"></script>
+
+		<!-- todo预加载 -->
+		<script src="js/app.js"></script>
+		<script type="text/javascript" src="assets/plugins/JqGrid/js/i18n/grid.locale-cn.js"></script>
+		<script type="text/javascript" src="assets/plugins/JqGrid/js/jquery.jqGrid.src.js"></script>
+		<script src="assets/plugins/LayerUI/layui.js"></script>
+		<script src="assets/plugins/LayerUI/lay/modules/layer.js"></script>
+		<script src="assets/plugins/LayerUI/lay/modules/tree.js"></script>
 		
 		<!--[if IE 8]>
-			
-			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-			
+			<h1>你的浏览器版本太旧，无法使用本系统的部分功能，建议下载新版的Chrome浏览器，地址：http://www.google.cn/chrome/browser/desktop/index.html</h1>
 		<![endif]-->
-
-		<!-- MAIN APP JS FILE -->
-		<script src="js/app.min.js"></script>
 		
 		<script src="js/auth/auth.js"></script>
 

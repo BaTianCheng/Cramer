@@ -17,7 +17,7 @@ $(document).ready(function(){
 			if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
 				$(this).show();
 			} else {
-				$(this).remove();
+				//$(this).remove();
 			}
 		})
 	} else {

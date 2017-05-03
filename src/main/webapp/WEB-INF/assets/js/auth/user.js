@@ -78,13 +78,11 @@ User.List = function (){
             var ids = jQuery("#main-table").jqGrid('getDataIDs');
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
-              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:editRow('"+ cl + "');\">编辑</a>";
-              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
-              se = "<a id=\"td-save-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:saveRow('"+ cl + "');\">保存</a>";
-              ce = "<a id=\"td-canel-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:restoreRow('"+ cl + "');\">取消</a>";
+              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:User.OpenEdit('"+ cl + "');\">编辑</a>";
+              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+cl+"');\">删除</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
-            	  	actions : be + de + se + ce
+            	  	actions : be + de 
                   });
             }
         }
@@ -94,7 +92,9 @@ User.List = function (){
 		edit : true,
 		add : true,
 		del : true,
-		search : false
+		search : false,
+		addfunc : User.OpenAdd,
+		editfunc : User.OpenInfo
 	}, {
 		closeAfterEdit : true,
 		viewPagerButtons : false
@@ -123,53 +123,72 @@ User.List = function (){
 	});
 }
 
-function editRow(cl){
-	$("#td-edit-"+cl).hide();
-	$("#td-del-"+cl).hide();
-	$("#td-save-"+cl).show();
-	$("#td-canel-"+cl).show();
-	$("#main-table").editRow(cl);
-}
-
-function saveRow(cl){
-	$("#td-edit-"+cl).show();
-	$("#td-del-"+cl).show();
-	$("#td-save-"+cl).hide();
-	$("#td-canel-"+cl).hide();
-	$("#main-table").saveRow(cl);
-	$("#main-table").trigger("reloadGrid");
-}
-
-function restoreRow(cl){
-	$("#td-edit-"+cl).show();
-	$("#td-del-"+cl).show();
-	$("#td-save-"+cl).hide();
-	$("#td-canel-"+cl).hide();
-	$("#main-table").restoreRow(cl);
-}
-
 function delRow(cl){
-	$("#td-edit-"+cl).hide();
-	$("#td-del-"+cl).hide();
-	$("#td-save-"+cl).show();
-	$("#td-canel-"+cl).show();
 	$("#main-table").jqGrid('delGridRow', cl);
 	$("#main-table").trigger("reloadGrid");
 }
 
-//获得用户
-User.Get = function (userId){
-	$.post(CTX_PATH + "/auth/users/get", {
-		userId : userId
-	}, function(msg) {
-		var result = JSON.parse(msg);
-		if(result.resultCode == '200'){
-			console.log(result.data);
+//打开添加用户
+User.OpenAdd = function(){
+	$.when($.post(CTX_PATH + "/auth/departments/list", {pageNum : 0, pageSize : 0})).done(function(d2){
+		var result2 = JSON.parse(d2);
+		if(result2.resultCode == '200'){
+			data.user = {};
+			data.department = result2.data.list;
+			var html = template('user_info_tpl', data);
+			layer.open({
+				type: 1,
+				title: '添加用户',
+				skin: 'layui-layer-rim', 
+				area: ['480px','auto'], 
+				closeBtn: 1,
+				content:html
+			});
+			User.ShowDepartmentRoles($('#user-department').val(),[]);
 		} else {
 			alert("程序异常");
 		}
-	}).error(function(xhr,errorText,errorType){
-		alert("系统错误");
+	});
+}
+
+//打开修改用户
+User.OpenEdit = function(userId){
+	var data = {};
+	if(userId > 0){
+		$.when($.post(CTX_PATH + "/auth/users/get", {userId : userId}),
+			$.post(CTX_PATH + "/auth/departments/list", {pageNum : 0, pageSize : 0})).done(function(d1, d2){
+				var result1 = JSON.parse(d1[0]);
+				var result2 = JSON.parse(d2[0]);
+				if(result1.resultCode == '200' && result2.resultCode == '200'){
+					data.user = result1.data;
+					data.department = result2.data.list;
+					var html = template('user_info_tpl', data);
+					layer.open({
+					  type: 1,
+					  title: '修改用户',
+					  skin: 'layui-layer-rim', 
+					  area: ['480px','auto'], 
+					  closeBtn: 1,
+					  content:html
+					});
+					User.ShowDepartmentRoles($('#user-department').val(),data.user.roleIds);
+				} else {
+					alert("程序异常");
+				}
+		});
+	} else {
+		User.OpenAdd();
+	}
+}
+
+//显示用户信息中部门的角色
+User.ShowDepartmentRoles = function (departmentId, roleIds){
+	Role.ListByDepartment(departmentId, function(result){
+		var data = {};
+		data.role = result;
+		data.roleIds = roleIds;
+		var html = template('department_role_tpl', data);
+		$('#departmentRoles').html(html);
 	});
 }
 

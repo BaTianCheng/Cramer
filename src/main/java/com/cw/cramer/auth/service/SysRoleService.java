@@ -122,6 +122,7 @@ public class SysRoleService extends BaseService{
 		departmentRoleExample.or().andDepartmentIdEqualTo(departmentId);
 		List<SysDepartmentRole> departmentRoles = sysDepartmentRoleDAO.selectByExample(departmentRoleExample);
 		List<Integer> roleIds = new ArrayList<Integer>();
+		roleIds.add(0);
 		for(SysDepartmentRole departmentRole : departmentRoles){
 			roleIds.add(departmentRole.getRoleId());
 		}

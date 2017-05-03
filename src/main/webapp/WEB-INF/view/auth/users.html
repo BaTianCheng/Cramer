@@ -37,8 +37,105 @@
 </section>
 <!-- end widgetGrid -->
 
+<script id="user_info_tpl" type="text/html">
+	<form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">用户名称：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="user-name" name="user-name" value="{{user.name}}" placeholder="用户名称">
+					</label>
+				</section>
+			</div>
+
+			{{if user.id == null || user.id == 0}}
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">用户密码：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="user-password" name="user-password" value="" placeholder="用户密码">
+					</label>
+				</section>
+			</div>
+			{{/if}}
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">用户状态：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="select"> <select id="user-status" name="user-status">
+						<option value="1" {{if user.status == 1}}selected{{/if}}>启用</option>
+						<option value="2" {{if user.status == 2}}selected{{/if}}>锁定</option>
+						<option value="-1" {{if user.status == -1}}selected{{/if}}>已删除</option>
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">所在部门：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="select"> <select id="user-department" name="user-department" onChange="User.ShowDepartmentRoles($('#user-department').val(),'{{user.roleIds.toString()}}'.split(','))">
+						{{each department as value i}}
+						<option value="{{value.id}}" {{if value.id == user.departmentId}}selected{{/if}}>{{value.name}}</option>
+						{{/each}}
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">备注信息：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="lname" name="lname" value="{{user.remarks}}" placeholder="备注信息">
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+		
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">拥有角色：</label>
+				</section>
+				<section class="col col-9 " id="departmentRoles" style="padding-top:5px;height:100px;overflow-y:auto;">
+					
+				</section>
+			</div>
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn">取消</button>
+			<button type="submit" class="btn btn-primary">保存</button>
+		</footer>
+	</form>
+</script>
+<script id="department_role_tpl" type="text/html">
+{{each role as value i}}
+	<label class="input col col-6"> 
+		<label class="checkbox">
+			<input type="checkbox" placeholder="" value="{{value.id}}" {{if roleIds.indexOf(value.id.toString()) >= 0 || roleIds.indexOf(value.id) >= 0}}checked{{/if}}>
+			<i></i> {{value.name}} 
+		</label>
+	</label>
+{{/each}}
+</script>
 
 <script src="js/auth/user.js"></script>
+<script src="js/auth/department.js"></script>
+<script src="js/auth/role.js"></script>
 <script type="text/javascript">
 	User.List();
 </script>

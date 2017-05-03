@@ -46,6 +46,18 @@ public class SysRoleController extends BaseController{
 	public String list(HttpServletRequest request, Model model, int pageNum, int pageSize, String roleName) {
 		return this.renderSuccessJson(sysRoleService.getSysRoles(pageNum, pageSize, roleName));
 	}
+	;
+	/**
+	 * 根据部门获取角色列表
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/roles/list/department")
+	@ResponseBody
+	public String listByDepartment(HttpServletRequest request, Model model, int departmentId) {
+		return this.renderSuccessJson(sysRoleService.getRolesByDepartment(departmentId));
+	}
 	
 	/**
 	 * 获取角色

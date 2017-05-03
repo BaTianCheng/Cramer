@@ -61,16 +61,16 @@ public class AuthController extends BaseController{
 			SysUser user = securityService.getCurrentUser();
 			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
 		}catch (UnknownAccountException e) {
-			LogUtils.error("login faile: " + e);
+			LogUtils.error("login fail: " + e);
 			return this.renderFailJson(null);
 		}catch (LockedAccountException e) {
-			LogUtils.error("login faile: " + e);
+			LogUtils.error("login fail: " + e);
 			return this.renderFailJson(null);
 		}catch (IncorrectCredentialsException e) {
-			LogUtils.error("login faile: " + e);
+			LogUtils.error("login fail: " + e);
 			return this.renderFailJson(null);
 		}catch (Exception e) {
-			LogUtils.error("login faile: " + e);
+			LogUtils.error("login fail: " + e);
 			return this.renderFailJson(null);
 		}
 	}
