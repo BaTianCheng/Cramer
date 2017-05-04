@@ -38,6 +38,14 @@ public class SecurityService {
 	}
 	
 	/**
+	 * 获取当前会话
+	 * @return
+	 */
+	public Session getCurrentSession(){
+		return  SecurityUtils.getSubject().getSession();
+	}
+	
+	/**
 	 * 获取所有在线用户
 	 * @return
 	 */
