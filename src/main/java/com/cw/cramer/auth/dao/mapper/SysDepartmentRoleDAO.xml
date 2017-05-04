@@ -82,7 +82,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentRoleExample">
-    delete from sys_department_role department_role
+    delete department_role from sys_department_role department_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

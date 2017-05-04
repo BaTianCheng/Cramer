@@ -38,7 +38,7 @@
 <!-- end widgetGrid -->
 
 <script id="user_info_tpl" type="text/html">
-	<form action="" id="checkout-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;">
+	<form action="" id="user-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 		<fieldset>
 			<div class="row">
 				<section class="col col-3 ">
@@ -46,7 +46,8 @@
 				</section>
 				<section class="col col-9 ">
 					<label class="input"> 
-						<input type="text" id="user-name" name="user-name" value="{{user.name}}" placeholder="用户名称">
+						<input type="text" id="name" name="name" value="{{user.name}}" placeholder="用户名称">
+						<input type="hidden" id="id" name="id" value="{{user.id}}">
 					</label>
 				</section>
 			</div>
@@ -58,7 +59,7 @@
 				</section>
 				<section class="col col-9 ">
 					<label class="input"> 
-						<input type="text" id="user-password" name="user-password" value="" placeholder="用户密码">
+						<input type="text" id="password" name="password" value="" placeholder="用户密码">
 					</label>
 				</section>
 			</div>
@@ -69,7 +70,7 @@
 					<label class="label col col-12">用户状态：</label>
 				</section>
 				<section class="col col-9 ">
-					<label class="select"> <select id="user-status" name="user-status">
+					<label class="select"> <select id="status" name="status">
 						<option value="1" {{if user.status == 1}}selected{{/if}}>启用</option>
 						<option value="2" {{if user.status == 2}}selected{{/if}}>锁定</option>
 						<option value="-1" {{if user.status == -1}}selected{{/if}}>已删除</option>
@@ -83,7 +84,13 @@
 					<label class="label col col-12">所在部门：</label>
 				</section>
 				<section class="col col-9 ">
-					<label class="select"> <select id="user-department" name="user-department" onChange="User.ShowDepartmentRoles($('#user-department').val(),'{{user.roleIds.toString()}}'.split(','))">
+					<label class="select"> <select id="departmentId" name="departmentId" 
+							{{if user.roleIds == null || user.roleIds == 0}}
+								onChange="User.ShowDepartmentRoles($('#user-department').val(),[])"
+							{{else}}
+								onChange="User.ShowDepartmentRoles($('#user-department').val(),'{{user.roleIds.toString()}}'.split(','))"
+							{{/if}}
+					>
 						{{each department as value i}}
 						<option value="{{value.id}}" {{if value.id == user.departmentId}}selected{{/if}}>{{value.name}}</option>
 						{{/each}}
@@ -98,7 +105,7 @@
 				</section>
 				<section class="col col-9 ">
 					<label class="input"> 
-						<input type="text" id="lname" name="lname" value="{{user.remarks}}" placeholder="备注信息">
+						<input type="text" id="remarks" name="remarks" value="{{user.remarks}}" placeholder="备注信息">
 					</label>
 				</section>
 			</div>
@@ -117,8 +124,8 @@
 		</fieldset>
 
 		<footer>
-			<button type="button" class="btn">取消</button>
-			<button type="submit" class="btn btn-primary">保存</button>
+			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
+			<button type="submit" class="btn btn-primary" onClick="User.UpdateInfo($('#user-form').serialize())">保存</button>
 		</footer>
 	</form>
 </script>
@@ -126,7 +133,7 @@
 {{each role as value i}}
 	<label class="input col col-6"> 
 		<label class="checkbox">
-			<input type="checkbox" placeholder="" value="{{value.id}}" {{if roleIds.indexOf(value.id.toString()) >= 0 || roleIds.indexOf(value.id) >= 0}}checked{{/if}}>
+			<input id="roleIds" name="roleIds" type="checkbox" placeholder="" value="{{value.id}}" {{if roleIds.indexOf(value.id.toString()) >= 0 || roleIds.indexOf(value.id) >= 0}}checked{{/if}}>
 			<i></i> {{value.name}} 
 		</label>
 	</label>

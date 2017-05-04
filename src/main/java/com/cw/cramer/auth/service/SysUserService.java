@@ -152,13 +152,41 @@ public class SysUserService extends BaseService{
 	
 	/**
 	 * 更新用户基本信息
+	 * @param user
+	 * @return
+	 */
+	public boolean insertInfo(SysUser user){
+		sysUserDepartmentDAO.deleteByExample(new SysUserDepartmentExample(){{this.or().andUserIdEqualTo(user.getId());}});
+		sysUserDepartmentDAO.insert(new SysUserDepartment(){{this.setUserId(user.getId());this.setDepartmentId(user.getDepartmentId());}});
+		sysUserRoleDAO.deleteByExample(new SysUserRoleExample(){{this.or().andUserIdEqualTo(user.getId());}});
+		if(user.getRoleIds() != null){
+			for(Integer roleId : user.getRoleIds()){
+				sysUserRoleDAO.insert(new SysUserRole(){{this.setUserId(user.getId());this.setRoleId(roleId);}});
+			}
+		}
+		return insert(user);
+	}
+	
+	/**
+	 * 更新用户基本信息
 	 * @param editedUser
 	 * @return
 	 */
 	public boolean updateInfo(SysUser editedUser){
 		SysUser user = getSysUser(editedUser.getId());
+		user.setName(editedUser.getName());
 		user.setStatus(editedUser.getStatus());
 		user.setRemarks(editedUser.getRemarks());
+		user.setDepartmentId(editedUser.getDepartmentId());
+		user.setRoleIds(editedUser.getRoleIds());
+		sysUserDepartmentDAO.deleteByExample(new SysUserDepartmentExample(){{this.or().andUserIdEqualTo(user.getId());}});
+		sysUserDepartmentDAO.insert(new SysUserDepartment(){{this.setUserId(user.getId());this.setDepartmentId(user.getDepartmentId());}});
+		sysUserRoleDAO.deleteByExample(new SysUserRoleExample(){{this.or().andUserIdEqualTo(user.getId());}});
+		if(user.getRoleIds() != null){
+			for(Integer roleId : user.getRoleIds()){
+				sysUserRoleDAO.insert(new SysUserRole(){{this.setUserId(user.getId());this.setRoleId(roleId);}});
+			}
+		}
 		return update(user);
 	}
 	

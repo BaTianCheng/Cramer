@@ -135,7 +135,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysRoleExample">
-    delete from sys_role role
+    delete role from sys_role role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

@@ -110,7 +110,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysAuthorityExample">
-    delete from sys_authority authority
+    delete authority from sys_authority authority
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

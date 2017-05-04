@@ -80,7 +80,7 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/add", method=RequestMethod.POST)
 	@ResponseBody
 	public String add(HttpServletRequest request, Model model, SysUser user) {
-		return this.renderSuccessJson(sysUserService.insert(user));
+		return this.renderSuccessJson(sysUserService.insertInfo(user));
 	}
 	
 	/**

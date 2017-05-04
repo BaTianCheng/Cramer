@@ -12,12 +12,34 @@ function runAllForms(){$.fn.slider&&$(".slider").slider(),$.fn.select2&&$(".sele
 /*权限校验*/
 $(document).ready(function(){
 	var authStr = sessionStorage.getItem("auth");
+	if(authStr == null){
+		$.post(CTX_PATH+'/auth/authorities/current',
+				{},
+				function(result){
+					var code = JSON.parse(result).resultCode;
+					if(code == "200"){
+						var str = '';
+						var data = JSON.parse(result).data;
+						if(data !=null){
+							for(var i=0;i<data.length;i++){
+								str+='['+data[i]+']';
+							}
+						}
+						sessionStorage.setItem('auth', str);
+						authStr = str;
+					} else {
+						sessionStorage.clear();
+					}
+				}
+			);
+	}
+	
 	if(authStr != null){
 		$(".auth").each(function(index,element){
 			if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
 				$(this).show();
 			} else {
-				//$(this).remove();
+				$(this).remove();
 			}
 		})
 	} else {

@@ -130,6 +130,7 @@ function delRow(cl){
 
 //打开添加用户
 User.OpenAdd = function(){
+	var data = {};
 	$.when($.post(CTX_PATH + "/auth/departments/list", {pageNum : 0, pageSize : 0})).done(function(d2){
 		var result2 = JSON.parse(d2);
 		if(result2.resultCode == '200'){
@@ -144,7 +145,7 @@ User.OpenAdd = function(){
 				closeBtn: 1,
 				content:html
 			});
-			User.ShowDepartmentRoles($('#user-department').val(),[]);
+			User.ShowDepartmentRoles($('#departmentId').val(),[]);
 		} else {
 			alert("程序异常");
 		}
@@ -171,7 +172,7 @@ User.OpenEdit = function(userId){
 					  closeBtn: 1,
 					  content:html
 					});
-					User.ShowDepartmentRoles($('#user-department').val(),data.user.roleIds);
+					User.ShowDepartmentRoles($('#departmentId').val(),data.user.roleIds);
 				} else {
 					alert("程序异常");
 				}
@@ -198,12 +199,13 @@ User.UpdateInfo = function (serialize){
 		function(msg) {
 			var result = JSON.parse(msg);
 			if(result.resultCode == '200'){
-				console.log(result.data);
+				layer.close(layer.index);
+				layer.msg('修改成功', {icon: 1});
 			} else {
-				alert("程序异常");
+				layer.msg('程序异常', {icon: 2});
 			}
 	}).error(function(xhr,errorText,errorType){
-		alert("系统错误");
+		layer.msg('系统错误', {icon: 2});
 	});
 }
 

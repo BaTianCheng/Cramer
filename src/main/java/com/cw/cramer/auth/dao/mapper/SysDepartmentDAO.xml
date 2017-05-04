@@ -125,7 +125,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentExample">
-    delete from sys_department department
+    delete department from sys_department department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
