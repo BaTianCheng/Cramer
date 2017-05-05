@@ -34,7 +34,11 @@ public class SecurityService {
 	 */
 	public SysUser getCurrentUser(){
 		Subject currentSubject = SecurityUtils.getSubject();
-		return sysUserService.getSysUser(currentSubject.getPrincipal().toString());
+		if(currentSubject.getPrincipal() == null){
+			return null;
+		} else {
+			return sysUserService.getSysUser(currentSubject.getPrincipal().toString());
+		}
 	}
 	
 	/**

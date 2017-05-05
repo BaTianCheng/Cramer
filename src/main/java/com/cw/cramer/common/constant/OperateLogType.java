@@ -10,7 +10,9 @@ import java.util.Map;
  * @author wicks
  */
 public enum OperateLogType {
-	Login_In(101),Login_Out(102),Query(201),Export(202),Insert(301),Update(302),Delete(303),Import(304);
+	Query(220001),Export(220002),
+	Insert(230001),Update(230002),Delete(230003),Import(230004),
+	Login_In(291001),Login_Out(291002);
 	
 	private int code;
 	
@@ -25,14 +27,14 @@ public enum OperateLogType {
 	 */
 	public String getDesc(int code){
 		switch (code) {
-			case 101 : return "登录";
-			case 102 : return "登出";
-			case 201 : return "查询";
-			case 202 : return "导出";
-			case 301 : return "添加";
-			case 302 : return "修改";
-			case 303 : return "删除";
-			case 304 : return "导入";
+			case 291001 : return "登录";
+			case 291002 : return "登出";
+			case 220001 : return "查询";
+			case 220002 : return "导出";
+			case 230001 : return "添加";
+			case 230002 : return "修改";
+			case 230003 : return "删除";
+			case 230004 : return "导入";
 			default : return String.valueOf ( this.code );
 		}
 	}

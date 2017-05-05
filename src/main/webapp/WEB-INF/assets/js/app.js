@@ -12,6 +12,7 @@ function runAllForms(){$.fn.slider&&$(".slider").slider(),$.fn.select2&&$(".sele
 /*权限校验*/
 $(document).ready(function(){
 	var authStr = sessionStorage.getItem("auth");
+	console.log(authStr);
 	if(authStr == null){
 		$.post(CTX_PATH+'/auth/authorities/current',
 				{},
@@ -27,14 +28,20 @@ $(document).ready(function(){
 						}
 						sessionStorage.setItem('auth', str);
 						authStr = str;
+						$(".auth").each(function(index,element){
+							if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
+								$(this).show();
+							} else {
+								$(this).remove();
+							}
+						})
 					} else {
 						sessionStorage.clear();
+						$(".auth").remove();
 					}
 				}
 			);
-	}
-	
-	if(authStr != null){
+	} else {
 		$(".auth").each(function(index,element){
 			if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
 				$(this).show();
@@ -42,8 +49,6 @@ $(document).ready(function(){
 				$(this).remove();
 			}
 		})
-	} else {
-		$(".auth").remove();
 	}
 });
 

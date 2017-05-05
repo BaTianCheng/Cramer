@@ -22,8 +22,8 @@ import com.google.common.base.Strings;
  * 操作日志服务类
  * @author wicks
  */
-@Service(value="operateLogService")
-public class OperateLogService {
+@Service(value="sysOperateLogService")
+public class SysOperateLogService {
 	
 	@Autowired
 	private SecurityService securityService;
@@ -87,7 +87,7 @@ public class OperateLogService {
 			criteria.andContentLike(sysOperateLog.getContent());
 		}
 		example.or(criteria);
-		example.setOrderByClause("operateTime desc");
+		example.setOrderByClause("operate_time desc");
 		List<SysOperateLog> list = sysOperateLogDAO.selectByExample(example);
 		return new PageInfo<SysOperateLog>(list);
 	}
