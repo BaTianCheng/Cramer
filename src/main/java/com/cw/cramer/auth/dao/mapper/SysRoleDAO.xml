@@ -16,6 +16,9 @@
     <result column="role_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="role_remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="department_name" jdbcType="VARCHAR" property="dapartmentName" />
+    <collection property="authorityIds" ofType="java.lang.Integer" column="role_id">  
+        <id column="authority_id" property="id"/>  
+    </collection>
     <collection property="authorities" ofType="com.cw.cramer.auth.entity.SysAuthority" column="role_id">  
         <id column="authority_id" jdbcType="INTEGER" property="id" />
 	    <result column="authority_name" jdbcType="VARCHAR" property="name" />

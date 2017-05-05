@@ -32,6 +32,8 @@ public class SysRole {
     
     private String dapartmentName;
     
+    private List<Integer> authorityIds;
+    
     private List<SysAuthority> authorities;
 
     public Integer getId() {
@@ -144,6 +146,14 @@ public class SysRole {
 
 	public void setDapartmentName(String dapartmentName) {
 		this.dapartmentName = dapartmentName;
+	}
+
+	public List<Integer> getAuthorityIds() {
+		return authorityIds;
+	}
+
+	public void setAuthorityIds(List<Integer> authorityIds) {
+		this.authorityIds = authorityIds;
 	}
 
 	public List<SysAuthority> getAuthorities() {

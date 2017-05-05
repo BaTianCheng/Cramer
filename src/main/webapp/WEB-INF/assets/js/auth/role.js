@@ -55,9 +55,10 @@ Role.List = function (){
               de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
               se = "<a id=\"td-save-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:saveRow('"+ cl + "');\">保存</a>";
               ce = "<a id=\"td-canel-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:restoreRow('"+ cl + "');\">取消</a>";
+              ae = "<a id=\"td-authority-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenAuthority('"+ cl + "');\">权限</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
-            	  	actions : be + de + se + ce
+            	  	actions : be + de + se + ce + ae
                   });
             }
         }
@@ -73,7 +74,7 @@ Role.List = function (){
 
 //角色列表
 Role.ListByDepartment = function (departmentId, callback){
-	$.post(CTX_PATH + "/auth/roles/list/department", {
+	$.post(CTX_PATH + "/auth/departments/roles/list", {
 		departmentId : departmentId
 	},function(msg) {
 			var result = JSON.parse(msg);
@@ -86,6 +87,49 @@ Role.ListByDepartment = function (departmentId, callback){
 	}).error(function(xhr,errorText,errorType){
 		alert("系统错误");
 		callback(null);
+	});
+}
+
+//打开角色权限窗口
+Role.OpenAuthority = function(roleId){
+	var data = {};
+	if(roleId > 0){
+		$.when($.post(CTX_PATH + "/auth/roles/get", {userId : userId}),
+			$.post(CTX_PATH + "/auth/roles/authorities/list")).done(function(d1, d2){
+				var result1 = JSON.parse(d1[0]);
+				var result2 = JSON.parse(d2[0]);
+				if(result1.resultCode == '200' && result2.resultCode == '200'){
+					data.role = result1.data;
+					data.authority = result2.data.list;
+					var html = template('authority_tpl', data);
+					layer.open({
+					  type: 1,
+					  title: '设置权限',
+					  skin: 'layui-layer-rim', 
+					  area: ['480px','auto'], 
+					  closeBtn: 1,
+					  content:html
+					});
+				} else {
+					alert("程序异常");
+				}
+		});
+	}
+}
+
+//保存角色权限
+Role.UpdateAuthority = function(serialize){
+	$.post(CTX_PATH + "/auth/roles/authorities/update", serialize,
+		function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				layer.close(layer.index);
+				layer.msg('修改成功', {icon: 1});
+			} else {
+				layer.msg('程序异常', {icon: 2});
+			}
+	}).error(function(xhr,errorText,errorType){
+		layer.msg('系统错误', {icon: 2});
 	});
 }
 

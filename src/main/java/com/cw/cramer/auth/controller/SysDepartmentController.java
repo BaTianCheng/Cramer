@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cw.cramer.auth.entity.SysDepartment;
 import com.cw.cramer.auth.service.SysDepartmentService;
 import com.cw.cramer.common.base.BaseController;
+import com.cw.cramer.common.constant.ModuleType;
+import com.cw.cramer.common.constant.OperateLogType;
 
 /**
  * 系统部门控制器
@@ -68,7 +70,11 @@ public class SysDepartmentController extends BaseController{
 	@RequestMapping(value = "/auth/departments/update", method=RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpServletRequest request, Model model, String oper, SysDepartment department) {
-		return this.renderSuccessJson(sysDepartmentService.updateInfo(department));
+		boolean isSuccess = sysDepartmentService.updateInfo(department);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改部门");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -80,7 +86,11 @@ public class SysDepartmentController extends BaseController{
 	@RequestMapping(value = "/auth/departments/add", method=RequestMethod.POST)
 	@ResponseBody
 	public String add(HttpServletRequest request, Model model, String oper, SysDepartment department) {
-		return this.renderSuccessJson(sysDepartmentService.insert(department));
+		boolean isSuccess = sysDepartmentService.insert(department);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Insert, "新增部门");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -92,7 +102,11 @@ public class SysDepartmentController extends BaseController{
 	@RequestMapping(value = "/auth/departments/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpServletRequest request, Model model, int departmentId) {
-		return this.renderSuccessJson(sysDepartmentService.delete(departmentId));
+		boolean isSuccess = sysDepartmentService.delete(departmentId);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除部门");
+		}
+		return this.renderJson(isSuccess);
 	}
 
 }

@@ -7,14 +7,15 @@ Log.List = function (){
 		datatype : "json",
 		autowidth:true,
 		height:'auto',
-		colNames : [ '编号', '模块', '操作类型', '操作人', '操作内容', '操作时间'],
+		colNames : [ '编号', '模块', '操作类型', '操作人', '操作内容', '操作时间', 'IP地址'],
 		colModel : 
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
 			 {name : 'moduleId',index : 'module_id asc, id',width : 100}, 
 			 {name : 'operateType',index : 'operate_type',width : 100},
 			 {name : 'operateBy',index : 'operate_by',width : 120},
 			 {name : 'content',index : 'operate_by',width : 200},
-			 {name : 'operateTime',index : 'operate_time',width : 100}],
+			 {name : 'operateTime',index : 'operate_time',width : 100},
+			 {name : 'operateIp',index : 'operate_ip',width : 100}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",

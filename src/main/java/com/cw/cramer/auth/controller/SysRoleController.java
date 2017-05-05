@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cw.cramer.auth.entity.SysRole;
 import com.cw.cramer.auth.service.SysRoleService;
 import com.cw.cramer.common.base.BaseController;
+import com.cw.cramer.common.constant.ModuleType;
+import com.cw.cramer.common.constant.OperateLogType;
 
 /**
  * 系统角色控制器
@@ -46,14 +48,14 @@ public class SysRoleController extends BaseController{
 	public String list(HttpServletRequest request, Model model, int pageNum, int pageSize, String roleName) {
 		return this.renderSuccessJson(sysRoleService.getSysRoles(pageNum, pageSize, roleName));
 	}
-	;
+	
 	/**
 	 * 根据部门获取角色列表
 	 * @param request
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/auth/roles/list/department")
+	@RequestMapping(value = "/auth/departments/roles/list")
 	@ResponseBody
 	public String listByDepartment(HttpServletRequest request, Model model, int departmentId) {
 		return this.renderSuccessJson(sysRoleService.getRolesByDepartment(departmentId));
@@ -80,7 +82,11 @@ public class SysRoleController extends BaseController{
 	@RequestMapping(value = "/auth/roles/update", method=RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpServletRequest request, Model model, String oper, SysRole role) {
-		return this.renderSuccessJson(sysRoleService.updateInfo(role));
+		boolean isSuccess = sysRoleService.updateInfo(role);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改角色");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -92,7 +98,11 @@ public class SysRoleController extends BaseController{
 	@RequestMapping(value = "/auth/roles/add", method=RequestMethod.POST)
 	@ResponseBody
 	public String add(HttpServletRequest request, Model model, String oper, SysRole role) {
-		return this.renderSuccessJson(sysRoleService.insert(role));
+		boolean isSuccess = sysRoleService.insert(role);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Insert, "增加角色");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -104,7 +114,11 @@ public class SysRoleController extends BaseController{
 	@RequestMapping(value = "/auth/roles/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpServletRequest request, Model model, int roleId) {
-		return this.renderSuccessJson(sysRoleService.delete(roleId));
+		boolean isSuccess = sysRoleService.delete(roleId);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除角色");
+		}
+		return this.renderJson(isSuccess);
 	}
 
 }

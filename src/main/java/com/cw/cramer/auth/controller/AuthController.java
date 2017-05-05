@@ -1,5 +1,7 @@
 package com.cw.cramer.auth.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cw.cramer.auth.entity.SysUser;
+import com.cw.cramer.auth.service.SysAuthorityService;
 import com.cw.cramer.common.base.BaseController;
+import com.cw.cramer.common.constant.ModuleType;
+import com.cw.cramer.common.constant.OperateLogType;
 import com.cw.cramer.common.util.LogUtils;
 import com.cw.cramer.core.security.SecurityService;
 
@@ -30,6 +35,9 @@ public class AuthController extends BaseController{
 	
 	@Autowired
 	private SecurityService securityService;
+	
+	@Autowired
+	private SysAuthorityService sysAuthorityService;
 	
 	/**
 	 * 登录页面
@@ -59,6 +67,7 @@ public class AuthController extends BaseController{
 		try {
 			subject.login(token);
 			SysUser user = securityService.getCurrentUser();
+			this.record(ModuleType.Auth, OperateLogType.Login_In, "登录成功");
 			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
 		}catch (UnknownAccountException e) {
 			LogUtils.error("login fail: " + e);
@@ -92,6 +101,46 @@ public class AuthController extends BaseController{
 		} else {
 			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
 		}
+	}
+	
+	/**
+	 * 获取全部权限
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/authorities/list")
+	@ResponseBody
+	public String list(HttpServletRequest request, Model model) {
+		return this.renderSuccessJson(sysAuthorityService.getAuthorities());
+	}
+	
+	/**
+	 * 获取角色权限
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/roles/authorities/list")
+	@ResponseBody
+	public String listRoleAuthorities(HttpServletRequest request, Model model, int roleId) {
+		return this.renderSuccessJson(sysAuthorityService.getAuthoritiesByRole(roleId));
+	}
+	
+	/**
+	 * 更新角色权限
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/roles/authorities/update")
+	@ResponseBody
+	public String updateRoleAuthorities(HttpServletRequest request, Model model, int roleId, List<Integer> authorityIds) {
+		boolean isSuccess = sysAuthorityService.updateRoleAuthorities(roleId, authorityIds);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Update, "更新角色权限");
+		}
+		return this.renderJson(isSuccess);
 	}
 
 }

@@ -6,9 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cw.cramer.auth.dao.SysAuthorityDAO;
+import com.cw.cramer.auth.dao.SysRoleAuthorityDAO;
 import com.cw.cramer.auth.dao.SysRoleDAO;
 import com.cw.cramer.auth.entity.SysAuthority;
+import com.cw.cramer.auth.entity.SysAuthorityExample;
 import com.cw.cramer.auth.entity.SysRole;
+import com.cw.cramer.auth.entity.SysRoleAuthority;
+import com.cw.cramer.auth.entity.SysRoleAuthorityExample;
 import com.cw.cramer.auth.entity.SysRoleExample;
 import com.cw.cramer.auth.entity.SysUser;
 
@@ -20,10 +25,16 @@ import com.cw.cramer.auth.entity.SysUser;
 public class SysAuthorityService {
 
 	@Autowired
-	SysUserService  sysUserService;
+	private SysUserService  sysUserService;
 	
 	@Autowired
-	SysRoleDAO sysRoleDAO;
+	private SysRoleDAO sysRoleDAO;
+	
+	@Autowired
+	private SysAuthorityDAO sysAuthorityDAO;
+	
+	@Autowired
+	private SysRoleAuthorityDAO sysRoleAuthorityDAO;
 	
 	/**
 	 * 获取用户拥有的权限集合
@@ -61,6 +72,31 @@ public class SysAuthorityService {
 	 */
 	public List<SysAuthority> getAuthoritiesByRole(int roleId){
 		return sysRoleDAO.selectByPrimaryKey(roleId).getAuthorities();
+	}
+	
+	/**
+	 * 获取所有权限
+	 * @return
+	 */
+	public List<SysAuthority> getAuthorities(){
+		SysAuthorityExample example = new SysAuthorityExample();
+		example.setOrderByClause("sort");
+		return sysAuthorityDAO.selectByExample(example);
+	}
+	
+	/**
+	 * 更新角色权限
+	 * @param editedUser
+	 * @return
+	 */
+	public boolean updateRoleAuthorities(int roleId, List<Integer> authorityIds){
+		sysRoleAuthorityDAO.deleteByExample(new SysRoleAuthorityExample(){{this.or().andRoleIdEqualTo(roleId);}});
+		if(authorityIds != null){
+			for(Integer authorityId : authorityIds){
+				sysRoleAuthorityDAO.insert(new SysRoleAuthority(){{this.setAuthorityId(authorityId);this.setRoleId(roleId);}});
+			}
+		}
+		return true;
 	}
 	
 }

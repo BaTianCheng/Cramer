@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.service.SysUserService;
 import com.cw.cramer.common.base.BaseController;
+import com.cw.cramer.common.constant.ModuleType;
+import com.cw.cramer.common.constant.OperateLogType;
 
 /**
  * 系统用户控制器
@@ -68,7 +70,11 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/update/info", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateUser(HttpServletRequest request, Model model, String oper, SysUser user) {
-		return this.renderSuccessJson(sysUserService.updateInfo(user));
+		boolean isSuccess = sysUserService.updateInfo(user);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改用户");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -80,7 +86,11 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/add", method=RequestMethod.POST)
 	@ResponseBody
 	public String add(HttpServletRequest request, Model model, SysUser user) {
-		return this.renderSuccessJson(sysUserService.insertInfo(user));
+		boolean isSuccess = sysUserService.insertInfo(user);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Insert, "新增用户");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -92,7 +102,11 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/update/current/password", method=RequestMethod.POST)
 	@ResponseBody
 	public String updatePassword(HttpServletRequest request, Model model, String newPassword) {
-		return this.renderSuccessJson(sysUserService.updatePassword(newPassword));
+		boolean isSuccess = sysUserService.updatePassword(newPassword);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改密码");
+		}
+		return this.renderJson(isSuccess);
 	}
 	
 	/**
@@ -104,7 +118,11 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String deleteUser(HttpServletRequest request, Model model, int id) {
-		return this.renderSuccessJson(sysUserService.delete(id));
+		boolean isSuccess = sysUserService.delete(id);
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除用户");
+		}
+		return this.renderJson(isSuccess);
 	}
 
 }

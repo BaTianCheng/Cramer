@@ -37,6 +37,26 @@
 </section>
 <!-- end widgetGrid -->
 
+<script id="authorities_tpl" type="text/html">
+<form action="" id="authority-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+	<fieldset>
+		<div class="row">
+			{{each authority as value i}}
+				<label class="input col col-4"> 
+					<label class="checkbox">
+						<input id="authorityIds" name="authorityIds" type="checkbox" placeholder="" value="{{value.id}}" {{if role.authorityIds != null &&(role.authorityIds.indexOf(value.id.toString()) >= 0 || role.authorityIds.indexOf(value.id) >= 0)}}checked{{/if}}>
+						<i></i> {{value.name}} 
+					</label>
+				</label>
+			{{/each}}
+		</div>
+	</fieldset>
+	<footer>
+		<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
+		<button type="submit" class="btn btn-primary" onClick="Role.UpdateAuthority($('#authority-form').serialize())">保存</button>
+	</footer>
+</form>
+</script>
 
 <script src="js/auth/role.js"></script>
 <script type="text/javascript">

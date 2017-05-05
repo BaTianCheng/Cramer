@@ -187,7 +187,11 @@ User.ShowDepartmentRoles = function (departmentId, roleIds){
 	Role.ListByDepartment(departmentId, function(result){
 		var data = {};
 		data.role = result;
-		data.roleIds = roleIds;
+		if(roleIds == null || roleIds == 0){
+			data.roleIds = roleIds;
+		} else {
+			data.roleIds = [];
+		}
 		var html = template('department_role_tpl', data);
 		$('#departmentRoles').html(html);
 	});
