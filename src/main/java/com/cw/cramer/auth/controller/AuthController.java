@@ -1,6 +1,6 @@
 package com.cw.cramer.auth.controller;
 
-import java.util.List;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -135,8 +135,8 @@ public class AuthController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/roles/authorities/update")
 	@ResponseBody
-	public String updateRoleAuthorities(HttpServletRequest request, Model model, int roleId, List<Integer> authorityIds) {
-		boolean isSuccess = sysAuthorityService.updateRoleAuthorities(roleId, authorityIds);
+	public String updateRoleAuthorities(HttpServletRequest request, Model model, int roleId, Integer[] authorityIds) {
+		boolean isSuccess = sysAuthorityService.updateRoleAuthorities(roleId, Arrays.asList(authorityIds));
 		if(isSuccess){
 			this.record(ModuleType.Auth, OperateLogType.Update, "更新角色权限");
 		}

@@ -2,6 +2,8 @@ package com.cw.cramer.sys.entity;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class SysOperateLog {
     private Integer id;
 
@@ -11,6 +13,7 @@ public class SysOperateLog {
 
     private Integer operateBy;
 
+    @JSONField (format="yyyy-MM-dd HH:mm:ss")  
     private Date operateTime;
 
     private String operateIp;

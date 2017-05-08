@@ -12,7 +12,7 @@ Department.List = function (){
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
 			 {name : 'name',index : 'name asc, id',width : 100,editable :true},
 			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
-			 {name : 'actions',index : 'actions',width : 80, align:'center'}],
+			 {name : 'actions',index : 'actions',width : 80, align:'center',title:false}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",

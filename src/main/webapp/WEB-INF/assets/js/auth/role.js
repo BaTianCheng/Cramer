@@ -13,7 +13,7 @@ Role.List = function (){
 			 {name : 'name',index : 'name asc, id',width : 100,editable :true}, 
 			 {name : 'departmentId',index : 'departmentId',width : 80,editable :true},
 			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
-			 {name : 'actions',index : 'actions',width : 80, align:'center'}],
+			 {name : 'actions',index : 'actions',width : 80, align:'center', title:false}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",
@@ -94,14 +94,14 @@ Role.ListByDepartment = function (departmentId, callback){
 Role.OpenAuthority = function(roleId){
 	var data = {};
 	if(roleId > 0){
-		$.when($.post(CTX_PATH + "/auth/roles/get", {userId : userId}),
-			$.post(CTX_PATH + "/auth/roles/authorities/list")).done(function(d1, d2){
+		$.when($.post(CTX_PATH + "/auth/roles/get", {roleId : roleId}),
+			$.post(CTX_PATH + "/auth/authorities/list", {})).done(function(d1, d2){
 				var result1 = JSON.parse(d1[0]);
 				var result2 = JSON.parse(d2[0]);
 				if(result1.resultCode == '200' && result2.resultCode == '200'){
 					data.role = result1.data;
-					data.authority = result2.data.list;
-					var html = template('authority_tpl', data);
+					data.authority = result2.data;
+					var html = template('authorities_tpl', data);
 					layer.open({
 					  type: 1,
 					  title: '设置权限',

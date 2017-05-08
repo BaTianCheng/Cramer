@@ -41,6 +41,7 @@
 <form action="" id="authority-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 	<fieldset>
 		<div class="row">
+			<input type="hidden" id="roleId" name="roleId" value="{{role.id}}">
 			{{each authority as value i}}
 				<label class="input col col-4"> 
 					<label class="checkbox">

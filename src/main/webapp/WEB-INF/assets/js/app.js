@@ -12,7 +12,6 @@ function runAllForms(){$.fn.slider&&$(".slider").slider(),$.fn.select2&&$(".sele
 /*权限校验*/
 $(document).ready(function(){
 	var authStr = sessionStorage.getItem("auth");
-	console.log(authStr);
 	if(authStr == null){
 		$.post(CTX_PATH+'/auth/authorities/current',
 				{},

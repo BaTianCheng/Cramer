@@ -40,7 +40,7 @@ User.List = function (){
 			 	 edittype:'select', editoptions:{value:{0:'可用', 1:'不可用'}}
 			 },
 			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
-			 {name : 'actions',index : 'actions',width : 80, align:'center'}],
+			 {name : 'actions',index : 'actions',width : 80, align:'center',title:false}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",

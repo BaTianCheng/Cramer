@@ -14,7 +14,7 @@ Log.List = function (){
 			 {name : 'operateType',index : 'operate_type',width : 100},
 			 {name : 'operateBy',index : 'operate_by',width : 120},
 			 {name : 'content',index : 'operate_by',width : 200},
-			 {name : 'operateTime',index : 'operate_time',width : 100},
+			 {name : 'operateTime',index : 'operate_time',width : 100,datefmt:'yyyy-MM-dd HH:mm:ss'},
 			 {name : 'operateIp',index : 'operate_ip',width : 100}],
 		jsonReader : {   
 			id: "id",
