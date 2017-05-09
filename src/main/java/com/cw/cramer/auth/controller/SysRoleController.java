@@ -1,5 +1,7 @@
 package com.cw.cramer.auth.controller;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -97,7 +100,7 @@ public class SysRoleController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/roles/add", method=RequestMethod.POST)
 	@ResponseBody
-	public String add(HttpServletRequest request, Model model, String oper, SysRole role) {
+	public String add(HttpServletRequest request, Model model, @RequestParam("id") String id, SysRole role) {
 		boolean isSuccess = sysRoleService.insert(role);
 		if(isSuccess){
 			this.record(ModuleType.Auth, OperateLogType.Insert, "增加角色");
@@ -117,6 +120,22 @@ public class SysRoleController extends BaseController{
 		boolean isSuccess = sysRoleService.delete(roleId);
 		if(isSuccess){
 			this.record(ModuleType.Auth, OperateLogType.Delete, "删除角色");
+		}
+		return this.renderJson(isSuccess);
+	}
+	
+	/**
+	 * 更新部门角色
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/departments/roles/update")
+	@ResponseBody
+	public String updateRoleAuthorities(HttpServletRequest request, Model model, int departmentId, Integer[] roleIds) {
+		boolean isSuccess = sysRoleService.updateDepartmentRoles(departmentId, Arrays.asList(roleIds));
+		if(isSuccess){
+			this.record(ModuleType.Auth, OperateLogType.Update, "更新部门角色");
 		}
 		return this.renderJson(isSuccess);
 	}

@@ -1,5 +1,6 @@
 package com.cw.cramer.auth.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,14 @@ import com.cw.cramer.auth.dao.SysDepartmentDAO;
 import com.cw.cramer.auth.entity.SysDepartment;
 import com.cw.cramer.auth.entity.SysDepartmentExample;
 import com.cw.cramer.common.base.BaseService;
+import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
 import com.cw.cramer.common.util.DateTimeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 /**
  * 角色服务类
@@ -25,8 +28,6 @@ public class SysDepartmentService extends BaseService{
 	
 	@Autowired
 	private SysDepartmentDAO sysDepartmentDAO;
-	
-
 	
 	/**
 	 * 获取部门
@@ -64,6 +65,7 @@ public class SysDepartmentService extends BaseService{
 	 */
 	public boolean insert(SysDepartment Department){
 		Department.setId(getNextSeq(SequenceConstant.SEQ_SYSDEPARTMENTID));
+		Department.setStatus(StatusConstant.STATUS_ENABLED);
 		return sysDepartmentDAO.insert(Department)>0 ? true : false;
 	}
 	
@@ -107,4 +109,40 @@ public class SysDepartmentService extends BaseService{
 		}
 	}
 
+	/**
+	 * 获取上级部门
+	 * @param departmentId
+	 * @return
+	 */
+	public SysDepartment getUpperDepartment(int departmentId){
+		SysDepartment department = getSysDepartment(departmentId);
+		SysDepartment upperDepartment = getSysDepartment(department.getParentId());
+		return upperDepartment;
+	}
+	
+	/**
+	 * 获取部门层级
+	 * @param departmentId
+	 * @param sort
+	 * @return
+	 */
+	public List<SysDepartment> getDepartmentLevels(int departmentId, String sort){
+		List<SysDepartment> departments = new ArrayList<SysDepartment>();
+		SysDepartment department = getSysDepartment(departmentId);
+		departments.add(department);
+		int parentId = department.getParentId();
+		while(parentId > 0){
+			SysDepartment upperDepartment = getSysDepartment(parentId);
+			departments.add(upperDepartment);
+			parentId = upperDepartment.getParentId();
+		}
+		
+		//排序
+		if(CommonConstant.SORT_DESC.equals(sort)){
+			departments = Lists.reverse(departments);
+		}
+		
+		return departments;
+	}
+	
 }

@@ -54,9 +54,10 @@ Department.List = function (){
               de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
               se = "<a id=\"td-save-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:saveRow('"+ cl + "');\">保存</a>";
               ce = "<a id=\"td-canel-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:restoreRow('"+ cl + "');\">取消</a>";
+              ae = "<a id=\"td-role-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Department.OpenRole('"+ cl + "');\">角色</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
-            	  	actions : be + de + se + ce
+            	  	actions : be + de + se + ce + ae
                   });
             }
         }
@@ -65,7 +66,12 @@ Department.List = function (){
 	$("#main-table").jqGrid('navGrid', '#pager', 
 		{edit : true,add : true,del : true,search:false},
 		{closeAfterEdit: true,viewPagerButtons: false},
-		{url:CTX_PATH+"/auth/departments/add",closeAfterAdd: true},
+		{url:CTX_PATH+"/auth/departments/add",closeAfterAdd: true,
+			beforeSubmit : function(postdata, formid) {
+				postdata.id = null;
+				return [ true, '' ];
+			}
+		},
 		{url:CTX_PATH+"/auth/departments/delte"}
 	);
 }
@@ -120,6 +126,49 @@ Department.GetAllList = function (){
 	}).error(function(xhr,errorText,errorType){
 		alert("系统错误");
 		return [];
+	});
+}
+
+//打开部门角色窗口
+Department.OpenRole = function(departmentId){
+	var data = {};
+	if(departmentId > 0){
+		$.when($.post(CTX_PATH + "/auth/departments/get", {departmentId : departmentId}),
+			$.post(CTX_PATH + "/auth/departments/level/list", {departmentId : departmentId})).done(function(d1, d2){
+				var result1 = JSON.parse(d1[0]);
+				var result2 = JSON.parse(d2[0]);
+				if(result1.resultCode == '200' && result2.resultCode == '200'){
+					data.department = result1.data;
+					data.departmentLevel = result2.data;
+					var html = template('roles_tpl', data);
+					layer.open({
+					  type: 1,
+					  title: '设置角色',
+					  skin: 'layui-layer-rim', 
+					  area: ['520px','auto'], 
+					  closeBtn: 1,
+					  content:html
+					});
+				} else {
+					alert("程序异常");
+				}
+		});
+	}
+}
+
+//保存部门角色
+Department.UpdateRole = function(serialize){
+	$.post(CTX_PATH + "/auth/departments/roles/update", serialize,
+		function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				layer.close(layer.index);
+				layer.msg('修改成功', {icon: 1});
+			} else {
+				layer.msg('程序异常', {icon: 2});
+			}
+	}).error(function(xhr,errorText,errorType){
+		layer.msg('系统错误', {icon: 2});
 	});
 }
 

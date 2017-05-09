@@ -67,7 +67,12 @@ Role.List = function (){
 	$("#main-table").jqGrid('navGrid', '#pager', 
 		{edit : true,add : true,del : true,search:false},
 		{closeAfterEdit: true,viewPagerButtons: false},
-		{url:CTX_PATH+"/auth/roles/add",closeAfterAdd: true},
+		{url:CTX_PATH+"/auth/roles/add",closeAfterAdd: true,
+			beforeSubmit : function(postdata, formid) {
+				postdata.id = null;
+				return [ true, '' ];
+			}
+		},
 		{url:CTX_PATH+"/auth/roles/delte"}
 	);
 }

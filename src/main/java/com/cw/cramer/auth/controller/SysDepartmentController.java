@@ -85,7 +85,7 @@ public class SysDepartmentController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/departments/add", method=RequestMethod.POST)
 	@ResponseBody
-	public String add(HttpServletRequest request, Model model, String oper, SysDepartment department) {
+	public String add(HttpServletRequest request, Model model, SysDepartment department) {
 		boolean isSuccess = sysDepartmentService.insert(department);
 		if(isSuccess){
 			this.record(ModuleType.Auth, OperateLogType.Insert, "新增部门");
@@ -109,4 +109,16 @@ public class SysDepartmentController extends BaseController{
 		return this.renderJson(isSuccess);
 	}
 
+	/**
+	 * 获取部门层级列表
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/departments/level/list")
+	@ResponseBody
+	public String listLevel(HttpServletRequest request, Model model, int departmentId, String sort) {
+		return this.renderSuccessJson(sysDepartmentService.getDepartmentLevels(departmentId, sort));
+	}
+	
 }

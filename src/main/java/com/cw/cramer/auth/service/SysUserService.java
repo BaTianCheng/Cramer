@@ -151,7 +151,7 @@ public class SysUserService extends BaseService{
 	}
 	
 	/**
-	 * 更新用户基本信息
+	 * 新增用户基本信息
 	 * @param user
 	 * @return
 	 */

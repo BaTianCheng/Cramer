@@ -69,6 +69,7 @@ public class SysRoleService extends BaseService{
 	 */
 	public boolean insert(SysRole role){
 		role.setId(getNextSeq(SequenceConstant.SEQ_SYSROLEID));
+		role.setStatus(StatusConstant.STATUS_ENABLED);
 		return sysRoleDAO.insert(role)>0 ? true : false;
 	}
 	
@@ -113,7 +114,7 @@ public class SysRoleService extends BaseService{
 	}
 	
 	/**
-	 * 根据部门获取角色
+	 * 根据部门获取关联的角色
 	 * @param departmentId
 	 * @return
 	 */
@@ -130,6 +131,33 @@ public class SysRoleService extends BaseService{
 		roleExample.or().andIdIn(roleIds);
 		List<SysRole> roles = sysRoleDAO.selectByExample(roleExample);
 		return roles;
+	}
+	
+	/**
+	 * 获得隶属于某个部门的角色
+	 * @param departmentId
+	 * @return
+	 */
+	public List<SysRole> getRolesByOwnerDepartment(int departmentId){
+		SysRoleExample example = new SysRoleExample();
+		example.or().andDapartmentIdEqualTo(departmentId);
+		List<SysRole> roles = sysRoleDAO.selectByExample(example);
+		return roles;
+	}
+	
+	/**
+	 * 更新部门角色信息
+	 * @param editedUser
+	 * @return
+	 */
+	public boolean updateDepartmentRoles(int departmentId, List<Integer> roleIds){
+		sysDepartmentRoleDAO.deleteByExample(new SysDepartmentRoleExample(){{this.or().andDepartmentIdEqualTo(departmentId);}});
+		if(roleIds != null){
+			for(Integer roleId : roleIds){
+				sysDepartmentRoleDAO.insert(new SysDepartmentRole(){{this.setRoleId(roleId);this.setDepartmentId(departmentId);}});
+			}
+		}
+		return true;
 	}
 
 }
