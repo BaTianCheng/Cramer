@@ -45,8 +45,8 @@ public class SysDepartmentController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/departments/list")
 	@ResponseBody
-	public String list(HttpServletRequest request, Model model, int pageNum, int pageSize, String departmentName) {
-		return this.renderSuccessJson(sysDepartmentService.getSysDepartments(pageNum, pageSize, departmentName));
+	public String list(HttpServletRequest request, Model model, int pageNum, int pageSize, String departmentName, Integer parentId) {
+		return this.renderSuccessJson(sysDepartmentService.getSysDepartments(pageNum, pageSize, departmentName, parentId));
 	}
 	
 	/**
@@ -119,6 +119,18 @@ public class SysDepartmentController extends BaseController{
 	@ResponseBody
 	public String listLevel(HttpServletRequest request, Model model, int departmentId, String sort) {
 		return this.renderSuccessJson(sysDepartmentService.getDepartmentLevels(departmentId, sort));
+	}
+	
+	/**
+	 * 获取部门层级列表
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/auth/departments/tree")
+	@ResponseBody
+	public String tree(HttpServletRequest request, Model model) {
+		return this.renderSuccessJson(sysDepartmentService.getDepartmentTrees());
 	}
 	
 }

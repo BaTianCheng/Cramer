@@ -35,6 +35,8 @@ public class SysDepartment {
     private List<String> roleCodes;
     
     private List<String> roleNames;
+    
+    private List<SysRole> owenrRoles;
 
     public Integer getId() {
         return id;
@@ -162,6 +164,14 @@ public class SysDepartment {
 
 	public void setRoleNames(List<String> roleNames) {
 		this.roleNames = roleNames;
+	}
+
+	public List<SysRole> getOwenrRoles() {
+		return owenrRoles;
+	}
+
+	public void setOwenrRoles(List<SysRole> owenrRoles) {
+		this.owenrRoles = owenrRoles;
 	}
     
 }

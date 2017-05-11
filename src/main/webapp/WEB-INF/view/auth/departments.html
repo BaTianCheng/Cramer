@@ -9,7 +9,13 @@
 				<div>
 					<div class="jarviswidget-editbox"></div>
 					<div class="widget-body ">
-						<div class="table-responsive">
+						<!-- 左侧树导航 -->
+						<div style="float:left;overflow-x:auto;" id="department-tree" class="ztree">
+							
+						</div>
+						
+						<!-- 右侧表格详情 -->
+						<div class="table-responsive" style="margin-left:200px;">
 							<table class="table table-bordered" id="main-table">
 								
 							</table>
@@ -41,17 +47,20 @@
 <form action="" id="role-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 	<fieldset>
 		<div class="row">
-			<input type="hidden" id="roleId" name="roleId" value="{{department.id}}">
+			<input type="hidden" id="departmentId" name="departmentId" value="{{department.id}}">
 			{{each departmentLevel as value i}}
-				<div class="col col-2">
-					<label class=""><b>{{value.name}}</b></lable>
+				<div class="col col-2" style="min-height:45px">
+					<label class="" style="padding-top:5px;"><b>{{value.name}}</b></lable>
 				</div>
 				<div class="col col-10">
-					{{each value.roleIds as roleId j}}
+					{{if value.owenrRoles == null || value.owenrRoles.size == 0}}
+						无可用角色
+					{{/if}}
+					{{each value.owenrRoles as owerRole j}}
 					<label class="input col col-4"> 
 						<label class="checkbox">
-							<input id="roleIds" name="roleIds" type="checkbox" placeholder="" value="{{roleId}}" {{if department.roleIds != null &&(department.roleIds.indexOf(roleId.toString()) >= 0 || department.roleIds.indexOf(roleId) >= 0)}}checked{{/if}}>
-							<i></i> {{value.roleNames[j]}} 
+							<input id="roleIds" name="roleIds" type="checkbox" placeholder="" value="{{owerRole.id}}" {{if department.roleIds != null &&(department.roleIds.indexOf(owerRole.id.toString()) >= 0 || department.roleIds.indexOf(owerRole.id) >= 0)}}checked{{/if}}>
+							<i></i> {{owerRole.name}} 
 						</label>
 					</label>
 					{{/each}}
@@ -62,7 +71,7 @@
 	</fieldset>
 	<footer>
 		<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
-		<button type="submit" class="btn btn-primary" onClick="Role.UpdateAuthority($('#authority-form').serialize())">保存</button>
+		<button type="submit" class="btn btn-primary" onClick="Department.UpdateRole($('#role-form').serialize())">保存</button>
 	</footer>
 </form>
 </script>
@@ -71,5 +80,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	Department.List();
+	$('#department-tree').departmentZtree();
 });
 </script>

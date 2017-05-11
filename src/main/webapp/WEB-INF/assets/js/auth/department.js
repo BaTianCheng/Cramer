@@ -50,11 +50,11 @@ Department.List = function (){
             var ids = jQuery("#main-table").jqGrid('getDataIDs');
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
-              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:editRow('"+ cl + "');\">编辑</a>";
-              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
-              se = "<a id=\"td-save-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:saveRow('"+ cl + "');\">保存</a>";
-              ce = "<a id=\"td-canel-"+cl+"\" style=\"display:none;padding-left:5px;padding-right:5px;\" href=\"javascript:restoreRow('"+ cl + "');\">取消</a>";
-              ae = "<a id=\"td-role-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Department.OpenRole('"+ cl + "');\">角色</a>";
+              be = "<a id=\"td-edit-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:editRow('"+ cl + "');\">编辑</a>";
+              de = "<a id=\"td-del-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
+              se = "<a id=\"td-save-"+cl+"\" style=\"display:none;margin-left:5px;margin-right:5px;\" href=\"javascript:saveRow('"+ cl + "');\">保存</a>";
+              ce = "<a id=\"td-canel-"+cl+"\" style=\"display:none;margin-left:5px;margin-right:5px;\" href=\"javascript:restoreRow('"+ cl + "');\">取消</a>";
+              ae = "<a id=\"td-role-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:Department.OpenRole('"+ cl + "');\">角色</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
             	  	actions : be + de + se + ce + ae
@@ -134,7 +134,7 @@ Department.OpenRole = function(departmentId){
 	var data = {};
 	if(departmentId > 0){
 		$.when($.post(CTX_PATH + "/auth/departments/get", {departmentId : departmentId}),
-			$.post(CTX_PATH + "/auth/departments/level/list", {departmentId : departmentId})).done(function(d1, d2){
+			$.post(CTX_PATH + "/auth/departments/level/list", {departmentId : departmentId, sort : 'desc'})).done(function(d1, d2){
 				var result1 = JSON.parse(d1[0]);
 				var result2 = JSON.parse(d2[0]);
 				if(result1.resultCode == '200' && result2.resultCode == '200'){

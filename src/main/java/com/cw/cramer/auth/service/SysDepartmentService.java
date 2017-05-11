@@ -1,14 +1,18 @@
 package com.cw.cramer.auth.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cw.cramer.auth.dao.SysDepartmentDAO;
+import com.cw.cramer.auth.entity.DepartmentTreeNode;
 import com.cw.cramer.auth.entity.SysDepartment;
 import com.cw.cramer.auth.entity.SysDepartmentExample;
+import com.cw.cramer.auth.entity.SysDepartmentExample.Criteria;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.SequenceConstant;
@@ -20,7 +24,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
- * 角色服务类
+ * 部门服务类
  * @author wicks
  */
 @Service(value="sysDepartmentService")
@@ -29,13 +33,18 @@ public class SysDepartmentService extends BaseService{
 	@Autowired
 	private SysDepartmentDAO sysDepartmentDAO;
 	
+	@Autowired
+	private SysRoleService sysRoleService;
+	
 	/**
 	 * 获取部门
 	 * @param id
 	 * @return
 	 */
 	public SysDepartment getSysDepartment(int id){
-		return sysDepartmentDAO.selectByPrimaryKey(id);
+		SysDepartment department = sysDepartmentDAO.selectByPrimaryKey(id);
+		department.setOwenrRoles(sysRoleService.getRolesByOwnerDepartment(id));
+		return department;
 	}
 	
 	/**
@@ -45,15 +54,25 @@ public class SysDepartmentService extends BaseService{
 	 * @param DepartmentName
 	 * @return
 	 */
-	public PageInfo<SysDepartment> getSysDepartments(int pageNum, int pageSize, String DepartmentName) {
+	public PageInfo<SysDepartment> getSysDepartments(int pageNum, int pageSize, String DepartmentName, Integer parentId) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysDepartmentExample example = new SysDepartmentExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(DepartmentName)){
-			example.or().andNameEqualTo(DepartmentName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			criteria.andNameLike(DepartmentName);
+			example.setOrderByClause("department_sort");
+		} else if(parentId != null){
+			criteria.andIdEqualTo(parentId);
+			Criteria criteria2 = example.createCriteria();
+			criteria2.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			criteria2.andParentIdEqualTo(parentId);
+			example.or(criteria2);
+			example.setOrderByClause("(case when id='"+parentId.toString()+"' then 1 else 2 end), department_sort");
 		} else {
-			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.setOrderByClause("department_sort");
 		}
-		example.setOrderByClause("department_sort");
+		
 		List<SysDepartment> Departments = sysDepartmentDAO.selectByExample(example);
 		return new PageInfo<SysDepartment>(Departments);
 	}
@@ -130,6 +149,7 @@ public class SysDepartmentService extends BaseService{
 		List<SysDepartment> departments = new ArrayList<SysDepartment>();
 		SysDepartment department = getSysDepartment(departmentId);
 		departments.add(department);
+
 		int parentId = department.getParentId();
 		while(parentId > 0){
 			SysDepartment upperDepartment = getSysDepartment(parentId);
@@ -143,6 +163,43 @@ public class SysDepartmentService extends BaseService{
 		}
 		
 		return departments;
+	}
+	
+	/**
+	 * 获取部门树结构
+	 * @param departmentId
+	 * @param sort
+	 * @return
+	 */
+	public List<DepartmentTreeNode> getDepartmentTrees(){
+		List<DepartmentTreeNode> roots = new ArrayList<DepartmentTreeNode>();
+		Map<Integer, DepartmentTreeNode> map = new HashMap<>();
+		SysDepartmentExample example = new SysDepartmentExample();
+		example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+		example.setOrderByClause("department_parent_id, department_sort");
+		List<SysDepartment> departments = sysDepartmentDAO.selectByExample(example);
+		for(SysDepartment department : departments){
+			DepartmentTreeNode node = new DepartmentTreeNode();
+			node.setId(department.getId().toString());
+			node.setName(department.getName());
+			map.put(department.getId(), node);
+			
+			//关联父节点
+			if(department.getParentId() == 0){
+				roots.add(node);
+				node.setOpen(true);
+			} else {
+				if(map.containsKey(department.getParentId())){
+					if(map.get(department.getParentId()).getChildren() == null){
+						map.get(department.getParentId()).setChildren(new ArrayList<>());
+					}
+					map.get(department.getParentId()).getChildren().add(node);
+				}
+			}
+		}
+		
+		//返回根节点
+		return roots;
 	}
 	
 }
