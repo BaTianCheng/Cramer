@@ -48,8 +48,8 @@ public class SysUserService extends BaseService{
 	public SysUser getSysUser(String userName){
 		SysUserExample example = new SysUserExample();
 		example.or().andNameEqualTo(userName);
+
 		List<SysUser> users =  sysUserDAO.selectByExample(example);
-		
 		if(users.isEmpty()){
 			return null;
 		} else {
@@ -87,18 +87,27 @@ public class SysUserService extends BaseService{
 	 * @param pageNum
 	 * @param pageSize
 	 * @param userName
+	 * @param sortId
+	 * @param sortType
 	 * @return
 	 */
-	public PageInfo<SysUser> getSysUsers(int pageNum, int pageSize, String userName) {
+	public PageInfo<SysUser> getSysUsers(int pageNum, int pageSize, String userName, String sortId, String sortType) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysUserExample example = new SysUserExample();
+		String sortStr = "user.sort, user.id";
 		if(!Strings.isNullOrEmpty(userName)){
 			example.or().andNameEqualTo(userName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		} else {
 			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		}
-		example.setOrderByClause("user_sort");
-		List<SysUser> users = sysUserDAO.selectByExample(example);
+		if(!Strings.isNullOrEmpty(sortId)){
+			sortStr = sortId+" "+sortType+", " + sortStr;
+		}
+		example.setOrderByClause(sortStr);
+		List<Integer> ids = sysUserDAO.selectIdByExample(example);
+		SysUserExample exampleId = new SysUserExample();
+		exampleId.or().andIdIn(ids);
+		List<SysUser> users = sysUserDAO.selectByExample(exampleId);
 		return new PageInfo<SysUser>(users);
 	}
 	
@@ -107,10 +116,16 @@ public class SysUserService extends BaseService{
 	 * @param user
 	 * @return
 	 */
-	public boolean insert(SysUser user){
+	public boolean insertInfo(SysUser user){
 		user.setId(getNextSeq(SequenceConstant.SEQ_SYSUSERID));
 		if(!Strings.isNullOrEmpty(user.getPassword())){
 			user.setPassword(EncryptionUtils.EncoderByMd5(user.getPassword()));
+		}
+		sysUserDepartmentDAO.insert(new SysUserDepartment(){{this.setUserId(user.getId());this.setDepartmentId(user.getDepartmentId());}});
+		if(user.getRoleIds() != null){
+			for(Integer roleId : user.getRoleIds()){
+				sysUserRoleDAO.insert(new SysUserRole(){{this.setUserId(user.getId());this.setRoleId(roleId);}});
+			}
 		}
 		return sysUserDAO.insert(user)>0 ? true : false;
 	}
@@ -148,23 +163,6 @@ public class SysUserService extends BaseService{
 		SysUser user = getSysUser(userId);
 		user.setPassword(EncryptionUtils.EncoderByMd5(newPassword));
 		return update(user);
-	}
-	
-	/**
-	 * 新增用户基本信息
-	 * @param user
-	 * @return
-	 */
-	public boolean insertInfo(SysUser user){
-		sysUserDepartmentDAO.deleteByExample(new SysUserDepartmentExample(){{this.or().andUserIdEqualTo(user.getId());}});
-		sysUserDepartmentDAO.insert(new SysUserDepartment(){{this.setUserId(user.getId());this.setDepartmentId(user.getDepartmentId());}});
-		sysUserRoleDAO.deleteByExample(new SysUserRoleExample(){{this.or().andUserIdEqualTo(user.getId());}});
-		if(user.getRoleIds() != null){
-			for(Integer roleId : user.getRoleIds()){
-				sysUserRoleDAO.insert(new SysUserRole(){{this.setUserId(user.getId());this.setRoleId(roleId);}});
-			}
-		}
-		return insert(user);
 	}
 	
 	/**
@@ -220,6 +218,7 @@ public class SysUserService extends BaseService{
 		}
 		SysUserExample userExample = new SysUserExample();
 		userExample.or().andIdIn(userIds);
+		userExample.setOrderByClause("user.sort, user.id");
 		List<SysUser> users = sysUserDAO.selectByExample(userExample);
 		return users;
 	}
@@ -239,6 +238,7 @@ public class SysUserService extends BaseService{
 		}
 		SysUserExample userExample = new SysUserExample();
 		userExample.or().andIdIn(userIds);
+		userExample.setOrderByClause("user.sort, user.id");
 		List<SysUser> users = sysUserDAO.selectByExample(userExample);
 		return users;
 	}

@@ -57,23 +57,26 @@ public class SysDepartmentService extends BaseService{
 	public PageInfo<SysDepartment> getSysDepartments(int pageNum, int pageSize, String DepartmentName, Integer parentId) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysDepartmentExample example = new SysDepartmentExample();
+		String sortStr = "department.sort, department.id";
 		Criteria criteria = example.createCriteria();
 		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(DepartmentName)){
 			criteria.andNameLike(DepartmentName);
-			example.setOrderByClause("department_sort");
 		} else if(parentId != null){
 			criteria.andIdEqualTo(parentId);
 			Criteria criteria2 = example.createCriteria();
 			criteria2.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 			criteria2.andParentIdEqualTo(parentId);
 			example.or(criteria2);
-			example.setOrderByClause("(case when id='"+parentId.toString()+"' then 1 else 2 end), department_sort");
-		} else {
-			example.setOrderByClause("department_sort");
-		}
-		
-		List<SysDepartment> Departments = sysDepartmentDAO.selectByExample(example);
+			sortStr = "(case when department.id='"+parentId.toString()+"' then 1 else 2 end), "+sortStr;
+		} 
+		example.setOrderByClause(sortStr);
+		List<Integer> ids = sysDepartmentDAO.selectIdByExample(example);
+		PageHelper.clearPage();
+		SysDepartmentExample exampleId = new SysDepartmentExample();
+		exampleId.or().andIdIn(ids);
+		exampleId.setOrderByClause(sortStr);
+		List<SysDepartment> Departments = sysDepartmentDAO.selectByExample(exampleId);
 		return new PageInfo<SysDepartment>(Departments);
 	}
 	
@@ -176,7 +179,7 @@ public class SysDepartmentService extends BaseService{
 		Map<Integer, DepartmentTreeNode> map = new HashMap<>();
 		SysDepartmentExample example = new SysDepartmentExample();
 		example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
-		example.setOrderByClause("department_parent_id, department_sort");
+		example.setOrderByClause("department_parent_id, department_sort, department_id");
 		List<SysDepartment> departments = sysDepartmentDAO.selectByExample(example);
 		for(SysDepartment department : departments){
 			DepartmentTreeNode node = new DepartmentTreeNode();

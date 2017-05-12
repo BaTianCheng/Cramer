@@ -17,6 +17,8 @@ public interface SysRoleDAO {
     int insertSelective(SysRole record);
 
     List<SysRole> selectByExample(SysRoleExample example);
+    
+    List<Integer> selectIdByExample(SysRoleExample example);
 
     SysRole selectByPrimaryKey(Integer id);
 

@@ -17,6 +17,8 @@ public interface SysDepartmentDAO {
     int insertSelective(SysDepartment record);
 
     List<SysDepartment> selectByExample(SysDepartmentExample example);
+    
+    List<Integer> selectIdByExample(SysDepartmentExample example);
 
     SysDepartment selectByPrimaryKey(Integer id);
 

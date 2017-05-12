@@ -86,9 +86,9 @@
 				<section class="col col-9 ">
 					<label class="select"> <select id="departmentId" name="departmentId" 
 							{{if user.roleIds == null || user.roleIds == 0}}
-								onChange="User.ShowDepartmentRoles($('#user-department').val(),[])"
+								onChange="User.ShowDepartmentRoles($('#departmentId').val(),[])"
 							{{else}}
-								onChange="User.ShowDepartmentRoles($('#user-department').val(),'{{user.roleIds.toString()}}'.split(','))"
+								onChange="User.ShowDepartmentRoles($('#departmentId').val(),'{{user.roleIds.toString()}}'.split(','))"
 							{{/if}}
 					>
 						{{each department as value i}}
@@ -125,7 +125,13 @@
 
 		<footer>
 			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
-			<button type="submit" class="btn btn-primary" onClick="User.UpdateInfo($('#user-form').serialize())">保存</button>
+			<button type="submit" class="btn btn-primary" onClick="
+				{{if user.id != null}}
+					User.UpdateInfo($('#user-form').serialize())
+				{{else}}
+					User.AddInfo($('#user-form').serialize())
+				{{/if}}
+			">保存</button>
 		</footer>
 	</form>
 </script>

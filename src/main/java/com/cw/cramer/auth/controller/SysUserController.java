@@ -45,8 +45,8 @@ public class SysUserController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/users/list")
 	@ResponseBody
-	public String getUsers(HttpServletRequest request, Model model, int pageNum, int pageSize, String userName) {
-		return this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName));
+	public String getUsers(HttpServletRequest request, Model model, int pageNum, int pageSize, String userName, String sortId, String sortType) {
+		return this.renderSuccessJson(sysUserService.getSysUsers(pageNum, pageSize, userName, sortId, sortType));
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class SysUserController extends BaseController{
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/auth/users/add", method=RequestMethod.POST)
+	@RequestMapping(value = "/auth/users/add/info", method=RequestMethod.POST)
 	@ResponseBody
 	public String add(HttpServletRequest request, Model model, SysUser user) {
 		boolean isSuccess = sysUserService.insertInfo(user);

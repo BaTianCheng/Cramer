@@ -9,11 +9,11 @@ User.List = function (){
 		height:'auto',
 		colNames : [ '编号', '名称', '密码', '部门', '角色', '状态', '备注', '操作'],
 		colModel : 
-			[{name : 'id',index : 'id',width : 55,fixed:true}, 
-			 {name : 'name',index : 'name asc, id',width : 100}, 
-			 {name : 'password',index : 'password',width : 200,editrules:{required:true}}, 
+			[{name : 'id',index : 'user.id',width : 55,fixed:true}, 
+			 {name : 'name',index : 'user.name',width : 100}, 
+			 {name : 'password',index : 'user.password',width : 200,editrules:{required:true}}, 
 			 {name : 'departmentName',index : 'department_name',width : 80}, 
-			 {name : 'roleNames',index : 'role_name',width : 100,
+			 {name : 'roleNames',width : 100,sortable:false,
 				 formatter:function(cellvalue, options, rowObject){
 					 if(cellvalue != null){
 						 var temp = '';
@@ -29,7 +29,7 @@ User.List = function (){
 					 }
 				 }
 			 }, 
-			 {name : 'status',index : 'status',width : 80,editable :true, align:'center',
+			 {name : 'status',index : 'user.status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
 					switch(cellValue){
 						case 1 : return '可用';
@@ -39,8 +39,8 @@ User.List = function (){
 				 } ,
 			 	 edittype:'select', editoptions:{value:{0:'可用', 1:'不可用'}}
 			 },
-			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
-			 {name : 'actions',index : 'actions',width : 80, align:'center',title:false}],
+			 {name : 'remarks',index : 'user.remarks',width : 120,editable :true},
+			 {name : 'actions',width : 80, align:'center',title:false,sortable:false}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",
@@ -52,8 +52,8 @@ User.List = function (){
 		prmNames : {
 			page:"pageNum", // 表示请求页码的参数名称
 			rows:"pageSize", // 表示请求行数的参数名称
-			sort: "sidx", // 表示用于排序的列名的参数名称
-			order: "sord", // 表示采用的排序方式的参数名称
+			sort: "sortId", // 表示用于排序的列名的参数名称
+			order: "sortType", // 表示采用的排序方式的参数名称
 			search:"_search", // 表示是否是搜索请求的参数名称
 			nd:"nd", // 表示已经发送请求的次数的参数名称
 			id:"id", // 表示当在编辑数据模块中发送数据时，使用的id的名称
@@ -68,8 +68,6 @@ User.List = function (){
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
 		pager : '#pager',
-		sortname : 'id',
-		sortorder : "asc",
 		mtype : "post",
 		viewrecords : true,
 		emptyrecords: "暂无任何数据",
@@ -205,6 +203,24 @@ User.UpdateInfo = function (serialize){
 			if(result.resultCode == '200'){
 				layer.close(layer.index);
 				layer.msg('修改成功', {icon: 1});
+				$("#main-table").trigger("reloadGrid");
+			} else {
+				layer.msg('程序异常', {icon: 2});
+			}
+	}).error(function(xhr,errorText,errorType){
+		layer.msg('系统错误', {icon: 2});
+	});
+}
+
+//新增用户信息
+User.AddInfo = function (serialize){
+	$.post(CTX_PATH + "/auth/users/add/info", serialize,
+		function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				layer.close(layer.index);
+				layer.msg('添加成功', {icon: 1});
+				$("#main-table").trigger("reloadGrid");
 			} else {
 				layer.msg('程序异常', {icon: 2});
 			}

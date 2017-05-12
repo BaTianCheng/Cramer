@@ -17,6 +17,8 @@ public interface SysUserDAO {
     int insertSelective(SysUser record);
 
     List<SysUser> selectByExample(SysUserExample example);
+    
+    List<Integer> selectIdByExample(SysUserExample example);
 
     SysUser selectByPrimaryKey(Integer id);
 

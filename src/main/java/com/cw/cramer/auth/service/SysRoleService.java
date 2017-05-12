@@ -49,16 +49,24 @@ public class SysRoleService extends BaseService{
 	 * @param roleName
 	 * @return
 	 */
-	public PageInfo<SysRole> getSysRoles(int pageNum, int pageSize, String roleName) {
+	public PageInfo<SysRole> getSysRoles(int pageNum, int pageSize, String roleName, String sortId, String sortType) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysRoleExample example = new SysRoleExample();
+		String sortStr = "role.sort, role.id";
 		if(!Strings.isNullOrEmpty(roleName)){
 			example.or().andNameEqualTo(roleName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		} else {
 			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		}
-		example.setOrderByClause("role_sort");
-		List<SysRole> roles = sysRoleDAO.selectByExample(example);
+		if(!Strings.isNullOrEmpty(sortId)){
+			sortStr = sortId+" "+sortType+", "+sortStr;
+		}
+		example.setOrderByClause(sortStr);
+		List<Integer> ids = sysRoleDAO.selectIdByExample(example);
+		SysRoleExample exampleId = new SysRoleExample();
+		exampleId.or().andIdIn(ids);
+		exampleId.setOrderByClause(sortStr);
+		List<SysRole> roles = sysRoleDAO.selectByExample(exampleId);
 		return new PageInfo<SysRole>(roles);
 	}
 	
@@ -129,6 +137,7 @@ public class SysRoleService extends BaseService{
 		}
 		SysRoleExample roleExample = new SysRoleExample();
 		roleExample.or().andIdIn(roleIds);
+		roleExample.setOrderByClause("role.sort, role.id");
 		List<SysRole> roles = sysRoleDAO.selectByExample(roleExample);
 		return roles;
 	}

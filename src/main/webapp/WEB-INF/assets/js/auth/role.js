@@ -10,10 +10,10 @@ Role.List = function (){
 		colNames : [ '编号', '名称', '部门', '备注', '操作'],
 		colModel : 
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
-			 {name : 'name',index : 'name asc, id',width : 100,editable :true}, 
-			 {name : 'departmentId',index : 'departmentId',width : 80,editable :true},
+			 {name : 'name',index : 'name',width : 100,editable :true}, 
+			 {name : 'departmentName',index : 'departmentName',width : 80,editable :true},
 			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
-			 {name : 'actions',index : 'actions',width : 80, align:'center', title:false}],
+			 {name : 'actions',width : 80, align:'center', title:false,sortable:false}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",
@@ -25,8 +25,8 @@ Role.List = function (){
 		prmNames : {
 			page:"pageNum", // 表示请求页码的参数名称
 			rows:"pageSize", // 表示请求行数的参数名称
-			sort: "sidx", // 表示用于排序的列名的参数名称
-			order: "sord", // 表示采用的排序方式的参数名称
+			sort: "sortId", // 表示用于排序的列名的参数名称
+			order: "sortType", // 表示采用的排序方式的参数名称
 			search:"_search", // 表示是否是搜索请求的参数名称
 			nd:"nd", // 表示已经发送请求的次数的参数名称
 			id:"id", // 表示当在编辑数据模块中发送数据时，使用的id的名称
@@ -41,8 +41,6 @@ Role.List = function (){
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
 		pager : '#pager',
-		sortname : 'id',
-		sortorder : "asc",
 		mtype : "post",
 		viewrecords : true,
 		emptyrecords: "暂无任何数据",

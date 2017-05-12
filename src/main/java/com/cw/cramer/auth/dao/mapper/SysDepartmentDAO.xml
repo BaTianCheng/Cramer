@@ -113,6 +113,20 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectIdByExample" parameterType="com.cw.cramer.auth.entity.SysDepartmentExample" resultType="java.lang.Integer">
+    select
+    <if test="distinct">
+      distinct 
+    </if>
+    department.id 
+    from sys_department department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

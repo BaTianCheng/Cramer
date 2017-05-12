@@ -9,10 +9,10 @@ Department.List = function (){
 		height:'auto',
 		colNames : [ '编号', '名称', '备注', '操作'],
 		colModel : 
-			[{name : 'id',index : 'id',width : 55,fixed:true}, 
-			 {name : 'name',index : 'name asc, id',width : 100,editable :true},
-			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
-			 {name : 'actions',index : 'actions',width : 80, align:'center',title:false}],
+			[{name : 'id',index : 'id',width : 55,fixed:true, sortable:false}, 
+			 {name : 'name',index : 'name asc, id',width : 100,editable :true,sortable:false},
+			 {name : 'remarks',index : 'remarks',width : 120,editable :true,sortable:false},
+			 {name : 'actions',index : 'actions',width : 80, align:'center',title:false,sortable:false}],
 		jsonReader : {   
 			id: "id",
 			root: "data.list",

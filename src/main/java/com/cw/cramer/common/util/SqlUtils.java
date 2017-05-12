@@ -3,7 +3,7 @@ package com.cw.cramer.common.util;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.github.pagehelper.Dialect;
+import com.cw.cramer.common.constant.Dialect;
 
 public final class SqlUtils {
 	
