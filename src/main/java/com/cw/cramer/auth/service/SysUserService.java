@@ -106,7 +106,11 @@ public class SysUserService extends BaseService{
 		example.setOrderByClause(sortStr);
 		List<Integer> ids = sysUserDAO.selectIdByExample(example);
 		SysUserExample exampleId = new SysUserExample();
-		exampleId.or().andIdIn(ids);
+		if(ids.size() > 0){
+			exampleId.or().andIdIn(ids);
+		} else {
+			return new PageInfo<SysUser>(new ArrayList<SysUser>());
+		}
 		List<SysUser> users = sysUserDAO.selectByExample(exampleId);
 		return new PageInfo<SysUser>(users);
 	}

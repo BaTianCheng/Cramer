@@ -74,7 +74,11 @@ public class SysDepartmentService extends BaseService{
 		List<Integer> ids = sysDepartmentDAO.selectIdByExample(example);
 		PageHelper.clearPage();
 		SysDepartmentExample exampleId = new SysDepartmentExample();
-		exampleId.or().andIdIn(ids);
+		if(ids.size() > 0){
+			exampleId.or().andIdIn(ids);
+		} else {
+			return new PageInfo<SysDepartment>(new ArrayList<SysDepartment>());
+		}
 		exampleId.setOrderByClause(sortStr);
 		List<SysDepartment> Departments = sysDepartmentDAO.selectByExample(exampleId);
 		return new PageInfo<SysDepartment>(Departments);

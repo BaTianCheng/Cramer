@@ -48,8 +48,8 @@ public class SysRoleController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/roles/list")
 	@ResponseBody
-	public String list(HttpServletRequest request, Model model, int pageNum, int pageSize, String roleName, String sortId, String sortType) {
-		return this.renderSuccessJson(sysRoleService.getSysRoles(pageNum, pageSize, roleName, sortId, sortType));
+	public String list(HttpServletRequest request, Model model, int pageNum, Integer pageSize, int departmentId, String roleName, String sortId, String sortType) {
+		return this.renderSuccessJson(sysRoleService.getSysRoles(pageNum, pageSize, departmentId, roleName, sortId, sortType));
 	}
 	
 	/**

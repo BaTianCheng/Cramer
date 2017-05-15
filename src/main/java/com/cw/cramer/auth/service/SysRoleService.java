@@ -12,6 +12,7 @@ import com.cw.cramer.auth.entity.SysDepartmentRole;
 import com.cw.cramer.auth.entity.SysDepartmentRoleExample;
 import com.cw.cramer.auth.entity.SysRole;
 import com.cw.cramer.auth.entity.SysRoleExample;
+import com.cw.cramer.auth.entity.SysRoleExample.Criteria;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
@@ -49,22 +50,30 @@ public class SysRoleService extends BaseService{
 	 * @param roleName
 	 * @return
 	 */
-	public PageInfo<SysRole> getSysRoles(int pageNum, int pageSize, String roleName, String sortId, String sortType) {
+	public PageInfo<SysRole> getSysRoles(int pageNum, int pageSize, Integer departmentId, String roleName, String sortId, String sortType) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysRoleExample example = new SysRoleExample();
 		String sortStr = "role.sort, role.id";
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(roleName)){
-			example.or().andNameEqualTo(roleName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
-		} else {
-			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			criteria.andNameLike(roleName);
+		}
+		if(departmentId != null && departmentId > 0){
+			criteria.andDapartmentIdEqualTo(departmentId);
 		}
 		if(!Strings.isNullOrEmpty(sortId)){
 			sortStr = sortId+" "+sortType+", "+sortStr;
 		}
+		example.or(criteria);
 		example.setOrderByClause(sortStr);
 		List<Integer> ids = sysRoleDAO.selectIdByExample(example);
 		SysRoleExample exampleId = new SysRoleExample();
-		exampleId.or().andIdIn(ids);
+		if(ids.size() >0){
+			exampleId.or().andIdIn(ids);
+		} else {
+			return new PageInfo<SysRole>(new ArrayList<SysRole>());
+		}
 		exampleId.setOrderByClause(sortStr);
 		List<SysRole> roles = sysRoleDAO.selectByExample(exampleId);
 		return new PageInfo<SysRole>(roles);

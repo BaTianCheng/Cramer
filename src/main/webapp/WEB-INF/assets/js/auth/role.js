@@ -1,9 +1,10 @@
 Role = {}
 
 //角色列表
-Role.List = function (){
+Role.List = function (postData){
 	$("#main-table").jqGrid({
 		url : CTX_PATH + "/auth/roles/list",
+		postData : postData,
 		datatype : "json",
 		autowidth:true,
 		height:'auto',
@@ -73,6 +74,9 @@ Role.List = function (){
 		},
 		{url:CTX_PATH+"/auth/roles/delte"}
 	);
+	
+	$("#main-table").jqGrid().setGridParam({'postData':postData});
+	$("#main-table").jqGrid().trigger('reloadGrid');
 }
 
 //角色列表
@@ -135,38 +139,3 @@ Role.UpdateAuthority = function(serialize){
 		layer.msg('系统错误', {icon: 2});
 	});
 }
-
-function editRow(cl){
-	$("#td-edit-"+cl).hide();
-	$("#td-del-"+cl).hide();
-	$("#td-save-"+cl).show();
-	$("#td-canel-"+cl).show();
-	$("#main-table").editRow(cl);
-}
-
-function saveRow(cl){
-	$("#td-edit-"+cl).show();
-	$("#td-del-"+cl).show();
-	$("#td-save-"+cl).hide();
-	$("#td-canel-"+cl).hide();
-	$("#main-table").saveRow(cl);
-	$("#main-table").trigger("reloadGrid");
-}
-
-function restoreRow(cl){
-	$("#td-edit-"+cl).show();
-	$("#td-del-"+cl).show();
-	$("#td-save-"+cl).hide();
-	$("#td-canel-"+cl).hide();
-	$("#main-table").restoreRow(cl);
-}
-
-function delRow(cl){
-	$("#td-edit-"+cl).hide();
-	$("#td-del-"+cl).hide();
-	$("#td-save-"+cl).show();
-	$("#td-canel-"+cl).show();
-	$("#main-table").jqGrid('delGridRow', cl);
-	$("#main-table").trigger("reloadGrid");
-}
-

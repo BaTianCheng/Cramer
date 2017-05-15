@@ -9,7 +9,11 @@
 				<div>
 					<div class="jarviswidget-editbox"></div>
 					<div class="widget-body ">
-						<div class="table-responsive">
+						<div style="float:left;overflow-x:auto;" id="department-tree" class="ztree">
+							
+						</div>
+					
+						<div class="table-responsive" style="margin-left:200px;">
 							<table class="table table-bordered" id="main-table">
 								
 							</table>
@@ -62,6 +66,9 @@
 <script src="js/auth/role.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	Role.List();
+	$('#department-tree').departmentZtree({'callback':zTreeOnClick});
 });
+function zTreeOnClick(event, treeId, treeNode) {
+	Role.List({'departmentId':treeNode.id});
+}
 </script>

@@ -77,7 +77,7 @@ User.List = function (){
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
               be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:User.OpenEdit('"+ cl + "');\">编辑</a>";
-              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+cl+"');\">删除</a>";
+              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delTableRow('"+cl+"');\">删除</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
             	  	actions : be + de 
@@ -121,7 +121,7 @@ User.List = function (){
 	});
 }
 
-function delRow(cl){
+function delTableRow(cl){
 	$("#main-table").jqGrid('delGridRow', cl);
 	$("#main-table").trigger("reloadGrid");
 }

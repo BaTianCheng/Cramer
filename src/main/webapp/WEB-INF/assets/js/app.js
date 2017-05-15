@@ -51,6 +51,36 @@ $(document).ready(function(){
 	}
 });
 
+function editRow(cl){
+	$("#td-edit-"+cl).hide();
+	$("#td-del-"+cl).hide();
+	$("#td-save-"+cl).show();
+	$("#td-canel-"+cl).show();
+	$("#main-table").editRow(cl);
+}
+
+function saveRow(cl){
+	$("#td-edit-"+cl).show();
+	$("#td-del-"+cl).show();
+	$("#td-save-"+cl).hide();
+	$("#td-canel-"+cl).hide();
+	$("#main-table").saveRow(cl);
+	$("#main-table").trigger("reloadGrid");
+}
+
+function restoreRow(cl){
+	$("#td-edit-"+cl).show();
+	$("#td-del-"+cl).show();
+	$("#td-save-"+cl).hide();
+	$("#td-canel-"+cl).hide();
+	$("#main-table").restoreRow(cl);
+}
+
+function delRow(cl){
+	$("#main-table").jqGrid('delGridRow', cl);
+	$("#main-table").trigger("reloadGrid");
+}
+
 /*自定义组件*/
 (function ($) {  
     $.fn.departmentZtree = function (options) {
@@ -64,11 +94,18 @@ $(document).ready(function(){
     	this.init = function(){
     		var zTreeObj;
     		var setting = {};
+    		setting.callback = {};
+    		setting.callback.onClick = callback;
     		
     		$.post(CTX_PATH+'/auth/departments/tree',{},
     			function(result){
     				var data = JSON.parse(result).data;
     				zTreeObj = $.fn.zTree.init($sel, setting, data);
+    				var nodes = zTreeObj.getNodes();
+    				if (nodes.length>0) {
+    					zTreeObj.selectNode(nodes[0]);
+    					zTreeObj.setting.callback.onClick(null, zTreeObj.setting.treeId, nodes[0]);
+    				}
     			}
     		);
     		
