@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cw.cramer.module.msg.dao.MsgNoticeDAO">
+  <resultMap id="BaseResultMap" type="com.cw.cramer.module.msg.entity.MsgNotice">
+    <id column="notice_id" jdbcType="INTEGER" property="id" />
+    <result column="notice_type" jdbcType="INTEGER" property="type" />
+    <result column="notice_status" jdbcType="INTEGER" property="status" />
+    <result column="notice_titlt" jdbcType="VARCHAR" property="titlt" />
+    <result column="notice_push_flag" jdbcType="INTEGER" property="pushFlag" />
+    <result column="notice_top_flag" jdbcType="INTEGER" property="topFlag" />
+    <result column="notice_sort" jdbcType="INTEGER" property="sort" />
+    <result column="notice_create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="notice_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="notice_update_by" jdbcType="INTEGER" property="updateBy" />
+    <result column="notice_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="notice_remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cw.cramer.module.msg.entity.MsgNotice">
+    <result column="notice_content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    notice.id as notice_id, notice.type as notice_type, notice.status as notice_status, 
+    notice.titlt as notice_titlt, notice.push_flag as notice_push_flag, notice.top_flag as notice_top_flag, 
+    notice.sort as notice_sort, notice.create_by as notice_create_by, notice.create_time as notice_create_time, 
+    notice.update_by as notice_update_by, notice.update_time as notice_update_time, notice.remarks as notice_remarks
+  </sql>
+  <sql id="Blob_Column_List">
+    notice.content as notice_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.cw.cramer.module.msg.entity.MsgNoticeExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from msg_notice notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.cw.cramer.module.msg.entity.MsgNoticeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from msg_notice notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from msg_notice notice
+    where notice.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from msg_notice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.cramer.module.msg.entity.MsgNoticeExample">
+    delete from msg_notice notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.cramer.module.msg.entity.MsgNotice">
+    insert into msg_notice (id, type, status, 
+      titlt, push_flag, top_flag, 
+      sort, create_by, create_time, 
+      update_by, update_time, remarks, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{titlt,jdbcType=VARCHAR}, #{pushFlag,jdbcType=INTEGER}, #{topFlag,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.cramer.module.msg.entity.MsgNotice">
+    insert into msg_notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="titlt != null">
+        titlt,
+      </if>
+      <if test="pushFlag != null">
+        push_flag,
+      </if>
+      <if test="topFlag != null">
+        top_flag,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="titlt != null">
+        #{titlt,jdbcType=VARCHAR},
+      </if>
+      <if test="pushFlag != null">
+        #{pushFlag,jdbcType=INTEGER},
+      </if>
+      <if test="topFlag != null">
+        #{topFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.cramer.module.msg.entity.MsgNoticeExample" resultType="java.lang.Long">
+    select count(*) from msg_notice notice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update msg_notice notice
+    <set>
+      <if test="record.id != null">
+        notice.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        notice.type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        notice.status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.titlt != null">
+        notice.titlt = #{record.titlt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pushFlag != null">
+        notice.push_flag = #{record.pushFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.topFlag != null">
+        notice.top_flag = #{record.topFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null">
+        notice.sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.createBy != null">
+        notice.create_by = #{record.createBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        notice.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        notice.update_by = #{record.updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null">
+        notice.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        notice.remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        notice.content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update msg_notice notice
+    set notice.id = #{record.id,jdbcType=INTEGER},
+      notice.type = #{record.type,jdbcType=INTEGER},
+      notice.status = #{record.status,jdbcType=INTEGER},
+      notice.titlt = #{record.titlt,jdbcType=VARCHAR},
+      notice.push_flag = #{record.pushFlag,jdbcType=INTEGER},
+      notice.top_flag = #{record.topFlag,jdbcType=INTEGER},
+      notice.sort = #{record.sort,jdbcType=INTEGER},
+      notice.create_by = #{record.createBy,jdbcType=INTEGER},
+      notice.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      notice.update_by = #{record.updateBy,jdbcType=INTEGER},
+      notice.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      notice.remarks = #{record.remarks,jdbcType=VARCHAR},
+      notice.content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update msg_notice notice
+    set notice.id = #{record.id,jdbcType=INTEGER},
+      notice.type = #{record.type,jdbcType=INTEGER},
+      notice.status = #{record.status,jdbcType=INTEGER},
+      notice.titlt = #{record.titlt,jdbcType=VARCHAR},
+      notice.push_flag = #{record.pushFlag,jdbcType=INTEGER},
+      notice.top_flag = #{record.topFlag,jdbcType=INTEGER},
+      notice.sort = #{record.sort,jdbcType=INTEGER},
+      notice.create_by = #{record.createBy,jdbcType=INTEGER},
+      notice.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      notice.update_by = #{record.updateBy,jdbcType=INTEGER},
+      notice.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      notice.remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.cramer.module.msg.entity.MsgNotice">
+    update msg_notice
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="titlt != null">
+        titlt = #{titlt,jdbcType=VARCHAR},
+      </if>
+      <if test="pushFlag != null">
+        push_flag = #{pushFlag,jdbcType=INTEGER},
+      </if>
+      <if test="topFlag != null">
+        top_flag = #{topFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cw.cramer.module.msg.entity.MsgNotice">
+    update msg_notice
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      titlt = #{titlt,jdbcType=VARCHAR},
+      push_flag = #{pushFlag,jdbcType=INTEGER},
+      top_flag = #{topFlag,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.cramer.module.msg.entity.MsgNotice">
+    update msg_notice
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      titlt = #{titlt,jdbcType=VARCHAR},
+      push_flag = #{pushFlag,jdbcType=INTEGER},
+      top_flag = #{topFlag,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

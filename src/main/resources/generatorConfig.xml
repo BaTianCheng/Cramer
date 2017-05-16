@@ -21,24 +21,24 @@
             <property name="forceBigDecimals" value="false"/>  
         </javaTypeResolver>  
 
-        <javaModelGenerator targetPackage="com.cw.cramer.auth.entity" targetProject="D:\mars-workspace\cramer\src\main\java">  
+        <javaModelGenerator targetPackage="com.cw.cramer.module.msg.entity" targetProject="D:\mars-workspace\cramer\src\main\java">  
             <property name="enableSubPackages" value="true"/>  
             <property name="trimStrings" value="true"/>  
         </javaModelGenerator>  
 
-        <sqlMapGenerator targetPackage="com.cw.cramer.auth.dao.mapper" targetProject="D:\mars-workspace\cramer\src\main\java">  
+        <sqlMapGenerator targetPackage="com.cw.cramer.module.msg.dao.mapper" targetProject="D:\mars-workspace\cramer\src\main\java">  
             <property name="enableSubPackages" value="true"/>  
         </sqlMapGenerator>  
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cw.cramer.auth.dao" targetProject="D:\mars-workspace\cramer\src\main\java">  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cw.cramer.module.msg.dao" targetProject="D:\mars-workspace\cramer\src\main\java">  
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>  
      
 		<!-- 
 		<table tableName="sys_sequence" domainObjectName="SysSequence" mapperName="SysSequenceDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-         --><table tableName="sys_operatelog" domainObjectName="SysOperateLog" mapperName="SysOperateLogDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="sys_operatelog" domainObjectName="SysOperateLog" mapperName="SysOperateLogDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_user" alias="user" domainObjectName="SysUser" mapperName="SysUserDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
-        <!-- <table tableName="sys_role" alias="role" domainObjectName="SysRole" mapperName="SysRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="sys_role" alias="role" domainObjectName="SysRole" mapperName="SysRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_department" alias="department" domainObjectName="SysDepartment" mapperName="SysDepartmentDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_user_role" alias="user_role" domainObjectName="SysUserRole" mapperName="SysUserRoleDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_user_department" alias="user_department" domainObjectName="SysUserDepartment" mapperName="SysUserDepartmentDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
@@ -46,5 +46,10 @@
         <table tableName="sys_authority" alias="authority" domainObjectName="SysAuthority" mapperName="SysAuthorityDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         <table tableName="sys_role_authority" alias="role_authority" domainObjectName="SysRoleAuthority" mapperName="SysRoleAuthorityDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
         -->
+        
+        <table tableName="msg_web_mail" alias="web_mail" domainObjectName="MsgWebMail" mapperName="MsgWebMailDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="msg_web_mail_storage"  alias="web_mail_storage" domainObjectName="MsgWebMailStorage" mapperName="MsgWebMailStorageDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="msg_notice" alias="notice" domainObjectName="MsgNotice" mapperName="MsgNoticeDAO" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        
     </context>  
 </generatorConfiguration>  

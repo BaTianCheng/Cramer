@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cw.cramer.module.msg.dao.MsgWebMailDAO">
+  <resultMap id="BaseResultMap" type="com.cw.cramer.module.msg.entity.MsgWebMail">
+    <id column="web_mail_id" jdbcType="INTEGER" property="id" />
+    <result column="web_mail_type" jdbcType="INTEGER" property="type" />
+    <result column="web_mail_status" jdbcType="INTEGER" property="status" />
+    <result column="web_mail_sender" jdbcType="INTEGER" property="sender" />
+    <result column="web_mail_receiver_type" jdbcType="INTEGER" property="receiverType" />
+    <result column="web_mail_receiver" jdbcType="VARCHAR" property="receiver" />
+    <result column="web_mail_method" jdbcType="INTEGER" property="method" />
+    <result column="web_mail_title" jdbcType="VARCHAR" property="title" />
+    <result column="web_mail_icon" jdbcType="VARCHAR" property="icon" />
+    <result column="web_mail_sort" jdbcType="INTEGER" property="sort" />
+    <result column="web_mail_send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="web_mail_read_time" jdbcType="TIMESTAMP" property="readTime" />
+    <result column="web_mail_remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cw.cramer.module.msg.entity.MsgWebMail">
+    <result column="web_mail_content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    web_mail.id as web_mail_id, web_mail.type as web_mail_type, web_mail.status as web_mail_status, 
+    web_mail.sender as web_mail_sender, web_mail.receiver_type as web_mail_receiver_type, 
+    web_mail.receiver as web_mail_receiver, web_mail.method as web_mail_method, web_mail.title as web_mail_title, 
+    web_mail.icon as web_mail_icon, web_mail.sort as web_mail_sort, web_mail.send_time as web_mail_send_time, 
+    web_mail.read_time as web_mail_read_time, web_mail.remarks as web_mail_remarks
+  </sql>
+  <sql id="Blob_Column_List">
+    web_mail.content as web_mail_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from msg_web_mail web_mail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from msg_web_mail web_mail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from msg_web_mail web_mail
+    where web_mail.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from msg_web_mail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailExample">
+    delete from msg_web_mail web_mail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.cramer.module.msg.entity.MsgWebMail">
+    insert into msg_web_mail (id, type, status, 
+      sender, receiver_type, receiver, 
+      method, title, icon, 
+      sort, send_time, read_time, 
+      remarks, content)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{sender,jdbcType=INTEGER}, #{receiverType,jdbcType=INTEGER}, #{receiver,jdbcType=VARCHAR}, 
+      #{method,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{sendTime,jdbcType=TIMESTAMP}, #{readTime,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.cramer.module.msg.entity.MsgWebMail">
+    insert into msg_web_mail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sender != null">
+        sender,
+      </if>
+      <if test="receiverType != null">
+        receiver_type,
+      </if>
+      <if test="receiver != null">
+        receiver,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="sendTime != null">
+        send_time,
+      </if>
+      <if test="readTime != null">
+        read_time,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sender != null">
+        #{sender,jdbcType=INTEGER},
+      </if>
+      <if test="receiverType != null">
+        #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="receiver != null">
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null">
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readTime != null">
+        #{readTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailExample" resultType="java.lang.Long">
+    select count(*) from msg_web_mail web_mail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update msg_web_mail web_mail
+    <set>
+      <if test="record.id != null">
+        web_mail.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        web_mail.type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        web_mail.status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sender != null">
+        web_mail.sender = #{record.sender,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiverType != null">
+        web_mail.receiver_type = #{record.receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiver != null">
+        web_mail.receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null">
+        web_mail.method = #{record.method,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        web_mail.title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        web_mail.icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        web_mail.sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendTime != null">
+        web_mail.send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.readTime != null">
+        web_mail.read_time = #{record.readTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null">
+        web_mail.remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        web_mail.content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update msg_web_mail web_mail
+    set web_mail.id = #{record.id,jdbcType=INTEGER},
+      web_mail.type = #{record.type,jdbcType=INTEGER},
+      web_mail.status = #{record.status,jdbcType=INTEGER},
+      web_mail.sender = #{record.sender,jdbcType=INTEGER},
+      web_mail.receiver_type = #{record.receiverType,jdbcType=INTEGER},
+      web_mail.receiver = #{record.receiver,jdbcType=VARCHAR},
+      web_mail.method = #{record.method,jdbcType=INTEGER},
+      web_mail.title = #{record.title,jdbcType=VARCHAR},
+      web_mail.icon = #{record.icon,jdbcType=VARCHAR},
+      web_mail.sort = #{record.sort,jdbcType=INTEGER},
+      web_mail.send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      web_mail.read_time = #{record.readTime,jdbcType=TIMESTAMP},
+      web_mail.remarks = #{record.remarks,jdbcType=VARCHAR},
+      web_mail.content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update msg_web_mail web_mail
+    set web_mail.id = #{record.id,jdbcType=INTEGER},
+      web_mail.type = #{record.type,jdbcType=INTEGER},
+      web_mail.status = #{record.status,jdbcType=INTEGER},
+      web_mail.sender = #{record.sender,jdbcType=INTEGER},
+      web_mail.receiver_type = #{record.receiverType,jdbcType=INTEGER},
+      web_mail.receiver = #{record.receiver,jdbcType=VARCHAR},
+      web_mail.method = #{record.method,jdbcType=INTEGER},
+      web_mail.title = #{record.title,jdbcType=VARCHAR},
+      web_mail.icon = #{record.icon,jdbcType=VARCHAR},
+      web_mail.sort = #{record.sort,jdbcType=INTEGER},
+      web_mail.send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      web_mail.read_time = #{record.readTime,jdbcType=TIMESTAMP},
+      web_mail.remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.cramer.module.msg.entity.MsgWebMail">
+    update msg_web_mail
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sender != null">
+        sender = #{sender,jdbcType=INTEGER},
+      </if>
+      <if test="receiverType != null">
+        receiver_type = #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="receiver != null">
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null">
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readTime != null">
+        read_time = #{readTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cw.cramer.module.msg.entity.MsgWebMail">
+    update msg_web_mail
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      sender = #{sender,jdbcType=INTEGER},
+      receiver_type = #{receiverType,jdbcType=INTEGER},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      method = #{method,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      read_time = #{readTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.cramer.module.msg.entity.MsgWebMail">
+    update msg_web_mail
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      sender = #{sender,jdbcType=INTEGER},
+      receiver_type = #{receiverType,jdbcType=INTEGER},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      method = #{method,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      send_time = #{sendTime,jdbcType=TIMESTAMP},
+      read_time = #{readTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

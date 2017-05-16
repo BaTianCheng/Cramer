@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cw.cramer.module.msg.dao.MsgWebMailStorageDAO">
+  <resultMap id="BaseResultMap" type="com.cw.cramer.module.msg.entity.MsgWebMailStorage">
+    <id column="web_mail_storage_id" jdbcType="INTEGER" property="id" />
+    <result column="web_mail_storage_type" jdbcType="INTEGER" property="type" />
+    <result column="web_mail_storage_status" jdbcType="INTEGER" property="status" />
+    <result column="web_mail_storage_tag" jdbcType="INTEGER" property="tag" />
+    <result column="web_mail_storage_owner" jdbcType="INTEGER" property="owner" />
+    <result column="web_mail_storage_mail_id" jdbcType="INTEGER" property="mailId" />
+    <result column="web_mail_storage_method" jdbcType="INTEGER" property="method" />
+    <result column="web_mail_storage_remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    web_mail_storage.id as web_mail_storage_id, web_mail_storage.type as web_mail_storage_type, 
+    web_mail_storage.status as web_mail_storage_status, web_mail_storage.tag as web_mail_storage_tag, 
+    web_mail_storage.owner as web_mail_storage_owner, web_mail_storage.mail_id as web_mail_storage_mail_id, 
+    web_mail_storage.method as web_mail_storage_method, web_mail_storage.remarks as web_mail_storage_remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from msg_web_mail_storage web_mail_storage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from msg_web_mail_storage web_mail_storage
+    where web_mail_storage.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from msg_web_mail_storage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorageExample">
+    delete from msg_web_mail_storage web_mail_storage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorage">
+    insert into msg_web_mail_storage (id, type, status, 
+      tag, owner, mail_id, 
+      method, remarks)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{tag,jdbcType=INTEGER}, #{owner,jdbcType=INTEGER}, #{mailId,jdbcType=INTEGER}, 
+      #{method,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorage">
+    insert into msg_web_mail_storage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="owner != null">
+        owner,
+      </if>
+      <if test="mailId != null">
+        mail_id,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=INTEGER},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=INTEGER},
+      </if>
+      <if test="mailId != null">
+        #{mailId,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorageExample" resultType="java.lang.Long">
+    select count(*) from msg_web_mail_storage web_mail_storage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update msg_web_mail_storage web_mail_storage
+    <set>
+      <if test="record.id != null">
+        web_mail_storage.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        web_mail_storage.type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        web_mail_storage.status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.tag != null">
+        web_mail_storage.tag = #{record.tag,jdbcType=INTEGER},
+      </if>
+      <if test="record.owner != null">
+        web_mail_storage.owner = #{record.owner,jdbcType=INTEGER},
+      </if>
+      <if test="record.mailId != null">
+        web_mail_storage.mail_id = #{record.mailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.method != null">
+        web_mail_storage.method = #{record.method,jdbcType=INTEGER},
+      </if>
+      <if test="record.remarks != null">
+        web_mail_storage.remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update msg_web_mail_storage web_mail_storage
+    set web_mail_storage.id = #{record.id,jdbcType=INTEGER},
+      web_mail_storage.type = #{record.type,jdbcType=INTEGER},
+      web_mail_storage.status = #{record.status,jdbcType=INTEGER},
+      web_mail_storage.tag = #{record.tag,jdbcType=INTEGER},
+      web_mail_storage.owner = #{record.owner,jdbcType=INTEGER},
+      web_mail_storage.mail_id = #{record.mailId,jdbcType=INTEGER},
+      web_mail_storage.method = #{record.method,jdbcType=INTEGER},
+      web_mail_storage.remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorage">
+    update msg_web_mail_storage
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=INTEGER},
+      </if>
+      <if test="owner != null">
+        owner = #{owner,jdbcType=INTEGER},
+      </if>
+      <if test="mailId != null">
+        mail_id = #{mailId,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorage">
+    update msg_web_mail_storage
+    set type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=INTEGER},
+      owner = #{owner,jdbcType=INTEGER},
+      mail_id = #{mailId,jdbcType=INTEGER},
+      method = #{method,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
