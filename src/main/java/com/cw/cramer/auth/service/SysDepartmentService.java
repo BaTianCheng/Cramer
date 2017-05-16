@@ -116,6 +116,7 @@ public class SysDepartmentService extends BaseService{
 		Department.setName(editedDepartment.getName());
 		Department.setCode(editedDepartment.getCode());
 		Department.setStatus(editedDepartment.getStatus());
+		Department.setParentId(editedDepartment.getParentId());
 		Department.setRemarks(editedDepartment.getRemarks());
 		return update(Department);
 	}

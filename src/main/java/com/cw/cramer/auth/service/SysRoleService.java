@@ -60,7 +60,7 @@ public class SysRoleService extends BaseService{
 			criteria.andNameLike(roleName);
 		}
 		if(departmentId != null && departmentId > 0){
-			criteria.andDapartmentIdEqualTo(departmentId);
+			criteria.andDepartmentIdEqualTo(departmentId);
 		}
 		if(!Strings.isNullOrEmpty(sortId)){
 			sortStr = sortId+" "+sortType+", "+sortStr;
@@ -111,6 +111,7 @@ public class SysRoleService extends BaseService{
 		role.setName(editedRole.getName());
 		role.setCode(editedRole.getCode());
 		role.setStatus(editedRole.getStatus());
+		role.setDepartmentId(editedRole.getDepartmentId());
 		role.setRemarks(editedRole.getRemarks());
 		return update(role);
 	}
@@ -158,7 +159,7 @@ public class SysRoleService extends BaseService{
 	 */
 	public List<SysRole> getRolesByOwnerDepartment(int departmentId){
 		SysRoleExample example = new SysRoleExample();
-		example.or().andDapartmentIdEqualTo(departmentId);
+		example.or().andDepartmentIdEqualTo(departmentId);
 		List<SysRole> roles = sysRoleDAO.selectByExample(example);
 		return roles;
 	}

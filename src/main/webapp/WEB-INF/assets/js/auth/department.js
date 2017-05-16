@@ -65,7 +65,7 @@ Department.List = function (postData){
 		});
 	
 		$("#main-table").jqGrid('navGrid', '#pager', 
-			{edit : true,add : true,del : true,search:false},
+			{edit : true,add : true,del : true,search:false,addfunc:Department.OpenAdd,editfunc:Department.OpenUpdate},
 			{closeAfterEdit: true,viewPagerButtons: false},
 			{url:CTX_PATH+"/auth/departments/add",closeAfterAdd: true,
 				beforeSubmit : function(postdata, formid) {
@@ -79,6 +79,106 @@ Department.List = function (postData){
 		$("#main-table").jqGrid().setGridParam({'postData':postData});
 		$("#main-table").jqGrid().trigger('reloadGrid');
 	
+}
+
+//打开添加部门
+Department.OpenAdd = function(){
+	var data = {};
+	$.when($.post(CTX_PATH + "/auth/departments/list", {pageNum : 0, pageSize : 0})).done(function(d2){
+		var result2 = JSON.parse(d2);
+		if(result2.resultCode == '200'){
+			data.department = {};
+			var treeObj = $.fn.zTree.getZTreeObj("department-tree");
+			var nodes=treeObj.getSelectedNodes();
+			if(nodes != null && nodes.length > 0){
+				data.department.parentId = nodes[0].id;
+			}
+			data.parentDepartment = result2.data.list;
+			var html = template('department_tpl', data);
+			layer.open({
+				type: 1,
+				title: '添加部门',
+				skin: 'layui-layer-rim', 
+				area: ['480px','auto'], 
+				closeBtn: 1,
+				content:html
+			});
+		} else {
+			alert("程序异常");
+		}
+	});
+}
+
+//打开修改角色
+Department.OpenEdit = function(departmentId){
+	var data = {};
+	if(roleId > 0){
+		$.when($.post(CTX_PATH + "/auth/departments/get", {departmentId : departmentId}),
+			$.post(CTX_PATH + "/auth/departments/list", {pageNum : 0, pageSize : 0})).done(function(d1, d2){
+				var result1 = JSON.parse(d1[0]);
+				var result2 = JSON.parse(d2[0]);
+				var list = [];
+				
+				//上级部门中去除本身
+				for(var i=0;i<result2.data.list.length;i++){
+					if(result2.data.list[i].id != result1.data.id){
+						list.add(result2.data.list[i]);
+					}
+				}
+				
+				if(result1.resultCode == '200' && result2.resultCode == '200'){
+					data.department = result1.data;
+					data.parentDepartment = list;
+					var html = template('department_tpl', data);
+					layer.open({
+					  type: 1,
+					  title: '修改部门',
+					  skin: 'layui-layer-rim', 
+					  area: ['480px','auto'], 
+					  closeBtn: 1,
+					  content:html
+					});
+				} else {
+					alert("程序异常");
+				}
+		});
+	} else {
+		Department.OpenAdd();
+	}
+}
+
+//更新部门信息
+Department.Update = function (serialize){
+	$.post(CTX_PATH + "/auth/departments/update", serialize,
+		function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				layer.close(layer.index);
+				layer.msg('修改成功', {icon: 1});
+				$("#main-table").trigger("reloadGrid");
+			} else {
+				layer.msg('程序异常', {icon: 2});
+			}
+	}).error(function(xhr,errorText,errorType){
+		layer.msg('系统错误', {icon: 2});
+	});
+}
+
+//新增部门信息
+Department.Add = function (serialize){
+	$.post(CTX_PATH + "/auth/departments/add", serialize,
+		function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				layer.close(layer.index);
+				layer.msg('添加成功', {icon: 1});
+				$("#main-table").trigger("reloadGrid");
+			} else {
+				layer.msg('程序异常', {icon: 2});
+			}
+	}).error(function(xhr,errorText,errorType){
+		layer.msg('系统错误', {icon: 2});
+	});
 }
 
 //获取全部部门

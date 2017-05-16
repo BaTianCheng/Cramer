@@ -41,6 +41,75 @@
 </section>
 <!-- end widgetGrid -->
 
+<script id="role_tpl" type="text/html">
+	<form action="" id="role-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">角色名称：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="name" name="name" value="{{role.name}}" placeholder="角色名称">
+						<input type="hidden" id="id" name="id" value="{{role.id}}">
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">角色状态：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="select"> <select id="status" name="status">
+						<option value="1" {{if role.status == 1}}selected{{/if}}>启用</option>
+						<option value="2" {{if role.status == 2}}selected{{/if}}>锁定</option>
+						<option value="-1" {{if role.status == -1}}selected{{/if}}>已删除</option>
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">所在部门：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="select"> <select id="departmentId" name="departmentId">
+						{{each department as value i}}
+							<option value="{{value.id}}" {{if value.id == role.departmentId}}selected{{/if}}>{{value.name}}</option>
+						{{/each}}
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">备注信息：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="remarks" name="remarks" value="{{role.remarks}}" placeholder="备注信息">
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
+			<button type="submit" class="btn btn-primary" onClick="
+				{{if role.id != null}}
+					Role.Update($('#role-form').serialize())
+				{{else}}
+					Role.Add($('#role-form').serialize())
+				{{/if}}
+			">保存</button>
+		</footer>
+	</form>
+</script>
+
 <script id="authorities_tpl" type="text/html">
 <form action="" id="authority-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 	<fieldset>

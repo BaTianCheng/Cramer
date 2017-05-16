@@ -16,7 +16,7 @@ public class SysRole {
 
     private Integer parentId;
 
-    private Integer dapartmentId;
+    private Integer departmentId;
 
     private Integer sort;
 
@@ -30,7 +30,7 @@ public class SysRole {
 
     private String remarks;
     
-    private String dapartmentName;
+    private String departmentName;
     
     private List<Integer> authorityIds;
     
@@ -84,12 +84,12 @@ public class SysRole {
         this.parentId = parentId;
     }
 
-    public Integer getDapartmentId() {
-        return dapartmentId;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDapartmentId(Integer dapartmentId) {
-        this.dapartmentId = dapartmentId;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Integer getSort() {
@@ -140,12 +140,12 @@ public class SysRole {
         this.remarks = remarks == null ? null : remarks.trim();
     }
 
-	public String getDapartmentName() {
-		return dapartmentName;
+	public String getDepartmentName() {
+		return departmentName;
 	}
 
-	public void setDapartmentName(String dapartmentName) {
-		this.dapartmentName = dapartmentName;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 	public List<Integer> getAuthorityIds() {

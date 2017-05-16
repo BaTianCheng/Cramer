@@ -485,63 +485,63 @@ public class SysRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdIsNull() {
-            addCriterion("role.dapartment_id is null");
+        public Criteria andDepartmentIdIsNull() {
+            addCriterion("role.department_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdIsNotNull() {
-            addCriterion("role.dapartment_id is not null");
+        public Criteria andDepartmentIdIsNotNull() {
+            addCriterion("role.department_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdEqualTo(Integer value) {
-            addCriterion("role.dapartment_id =", value, "dapartmentId");
+        public Criteria andDepartmentIdEqualTo(Integer value) {
+            addCriterion("role.department_id =", value, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdNotEqualTo(Integer value) {
-            addCriterion("role.dapartment_id <>", value, "dapartmentId");
+        public Criteria andDepartmentIdNotEqualTo(Integer value) {
+            addCriterion("role.department_id <>", value, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdGreaterThan(Integer value) {
-            addCriterion("role.dapartment_id >", value, "dapartmentId");
+        public Criteria andDepartmentIdGreaterThan(Integer value) {
+            addCriterion("role.department_id >", value, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("role.dapartment_id >=", value, "dapartmentId");
+        public Criteria andDepartmentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("role.department_id >=", value, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdLessThan(Integer value) {
-            addCriterion("role.dapartment_id <", value, "dapartmentId");
+        public Criteria andDepartmentIdLessThan(Integer value) {
+            addCriterion("role.department_id <", value, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdLessThanOrEqualTo(Integer value) {
-            addCriterion("role.dapartment_id <=", value, "dapartmentId");
+        public Criteria andDepartmentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("role.department_id <=", value, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdIn(List<Integer> values) {
-            addCriterion("role.dapartment_id in", values, "dapartmentId");
+        public Criteria andDepartmentIdIn(List<Integer> values) {
+            addCriterion("role.department_id in", values, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdNotIn(List<Integer> values) {
-            addCriterion("role.dapartment_id not in", values, "dapartmentId");
+        public Criteria andDepartmentIdNotIn(List<Integer> values) {
+            addCriterion("role.department_id not in", values, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdBetween(Integer value1, Integer value2) {
-            addCriterion("role.dapartment_id between", value1, value2, "dapartmentId");
+        public Criteria andDepartmentIdBetween(Integer value1, Integer value2) {
+            addCriterion("role.department_id between", value1, value2, "departmentId");
             return (Criteria) this;
         }
 
-        public Criteria andDapartmentIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("role.dapartment_id not between", value1, value2, "dapartmentId");
+        public Criteria andDepartmentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("role.department_id not between", value1, value2, "departmentId");
             return (Criteria) this;
         }
 

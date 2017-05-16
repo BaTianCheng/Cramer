@@ -8,14 +8,14 @@
     <result column="role_type" jdbcType="INTEGER" property="type" />
     <result column="role_status" jdbcType="INTEGER" property="status" />
     <result column="role_parent_id" jdbcType="INTEGER" property="parentId" />
-    <result column="role_dapartment_id" jdbcType="INTEGER" property="dapartmentId" />
+    <result column="role_department_id" jdbcType="INTEGER" property="departmentId" />
     <result column="role_sort" jdbcType="INTEGER" property="sort" />
     <result column="role_create_by" jdbcType="INTEGER" property="createBy" />
     <result column="role_create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="role_update_by" jdbcType="INTEGER" property="updateBy" />
     <result column="role_update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="role_remarks" jdbcType="VARCHAR" property="remarks" />
-    <result column="department_name" jdbcType="VARCHAR" property="dapartmentName" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <collection property="authorityIds" ofType="java.lang.Integer" column="role_id">  
         <id column="authority_id" property="id"/>  
     </collection>
@@ -39,7 +39,7 @@
   </resultMap>
   
   <sql id="Joins">
-		LEFT JOIN sys_department department ON role.dapartment_id = department.id 
+		LEFT JOIN sys_department department ON role.department_id = department.id 
 		LEFT JOIN sys_role_authority role_authority ON role.id = role_authority.role_id 
 		LEFT JOIN sys_authority authority ON role_authority.authority_id = authority.id
   </sql>
@@ -104,7 +104,7 @@
   </sql>
   <sql id="Base_Column_List">
     role.id as role_id, role.name as role_name, role.code as role_code, role.type as role_type, 
-    role.status as role_status, role.parent_id as role_parent_id, role.dapartment_id as role_dapartment_id, 
+    role.status as role_status, role.parent_id as role_parent_id, role.department_id as role_department_id, 
     role.sort as role_sort, role.create_by as role_create_by, role.create_time as role_create_time, 
     role.update_by as role_update_by, role.update_time as role_update_time, role.remarks as role_remarks,
     department.name as department_name,
@@ -160,12 +160,12 @@
   <insert id="insert" parameterType="com.cw.cramer.auth.entity.SysRole">
     insert into sys_role (id, name, code, 
       type, status, parent_id, 
-      dapartment_id, sort, create_by, 
+      department_id, sort, create_by, 
       create_time, update_by, update_time, 
       remarks)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
       #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
-      #{dapartmentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
+      #{departmentId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{remarks,jdbcType=VARCHAR})
   </insert>
@@ -190,8 +190,8 @@
       <if test="parentId != null">
         parent_id,
       </if>
-      <if test="dapartmentId != null">
-        dapartment_id,
+      <if test="departmentId != null">
+        department_id,
       </if>
       <if test="sort != null">
         sort,
@@ -231,8 +231,8 @@
       <if test="parentId != null">
         #{parentId,jdbcType=INTEGER},
       </if>
-      <if test="dapartmentId != null">
-        #{dapartmentId,jdbcType=INTEGER},
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="sort != null">
         #{sort,jdbcType=INTEGER},
@@ -281,8 +281,8 @@
       <if test="record.parentId != null">
         role.parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
-      <if test="record.dapartmentId != null">
-        role.dapartment_id = #{record.dapartmentId,jdbcType=INTEGER},
+      <if test="record.departmentId != null">
+        role.department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
       <if test="record.sort != null">
         role.sort = #{record.sort,jdbcType=INTEGER},
@@ -315,7 +315,7 @@
       role.type = #{record.type,jdbcType=INTEGER},
       role.status = #{record.status,jdbcType=INTEGER},
       role.parent_id = #{record.parentId,jdbcType=INTEGER},
-      role.dapartment_id = #{record.dapartmentId,jdbcType=INTEGER},
+      role.department_id = #{record.departmentId,jdbcType=INTEGER},
       role.sort = #{record.sort,jdbcType=INTEGER},
       role.create_by = #{record.createBy,jdbcType=INTEGER},
       role.create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -344,8 +344,8 @@
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=INTEGER},
       </if>
-      <if test="dapartmentId != null">
-        dapartment_id = #{dapartmentId,jdbcType=INTEGER},
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
@@ -375,7 +375,7 @@
       type = #{type,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
-      dapartment_id = #{dapartmentId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       create_by = #{createBy,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

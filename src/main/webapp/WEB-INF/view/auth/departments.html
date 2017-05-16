@@ -43,6 +43,75 @@
 </section>
 <!-- end widgetGrid -->
 
+<script id="department_tpl" type="text/html">
+	<form action="" id="department-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">部门名称：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="name" name="name" value="{{department.name}}" placeholder="部门名称">
+						<input type="hidden" id="id" name="id" value="{{department.id}}">
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">部门状态：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="select"> <select id="status" name="status">
+						<option value="1" {{if department.status == 1}}selected{{/if}}>启用</option>
+						<option value="2" {{if department.status == 2}}selected{{/if}}>锁定</option>
+						<option value="-1" {{if department.status == -1}}selected{{/if}}>已删除</option>
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">上级部门：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="select"> <select id="parentId" name="parentId">
+						{{each parentDepartment as value i}}
+							<option value="{{value.id}}" {{if value.id == department.parentId}}selected{{/if}}>{{value.name}}</option>
+						{{/each}}
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">备注信息：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="remarks" name="remarks" value="{{department.remarks}}" placeholder="备注信息">
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
+			<button type="submit" class="btn btn-primary" onClick="
+				{{if department.id != null}}
+					Department.Update($('#department-form').serialize())
+				{{else}}
+					Department.Add($('#department-form').serialize())
+				{{/if}}
+			">保存</button>
+		</footer>
+	</form>
+</script>
+
 <script id="roles_tpl" type="text/html">
 <form action="" id="role-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 	<fieldset>
