@@ -83,5 +83,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<!-- Spring手动获取Bean工具类，需要配置在XML文件才能自动获取上下文 -->
+	<bean id="springBeanUtils" class="com.cw.cramer.common.util.SpringBeanUtils" />
 
 </beans>

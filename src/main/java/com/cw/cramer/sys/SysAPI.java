@@ -20,7 +20,7 @@ public class SysAPI {
 	
 	@Autowired
 	SysOperateLogService sysOperateLogService;
-
+	
 	/**
 	 * 获取下一个序列
 	 * @param seqName
