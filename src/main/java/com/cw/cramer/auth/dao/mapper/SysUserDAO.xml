@@ -438,4 +438,7 @@
       Remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectNextSortId" resultType="java.lang.Integer" >
+  	select (case when max(sort) is NULL then 1 else max(sort)+1 end) from sys_user
+  </select>
 </mapper>

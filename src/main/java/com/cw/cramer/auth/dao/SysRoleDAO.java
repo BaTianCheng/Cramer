@@ -29,4 +29,6 @@ public interface SysRoleDAO {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+    
+    int selectNextSortId();
 }

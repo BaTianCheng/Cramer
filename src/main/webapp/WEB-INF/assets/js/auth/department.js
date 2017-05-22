@@ -8,10 +8,22 @@ Department.List = function (postData){
 			datatype : "json",
 			autowidth:true,
 			height:'auto',
-			colNames : [ '编号', '名称', '备注', '操作'],
+			colNames : [ '编号', '名称', '状态', '备注', '操作'],
 			colModel : 
 				[{name : 'id',index : 'id',width : 55,fixed:true, sortable:false}, 
 				 {name : 'name',index : 'name asc, id',width : 100,editable :true,sortable:false},
+				 {name : 'status',index : 'user.status',width : 80,editable :true, align:'center',
+					 formatter: function(cellValue, options, rowObject) {  
+						switch(cellValue){
+							case -1 : return '已删除';
+							case 0 : return '不可用';
+							case 1 : return '可用';
+							case 2 : return '锁定';
+							default	: return cellValue;
+						}
+					 } ,
+				 	 edittype:'select', editoptions:{value:{0:'不可用', 1:'可用', 2:'锁定'}}
+				 },
 				 {name : 'remarks',index : 'remarks',width : 120,editable :true,sortable:false},
 				 {name : 'actions',index : 'actions',width : 80, align:'center',title:false,sortable:false}],
 			jsonReader : {   
@@ -51,14 +63,12 @@ Department.List = function (postData){
 	            var ids = jQuery("#main-table").jqGrid('getDataIDs');
 	            for ( var i = 0; i < ids.length; i++) {
 	              var cl = ids[i];
-	              be = "<a id=\"td-edit-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:editRow('"+ cl + "');\">编辑</a>";
+	              be = "<a id=\"td-edit-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:Department.OpenEdit('"+ cl + "');\">编辑</a>";
 	              de = "<a id=\"td-del-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
-	              se = "<a id=\"td-save-"+cl+"\" style=\"display:none;margin-left:5px;margin-right:5px;\" href=\"javascript:saveRow('"+ cl + "');\">保存</a>";
-	              ce = "<a id=\"td-canel-"+cl+"\" style=\"display:none;margin-left:5px;margin-right:5px;\" href=\"javascript:restoreRow('"+ cl + "');\">取消</a>";
 	              ae = "<a id=\"td-role-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:Department.OpenRole('"+ cl + "');\">角色</a>";
 	              jQuery("#main-table").jqGrid('setRowData', ids[i],
 	                  {
-	            	  	actions : be + de + se + ce + ae
+	            	  	actions : be + de + ae
 	                  });
 	            }
 	        }
@@ -109,7 +119,7 @@ Department.OpenAdd = function(){
 	});
 }
 
-//打开修改角色
+//打开修改部门
 Department.OpenEdit = function(departmentId){
 	var data = {};
 	if(roleId > 0){

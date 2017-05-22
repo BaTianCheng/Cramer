@@ -72,6 +72,7 @@
 				<section class="col col-9 ">
 					<label class="select"> <select id="status" name="status">
 						<option value="1" {{if user.status == 1}}selected{{/if}}>启用</option>
+						<option value="0" {{if user.status == 0}}selected{{/if}}>不启用</option>
 						<option value="2" {{if user.status == 2}}selected{{/if}}>锁定</option>
 						<option value="-1" {{if user.status == -1}}selected{{/if}}>已删除</option>
 					</select> <i></i>
@@ -95,6 +96,18 @@
 						<option value="{{value.id}}" {{if value.id == user.departmentId}}selected{{/if}}>{{value.name}}</option>
 						{{/each}}
 					</select> <i></i>
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">排序编号：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="sort" name="sort" value="{{user.sort}}" placeholder="排序编号" 
+							onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false">
 					</label>
 				</section>
 			</div>

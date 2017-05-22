@@ -91,7 +91,9 @@ public class SysDepartmentService extends BaseService{
 	 */
 	public boolean insert(SysDepartment Department){
 		Department.setId(getNextSeq(SequenceConstant.SEQ_SYSDEPARTMENTID));
-		Department.setStatus(StatusConstant.STATUS_ENABLED);
+		if(Department.getSort() == null){
+			Department.setSort(sysDepartmentDAO.selectNextSortId());
+		}
 		return sysDepartmentDAO.insert(Department)>0 ? true : false;
 	}
 	

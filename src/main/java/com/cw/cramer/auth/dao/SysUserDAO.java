@@ -29,4 +29,6 @@ public interface SysUserDAO {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+    
+    int selectNextSortId();
 }

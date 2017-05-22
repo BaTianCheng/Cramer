@@ -9,6 +9,9 @@ public class StatusConstant {
 	//删除状态
 	public static int STATUS_DELETED = -1;
 	
+	//不可用状态
+	public static int STATUS_UNENABLED = 0;
+	
 	//可用状态
 	public static int STATUS_ENABLED = 1;
 	
