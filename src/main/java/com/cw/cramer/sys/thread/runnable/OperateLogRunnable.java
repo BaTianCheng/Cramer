@@ -42,8 +42,10 @@ public class OperateLogRunnable implements Runnable{
 			if(getQueueSize()>=CommonConstant.LOGQUEUE_SIZE || System.currentTimeMillis()-lastTime>CommonConstant.LOG_TIME){
 				lastTime = System.currentTimeMillis();
 				LogUtils.info("线程启动——插入操作记录");
-				while(!CommonConstant.logQueue.isEmpty()){
-					sysOperateLogService.insert(CommonConstant.logQueue.poll());
+				synchronized (this) {
+					while(!CommonConstant.logQueue.isEmpty()){
+						sysOperateLogService.insert(CommonConstant.logQueue.poll());
+					}
 				}
 			} else {
 				try {

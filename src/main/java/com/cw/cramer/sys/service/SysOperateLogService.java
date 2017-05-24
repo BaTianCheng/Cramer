@@ -62,7 +62,6 @@ public class SysOperateLogService {
 		sysOperateLog.setOperateIp(securityService.getCurrentSession().getHost());
 		sysOperateLog.setOperateBy(securityService.getCurrentUser().getId());
 		sysOperateLog.setOperateTime(DateTimeUtils.getCurrentTime());
-		//insert(sysOperateLog);
 		CommonConstant.logThread.insertQueue(sysOperateLog);
 	}
 	
