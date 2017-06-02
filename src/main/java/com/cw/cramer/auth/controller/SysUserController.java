@@ -70,9 +70,9 @@ public class SysUserController extends BaseController{
 	@RequestMapping(value = "/auth/users/update/info", method=RequestMethod.POST)
 	@ResponseBody
 	public String updateUser(HttpServletRequest request, Model model, String oper, SysUser user) {
-		boolean isSuccess = sysUserService.updateInfo(user);
+		boolean isSuccess = sysUserService.updateInfo(user);request.getQueryString();
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Update, "修改用户");
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改用户："+user.getName());
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -88,7 +88,7 @@ public class SysUserController extends BaseController{
 	public String add(HttpServletRequest request, Model model, SysUser user) {
 		boolean isSuccess = sysUserService.insertInfo(user);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Insert, "新增用户");
+			this.record(ModuleType.Auth, OperateLogType.Insert, "新增用户："+user.getName());
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -120,7 +120,7 @@ public class SysUserController extends BaseController{
 	public String deleteUser(HttpServletRequest request, Model model, int id) {
 		boolean isSuccess = sysUserService.delete(id);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Delete, "删除用户");
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除用户，编号："+id);
 		}
 		return this.renderJson(isSuccess);
 	}
