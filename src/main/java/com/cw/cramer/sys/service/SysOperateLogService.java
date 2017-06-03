@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.ModuleType;
 import com.cw.cramer.common.constant.OperateLogType;
 import com.cw.cramer.common.constant.SequenceConstant;
@@ -36,6 +37,15 @@ public class SysOperateLogService {
 	
 	/**
 	 * 日志记录
+	 * @param sysOperateLog
+	 */
+	public void insert(SysOperateLog sysOperateLog){
+		sysOperateLog.setId(sysSequenceService.getNextSeq(SequenceConstant.SEQ_SYSOPERATELOGID));
+		sysOperateLogDAO.insert(sysOperateLog);
+	}
+	
+	/**
+	 * 日志记录
 	 * @param moduleType
 	 * @param logType
 	 * @param description
@@ -44,16 +54,15 @@ public class SysOperateLogService {
 	 */
 	public void record(ModuleType moduleType, OperateLogType logType, String description, String url, String remarks){
 		SysOperateLog sysOperateLog = new SysOperateLog();
-		sysOperateLog.setId(sysSequenceService.getNextSeq(SequenceConstant.SEQ_SYSOPERATELOGID));
-		sysOperateLog.setOperateIp(securityService.getCurrentSession().getHost());
-		sysOperateLog.setOperateBy(securityService.getCurrentUser().getId());
-		sysOperateLog.setOperateTime(DateTimeUtils.getCurrentTime());
 		sysOperateLog.setOperateType(logType.getValue());
 		sysOperateLog.setContent(description);
 		sysOperateLog.setModuleId(moduleType.getValue());
 		sysOperateLog.setUrl(url);
 		sysOperateLog.setRemarks(remarks);
-		sysOperateLogDAO.insert(sysOperateLog);
+		sysOperateLog.setOperateIp(securityService.getCurrentSession().getHost());
+		sysOperateLog.setOperateBy(securityService.getCurrentUser().getId());
+		sysOperateLog.setOperateTime(DateTimeUtils.getCurrentTime());
+		CommonConstant.logThread.insertQueue(sysOperateLog);
 	}
 	
 	/**

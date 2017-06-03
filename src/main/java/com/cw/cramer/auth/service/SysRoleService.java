@@ -86,7 +86,9 @@ public class SysRoleService extends BaseService{
 	 */
 	public boolean insert(SysRole role){
 		role.setId(getNextSeq(SequenceConstant.SEQ_SYSROLEID));
-		role.setStatus(StatusConstant.STATUS_ENABLED);
+		if(role.getSort() == null){
+			role.setSort(sysRoleDAO.selectNextSortId());
+		}
 		return sysRoleDAO.insert(role)>0 ? true : false;
 	}
 	

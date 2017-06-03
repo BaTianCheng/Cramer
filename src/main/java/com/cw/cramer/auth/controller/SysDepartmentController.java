@@ -72,7 +72,7 @@ public class SysDepartmentController extends BaseController{
 	public String update(HttpServletRequest request, Model model, String oper, SysDepartment department) {
 		boolean isSuccess = sysDepartmentService.updateInfo(department);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Update, "修改部门");
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改部门："+department.getName());
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -88,7 +88,7 @@ public class SysDepartmentController extends BaseController{
 	public String add(HttpServletRequest request, Model model, SysDepartment department) {
 		boolean isSuccess = sysDepartmentService.insert(department);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Insert, "新增部门");
+			this.record(ModuleType.Auth, OperateLogType.Insert, "新增部门："+department.getName());
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -104,7 +104,7 @@ public class SysDepartmentController extends BaseController{
 	public String delete(HttpServletRequest request, Model model, int departmentId) {
 		boolean isSuccess = sysDepartmentService.delete(departmentId);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Delete, "删除部门");
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除部门，编号："+departmentId);
 		}
 		return this.renderJson(isSuccess);
 	}

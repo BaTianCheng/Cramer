@@ -65,8 +65,8 @@
 				<section class="col col-9 ">
 					<label class="select"> <select id="status" name="status">
 						<option value="1" {{if department.status == 1}}selected{{/if}}>启用</option>
+						<option value="0" {{if department.status == 0}}selected{{/if}}>不可用</option>
 						<option value="2" {{if department.status == 2}}selected{{/if}}>锁定</option>
-						<option value="-1" {{if department.status == -1}}selected{{/if}}>已删除</option>
 					</select> <i></i>
 					</label>
 				</section>

@@ -8,11 +8,23 @@ Role.List = function (postData){
 		datatype : "json",
 		autowidth:true,
 		height:'auto',
-		colNames : [ '编号', '名称', '部门', '备注', '操作'],
+		colNames : [ '编号', '名称', '部门', '状态', '备注', '操作'],
 		colModel : 
 			[{name : 'id',index : 'id',width : 55,fixed:true}, 
 			 {name : 'name',index : 'name',width : 100,editable :true}, 
 			 {name : 'departmentName',index : 'departmentName',width : 80,editable :true},
+			 {name : 'status',index : 'user.status',width : 80,editable :true, align:'center',
+				 formatter: function(cellValue, options, rowObject) {  
+					switch(cellValue){
+						case -1 : return '已删除';
+						case 0 : return '不可用';
+						case 1 : return '可用';
+						case 2 : return '锁定';
+						default	: return cellValue;
+					}
+				 } ,
+			 	 edittype:'select', editoptions:{value:{0:'不可用', 1:'可用', 2:'锁定'}}
+			 },
 			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
 			 {name : 'actions',width : 80, align:'center', title:false,sortable:false}],
 		jsonReader : {   
@@ -50,7 +62,7 @@ Role.List = function (postData){
             var ids = jQuery("#main-table").jqGrid('getDataIDs');
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
-              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:editRow('"+ cl + "');\">编辑</a>";
+              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenEdit('"+ cl + "');\">编辑</a>";
               de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
               ae = "<a id=\"td-authority-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenAuthority('"+ cl + "');\">权限</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],

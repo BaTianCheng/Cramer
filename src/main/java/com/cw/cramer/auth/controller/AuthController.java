@@ -80,6 +80,7 @@ public class AuthController extends BaseController{
 			return this.renderFailJson(null);
 		}catch (Exception e) {
 			LogUtils.error("login fail: " + e);
+			LogUtils.error(e.getStackTrace().toString());
 			return this.renderFailJson(null);
 		}
 	}

@@ -87,7 +87,7 @@ public class SysRoleController extends BaseController{
 	public String update(HttpServletRequest request, Model model, String oper, SysRole role) {
 		boolean isSuccess = sysRoleService.updateInfo(role);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Update, "修改角色");
+			this.record(ModuleType.Auth, OperateLogType.Update, "修改角色："+role.getName());
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -103,7 +103,7 @@ public class SysRoleController extends BaseController{
 	public String add(HttpServletRequest request, Model model, @RequestParam("id") String id, SysRole role) {
 		boolean isSuccess = sysRoleService.insert(role);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Insert, "增加角色");
+			this.record(ModuleType.Auth, OperateLogType.Insert, "增加角色："+role.getName());
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -119,7 +119,7 @@ public class SysRoleController extends BaseController{
 	public String delete(HttpServletRequest request, Model model, int roleId) {
 		boolean isSuccess = sysRoleService.delete(roleId);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Delete, "删除角色");
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除角色，编号："+roleId);
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -135,7 +135,7 @@ public class SysRoleController extends BaseController{
 	public String updateRoleAuthorities(HttpServletRequest request, Model model, int departmentId, Integer[] roleIds) {
 		boolean isSuccess = sysRoleService.updateDepartmentRoles(departmentId, Arrays.asList(roleIds));
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Update, "更新部门角色");
+			this.record(ModuleType.Auth, OperateLogType.Update, "更新部门角色，部门编号："+departmentId);
 		}
 		return this.renderJson(isSuccess);
 	}

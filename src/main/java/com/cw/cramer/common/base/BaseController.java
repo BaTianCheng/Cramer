@@ -1,5 +1,7 @@
 package com.cw.cramer.common.base;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,7 @@ import com.cw.cramer.common.base.entity.Result;
 import com.cw.cramer.common.constant.ModuleType;
 import com.cw.cramer.common.constant.OperateLogType;
 import com.cw.cramer.common.constant.ResultConstant;
+import com.cw.cramer.common.util.LogUtils;
 import com.cw.cramer.core.security.SecurityService;
 import com.cw.cramer.sys.SysAPI;
 
@@ -104,12 +107,20 @@ public class BaseController {
 	
 	/**
 	 * 记录日志
+	 * (在数据库中记录日志，在文件中记录请求参数)
 	 * @param moduleType
 	 * @param logType
 	 * @param description
 	 */
 	public void record(ModuleType moduleType, OperateLogType logType, String description){
-		sysAPI.record(moduleType, logType, description, request.getRequestURI(), null);
+		UUID uuid = UUID.randomUUID();
+		sysAPI.record(moduleType, logType, description, request.getRequestURI(), uuid.toString());
+		StringBuilder sb = new StringBuilder();
+		sb.append("REQ_LOG_");
+		sb.append(uuid.toString());
+		sb.append("   ");
+		sb.append(JSON.toJSONString(request.getParameterMap()));
+		LogUtils.info(sb.toString());
 	}
 
 }

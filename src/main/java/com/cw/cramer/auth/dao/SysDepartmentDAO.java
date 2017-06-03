@@ -29,4 +29,6 @@ public interface SysDepartmentDAO {
     int updateByPrimaryKeySelective(SysDepartment record);
 
     int updateByPrimaryKey(SysDepartment record);
+    
+    int selectNextSortId();
 }

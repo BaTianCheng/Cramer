@@ -111,6 +111,7 @@ public class SysUserService extends BaseService{
 		} else {
 			return new PageInfo<SysUser>(new ArrayList<SysUser>());
 		}
+		exampleId.setOrderByClause(sortStr);
 		List<SysUser> users = sysUserDAO.selectByExample(exampleId);
 		return new PageInfo<SysUser>(users);
 	}
@@ -122,10 +123,17 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean insertInfo(SysUser user){
 		user.setId(getNextSeq(SequenceConstant.SEQ_SYSUSERID));
+		//密码加密
 		if(!Strings.isNullOrEmpty(user.getPassword())){
 			user.setPassword(EncryptionUtils.EncoderByMd5(user.getPassword()));
 		}
+		//自动排序
+		if(user.getSort() == null){
+			user.setSort(sysUserDAO.selectNextSortId());
+		}
+		//添加机构关联
 		sysUserDepartmentDAO.insert(new SysUserDepartment(){{this.setUserId(user.getId());this.setDepartmentId(user.getDepartmentId());}});
+		//添加角色关联
 		if(user.getRoleIds() != null){
 			for(Integer roleId : user.getRoleIds()){
 				sysUserRoleDAO.insert(new SysUserRole(){{this.setUserId(user.getId());this.setRoleId(roleId);}});
@@ -181,6 +189,7 @@ public class SysUserService extends BaseService{
 		user.setRemarks(editedUser.getRemarks());
 		user.setDepartmentId(editedUser.getDepartmentId());
 		user.setRoleIds(editedUser.getRoleIds());
+		user.setSort(editedUser.getSort());
 		sysUserDepartmentDAO.deleteByExample(new SysUserDepartmentExample(){{this.or().andUserIdEqualTo(user.getId());}});
 		sysUserDepartmentDAO.insert(new SysUserDepartment(){{this.setUserId(user.getId());this.setDepartmentId(user.getDepartmentId());}});
 		sysUserRoleDAO.deleteByExample(new SysUserRoleExample(){{this.or().andUserIdEqualTo(user.getId());}});

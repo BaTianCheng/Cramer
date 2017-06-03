@@ -32,12 +32,14 @@ User.List = function (){
 			 {name : 'status',index : 'user.status',width : 80,editable :true, align:'center',
 				 formatter: function(cellValue, options, rowObject) {  
 					switch(cellValue){
+						case -1 : return '已删除';
+						case 0 : return '不可用';
 						case 1 : return '可用';
 						case 2 : return '锁定';
 						default	: return cellValue;
 					}
 				 } ,
-			 	 edittype:'select', editoptions:{value:{0:'可用', 1:'不可用'}}
+			 	 edittype:'select', editoptions:{value:{0:'不可用', 1:'可用', 2:'锁定'}}
 			 },
 			 {name : 'remarks',index : 'user.remarks',width : 120,editable :true},
 			 {name : 'actions',width : 80, align:'center',title:false,sortable:false}],
@@ -186,9 +188,9 @@ User.ShowDepartmentRoles = function (departmentId, roleIds){
 		var data = {};
 		data.role = result;
 		if(roleIds == null || roleIds == 0){
-			data.roleIds = roleIds;
-		} else {
 			data.roleIds = [];
+		} else {
+			data.roleIds = roleIds;
 		}
 		var html = template('department_role_tpl', data);
 		$('#departmentRoles').html(html);
