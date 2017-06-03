@@ -82,7 +82,7 @@ Role.List = function (postData){
 				return [ true, '' ];
 			}
 		},
-		{url:CTX_PATH+"/auth/roles/delte"}
+		{url:CTX_PATH+"/auth/roles/delete"}
 	);
 	
 	$("#main-table").jqGrid().setGridParam({'postData':postData});

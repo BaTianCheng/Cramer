@@ -116,10 +116,10 @@ public class SysRoleController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/roles/delete", method=RequestMethod.POST)
 	@ResponseBody
-	public String delete(HttpServletRequest request, Model model, int roleId) {
-		boolean isSuccess = sysRoleService.delete(roleId);
+	public String delete(HttpServletRequest request, Model model, int id) {
+		boolean isSuccess = sysRoleService.delete(id);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Delete, "删除角色，编号："+roleId);
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除角色，编号："+id);
 		}
 		return this.renderJson(isSuccess);
 	}

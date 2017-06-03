@@ -51,6 +51,7 @@ $(document).ready(function(){
 	}
 });
 
+
 function editRow(cl){
 	$("#td-edit-"+cl).hide();
 	$("#td-del-"+cl).hide();
