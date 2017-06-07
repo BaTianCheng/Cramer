@@ -84,6 +84,9 @@ Department.List = function (postData){
 			}
 		},
 		{url:CTX_PATH+"/auth/departments/delete",
+			onclickSubmit : function(params, postdata) {
+				return {departmentId : postdata};
+			},
 			afterSubmit: function(xhr, postData){
 				$('#department-tree').departmentZtree({'callback':zTreeOnClick});
 				return [true,"删除成功",postData.id];

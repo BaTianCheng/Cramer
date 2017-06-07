@@ -33,4 +33,6 @@ public interface MsgNoticeDAO {
     int updateByPrimaryKeyWithBLOBs(MsgNotice record);
 
     int updateByPrimaryKey(MsgNotice record);
+    
+    int selectNextSortId();
 }

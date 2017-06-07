@@ -57,7 +57,7 @@ public class SysDepartmentService extends BaseService{
 	public PageInfo<SysDepartment> getSysDepartments(int pageNum, int pageSize, String DepartmentName, Integer parentId) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysDepartmentExample example = new SysDepartmentExample();
-		String sortStr = "department.sort, department.id";
+		String sortStr = "department.sort asc, department.id asc";
 		Criteria criteria = example.createCriteria();
 		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(DepartmentName)){

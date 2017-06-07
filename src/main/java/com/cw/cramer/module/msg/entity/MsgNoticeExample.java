@@ -285,73 +285,73 @@ public class MsgNoticeExample {
             return (Criteria) this;
         }
 
-        public Criteria andTitltIsNull() {
-            addCriterion("notice.titlt is null");
+        public Criteria andTitleIsNull() {
+            addCriterion("notice.title is null");
             return (Criteria) this;
         }
 
-        public Criteria andTitltIsNotNull() {
-            addCriterion("notice.titlt is not null");
+        public Criteria andTitleIsNotNull() {
+            addCriterion("notice.title is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTitltEqualTo(String value) {
-            addCriterion("notice.titlt =", value, "titlt");
+        public Criteria andTitleEqualTo(String value) {
+            addCriterion("notice.title =", value, "titlt");
             return (Criteria) this;
         }
 
-        public Criteria andTitltNotEqualTo(String value) {
-            addCriterion("notice.titlt <>", value, "titlt");
+        public Criteria andTitleNotEqualTo(String value) {
+            addCriterion("notice.title <>", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltGreaterThan(String value) {
-            addCriterion("notice.titlt >", value, "titlt");
+        public Criteria andTitleGreaterThan(String value) {
+            addCriterion("notice.title >", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltGreaterThanOrEqualTo(String value) {
-            addCriterion("notice.titlt >=", value, "titlt");
+        public Criteria andTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("notice.title >=", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltLessThan(String value) {
-            addCriterion("notice.titlt <", value, "titlt");
+        public Criteria andTitletLessThan(String value) {
+            addCriterion("notice.title <", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltLessThanOrEqualTo(String value) {
-            addCriterion("notice.titlt <=", value, "titlt");
+        public Criteria andTitleLessThanOrEqualTo(String value) {
+            addCriterion("notice.title <=", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltLike(String value) {
-            addCriterion("notice.titlt like", value, "titlt");
+        public Criteria andTitleLike(String value) {
+            addCriterion("notice.title like", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltNotLike(String value) {
-            addCriterion("notice.titlt not like", value, "titlt");
+        public Criteria andTitleNotLike(String value) {
+            addCriterion("notice.title not like", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltIn(List<String> values) {
-            addCriterion("notice.titlt in", values, "titlt");
+        public Criteria andTitleIn(List<String> values) {
+            addCriterion("notice.title in", values, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltNotIn(List<String> values) {
-            addCriterion("notice.titlt not in", values, "titlt");
+        public Criteria andTitleNotIn(List<String> values) {
+            addCriterion("notice.title not in", values, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltBetween(String value1, String value2) {
-            addCriterion("notice.titlt between", value1, value2, "titlt");
+        public Criteria andTitleBetween(String value1, String value2) {
+            addCriterion("notice.title between", value1, value2, "title");
             return (Criteria) this;
         }
 
-        public Criteria andTitltNotBetween(String value1, String value2) {
-            addCriterion("notice.titlt not between", value1, value2, "titlt");
+        public Criteria andTitleNotBetween(String value1, String value2) {
+            addCriterion("notice.title not between", value1, value2, "title");
             return (Criteria) this;
         }
 

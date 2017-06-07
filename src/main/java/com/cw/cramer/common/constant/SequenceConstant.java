@@ -21,5 +21,13 @@ public class SequenceConstant {
 	//系统操作日志序号
 	public static String SEQ_SYSOPERATELOGID = "seq_sys_operatelog_id";
 	
+	//通知公告序号
+	public static String SEQ_MSGNOTICEID = "seq_msg_notice_id";
+	
+	//站内信序号
+	public static String SEQ_MSGWEBMAILID = "seq_msg_web_mail_id";
+	
+	//站内信存件序号
+	public static String SEQ_MSGWEBMAILSTORAGEID = "seq_msg_web_mail_storage_id";
 	
 }

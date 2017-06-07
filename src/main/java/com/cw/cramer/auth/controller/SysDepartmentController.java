@@ -101,10 +101,10 @@ public class SysDepartmentController extends BaseController{
 	 */
 	@RequestMapping(value = "/auth/departments/delete", method=RequestMethod.POST)
 	@ResponseBody
-	public String delete(HttpServletRequest request, Model model, int id) {
-		boolean isSuccess = sysDepartmentService.delete(id);
+	public String delete(HttpServletRequest request, Model model, int departmentId) {
+		boolean isSuccess = sysDepartmentService.delete(departmentId);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Delete, "删除部门，编号："+id);
+			this.record(ModuleType.Auth, OperateLogType.Delete, "删除部门，编号："+departmentId);
 		}
 		return this.renderJson(isSuccess);
 	}

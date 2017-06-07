@@ -53,7 +53,7 @@ public class SysRoleService extends BaseService{
 	public PageInfo<SysRole> getSysRoles(int pageNum, int pageSize, Integer departmentId, String roleName, String sortId, String sortType) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysRoleExample example = new SysRoleExample();
-		String sortStr = "role.sort, role.id";
+		String sortStr = "role.sort asc, role.id asc";
 		Criteria criteria = example.createCriteria();
 		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(roleName)){

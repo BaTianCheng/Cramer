@@ -94,7 +94,7 @@ public class SysUserService extends BaseService{
 	public PageInfo<SysUser> getSysUsers(int pageNum, int pageSize, String userName, String sortId, String sortType) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysUserExample example = new SysUserExample();
-		String sortStr = "user.sort, user.id";
+		String sortStr = "user.sort asc, user.id asc";
 		if(!Strings.isNullOrEmpty(userName)){
 			example.or().andNameEqualTo(userName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
 		} else {

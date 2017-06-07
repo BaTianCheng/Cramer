@@ -27,4 +27,6 @@ public interface MsgWebMailStorageDAO {
     int updateByPrimaryKeySelective(MsgWebMailStorage record);
 
     int updateByPrimaryKey(MsgWebMailStorage record);
+    
+    int selectNextSortId();
 }

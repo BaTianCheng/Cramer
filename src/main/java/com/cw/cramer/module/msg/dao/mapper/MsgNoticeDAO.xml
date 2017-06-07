@@ -5,7 +5,7 @@
     <id column="notice_id" jdbcType="INTEGER" property="id" />
     <result column="notice_type" jdbcType="INTEGER" property="type" />
     <result column="notice_status" jdbcType="INTEGER" property="status" />
-    <result column="notice_titlt" jdbcType="VARCHAR" property="titlt" />
+    <result column="notice_title" jdbcType="VARCHAR" property="title" />
     <result column="notice_push_flag" jdbcType="INTEGER" property="pushFlag" />
     <result column="notice_top_flag" jdbcType="INTEGER" property="topFlag" />
     <result column="notice_sort" jdbcType="INTEGER" property="sort" />
@@ -78,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     notice.id as notice_id, notice.type as notice_type, notice.status as notice_status, 
-    notice.titlt as notice_titlt, notice.push_flag as notice_push_flag, notice.top_flag as notice_top_flag, 
+    notice.title as notice_title, notice.push_flag as notice_push_flag, notice.top_flag as notice_top_flag, 
     notice.sort as notice_sort, notice.create_by as notice_create_by, notice.create_time as notice_create_time, 
     notice.update_by as notice_update_by, notice.update_time as notice_update_time, notice.remarks as notice_remarks
   </sql>
@@ -137,12 +137,12 @@
   </delete>
   <insert id="insert" parameterType="com.cw.cramer.module.msg.entity.MsgNotice">
     insert into msg_notice (id, type, status, 
-      titlt, push_flag, top_flag, 
+      title, push_flag, top_flag, 
       sort, create_by, create_time, 
       update_by, update_time, remarks, 
       content)
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{titlt,jdbcType=VARCHAR}, #{pushFlag,jdbcType=INTEGER}, #{topFlag,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{pushFlag,jdbcType=INTEGER}, #{topFlag,jdbcType=INTEGER}, 
       #{sort,jdbcType=INTEGER}, #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateBy,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -159,8 +159,8 @@
       <if test="status != null">
         status,
       </if>
-      <if test="titlt != null">
-        titlt,
+      <if test="title != null">
+        title,
       </if>
       <if test="pushFlag != null">
         push_flag,
@@ -200,8 +200,8 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="titlt != null">
-        #{titlt,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="pushFlag != null">
         #{pushFlag,jdbcType=INTEGER},
@@ -250,8 +250,8 @@
       <if test="record.status != null">
         notice.status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.titlt != null">
-        notice.titlt = #{record.titlt,jdbcType=VARCHAR},
+      <if test="record.title != null">
+        notice.title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.pushFlag != null">
         notice.push_flag = #{record.pushFlag,jdbcType=INTEGER},
@@ -290,7 +290,7 @@
     set notice.id = #{record.id,jdbcType=INTEGER},
       notice.type = #{record.type,jdbcType=INTEGER},
       notice.status = #{record.status,jdbcType=INTEGER},
-      notice.titlt = #{record.titlt,jdbcType=VARCHAR},
+      notice.title = #{record.title,jdbcType=VARCHAR},
       notice.push_flag = #{record.pushFlag,jdbcType=INTEGER},
       notice.top_flag = #{record.topFlag,jdbcType=INTEGER},
       notice.sort = #{record.sort,jdbcType=INTEGER},
@@ -309,7 +309,7 @@
     set notice.id = #{record.id,jdbcType=INTEGER},
       notice.type = #{record.type,jdbcType=INTEGER},
       notice.status = #{record.status,jdbcType=INTEGER},
-      notice.titlt = #{record.titlt,jdbcType=VARCHAR},
+      notice.title = #{record.title,jdbcType=VARCHAR},
       notice.push_flag = #{record.pushFlag,jdbcType=INTEGER},
       notice.top_flag = #{record.topFlag,jdbcType=INTEGER},
       notice.sort = #{record.sort,jdbcType=INTEGER},
@@ -331,8 +331,8 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="titlt != null">
-        titlt = #{titlt,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="pushFlag != null">
         push_flag = #{pushFlag,jdbcType=INTEGER},
@@ -368,7 +368,7 @@
     update msg_notice
     set type = #{type,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      titlt = #{titlt,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       push_flag = #{pushFlag,jdbcType=INTEGER},
       top_flag = #{topFlag,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
@@ -384,7 +384,7 @@
     update msg_notice
     set type = #{type,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      titlt = #{titlt,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       push_flag = #{pushFlag,jdbcType=INTEGER},
       top_flag = #{topFlag,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
@@ -395,4 +395,7 @@
       remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectNextSortId" resultType="java.lang.Integer" >
+  	select (case when max(sort) is NULL then 1 else max(sort)+1 end) from msg_notice
+  </select>
 </mapper>

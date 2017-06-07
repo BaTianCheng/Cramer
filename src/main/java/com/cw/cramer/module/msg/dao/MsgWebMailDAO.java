@@ -33,4 +33,6 @@ public interface MsgWebMailDAO {
     int updateByPrimaryKeyWithBLOBs(MsgWebMail record);
 
     int updateByPrimaryKey(MsgWebMail record);
+    
+    int selectNextSortId();
 }

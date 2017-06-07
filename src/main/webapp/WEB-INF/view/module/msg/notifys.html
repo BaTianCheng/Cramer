@@ -4,7 +4,7 @@
 			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
 				<header>
 					<span class="widget-icon"><i class="fa fa-table"></i></span>
-					<h2>角色管理</h2>
+					<h2>通知公告</h2>
 				</header>
 				<div>
 					<div class="jarviswidget-editbox"></div>
@@ -41,8 +41,8 @@
 </section>
 <!-- end widgetGrid -->
 
-<script id="role_tpl" type="text/html">
-	<form action="" id="role-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+<script id="notify_tpl" type="text/html">
+	<form action="" id="notify-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 		<fieldset>
 			<div class="row">
 				<section class="col col-3 ">
@@ -100,43 +100,18 @@
 			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
 			<button type="submit" class="btn btn-primary" onClick="
 				{{if role.id != null}}
-					Role.Update($('#role-form').serialize())
+					Notify.Update($('#notify-form').serialize())
 				{{else}}
-					Role.Add($('#role-form').serialize())
+					Notify.Add($('#notify-form').serialize())
 				{{/if}}
 			">保存</button>
 		</footer>
 	</form>
 </script>
 
-<script id="authorities_tpl" type="text/html">
-<form action="" id="authority-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
-	<fieldset>
-		<div class="row">
-			<input type="hidden" id="roleId" name="roleId" value="{{role.id}}">
-			{{each authority as value i}}
-				<label class="input col col-4"> 
-					<label class="checkbox">
-						<input id="authorityIds" name="authorityIds" type="checkbox" placeholder="" value="{{value.id}}" {{if role.authorityIds != null &&(role.authorityIds.indexOf(value.id.toString()) >= 0 || role.authorityIds.indexOf(value.id) >= 0)}}checked{{/if}}>
-						<i></i> {{value.name}} 
-					</label>
-				</label>
-			{{/each}}
-		</div>
-	</fieldset>
-	<footer>
-		<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
-		<button type="submit" class="btn btn-primary" onClick="Role.UpdateAuthority($('#authority-form').serialize())">保存</button>
-	</footer>
-</form>
-</script>
-
-<script src="js/auth/role.js"></script>
+<script src="js/module/notify.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#department-tree').departmentZtree({'callback':zTreeOnClick});
+	Notify.List();
 });
-function zTreeOnClick(event, treeId, treeNode) {
-	Role.List({'departmentId':treeNode.id});
-}
 </script>

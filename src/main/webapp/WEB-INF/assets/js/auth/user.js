@@ -119,7 +119,10 @@ User.List = function (){
 			return [ true, '' ];
 		}
 	},{
-		url : CTX_PATH+'/auth/users/delete'
+		url : CTX_PATH+'/auth/users/delete',
+		onclickSubmit : function(params, postdata) {
+			return {userId : postdata};
+		}
 	});
 }
 
@@ -248,6 +251,7 @@ User.UpdatePassword = function (newPassword){
 }
 
 //删除用户
+/*
 User.Delete = function (userId){
 	layer.confirm('确定要删除用户吗?', {icon: 3, title:'提示'}, function(index){
 		$.post(CTX_PATH + "/auth/users/delete", {
@@ -264,6 +268,5 @@ User.Delete = function (userId){
 		});
 		layer.close(index);
 	});
-
 }
-
+*/

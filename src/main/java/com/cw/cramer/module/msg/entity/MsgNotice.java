@@ -9,7 +9,7 @@ public class MsgNotice {
 
     private Integer status;
 
-    private String titlt;
+    private String title;
 
     private Integer pushFlag;
 
@@ -18,10 +18,14 @@ public class MsgNotice {
     private Integer sort;
 
     private Integer createBy;
+    
+    private String createName;
 
     private Date createTime;
 
     private Integer updateBy;
+    
+    private String updateName;
 
     private Date updateTime;
 
@@ -53,15 +57,15 @@ public class MsgNotice {
         this.status = status;
     }
 
-    public String getTitlt() {
-        return titlt;
-    }
+    public String getTitle() {
+		return title;
+	}
 
-    public void setTitlt(String titlt) {
-        this.titlt = titlt == null ? null : titlt.trim();
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public Integer getPushFlag() {
+	public Integer getPushFlag() {
         return pushFlag;
     }
 
@@ -93,7 +97,15 @@ public class MsgNotice {
         this.createBy = createBy;
     }
 
-    public Date getCreateTime() {
+    public String getCreateName() {
+		return createName;
+	}
+
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
+
+	public Date getCreateTime() {
         return createTime;
     }
 
@@ -108,8 +120,16 @@ public class MsgNotice {
     public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
     }
+    
+    public String getUpdateName() {
+		return updateName;
+	}
 
-    public Date getUpdateTime() {
+	public void setUpdateName(String updateName) {
+		this.updateName = updateName;
+	}
+
+	public Date getUpdateTime() {
         return updateTime;
     }
 
