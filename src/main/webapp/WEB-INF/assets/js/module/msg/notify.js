@@ -3,29 +3,16 @@ Notify = {}
 //通知公告列表
 Notify.List = function (postData){
 	$("#main-table").jqGrid({
-		url : CTX_PATH + "/auth/roles/list",
+		url : CTX_PATH + "/msg/notifys/list",
 		postData : postData,
 		datatype : "json",
 		autowidth:true,
 		height:'auto',
-		colNames : [ '编号', '名称', '部门', '状态', '备注', '操作'],
+		colNames : [ '标题', '发布人', '发布时间', '操作'],
 		colModel : 
-			[{name : 'id',index : 'id',width : 55,fixed:true}, 
-			 {name : 'name',index : 'name',width : 100,editable :true}, 
-			 {name : 'departmentName',index : 'departmentName',width : 80,editable :true},
-			 {name : 'status',index : 'user.status',width : 80,editable :true, align:'center',
-				 formatter: function(cellValue, options, rowObject) {  
-					switch(cellValue){
-						case -1 : return '已删除';
-						case 0 : return '不可用';
-						case 1 : return '可用';
-						case 2 : return '锁定';
-						default	: return cellValue;
-					}
-				 } ,
-			 	 edittype:'select', editoptions:{value:{0:'不可用', 1:'可用', 2:'锁定'}}
-			 },
-			 {name : 'remarks',index : 'remarks',width : 120,editable :true},
+			[{name : 'title',index : 'title',width : 100,editable :true}, 
+			 {name : 'create_by',index : 'create_by',width : 80,editable :true},
+			 {name : 'create_time',index : 'create_time',width : 80,editable :true, align:'center'},
 			 {name : 'actions',width : 80, align:'center', title:false,sortable:false}],
 		jsonReader : {   
 			id: "id",
@@ -62,12 +49,12 @@ Notify.List = function (postData){
             var ids = jQuery("#main-table").jqGrid('getDataIDs');
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
-              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenEdit('"+ cl + "');\">编辑</a>";
+              be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Notify.OpenEdit('"+ cl + "');\">编辑</a>";
               de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
-              ae = "<a id=\"td-authority-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenAuthority('"+ cl + "');\">查看</a>";
+              ae = "<a id=\"td-view-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Notify.OpenView('"+ cl + "');\">查看</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
-            	  	actions : be + de + ae
+            	  	actions : ae + be + de
                   });
             }
         }
@@ -163,4 +150,30 @@ Notify.Add = function (serialize){
 	}).error(function(xhr,errorText,errorType){
 		layer.msg('系统错误', {icon: 2});
 	});
+}
+
+//打开查看通知公告
+Notify.OpenView = function(notifyId){
+	var data = {};
+	if(id > 0){
+		$.when($.post(CTX_PATH + "/msg/notifys/get", {notifyId : notifyId})).done(function(d1){
+				var result1 = JSON.parse(d1[0]);
+				if(result1.resultCode == '200' && result2.resultCode == '200'){
+					data = result1.data;
+					var html = template('notify_view_tpl', data);
+					layer.open({
+					  type: 1,
+					  title: '查看通知公告',
+					  skin: 'layui-layer-rim', 
+					  area: ['800px','auto'], 
+					  closeBtn: 1,
+					  content:html
+					});
+				} else {
+					alert("程序异常");
+				}
+		});
+	} else {
+		Notify.OpenAdd();
+	}
 }
