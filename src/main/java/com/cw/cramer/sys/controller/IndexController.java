@@ -32,8 +32,19 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping(value = "sys/platform")
-	public ModelAndView  toLogin(HttpServletRequest request, Model model) {
+	public ModelAndView  toPlatform(HttpServletRequest request, Model model) {
 		return new ModelAndView("sys/platform");
+	}
+	
+	/**
+	 * 控制面板
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "sys/dashboard")
+	public ModelAndView  toDashboard(HttpServletRequest request, Model model) {
+		return new ModelAndView("sys/dashboard");
 	}
 	
 }
