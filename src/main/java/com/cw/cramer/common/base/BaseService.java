@@ -30,7 +30,7 @@ public class BaseService {
 		return sysAPI.getNextSeq(seqName);
 	}
 	
-	public String getUserName(int userId){
+	public String getUserName(Integer userId){
 		return authAPI.getUserName(userId);
 	}
 

@@ -10,9 +10,9 @@ Notify.List = function (postData){
 		height:'auto',
 		colNames : [ '标题', '发布人', '发布时间', '操作'],
 		colModel : 
-			[{name : 'title',index : 'title',width : 100,editable :true}, 
-			 {name : 'create_by',index : 'create_by',width : 80,editable :true},
-			 {name : 'create_time',index : 'create_time',width : 80,editable :true, align:'center'},
+			[{name : 'title',index : 'title',width : 400,editable :true}, 
+			 {name : 'createName',index : 'create_by',width : 80,editable :true},
+			 {name : 'createTime',index : 'create_time',width : 80,editable :true,datefmt:'yyyy-MM-dd HH:mm:ss', align:'center'},
 			 {name : 'actions',width : 80, align:'center', title:false,sortable:false}],
 		jsonReader : {   
 			id: "id",
@@ -61,7 +61,7 @@ Notify.List = function (postData){
 	});
 
 	$("#main-table").jqGrid('navGrid', '#pager', 
-		{edit : true,add : true,del : true,search:false,addfunc:Role.OpenAdd,editfunc:Role.OpenUpdate},
+		{edit : true,add : true,del : true,search:false,addfunc:Notify.OpenAdd,editfunc:Notify.OpenUpdate},
 		{closeAfterEdit: true,viewPagerButtons: false},
 		{url:CTX_PATH+"/msg/notifys/add",closeAfterAdd: true,
 			beforeSubmit : function(postdata, formid) {
@@ -80,98 +80,113 @@ Notify.List = function (postData){
 	$("#main-table").jqGrid().trigger('reloadGrid');
 }
 
-//打开添加通知公告
-Notify.OpenAdd = function(){
+// 打开添加通知公告
+Notify.OpenAdd = function() {
 	layer.open({
-		type: 1,
-		title: '添加通知公告',
-		skin: 'layui-layer-rim', 
-		area: ['800px','auto'], 
-		closeBtn: 1,
-		content:html
+		type : 1,
+		title : '添加通知公告',
+		skin : 'layui-layer-rim',
+		area : [ '800px', 'auto' ],
+		closeBtn : 1,
+		content : html
 	});
 }
 
-//打开修改通知公告
-Notify.OpenEdit = function(notifyId){
+// 打开修改通知公告
+Notify.OpenEdit = function(notifyId) {
 	var data = {};
-	if(id > 0){
-		$.when($.post(CTX_PATH + "/msg/notifys/get", {notifyId : notifyId})).done(function(d1){
-				var result1 = JSON.parse(d1[0]);
-				if(result1.resultCode == '200' && result2.resultCode == '200'){
-					data = result1.data;
-					var html = template('notify_tpl', data);
-					layer.open({
-					  type: 1,
-					  title: '修改通知公告',
-					  skin: 'layui-layer-rim', 
-					  area: ['800px','auto'], 
-					  closeBtn: 1,
-					  content:html
-					});
-				} else {
-					alert("程序异常");
-				}
+	if (notifyId > 0) {
+		$.when($.post(CTX_PATH + "/msg/notifys/get", {
+			notifyId : notifyId
+		})).done(function(d1) {
+			var result = JSON.parse(d1);
+			if (result.resultCode == '200') {
+				data = result.data;
+				var html = template('notify_tpl', data);
+				layer.open({
+					type : 1,
+					title : '修改通知公告',
+					skin : 'layui-layer-rim',
+					area : [ '800px', 'auto' ],
+					closeBtn : 1,
+					content : html
+				});
+			} else {
+				alert("程序异常");
+			}
 		});
 	} else {
 		Notify.OpenAdd();
 	}
 }
 
-//更新通知公告
-Notify.Update = function (serialize){
-	$.post(CTX_PATH + "/msg/notifys/update", serialize,
-		function(msg) {
-			var result = JSON.parse(msg);
-			if(result.resultCode == '200'){
-				layer.close(layer.index);
-				layer.msg('修改成功', {icon: 1});
-				$("#main-table").trigger("reloadGrid");
-			} else {
-				layer.msg('程序异常', {icon: 2});
-			}
-	}).error(function(xhr,errorText,errorType){
-		layer.msg('系统错误', {icon: 2});
+// 更新通知公告
+Notify.Update = function(serialize) {
+	$.post(CTX_PATH + "/msg/notifys/update", serialize, function(msg) {
+		var result = JSON.parse(msg);
+		if (result.resultCode == '200') {
+			layer.close(layer.index);
+			layer.msg('修改成功', {
+				icon : 1
+			});
+			$("#main-table").trigger("reloadGrid");
+		} else {
+			layer.msg('程序异常', {
+				icon : 2
+			});
+		}
+	}).error(function(xhr, errorText, errorType) {
+		layer.msg('系统错误', {
+			icon : 2
+		});
 	});
 }
 
-//新增通知公告
-Notify.Add = function (serialize){
-	$.post(CTX_PATH + "/msg/notifys/add", serialize,
-		function(msg) {
-			var result = JSON.parse(msg);
-			if(result.resultCode == '200'){
-				layer.close(layer.index);
-				layer.msg('添加成功', {icon: 1});
-				$("#main-table").trigger("reloadGrid");
-			} else {
-				layer.msg('程序异常', {icon: 2});
-			}
-	}).error(function(xhr,errorText,errorType){
-		layer.msg('系统错误', {icon: 2});
+// 新增通知公告
+Notify.Add = function(serialize) {
+	$.post(CTX_PATH + "/msg/notifys/add", serialize, function(msg) {
+		var result = JSON.parse(msg);
+		if (result.resultCode == '200') {
+			layer.close(layer.index);
+			layer.msg('添加成功', {
+				icon : 1
+			});
+			$("#main-table").trigger("reloadGrid");
+		} else {
+			layer.msg('程序异常', {
+				icon : 2
+			});
+		}
+	}).error(function(xhr, errorText, errorType) {
+		layer.msg('系统错误', {
+			icon : 2
+		});
 	});
 }
 
-//打开查看通知公告
-Notify.OpenView = function(notifyId){
+// 打开查看通知公告
+Notify.OpenView = function(notifyId) {
 	var data = {};
-	if(id > 0){
-		$.when($.post(CTX_PATH + "/msg/notifys/get", {notifyId : notifyId})).done(function(d1){
-				var result1 = JSON.parse(d1[0]);
-				if(result1.resultCode == '200' && result2.resultCode == '200'){
-					data = result1.data;
-					var html = template('notify_view_tpl', data);
-					layer.open({
-					  type: 1,
-					  title: '查看通知公告',
-					  skin: 'layui-layer-rim', 
-					  area: ['800px','auto'], 
-					  closeBtn: 1,
-					  content:html
-					});
-				} else {
-					alert("程序异常");
-				}
+	if (notifyId > 0) {
+		$.when($.post(CTX_PATH + "/msg/notifys/get", {
+			notifyId : notifyId
+		})).done(function(d1) {
+			var result = JSON.parse(d1);
+			if (result.resultCode == '200') {
+				data = result.data;
+				console.log(data);
+				var html = template('notify_view_tpl', data);
+				layer.open({
+					type : 1,
+					title : '查看通知公告',
+					skin : 'layui-layer-rim',
+					area : [ '800px', 'auto' ],
+					closeBtn : 1,
+					content : html
+				});
+			} else {
+				alert("程序异常");
+			}
 		});
 	} else {
 		Notify.OpenAdd();

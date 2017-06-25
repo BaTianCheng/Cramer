@@ -62,7 +62,7 @@ public class SysUserService extends BaseService{
 	 * @param userId
 	 * @return
 	 */
-	public SysUser getSysUser(int userId){
+	public SysUser getSysUser(Integer userId){
 		return sysUserDAO.selectByPrimaryKey(userId);
 	}
 	
