@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.cw.cramer.auth.dao.SysUserDAO;
@@ -62,6 +65,7 @@ public class SysUserService extends BaseService{
 	 * @param userId
 	 * @return
 	 */
+	@Cacheable(value = "SysUserCache", key = "#userId")
 	public SysUser getSysUser(Integer userId){
 		return sysUserDAO.selectByPrimaryKey(userId);
 	}
@@ -147,6 +151,7 @@ public class SysUserService extends BaseService{
 	 * @param user
 	 * @return
 	 */
+	@CachePut(value = "SysUserCache", key = "#user.getId()")
 	public boolean update(SysUser user){
 		user.setUpdateBy(this.getCurrentUser().getId());
 		user.setUpdateTime(DateTimeUtils.getCurrentTime());
@@ -206,6 +211,7 @@ public class SysUserService extends BaseService{
 	 * @param userId
 	 * @return
 	 */
+	@CacheEvict(value = "SysUserCache", key = "#userId")
 	public boolean delete(int userId){
 		SysUser user = getSysUser(userId);
 		if(user != null){
@@ -255,5 +261,5 @@ public class SysUserService extends BaseService{
 		List<SysUser> users = sysUserDAO.selectByExample(userExample);
 		return users;
 	}
-
+	
 }

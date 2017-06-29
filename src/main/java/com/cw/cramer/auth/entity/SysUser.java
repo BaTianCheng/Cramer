@@ -1,10 +1,17 @@
 package com.cw.cramer.auth.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class SysUser {
-    private Integer id;
+public class SysUser implements Serializable{
+	
+    /**
+	 * 序列号
+	 */
+	private static final long serialVersionUID = 6259010208567554967L;
+
+	private Integer id;
 
     private String name;
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+
+  <!-- 磁盘缓存位置 -->
+  <diskStore path="java.io.tmpdir/ehcache"/>
+  
+  <defaultCache
+            maxElementsInMemory="10000" 
+            eternal="false" 
+            overflowToDisk="true"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"/>
+
+    <cache name="SysUserCache"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"/>
+
+</ehcache>

@@ -78,6 +78,40 @@
 	</form>
 </script>
 
+<script id="notify_view_tpl" type="text/html">
+	<form action="" id="notify-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-2 ">
+					<label class="label col col-12">公告标题：</label>
+				</section>
+				<section class="col col-10 ">
+					<label class="input"> 
+						<lable id="title" name="title" class="label col col-12">{{title}}</label>
+						<input type="hidden" id="id" name="id" value="{{id}}">
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-2 ">
+					<label class="label col col-12">公告内容：</label>
+				</section>
+				<section class="col col-10 ">
+					<label class="label col col-12" style="height:240px; overflow:auto;">
+						{{content}}
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn btn-primary"onClick="layer.close(layer.index);">关闭</button>
+		</footer>
+	</form>
+</script>
+
 <script src="js/module/msg/notify.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){

@@ -81,13 +81,13 @@
 			<artifactId>shiro-web</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-		
+		<!-- 
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-ehcache</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-		
+		  -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
@@ -158,12 +158,10 @@
 		
 		<!-- 缓存类引用 -->
 		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-core</artifactId>
-			<version>2.5.3</version>
-		</dependency>
-		
-		
+  			<groupId>net.sf.ehcache</groupId>
+ 			<artifactId>ehcache</artifactId>
+  			<version>2.10.2</version>
+		</dependency> 
 		
 		<!-- 工具类引用 -->
 		<!-- 日志 -->

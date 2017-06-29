@@ -2,6 +2,8 @@ package com.cw.cramer.module.msg.entity;
 
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class MsgNotice {
     private Integer id;
 
@@ -21,12 +23,14 @@ public class MsgNotice {
     
     private String createName;
 
+    @JSONField (format="yyyy-MM-dd HH:mm:ss")  
     private Date createTime;
 
     private Integer updateBy;
     
     private String updateName;
 
+    @JSONField (format="yyyy-MM-dd HH:mm:ss")  
     private Date updateTime;
 
     private String remarks;

@@ -69,6 +69,11 @@ public class MsgNoticeService extends BaseService{
 	 */
 	public boolean insert(MsgNotice notice){
 		notice.setId(getNextSeq(SequenceConstant.SEQ_SYSROLEID));
+		notice.setStatus(StatusConstant.STATUS_ENABLED);
+		notice.setCreateBy(this.getCurrentUser().getId());
+		notice.setCreateTime(DateTimeUtils.getCurrentTime());
+		notice.setUpdateBy(this.getCurrentUser().getId());
+		notice.setUpdateTime(DateTimeUtils.getCurrentTime());
 		return msgNoticeDAO.insert(notice)>0 ? true : false;
 	}
 	

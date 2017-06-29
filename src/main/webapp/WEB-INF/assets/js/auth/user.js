@@ -159,7 +159,7 @@ User.OpenAdd = function(){
 User.OpenEdit = function(userId){
 	var data = {};
 	if(userId > 0){
-		$.when($.post(CTX_PATH + "/auth/users/get", {userId : userId}),
+		$.when($.post(CTX_PATH + "/auth/users/get", {id : userId}),
 			$.post(CTX_PATH + "/auth/departments/list", {pageNum : 0, pageSize : 0})).done(function(d1, d2){
 				var result1 = JSON.parse(d1[0]);
 				var result2 = JSON.parse(d2[0]);

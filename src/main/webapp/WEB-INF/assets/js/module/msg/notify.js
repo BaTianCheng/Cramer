@@ -82,6 +82,7 @@ Notify.List = function (postData){
 
 // 打开添加通知公告
 Notify.OpenAdd = function() {
+	var html = template('notify_tpl', {});
 	layer.open({
 		type : 1,
 		title : '添加通知公告',
