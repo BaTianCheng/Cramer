@@ -101,45 +101,8 @@
 						class="fa fa-newspaper-o txt-color-white"></i></span>
 					<h2>通知公告</h2>
 				</header>
-				<div class="tab-content padding-top-10">
-					<div class="tab-pane fade in active " id="a1">
-						<div class="row ">
-							<div class="col-xs-2 col-sm-1">
-								<time datetime="2017-06-06" class="icon">
-									<strong>6月</strong> <span>6</span>
-								</time>
-							</div>
-							<div class="col-xs-10 col-sm-11">
-								<h6 class="no-margin">
-									<a href="javascript:void(0);">发布1.0版本</a>
-								</h6>
-								<p style="height:54px;">
-									Cramer是基于多个优秀的开源项目，高度整合封装而成的开源Java EE快速开发平台。技术选型：Spring 4.0，Shiro 1.2，Spring MVC 4.0，Spring Task 4.0，MyBatis 3.1，Druid 1.0，Ehcache 2.6，Bootstrap 3.0。
-								</p>
-							</div>
-							<div class="col-sm-12 ">
-								<hr>
-							</div>
-
-							<div class="col-xs-2 col-sm-1">
-								<time datetime="2017-06-06" class="icon">
-									<strong>6月</strong> <span>6</span>
-								</time>
-							</div>
-							<div class="col-xs-10 col-sm-11">
-								<h6 class="no-margin">
-									<a href="javascript:void(0);">Cramer系统简介</a>
-								</h6>
-								<p style="height:54px;">
-									Cramer是基于多个优秀的开源项目，高度整合封装而成的开源Java EE快速开发平台。技术选型：Spring 4.0，Shiro 1.2，Spring MVC 4.0，Spring Task 4.0，MyBatis 3.1，Druid 1.0，Ehcache 2.6，Bootstrap 3.0。
-								</p>
-							</div>
-							<div class="col-sm-12 ">
-								<br>
-							</div>
-
-						</div>
-					</div>
+				<div class="tab-content padding-top-10" id="notice_list_panel">
+					
 				</div>
 			</div>
 
@@ -205,12 +168,72 @@
 </section>
 <!-- end widgetGrid -->
 
+<script id="notice_list_tpl" type="text/html">
+<div class="tab-pane fade in active " id="a1">
+	{{each list as value i}}
+	<div class="row ">
+		<div class="col-xs-2 col-sm-1">
+			<time datetime="{{value.createTime}}" class="icon">
+				<strong>{{value.month}}月</strong> <span>{{value.day}}</span>
+			</time>
+		</div>
+		<div class="col-xs-10 col-sm-11">
+			<h6 class="no-margin">
+				<a href="javascript:Notify.OpenView('{{value.id}}');">{{value.title}}</a>
+			</h6>
+			<p style="height:54px;">
+				{{value.content}}
+			</p>
+		</div>
+		<div class="col-sm-12 ">
+			<hr>
+		</div>
+	</div>
+	{{/each}}
+</div>
+</script>
 
+<script id="notify_view_tpl" type="text/html">
+	<form action="" id="notify-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-2 ">
+					<label class="label col col-12">公告标题：</label>
+				</section>
+				<section class="col col-10 ">
+					<label class="input"> 
+						<lable id="title" name="title" class="label col col-12">{{title}}</label>
+						<input type="hidden" id="id" name="id" value="{{id}}">
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-2 ">
+					<label class="label col col-12">公告内容：</label>
+				</section>
+				<section class="col col-10 ">
+					<label class="label col col-12" style="height:240px; overflow:auto;">
+						{{content}}
+					</label>
+				</section>
+			</div>
 
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn btn-primary"onClick="layer.close(layer.index);">关闭</button>
+		</footer>
+	</form>
+</script>
+
+<script src="js/module/msg/notify.js"></script>
+
+<script src="js/sys/platform.js"></script>
 <script type="text/javascript">
+	Platform.NoticeList();
 
-	pageSetUp();
-	
+	pageSetUp();	
 	
 	var pagefunction = function() {
 			
