@@ -57,7 +57,7 @@ public class MsgNoticeService extends BaseService{
 			sortStr = sortId+" "+sortType+", " + sortStr;
 		}
 		example.setOrderByClause(sortStr);
-		List<MsgNotice> msgNotices = msgNoticeDAO.selectByExample(example);
+		List<MsgNotice> msgNotices = msgNoticeDAO.selectByExampleWithBLOBs(example);
 		msgNotices = convert(msgNotices);
 		return new PageInfo<MsgNotice>(msgNotices);
 	}
