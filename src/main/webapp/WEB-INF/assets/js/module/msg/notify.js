@@ -94,11 +94,11 @@ Notify.OpenAdd = function() {
 }
 
 // 打开修改通知公告
-Notify.OpenEdit = function(notifyId) {
+Notify.OpenEdit = function(id) {
 	var data = {};
-	if (notifyId > 0) {
+	if (id > 0) {
 		$.when($.post(CTX_PATH + "/msg/notifys/get", {
-			notifyId : notifyId
+			id : id
 		})).done(function(d1) {
 			var result = JSON.parse(d1);
 			if (result.resultCode == '200') {
@@ -166,16 +166,15 @@ Notify.Add = function(serialize) {
 }
 
 // 打开查看通知公告
-Notify.OpenView = function(notifyId) {
+Notify.OpenView = function(id) {
 	var data = {};
-	if (notifyId > 0) {
+	if (id > 0) {
 		$.when($.post(CTX_PATH + "/msg/notifys/get", {
-			notifyId : notifyId
+			id : id
 		})).done(function(d1) {
 			var result = JSON.parse(d1);
 			if (result.resultCode == '200') {
 				data = result.data;
-				console.log(data);
 				var html = template('notify_view_tpl', data);
 				layer.open({
 					type : 1,

@@ -10,7 +10,27 @@
     <result column="web_mail_storage_mail_id" jdbcType="INTEGER" property="mailId" />
     <result column="web_mail_storage_method" jdbcType="INTEGER" property="method" />
     <result column="web_mail_storage_remarks" jdbcType="VARCHAR" property="remarks" />
+    <association property="msgWebMail" javaType="com.cw.cramer.module.msg.entity.MsgWebMail">
+    	<id column="web_mail_id" jdbcType="INTEGER" property="id" />
+    	<result column="web_mail_type" jdbcType="INTEGER" property="type" />
+	    <result column="web_mail_status" jdbcType="INTEGER" property="status" />
+	    <result column="web_mail_sender" jdbcType="INTEGER" property="sender" />
+	    <result column="web_mail_receiver_type" jdbcType="INTEGER" property="receiverType" />
+	    <result column="web_mail_receiver" jdbcType="VARCHAR" property="receiver" />
+	    <result column="web_mail_method" jdbcType="INTEGER" property="method" />
+	    <result column="web_mail_title" jdbcType="VARCHAR" property="title" />
+	    <result column="web_mail_icon" jdbcType="VARCHAR" property="icon" />
+	    <result column="web_mail_sort" jdbcType="INTEGER" property="sort" />
+	    <result column="web_mail_send_time" jdbcType="TIMESTAMP" property="sendTime" />
+	    <result column="web_mail_read_time" jdbcType="TIMESTAMP" property="readTime" />
+	    <result column="web_mail_remarks" jdbcType="VARCHAR" property="remarks" />
+	</association>
   </resultMap>
+  
+  <sql id="Joins">
+		LEFT JOIN msg_web_mail web_mail ON web_mail_storage.mail_id = web_mail.id 
+  </sql>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -73,7 +93,12 @@
     web_mail_storage.id as web_mail_storage_id, web_mail_storage.type as web_mail_storage_type, 
     web_mail_storage.status as web_mail_storage_status, web_mail_storage.tag as web_mail_storage_tag, 
     web_mail_storage.owner as web_mail_storage_owner, web_mail_storage.mail_id as web_mail_storage_mail_id, 
-    web_mail_storage.method as web_mail_storage_method, web_mail_storage.remarks as web_mail_storage_remarks
+    web_mail_storage.method as web_mail_storage_method, web_mail_storage.remarks as web_mail_storage_remarks, 
+    web_mail.id as web_mail_id, web_mail.type as web_mail_type, web_mail.status as web_mail_status, 
+    web_mail.sender as web_mail_sender, web_mail.receiver_type as web_mail_receiver_type, 
+    web_mail.receiver as web_mail_receiver, web_mail.method as web_mail_method, web_mail.title as web_mail_title, 
+    web_mail.icon as web_mail_icon, web_mail.sort as web_mail_sort, web_mail.send_time as web_mail_send_time, 
+    web_mail.read_time as web_mail_read_time, web_mail.remarks as web_mail_remarks
   </sql>
   <select id="selectByExample" parameterType="com.cw.cramer.module.msg.entity.MsgWebMailStorageExample" resultMap="BaseResultMap">
     select
@@ -83,6 +108,7 @@
     'true' as QUERYID,
     <include refid="Base_Column_List" />
     from msg_web_mail_storage web_mail_storage
+    <include refid="Joins" />
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,6 +121,7 @@
     <include refid="Base_Column_List" />
     from msg_web_mail_storage web_mail_storage
     where web_mail_storage.id = #{id,jdbcType=INTEGER}
+    <include refid="Joins" />
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from msg_web_mail_storage

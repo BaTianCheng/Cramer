@@ -16,6 +16,8 @@ public class MsgWebMailStorage {
     private Integer method;
 
     private String remarks;
+    
+    private MsgWebMail msgWebMail;
 
     public Integer getId() {
         return id;
@@ -80,4 +82,13 @@ public class MsgWebMailStorage {
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
     }
+
+	public MsgWebMail getMsgWebMail() {
+		return msgWebMail;
+	}
+
+	public void setMsgWebMail(MsgWebMail msgWebMail) {
+		this.msgWebMail = msgWebMail;
+	}
+    
 }

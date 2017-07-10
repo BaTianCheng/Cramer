@@ -1,0 +1,131 @@
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>邮件列表</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body ">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="main-table">
+								
+							</table>
+						</div>
+
+						<input id="page-num" type="hidden" value="1" /> 
+						<input id="page-size" type="hidden" value="10" />
+						<ul id="pager" class="pagination"></ul>
+					</div>
+					<!-- end widgetContent -->
+
+				</div>
+				<!-- end jarvisWidgetBody -->
+
+			</div>
+			<!-- end widget -->
+			<!-- end jarvisWidget -->
+
+		</article>
+		<!-- end widgetGridCol -->
+
+	</div>
+	<!-- end widgetGridRow -->
+
+</section>
+<!-- end widgetGrid -->
+
+<script id="webmail_tpl" type="text/html">
+	<form action="" id="webmail-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">邮件标题：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="title" name="title" value="{{title}}" placeholder="邮件标题">
+						<input type="hidden" id="id" name="id" value="{{id}}">
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">收件人：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="input"> 
+						<input type="text" id="title" name="title" value="{{receiver}}" placeholder="收件人">
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12">邮件内容：</label>
+				</section>
+				<section class="col col-9 ">
+					<label class="textarea">
+						<textarea  id="content" name="content" rows="6">{{content}}</textarea>
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
+			<button type="submit" class="btn btn-primary" onClick="
+				{{if id != null}}
+					WebMail.Update($('#webmail-form').serialize())
+				{{else}}
+					WebMail.Add($('#webmail-form').serialize())
+				{{/if}}
+			">保存</button>
+		</footer>
+	</form>
+</script>
+
+<script id="webmail_view_tpl" type="text/html">
+	<form action="" id="notify-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-2 ">
+					<label class="label col col-12">邮件标题：</label>
+				</section>
+				<section class="col col-10 ">
+					<label class="input"> 
+						<lable id="title" name="title" class="label col col-12">{{title}}</label>
+						<input type="hidden" id="id" name="id" value="{{id}}">
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-2 ">
+					<label class="label col col-12">邮件内容：</label>
+				</section>
+				<section class="col col-10 ">
+					<label class="label col col-12" style="height:240px; overflow:auto;">
+						{{content}}
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn btn-primary"onClick="layer.close(layer.index);">关闭</button>
+		</footer>
+	</form>
+</script>
+
+<script src="js/module/msg/notify.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	WebMail.List();
+});
+</script>

@@ -57,8 +57,8 @@ public class MsgNoticeController extends BaseController{
 	 */
 	@RequestMapping(value = "/msg/notifys/get", method=RequestMethod.POST)
 	@ResponseBody
-	public String getUser(HttpServletRequest request, Model model, int notifyId) {
-		return this.renderSuccessJson(msgNoticeService.getMsgNotice(notifyId));
+	public String getUser(HttpServletRequest request, Model model, int id) {
+		return this.renderSuccessJson(msgNoticeService.getMsgNotice(id));
 	}
 	
 	/**
@@ -104,7 +104,7 @@ public class MsgNoticeController extends BaseController{
 	public String deleteUser(HttpServletRequest request, Model model, int notifyId) {
 		boolean isSuccess = msgNoticeService.delete(notifyId);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Delete, "删除公告，编号："+notifyId);
+			this.record(ModuleType.Msg, OperateLogType.Delete, "删除公告，编号："+notifyId);
 		}
 		return this.renderJson(isSuccess);
 	}

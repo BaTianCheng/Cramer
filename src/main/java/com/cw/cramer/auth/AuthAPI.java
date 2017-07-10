@@ -22,6 +22,9 @@ public class AuthAPI {
 	 * @return
 	 */
 	public String getUserName(Integer userId){
+		if(userId == null){
+			return null;
+		}
 		SysUser user = sysUserService.getSysUser(userId);
 		if(user != null){
 			return user.getName();

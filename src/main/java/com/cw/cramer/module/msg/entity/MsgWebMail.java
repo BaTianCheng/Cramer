@@ -10,6 +10,8 @@ public class MsgWebMail {
     private Integer status;
 
     private Integer sender;
+    
+    private String senderName;
 
     private Integer receiverType;
 
@@ -55,7 +57,15 @@ public class MsgWebMail {
         this.status = status;
     }
 
-    public Integer getSender() {
+    public String getSenderName() {
+		return senderName;
+	}
+
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+
+	public Integer getSender() {
         return sender;
     }
 

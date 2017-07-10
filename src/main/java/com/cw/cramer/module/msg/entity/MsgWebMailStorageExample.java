@@ -593,6 +593,147 @@ public class MsgWebMailStorageExample {
             addCriterion("web_mail_storage.remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
+        
+        //邮件原件的查询条件
+        public Criteria andMailTitleIsNull() {
+            addCriterion("web_mail.title is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleIsNotNull() {
+            addCriterion("web_mail.title is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleEqualTo(String value) {
+            addCriterion("web_mail.title =", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleNotEqualTo(String value) {
+            addCriterion("web_mail.title <>", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleGreaterThan(String value) {
+            addCriterion("web_mail.title >", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("web_mail.title >=", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleLessThan(String value) {
+            addCriterion("web_mail.title <", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleLessThanOrEqualTo(String value) {
+            addCriterion("web_mail.title <=", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleLike(String value) {
+            addCriterion("web_mail.title like", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleNotLike(String value) {
+            addCriterion("web_mail.title not like", value, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleIn(List<String> values) {
+            addCriterion("web_mail.title in", values, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleNotIn(List<String> values) {
+            addCriterion("web_mail.title not in", values, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleBetween(String value1, String value2) {
+            addCriterion("web_mail.title between", value1, value2, "msgWebMail.title");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailTitleNotBetween(String value1, String value2) {
+            addCriterion("web_mail.title not between", value1, value2, "msgWebMail.title");
+            return (Criteria) this;
+        }
+        
+        public Criteria andMailContentIsNull() {
+            addCriterion("web_mail.content is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentIsNotNull() {
+            addCriterion("web_mail.content is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentEqualTo(String value) {
+            addCriterion("web_mail.content =", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentNotEqualTo(String value) {
+            addCriterion("web_mail.content <>", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentGreaterThan(String value) {
+            addCriterion("web_mail.content >", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentGreaterThanOrEqualTo(String value) {
+            addCriterion("web_mail.content >=", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentLessThan(String value) {
+            addCriterion("web_mail.content <", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentLessThanOrEqualTo(String value) {
+            addCriterion("web_mail.content <=", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentLike(String value) {
+            addCriterion("web_mail.content like", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentNotLike(String value) {
+            addCriterion("web_mail.content not like", value, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentIn(List<String> values) {
+            addCriterion("web_mail.content in", values, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentNotIn(List<String> values) {
+            addCriterion("web_mail.content not in", values, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentBetween(String value1, String value2) {
+            addCriterion("web_mail.content between", value1, value2, "msgWebMail.content");
+            return (Criteria) this;
+        }
+
+        public Criteria andMailContentNotBetween(String value1, String value2) {
+            addCriterion("web_mail.content not between", value1, value2, "msgWebMail.content");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

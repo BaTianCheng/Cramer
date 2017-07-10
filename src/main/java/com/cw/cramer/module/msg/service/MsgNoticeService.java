@@ -124,7 +124,6 @@ public class MsgNoticeService extends BaseService{
 	 */
 	public MsgNotice convert (MsgNotice msgNotice){
 		if(msgNotice != null){
-			
 			msgNotice.setCreateName(getUserName(msgNotice.getCreateBy()));
 			msgNotice.setUpdateName(getUserName(msgNotice.getUpdateBy()));
 		}

@@ -30,224 +30,288 @@
 		
 	</pluginRepositories> 
 	
+	<!-- 项目属性 -->
+	<properties>
+		<spring.version>4.1.9.RELEASE</spring.version>
+		<shiro.version>1.2.3</shiro.version>
+		<activiti.version>5.21.0</activiti.version>
+		<poi.version>3.9</poi.version>
+		
+		<freemarker.version>2.3.23</freemarker.version>
+		<mysql.version>5.1.30</mysql.version>
+		<oracle.version>10.2.0.4.0</oracle.version>
+		<mybatis.version>3.2.3</mybatis.version>
+		<mybatis-spring.version>1.2.3</mybatis-spring.version>
+		<druid.version>1.0.18</druid.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<commons-dbcp2.version>2.1.1</commons-dbcp2.version>
+		<commons-pool2.version>2.2</commons-pool2.version>
+		<ehcache.version>2.10.2</ehcache.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<fastjson.version>1.1.40</fastjson.version>
+		<guava.version>17.0</guava.version>
+		<jackson.version>1.7.1</jackson.version>
+		<pagehelper.version>5.0.1</pagehelper.version>
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
+		<dozer.version>5.4.0</dozer.version>
+		<junit.version>3.8.1</junit.version>
+		<mybatis-generator.version>1.3.4</mybatis-generator.version>
+	</properties>
+	
 	<dependencies>
 		
 		<!-- 框架类引用 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.1.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>4.1.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.1.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		
 		<dependency>  
             <groupId>org.springframework</groupId>  
             <artifactId>spring-jdbc</artifactId>  
-            <version>4.1.9.RELEASE</version>  
+            <version>${spring.version}</version>  
         </dependency>  
 		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.1.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		
        <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.23</version>
+            <version>${freemarker.version}</version>
         </dependency>
-		
 
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
-			<version>1.2.0</version>
+			<version>${shiro.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
-			<version>1.2.3</version>
+			<version>${shiro.version}</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-ehcache</artifactId>
-			<version>1.2.3</version>
-		</dependency>
-		  -->
+
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
-			<version>1.2.3</version>
+			<version>${shiro.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-cas</artifactId>
-			<version>1.2.3</version>
+			<version>${shiro.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-quartz</artifactId>
-			<version>1.2.3</version>
+			<version>${shiro.version}</version>
 		</dependency>
 		
 		<!-- 数据库类引用 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.30</version>
+			<version>${mysql.version}</version>
 		</dependency>
 		
 		<dependency>
 		  <groupId>com.oracle</groupId>
 		  <artifactId>ojdbc14</artifactId>
-		  <version>10.2.0.4.0</version>
+		  <version>${oracle.version}</version>
 		  <type>pom</type>
 		</dependency>
  	
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.3</version>
+			<version>${mybatis.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.3</version>
+			<version>${mybatis-spring.version}</version>
 		</dependency>
 		
 		<dependency>
 		     <groupId>com.alibaba</groupId>
 		     <artifactId>druid</artifactId>
-		     <version>1.0.18</version>
+		     <version>${druid.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.3.2</version>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 		
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-dbcp2</artifactId>
-		    <version>2.1.1</version>
+		    <version>${commons-dbcp2.version}</version>
 		</dependency>
 		
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-pool2</artifactId>
-		    <version>2.2</version>
+		    <version>${commons-pool2.version}</version>
 		</dependency>
 		
 		<!-- 缓存类引用 -->
 		<dependency>
   			<groupId>net.sf.ehcache</groupId>
  			<artifactId>ehcache</artifactId>
-  			<version>2.10.2</version>
+  			<version>${ehcache.version}</version>
 		</dependency> 
+		
+		<!-- Activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-explorer</artifactId>
+			<version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>vaadin</artifactId>
+					<groupId>com.vaadin</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dcharts-widget</artifactId>
+					<groupId>org.vaadin.addons</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>activiti-simple-workflow</artifactId>
+					<groupId>org.activiti</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-modeler</artifactId>
+            <version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-diagram-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
 		
 		<!-- 工具类引用 -->
 		<!-- 日志 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-jdk14</artifactId>
-			<version>1.7.25</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.25</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<version>${servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.7.1</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.1.40</version>
+			<version>${fastjson.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>17.0</version>
+			<version>${guava.version}</version>
 		</dependency>
 		
 		<dependency>
 		    <groupId>com.github.pagehelper</groupId>
 		    <artifactId>pagehelper</artifactId>
-		    <version>5.0.1</version>
+		    <version>${pagehelper.version}</version>
 		</dependency>
 		
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.3.1</version>
+		    <version>${commons-fileupload.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.9</version>
+			<version>${poi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.9</version>
+			<version>${poi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>3.9</version>
+			<version>${poi.version}</version>
 		</dependency>
 		
 		<dependency>
 		  <groupId>commons-collections</groupId>
 		  <artifactId>commons-collections</artifactId>
-		  <version>3.2.1</version>
+		  <version>${commons-collections.version}</version>
 		</dependency>
 		
 		<!-- 映射转换工具 -->
 		<dependency>
 		    <groupId>net.sf.dozer</groupId>
 		    <artifactId>dozer</artifactId>
-		    <version>5.4.0</version>
+		    <version>${dozer.version}</version>
 		</dependency>
 
 		<!-- 测试类引用 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -262,7 +326,7 @@
 			<plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.4</version>
+                <version>${mybatis-generator.version}</version>
                 <configuration>
                 	<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
