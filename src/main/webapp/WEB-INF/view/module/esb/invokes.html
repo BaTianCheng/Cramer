@@ -1,0 +1,106 @@
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-9" >
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>服务调用</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body" style="min-height:550px;">
+					<form action="" class="smart-form ">
+						<div class="row">
+							<label class="label col col-2" style="text-align:right;">请选择服务：</label>
+					        <section class="col col-4">
+					            <label class="select"> 
+								<select id="sel-service" name="sel-service" class="valid">
+									<option>未选择</option>
+									<option value="1">BW品牌绩效下传</option>  
+								</select>  
+								<i></i> 
+								</label>
+							</section>
+							<a class="btn btn-primary btn-sm" href="javascript:Invoke.sendService();" id="btn-start"><i class="fa fa-play-circle"></i> 启动</a>
+						</div>
+						
+						<hr />
+						
+						<div class="row">
+							<label class="label col col-2" style="text-align:right">状态：</label>
+							<label class="label col col-2" id="status">尚未启动</label>
+							<label class="label col col-2" style="text-align:right">任务编号：</label>
+							<label class="label col col-2"  id="questId"></label>
+						</div>
+						
+						<div class="row">
+							<label class="label col col-2" style="text-align:right">启动时间：</label>
+							<label class="label col col-2" id="requestTime"></label>
+							<label class="label col col-2" style="text-align:right">执行时间：</label>
+							<label class="label col col-2" id="excuteTime"></label>
+							<label class="label col col-2" style="text-align:right">结束时间：</label>
+							<label class="label col col-2" id="responseTime"></label>
+						</div>
+						
+						<div class="row" style="margin-top:10px;">
+							<section class="col" style="width:100%">
+							<label class="textarea">
+								<textarea rows="24" id="list" name="" value="" placeholder=""></textarea>
+							</label>
+							</section>
+						</div>
+						
+					</form>
+					</div>
+				</div>
+			</div>
+		</article>
+		
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-3" >
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>参数设置</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body" style="min-height:550px;">
+					<form action="" class="smart-form "  id="form-params">
+						
+						
+					</form>
+					</div>
+				</div>
+			</div>
+		</article>
+
+	</div>
+
+</section>
+
+<script id="sel_service_tpl" type="text/html">
+<option value="">未选择</option>
+{{each data as value i}}
+	<option value="{{value.serviceCode}}">{{value.serviceName}}</option>  
+{{/each}}
+</script>
+
+<script id="paramters_tpl" type="text/html">
+{{each params as value i}}
+<section>
+	<label class="label">参数：{{value}}</label>
+	<label class="input">
+		<input id="{{value}}" type="text" class="input-sm input-param">
+	</label>
+	<hr>		    
+</section>
+{{/each}}
+</script>
+
+<script src="js/module/esb/invoke.js"></script>
+<script type="text/javascript">
+var services = [];
+$(document).ready(function(){
+	Invoke.getServices("SAP");
+});
+</script>
