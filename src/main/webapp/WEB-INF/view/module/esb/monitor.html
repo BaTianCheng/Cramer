@@ -1,0 +1,45 @@
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>服务监控</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body ">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="main-table">
+								
+							</table>
+						</div>
+
+						<input id="page-num" type="hidden" value="1" /> 
+						<input id="page-size" type="hidden" value="10" />
+						<ul id="pager" class="pagination"></ul>
+					</div>
+					<!-- end widgetContent -->
+
+				</div>
+				<!-- end jarvisWidgetBody -->
+
+			</div>
+			<!-- end widget -->
+			<!-- end jarvisWidget -->
+
+		</article>
+		<!-- end widgetGridCol -->
+
+	</div>
+	<!-- end widgetGridRow -->
+
+</section>
+<!-- end widgetGrid -->
+
+<script src="js/module/esb/request.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	Request.list({condition:"{}"});
+});
+</script>
