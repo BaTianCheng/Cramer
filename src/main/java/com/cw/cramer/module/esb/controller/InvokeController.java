@@ -17,7 +17,7 @@ import com.cw.cramer.common.base.BaseController;
 public class InvokeController extends BaseController{
 
 	/**
-	 * 通知公告管理页面
+	 * 服务调用页面
 	 * @param request
 	 * @param model
 	 * @return
@@ -25,5 +25,16 @@ public class InvokeController extends BaseController{
 	@RequestMapping(value = "/esb/invokes")
 	public ModelAndView toIndex(HttpServletRequest request, Model model) {
 		return new ModelAndView("module/esb/invokes");
+	}
+	
+	/**
+	 * 服务监控页面
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/esb/monitor")
+	public ModelAndView toMonitor(HttpServletRequest request, Model model) {
+		return new ModelAndView("module/esb/monitor");
 	}
 }
