@@ -133,12 +133,3 @@ Request.OpenInfoView = function(questId) {
 	}
 }
 
-
-
-
-
-
-
-
-
-

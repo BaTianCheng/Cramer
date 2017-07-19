@@ -26,5 +26,5 @@ public class InvokeController extends BaseController{
 	public ModelAndView toIndex(HttpServletRequest request, Model model) {
 		return new ModelAndView("module/esb/invokes");
 	}
-	
+
 }
