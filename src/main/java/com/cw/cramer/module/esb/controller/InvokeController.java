@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cw.cramer.common.base.BaseController;
 
 /**
- * EXB服务调用控制器
+ * ESB服务调用控制器
  * @author wicks
  */
 @Controller
@@ -27,14 +27,4 @@ public class InvokeController extends BaseController{
 		return new ModelAndView("module/esb/invokes");
 	}
 	
-	/**
-	 * 服务监控页面
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/esb/monitor")
-	public ModelAndView toMonitor(HttpServletRequest request, Model model) {
-		return new ModelAndView("module/esb/monitor");
-	}
 }
