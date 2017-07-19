@@ -56,7 +56,7 @@
 $(document).ready(function(){
 	Request.list({condition:"{status:11202}"});
 	
-	//定时刷新
-	setInterval(function(){$("#main-table").trigger("reloadGrid");},5000);
+	//定时刷新--会导致所有页面都如此，待修改
+	//setInterval(function(){$("#main-table").trigger("reloadGrid");},5000);
 });
 </script>
