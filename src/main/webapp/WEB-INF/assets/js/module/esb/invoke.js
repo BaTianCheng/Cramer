@@ -118,7 +118,7 @@ Invoke.getResult = function (){
 						//case '1201':$("#status").text("进入队列");break;
 						//case '1202':$("#status").text("正在处理");break;
 						case '1203':$("#status").text("执行完成");break;
-						case '1401':$("#status").text("执行失败");break;
+						case '1301':$("#status").text("执行失败");break;
 						case '1400':$("#status").text("请求失败");break;
 					}
 					

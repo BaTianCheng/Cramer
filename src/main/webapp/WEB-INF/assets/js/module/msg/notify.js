@@ -188,7 +188,5 @@ Notify.OpenView = function(id) {
 				alert("程序异常");
 			}
 		});
-	} else {
-		Notify.OpenAdd();
 	}
 }

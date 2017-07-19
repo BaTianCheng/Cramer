@@ -10,14 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cw.cramer.common.base.BaseController;
 
 /**
- * EXB服务调用控制器
+ * ESB服务调用控制器
  * @author wicks
  */
 @Controller
 public class InvokeController extends BaseController{
 
 	/**
-	 * 通知公告管理页面
+	 * 服务调用页面
 	 * @param request
 	 * @param model
 	 * @return
@@ -26,4 +26,5 @@ public class InvokeController extends BaseController{
 	public ModelAndView toIndex(HttpServletRequest request, Model model) {
 		return new ModelAndView("module/esb/invokes");
 	}
+	
 }
