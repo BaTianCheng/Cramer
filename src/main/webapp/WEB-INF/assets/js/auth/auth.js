@@ -18,7 +18,7 @@ Auth.CheckLogin = function(userName, passWord){
 					}
 				}
 				sessionStorage.setItem('auth', str);
-				location.href='/cramer/index';
+				location.href=CTX_PATH+'/index';
 			} else {
 				alert('Login fail!');
 			}
