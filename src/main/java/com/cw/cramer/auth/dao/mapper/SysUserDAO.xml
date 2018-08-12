@@ -22,7 +22,7 @@
     <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
     <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
     <collection property="roleIds" ofType="java.lang.Integer" column="user_id">  
-        <id column="role_id" property="id"/>  
+        <id column="role_id" property="id"/>
     </collection>
     <collection property="roleCodes" ofType="java.lang.String" column="user_id">  
         <result column="role_code" property="code"/>  

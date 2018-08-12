@@ -1,6 +1,7 @@
 package com.cw.cramer.common.util.file;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 import com.cw.cramer.common.util.LogUtils;
@@ -28,4 +29,22 @@ public class PropertiesUtils {
 		}
 		return pro;
 	}
+	
+	/**
+	 * 读取属性文件
+	 * @param path
+	 * @return
+	 */
+	public static Properties getProperties(InputStream in){
+		Properties pro = new Properties();
+		try{
+			pro.load(in);
+			in.close();
+		}
+		catch(Exception ex){
+			LogUtils.error("读取属性文件失败", ex);
+		}
+		return pro;
+	}
+	
 }

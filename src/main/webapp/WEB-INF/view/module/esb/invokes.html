@@ -12,11 +12,14 @@
 					<form action="" class="smart-form ">
 						<div class="row">
 							<label class="label col col-2" style="text-align:right;">请选择服务：</label>
-					        <section class="col col-4">
-					            <label class="select"> 
-								<select id="sel-service" name="sel-service" class="valid">
-								</select>  
-								<i></i> 
+					        <section class="col col-6" >
+						        <label class="select" > 
+									<select id="sel-module" name="sel-module" class="select2"  style="width:150px; float:left; margin-right:5px;">
+									</select>
+								</label>
+								<label class="select" > 
+									<select id="sel-service" name="sel-service" class="select2" style="width:200px; float:left;">
+									</select>  
 								</label>
 							</section>
 							<a class="btn btn-primary btn-sm" href="javascript:Invoke.sendService();" id="btn-start"><i class="fa fa-play-circle"></i> 启动</a>
@@ -86,7 +89,7 @@
 <script id="paramters_tpl" type="text/html">
 {{each params as value i}}
 <section>
-	<label class="label">参数：{{value}}</label>
+	<label class="label">{{paramNames[i]}}({{value}})</label>
 	<label class="input">
 		<input id="{{value}}" type="text" class="input-sm input-param">
 	</label>
@@ -99,6 +102,6 @@
 <script type="text/javascript">
 var services = [];
 $(document).ready(function(){
-	Invoke.getServices("SAP");
+	Invoke.getServices();
 });
 </script>

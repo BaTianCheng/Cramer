@@ -50,7 +50,7 @@ Notify.List = function (postData){
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
               be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Notify.OpenEdit('"+ cl + "');\">编辑</a>";
-              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
+              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Notify.Delete('"+ cl + "');\">删除</a>";
               ae = "<a id=\"td-view-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Notify.OpenView('"+ cl + "');\">查看</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
@@ -189,4 +189,23 @@ Notify.OpenView = function(id) {
 			}
 		});
 	}
+}
+
+//删除公告
+Notify.Delete = function (userId){
+	layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
+		$.post(CTX_PATH + "/msg/notifys/delete", {
+			notifyId : notifyId
+		},function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				$("#main-table").trigger("reloadGrid");
+			} else {
+				alert("程序异常");
+			}
+		}).error(function(xhr,errorText,errorType){
+			alert("系统错误");
+		});
+		layer.close(index);
+	});
 }

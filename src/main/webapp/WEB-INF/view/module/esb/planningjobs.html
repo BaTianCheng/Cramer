@@ -1,0 +1,153 @@
+<style>
+.ui-jqgrid tr.jqgrow td {
+  white-space: normal !important;
+  height:auto;
+  vertical-align:text-top;
+  padding-top:5px;
+  word-break:break-all;
+ }
+</style>
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>计划任务</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body ">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="main-table">
+								
+							</table>
+						</div>
+
+						<input id="page-num" type="hidden" value="1" /> 
+						<input id="page-size" type="hidden" value="10" />
+						<ul id="pager" class="pagination"></ul>
+						<p style="padding-top:5px;">*如果两个计划任务共用一个服务，服务历史记录会合并展示</p>
+					</div>
+				</div>
+			</div>
+		</article>
+		
+	</div>
+
+</section>
+
+<script id="plannningjob_tpl" type="text/html">
+	<form action="" id="job-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right" >计划编码：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="jobCode" name="jobCode" value="{{jobCode}}" placeholder="计划编码" {{if jobCode != null}} readonly {{/if}}>
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">计划名称：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="jobName" name="jobName" value="{{jobName}}" placeholder="计划名称">
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">服务接口：</label>
+				</section>
+				<section class="col col-8">
+					<label class="select"> 
+						<select id="serviceCode" name="serviceCode" >
+						</select>  <i></i> 
+					</label>
+				</section>
+			</div>			
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">计划状态：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="select"> <select id="status" name="status">
+						<option value="1" {{if status == 1}}selected{{/if}}>启用</option>
+						<option value="0" {{if status == 0}}selected{{/if}}>不可用</option>
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">计划类型：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="select"> <select id="jobRule" name="jobRule">
+						<option value="1" {{if jobRule == 1}}selected{{/if}}>每日</option>
+						<option value="2" {{if jobRule == 2}}selected{{/if}}>每周</option>
+						<option value="3" {{if jobRule == 3}}selected{{/if}}>每月</option>
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">计划规则：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="jobRuleValues" name="jobRuleValues" value="{{jobRuleValues}}" placeholder="计划规则">
+						<br />
+						<input type="text" id="jobRuleTime" name="jobRuleTime" value="{{jobRuleTime}}" placeholder="计划规则2"
+							onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false">
+						*每日规则为分钟（例如[0, 180, 480]），每周每月规则为天（例如[1, 5, 10]），计划规则2为每周每日执行的分钟
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">参数信息：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="remarks" name="remarks" value="{{remarks}}" placeholder="可填参数格式(符合Json格式)：{"key":"value"}">
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn"onClick="layer.closeAll();">取消</button>
+			<button type="submit" id="btn-job-save" class="btn btn-primary" 
+				onClick="{{if jobCode != null}} PlanningJob.Update($('#job-form').serializeJSON());
+								{{else}} PlanningJob.Insert($('#job-form').serializeJSON()); {{/if}}">保存</button>
+		</footer>
+	</form>
+</script>
+
+<script id="sel_service_tpl" type="text/html">
+<option value="">未选择</option>
+{{each data as value i}}
+	<option value="{{value.serviceCode}}">{{value.serviceName}}</option>  
+{{/each}}
+</script>
+
+<script src="js/module/esb/planningjob.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	PlanningJob.List();
+});
+</script>

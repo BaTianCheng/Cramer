@@ -1,0 +1,9 @@
+[
+	{
+		id : "test",
+		type : "string",
+		isRequired : true,
+		isReadable : true,
+		isWritable : false
+	}
+]

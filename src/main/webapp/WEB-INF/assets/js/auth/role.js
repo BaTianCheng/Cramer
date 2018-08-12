@@ -63,7 +63,7 @@ Role.List = function (postData){
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
               be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenEdit('"+ cl + "');\">编辑</a>";
-              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
+              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.Delete('"+ cl + "');\">删除</a>";
               ae = "<a id=\"td-authority-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:Role.OpenAuthority('"+ cl + "');\">权限</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
@@ -242,5 +242,24 @@ Role.UpdateAuthority = function(serialize){
 			}
 	}).error(function(xhr,errorText,errorType){
 		layer.msg('系统错误', {icon: 2});
+	});
+}
+
+//删除角色
+Role.Delete = function (departmentId){
+	layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
+		$.post(CTX_PATH + "/auth/roles/delete", {
+			roleId : roleId
+		},function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				$("#main-table").trigger("reloadGrid");
+			} else {
+				alert("程序异常");
+			}
+		}).error(function(xhr,errorText,errorType){
+			alert("系统错误");
+		});
+		layer.close(index);
 	});
 }

@@ -72,7 +72,7 @@ public class MsgWebMailController extends BaseController{
 	public String add(HttpServletRequest request, Model model, MsgWebMail mail) {
 		boolean isSuccess = msgWebMailService.sendWebMail(mail);
 		if(isSuccess){
-			this.record(ModuleType.Msg, OperateLogType.Insert, "发送邮件公告："+mail.getTitle());
+			this.record(ModuleType.Msg, OperateLogType.Insert, "发送邮件："+mail.getTitle());
 		}
 		return this.renderJson(isSuccess);
 	}

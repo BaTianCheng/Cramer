@@ -19,6 +19,7 @@
 	<mvc:resources mapping="/fonts/**" location="WEB-INF/assets/fonts/"/>
 	<mvc:resources mapping="/ajax/**" location="WEB-INF/view/ajax/"/>
 	<mvc:resources mapping="/assets/**" location="WEB-INF/assets/"/>
+	<mvc:resources mapping="/files/**"  location="WEB-INF/files/"/> 
 
 	<!-- Freemarker配置 -->  
 	<bean id="freemarkerConfig"  

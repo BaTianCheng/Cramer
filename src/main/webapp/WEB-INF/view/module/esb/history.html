@@ -9,12 +9,37 @@
 				<div>
 					<div class="jarviswidget-editbox"></div>
 					<div class="widget-body ">
+						<form action="" class="smart-form " >
+							<div class="row" >
+								<div id="sel-service-panel">
+									<label class="label col col-1"  style="padding-left:20px;">请选择服务：</label>
+									<section class="col col-4" >
+							            <label class="select" > 
+										<select id="sel-module" name="sel-module" class="select2"  style="width:110px; float:left; margin-right:5px;">
+										</select>
+										</label>
+										<label class="select" > 
+										<select id="sel-service" name="sel-service" class="select2" style="width:190px; float:left;">
+										</select>  
+										</label>
+									</section>
+								</div>
+								<label class="label col col-1"  >时间范围：</label>
+								<section class="col col-2" >
+									<lable class="input "><input id="beginTime" type="text" class="input-sm date-picker"></lable>
+								</section>
+								<label class="label" style="float:left;padding-top:6px;">—</label>
+								<section class="col col-2" >
+									<lable class="input "><input id="endTime" type="text" class="input-sm date-picker" ></lable>
+								</section>
+								<a class="btn btn-primary btn-sm" href="javascript:Request.Search();" id="btn-start"><i class="fa fa-search"></i> 搜索</a>
+							</div>
+						</form>
 						<div class="table-responsive">
 							<table class="table table-bordered" id="main-table">
 								
 							</table>
 						</div>
-
 						<input id="page-num" type="hidden" value="1" /> 
 						<input id="page-size" type="hidden" value="10" />
 						<ul id="pager" class="pagination"></ul>
@@ -54,6 +79,43 @@
 <script src="js/module/esb/request.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	Request.list({condition:"{}"});
+	//时间范围选择器
+	$('#beginTime').datepicker({  
+		language: 'zh-CN',
+	    todayBtn : "linked",  
+	    autoclose : true,  
+	    todayHighlight : true,  
+	    endDate : new Date()  
+	}).on('changeDate',function(e){  
+	    var startTime = e.date;  
+	    $('#endTime').datepicker('setStartDate',startTime);  
+	});  
+	//结束时间：  
+	$('#endTime').datepicker({  
+		language: 'zh-CN',
+	    todayBtn : "linked",  
+	    autoclose : true,  
+	    todayHighlight : true,  
+	    endDate : new Date()  
+	}).on('changeDate',function(e){  
+	    var endTime = e.date;  
+	    $('#beginTime').datepicker('setEndDate',endTime);  
+	});
+	Request.getServices();
+	
+	//默认展示近七天
+	var now = Date.parse(new Date());
+	var last = getDateDesc(now-7*24*60*60*1000);
+	$("#beginTime").datepicker("setDate", last);
+	$("#endTime").datepicker("setDate", "@");
+	
+	if(GetQueryString("serviceCode") != null){
+		$("#sel-service").val(GetQueryString("serviceCode"));
+		$("#sel-service-panel").hide();
+		$("#beginTime").datepicker("setDate", "");
+		$("#endTime").datepicker("setDate", "");
+	}
+
+	Request.Search();
 });
 </script>

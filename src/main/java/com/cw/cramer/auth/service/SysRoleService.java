@@ -8,11 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.cw.cramer.auth.dao.SysDepartmentRoleDAO;
 import com.cw.cramer.auth.dao.SysRoleDAO;
+import com.cw.cramer.auth.dao.SysUserRoleDAO;
 import com.cw.cramer.auth.entity.SysDepartmentRole;
 import com.cw.cramer.auth.entity.SysDepartmentRoleExample;
 import com.cw.cramer.auth.entity.SysRole;
 import com.cw.cramer.auth.entity.SysRoleExample;
 import com.cw.cramer.auth.entity.SysRoleExample.Criteria;
+import com.cw.cramer.auth.entity.SysUserRole;
+import com.cw.cramer.auth.entity.SysUserRoleExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
@@ -33,6 +36,9 @@ public class SysRoleService extends BaseService{
 	
 	@Autowired
 	private SysDepartmentRoleDAO sysDepartmentRoleDAO;
+	
+	@Autowired
+	private SysUserRoleDAO sysUserRoleDAO;
 	
 	/**
 	 * 获取角色
@@ -179,6 +185,25 @@ public class SysRoleService extends BaseService{
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * 根据用户获得角色列表
+	 * @param userId
+	 * @return
+	 */
+	public List<SysRole> getRolesByUser(int userId){
+		SysUserRoleExample userRoleExample = new SysUserRoleExample();
+		userRoleExample.or().andUserIdEqualTo(userId);
+		List<SysUserRole> userRoles = sysUserRoleDAO.selectByExample(userRoleExample);
+		List<Integer> roleIds = new ArrayList<Integer>();
+		for(SysUserRole userRole : userRoles){
+			roleIds.add(userRole.getRoleId());
+		}
+		SysRoleExample roleExample = new SysRoleExample();
+		roleExample.or().andIdIn(roleIds);
+		List<SysRole> roles = sysRoleDAO.selectByExample(roleExample);
+		return roles;
 	}
 
 }

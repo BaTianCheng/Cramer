@@ -1,43 +1,84 @@
 Invoke = {};
 
-var ESB_PATH = "http://localhost:16060/esb";
-
 //定时器编号
 Invoke.timerId = 0;
 
 //获得服务信息列表
-Invoke.getServices = function(module){
-	$.post(ESB_PATH + "/manger/services/list", 
-		{module : module}, 
-		 function(msg) {
-			var result = JSON.parse(msg);
-			services = result.data;
+Invoke.getServices = function(){
+	var $selModule = $("#sel-module");
+	var $selService = $("#sel-service");
+	var modules, services;
+	$.ajax({
+		type : "GET",
+		url : ESB_PATH + "/manger/modules/list",
+		async : false,
+		dataType : "json",
+		success : function(result) {
 			if (result.statusCode == '200') {
-				var html = template('sel_service_tpl', result);
-				$("#sel-service").html(html);
-				
-				//选择服务，设置参数
-				$("#sel-service").change(function(){
-					if($("#sel-service").val()==""){
-						$("#form-params").html("");
-					}
-					for(var i=0;i<services.length;i++){
-						if(services[i].serviceCode == $("#sel-service").val()){
-							var paramsHtml = template('paramters_tpl', services[i]);
-							$("#form-params").html(paramsHtml);
-						}
-					}
-				});
-				
+				modules = result.data;
+				var html = "<option value=''>选择模块</option>"
+				for (var i = 0; i < modules.length; i++) {
+					html += "<option value='" + modules[i].module + "'>"
+							+ modules[i].name + "</option>"
+				}
+				$selModule.html(html);
+				$selModule.select2();
 			} else {
-				layer.msg('程序异常', {
+				layer.msg('系统错误', {
 					icon : 2
 				});
+				return;
 			}
-		}).error(function(xhr, errorText, errorType) {
-			layer.msg('系统错误', {
-				icon : 2
-		});
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : ESB_PATH + "/manger/services/list",
+		async : false,
+		dataType : "json",
+		success : function(result) {
+			if (result.statusCode == '200') {
+				services = result.data;
+				var html = "<option value=''>选择服务</option>"
+				for (var i = 0; i < services.length; i++) {
+					html += "<option value='" + services[i].serviceCode + "'>"
+							+ services[i].serviceName + "</option>"
+				}
+				$selService.html(html);
+				$selService.select2();
+			} else {
+				layer.msg('系统错误', {
+					icon : 2
+				});
+				return;
+			}
+		}
+	});
+
+	//选择模块后事件
+	$selModule.on("change", function() {
+		var html = "<option value=''>选择服务</option>"
+		for (var i = 0; i < services.length; i++) {
+			if (services[i].module == $selModule.val() || $selModule.val()=="") {
+				html += "<option value='" + services[i].serviceCode + "'>"
+						+ services[i].serviceName + "</option>"
+			}
+		}
+		$selService.html(html);
+		$selService.select2();
+	});
+	
+	//选择服务，设置参数
+	$("#sel-service").change(function(){
+		if($("#sel-service").val()==""){
+			$("#form-params").html("");
+		}
+		for(var i=0;i<services.length;i++){
+			if(services[i].serviceCode == $("#sel-service").val()){
+				var paramsHtml = template('paramters_tpl', services[i]);
+				$("#form-params").html(paramsHtml);
+			}
+		}
 	});
 }
 
@@ -52,6 +93,7 @@ Invoke.sendService = function (){
 	
 	if($("#sel-service").val()==""){
 		layer.alert('请选择要调用的服务');
+		allowInput();
 		return;
 	}
 	
@@ -75,6 +117,7 @@ Invoke.sendService = function (){
 				setTimeout(Invoke.getResult, 2000);
 			} else {
 				$("#status").text("调用失败");
+				allowInput();
 			}
 		}
 	);
@@ -94,9 +137,10 @@ Invoke.getTraces = function (){
 				$("#list").text(text);
 				$("#list").scrollTop($("#list")[0].scrollHeight);
 				if(messages[messages.length-1].no == '200'){
-					Invoke.getResult();
 					clearInterval(Invoke.timerId);
+					Invoke.getResult();
 					allowInput();
+					setTimeout(100,function(){});
 				}
 			}
 		);
@@ -122,8 +166,8 @@ Invoke.getResult = function (){
 						case '1400':$("#status").text("请求失败");break;
 					}
 					
-					if(data.result != null && data.result != ""){
-						$("#list").text($("#list").text()+"返回结果：\r\n"+data.result.toString());
+					if(data.result != null && data.result != "" && $("#list").text().indexOf("##########返回结果##########：")<0){
+						$("#list").text($("#list").text()+"##########返回结果##########：\r\n"+data.result.toString()+"\r\n");
 						$("#list").scrollTop($("#list")[0].scrollHeight);
 					}
 				} else {
@@ -136,6 +180,7 @@ Invoke.getResult = function (){
 //锁定，禁止输入
 function lockInput(){
 	$("#btn-start").attr("disabled",true);
+	$("#sel-module").attr("disabled",true);
 	$("#sel-service").attr("disabled",true);
 	$(".input-param").attr("disabled",true);
 }
@@ -143,8 +188,7 @@ function lockInput(){
 //取消锁定，允许输入
 function allowInput(){
 	$("#btn-start").attr("disabled",false);
+	$("#sel-module").attr("disabled",false);
 	$("#sel-service").attr("disabled",false);
 	$(".input-param").attr("disabled",false);
 }
-
-

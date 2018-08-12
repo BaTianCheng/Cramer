@@ -1,6 +1,8 @@
 package com.cw.cramer.auth.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.service.SysAuthorityService;
 import com.cw.cramer.common.base.BaseController;
+import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.ModuleType;
 import com.cw.cramer.common.constant.OperateLogType;
 import com.cw.cramer.common.util.LogUtils;
@@ -68,7 +71,11 @@ public class AuthController extends BaseController{
 			subject.login(token);
 			SysUser user = securityService.getCurrentUser();
 			this.record(ModuleType.Auth, OperateLogType.Login_In, "登录成功");
-			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
+			Map<String, Object> result = new HashMap<>();
+			result.put("auth", securityService.getAuthorityCodes(user.getId()));
+			result.put("userName", user.getName());
+			result.put("params", CommonConstant.CONFIG_PARAMS);
+			return this.renderSuccessJson(result);
 		}catch (UnknownAccountException e) {
 			LogUtils.error("login fail: " + e);
 			return this.renderFailJson(null);
@@ -100,7 +107,10 @@ public class AuthController extends BaseController{
 		if(user == null){
 			return this.renderFailJson(null);
 		} else {
-			return this.renderSuccessJson(securityService.getAuthorityCodes(user.getId()));
+			Map<String, Object> map = new HashMap<>();
+			map.put("user", user);
+			map.put("auth", securityService.getAuthorityCodes(user.getId()));
+			return this.renderSuccessJson(map);
 		}
 	}
 	

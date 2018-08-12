@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cw.cramer.auth.AuthAPI;
 import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.ModuleType;
 import com.cw.cramer.common.constant.OperateLogType;
@@ -34,6 +35,9 @@ public class SysOperateLogService {
 	
 	@Autowired
 	private SysSequenceService sysSequenceService;
+	
+	@Autowired
+	private AuthAPI authAPI;
 	
 	/**
 	 * 日志记录
@@ -98,7 +102,16 @@ public class SysOperateLogService {
 		example.or(criteria);
 		example.setOrderByClause("operate_time desc");
 		List<SysOperateLog> list = sysOperateLogDAO.selectByExample(example);
+		
+		//描述修改
+		for(SysOperateLog log : list){
+			log.setOperator(authAPI.getUserName(log.getOperateBy()));
+			log.setModuleDesc(ModuleType.getDesc(log.getModuleId()));
+			log.setOperateTypeDesc(OperateLogType.getDesc(log.getOperateType()));
+		}
+		
 		return new PageInfo<SysOperateLog>(list);
 	}
+
 
 }

@@ -24,6 +24,12 @@ public class SysOperateLog {
 
     private String remarks;
 
+    private String moduleDesc;
+    
+    private String operateTypeDesc;
+    
+    private String operator;
+    
     public Integer getId() {
         return id;
     }
@@ -95,4 +101,29 @@ public class SysOperateLog {
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
     }
+
+	public String getModuleDesc() {
+		return moduleDesc;
+	}
+
+	public void setModuleDesc(String moduleDesc) {
+		this.moduleDesc = moduleDesc;
+	}
+
+	public String getOperateTypeDesc() {
+		return operateTypeDesc;
+	}
+
+	public void setOperateTypeDesc(String operateTypeDesc) {
+		this.operateTypeDesc = operateTypeDesc;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+    
 }

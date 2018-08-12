@@ -1,0 +1,136 @@
+<style>
+.ui-jqgrid tr.jqgrow td {
+  white-space: normal !important;
+  height:auto;
+  vertical-align:text-top;
+  padding-top:5px;
+  word-break:break-all;
+ }
+</style>
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>实时任务</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body ">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="main-table">
+								
+							</table>
+						</div>
+
+						<input id="page-num" type="hidden" value="1" /> 
+						<input id="page-size" type="hidden" value="10" />
+						<ul id="pager" class="pagination"></ul>
+					</div>
+				</div>
+			</div>
+		</article>
+		
+	</div>
+
+</section>
+
+
+<script id="regularjob_tpl" type="text/html">
+	<form action="" id="job-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
+		<fieldset>
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right" >计划编码：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="jobCode" name="jobCode" value="{{jobCode}}" placeholder="计划编码" {{if jobCode != null}} readonly {{/if}}>
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">计划名称：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="jobName" name="jobName" value="{{jobName}}" placeholder="计划名称">
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">服务接口：</label>
+				</section>
+				<section class="col col-8">
+					<label class="select"> 
+						<select id="serviceCode" name="serviceCode" >
+						</select>  <i></i> 
+					</label>
+				</section>
+			</div>			
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">计划状态：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="select"> <select id="status" name="status">
+						<option value="1" {{if status == 1}}selected{{/if}}>启用</option>
+						<option value="0" {{if status == 0}}selected{{/if}}>不可用</option>
+					</select> <i></i>
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">间隔（秒）：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="intervalSecond" name="intervalSecond" value="{{intervalSecond}}" placeholder="时间间隔"
+							onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false">
+					</label>
+				</section>
+			</div>
+
+			<div class="row">
+				<section class="col col-3 ">
+					<label class="label col col-12" style="float:right">备注信息：</label>
+				</section>
+				<section class="col col-8 ">
+					<label class="input"> 
+						<input type="text" id="remarks" name="remarks" value="{{remarks}}" placeholder="备注信息">
+					</label>
+				</section>
+			</div>
+
+		</fieldset>
+
+		<footer>
+			<button type="button" class="btn"onClick="layer.closeAll();">取消</button>
+			<button type="submit" id="btn-job-save" class="btn btn-primary" 
+				onClick="{{if jobCode != null}} RegularJob.Update($('#job-form').serializeJSON());
+								{{else}} RegularJob.Insert($('#job-form').serializeJSON()); {{/if}}">保存</button>
+		</footer>
+	</form>
+</script>
+
+<script id="sel_service_tpl" type="text/html">
+<option value="">未选择</option>
+{{each data as value i}}
+	<option value="{{value.serviceCode}}">{{value.serviceName}}</option>  
+{{/each}}
+</script>
+
+<script src="js/module/esb/regularjob.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	RegularJob.List();
+});
+</script>

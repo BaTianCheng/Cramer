@@ -8,13 +8,13 @@
 				<header>
 					<span class="widget-icon"><i
 						class="glyphicon glyphicon-stats txt-color-darken"></i></span>
-					<h2>即时动态</h2>
+					<h2>任务队列</h2>
 					<ul id="myTab" class="nav nav-tabs pull-right in">
-						<li class="active"><a href="##s1" data-toggle="tab"> <i
-								class="fa fa-clock-o"></i> <span
-								class="hidden-mobile hidden-tablet">即时状态</span>
-
-						</a></li>
+						<li class="active">
+							<a href="##s1" data-toggle="tab"> <i class="fa fa-clock-o"></i> 
+								<span	class="hidden-mobile hidden-tablet">任务队列</span>
+							</a>
+						</li>
 					</ul>
 
 				</header>
@@ -25,7 +25,7 @@
 							<div class="tab-pane fade active in padding-10 no-padding-bottom"
 								id="s1">
 								<div class="row no-space">
-									<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 										<span class="demo-liveupdate-1"> <span
 											class="onoffswitch-title">在线开关</span> <span
 											class="onoffswitch"> <input type="checkbox"
@@ -42,7 +42,7 @@
 
 									</div>
 
-									<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 show-stats">
+									<div class="show-stats" style="display:none;">
 										<div class="row">
 											<div class="col-xs-6 col-sm-6 col-md-12 col-lg-12">
 												<span class="text"> 任务总数 <span class="pull-right" id="queueSize"></span>
@@ -100,7 +100,7 @@
 											data-percent="33" data-pie-size="50">
 											<span class="percent percent-sign">35</span>
 										</div>
-										<span class="easy-pie-title"> 服务器负载 <i
+										<span class="easy-pie-title">  <i
 											class="fa fa-caret-up icon-color-bad"></i>
 										</span>
 										<ul class="smaller-stat hidden-sm pull-right">
@@ -123,7 +123,7 @@
 											data-percent="78.9" data-pie-size="50">
 											<span class="percent percent-sign">78.9 </span>
 										</div>
-										<span class="easy-pie-title"> 磁盘使用率 <i
+										<span class="easy-pie-title">  <i
 											class="fa fa-caret-down icon-color-good"></i>
 										</span>
 										<ul class="smaller-stat hidden-sm pull-right">
@@ -146,7 +146,7 @@
 											data-pie-size="50">
 											<span class="percent percent-sign">23 </span>
 										</div>
-										<span class="easy-pie-title"> 传输情况<i
+										<span class="easy-pie-title"> <i
 											class="fa fa-caret-up icon-color-good"></i>
 										</span>
 										<ul class="smaller-stat hidden-sm pull-right">
@@ -170,7 +170,7 @@
 												class="fa fa-caret-up"></i>
 											</span>
 										</div>
-										<span class="easy-pie-title"> 温度 <i
+										<span class="easy-pie-title">  <i
 											class="fa fa-caret-down icon-color-good"></i>
 										</span>
 										<ul class="smaller-stat hidden-sm pull-right">
@@ -281,7 +281,7 @@
 	</div>
 	<!-- end widgetGridRow -->
 
-	<div class="row">
+	<div class="row" style="display:none;">
 		<article class="col-sm-12 col-md-12 col-lg-6">
 			
 			<!-- end widget -->
@@ -854,7 +854,7 @@
 		
 		    function update() {
 		        if ($on == true) {
-		        	$.when($.post("http://localhost:16060/http/manger/status/get")).done(function(dd){
+		        	$.when($.post(ESB_PATH+"/manger/status/get")).done(function(dd){
 		        		data = data.slice(1);
 		        		var resultx = JSON.parse(dd);
 		        		data.push(resultx.data.queueSize);

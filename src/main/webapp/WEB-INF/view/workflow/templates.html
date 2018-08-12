@@ -1,0 +1,69 @@
+<section id="widget-grid" class="">
+	<div class="row">
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-10" >
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>发起工作流</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div class="widget-body" style="min-height:550px;">
+					<form action="" class="smart-form ">
+						<div class="row">
+							<label class="label col col-1" style="text-align:right;">选择流程：</label>
+					        <section class="col col-4" >
+						        <label class="select" > 
+									<select id="sel-flow" name="sel-flow" class="select2"  style="width:100%; float:left; margin-right:5px;">
+									</select>
+								</label>
+							</section>
+							<a class="btn btn-primary btn-sm" href="javascript:Workflow.ShowForm();" id="btn-start"><i class="fa fa-play-circle"></i> 发起</a>
+							<a class="btn btn-danger btn-sm" href="javascript:Workflow.Deploy();" id="btn-start"><i class="fa fa-play-circle"></i> 重新部署</a>
+						</div>
+						
+						<hr />
+						
+						<div class="row" style="margin-top:10px;height:500px;">
+							<img id="workflow-image" src="" />
+						</div>
+						
+					</form>
+					</div>
+				</div>
+			</div>
+		</article>
+		
+		<article class="col-xs-12 col-sm-12 col-md-12 col-lg-2" >
+			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-editbutton="false">
+				<header>
+					<span class="widget-icon"><i class="fa fa-table"></i></span>
+					<h2>流程说明：</h2>
+				</header>
+				<div>
+					<div class="jarviswidget-editbox"></div>
+					<div id="description" class="widget-body" style="min-height:550px;font-size:14px;">
+						
+					</div>
+				</div>
+			</div>
+		</article>
+
+	</div>
+
+</section>
+
+<script id="sel_flow_tpl" type="text/html">
+<option value="">未选择</option>
+{{each data as value i}}
+	<option value="{{value.templateKey}}">{{value.templateName}}</option>  
+{{/each}}
+</script>
+
+<script src="js/workflow/workflow.js"></script>
+<script src="js/workflow/form.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	Workflow.GetTemplates();
+});
+</script>

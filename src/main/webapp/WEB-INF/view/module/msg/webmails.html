@@ -58,7 +58,8 @@
 				</section>
 				<section class="col col-9 ">
 					<label class="input"> 
-						<input type="text" id="title" name="title" value="{{receiver}}" placeholder="收件人">
+						<i class="icon-append fa fa-user"></i>
+						<input type="text" id="receiver" name="receiver" value="{{receiver}}" placeholder="收件人">
 					</label>
 				</section>
 			</div>
@@ -77,14 +78,8 @@
 		</fieldset>
 
 		<footer>
-			<button type="button" class="btn"onClick="layer.close(layer.index);">取消</button>
-			<button type="submit" class="btn btn-primary" onClick="
-				{{if id != null}}
-					WebMail.Update($('#webmail-form').serialize())
-				{{else}}
-					WebMail.Add($('#webmail-form').serialize())
-				{{/if}}
-			">保存</button>
+			<button type="button" class="btn"onClick="layer.closeAll();">取消</button>
+			<button type="submit" class="btn btn-primary" onClick="WebMail.Send($('#webmail-form').serialize());">发送</button>
 		</footer>
 	</form>
 </script>
@@ -121,6 +116,43 @@
 			<button type="button" class="btn btn-primary"onClick="layer.close(layer.index);">关闭</button>
 		</footer>
 	</form>
+</script>
+
+<!-- 用户选择组件模版，后期移至requireJS -->
+<script id="component_selUsers_tpl" type="text/html">
+<div style="float:left; width:220px; padding:10px;">
+	<div>
+		<label class="input" style="float:left;"> 
+			<input type="text" class="input-sm" id="" name="name" value="" placeholder="姓名" style="width:128px;">	                            
+		</label>
+		<a class="btn btn-primary btn-sm" href="javascript:void(0);" style="float:left;margin-left:10px;">
+    		<i class="fa fa-search"></i> 搜索 
+		</a>
+	</div>
+	<div style="height:420px;border:1px solid #aaa;margin-top:40px;">
+		
+	</div>
+</div>
+<div style="float:left; width:52px;">
+	<a class="btn btn-default btn-primary" id="" href="javascript:void(0);" style="margin-top:120px;">
+    	<i class="fa fa-angle-double-right fa-lg"></i> 
+	</a>
+	<a class="btn btn-default btn-primary" id="" href="javascript:void(0);" style="margin-top:120px;width:36px;">
+    	<i class="fa fa-angle-left fa-lg"></i> 
+	</a>
+	<a class="btn btn-default btn-primary" id="" href="javascript:void(0);" style="margin-top:20px;">
+    	<i class="fa fa-angle-double-left fa-lg"></i> 
+	</a>
+</div>
+<div style="float:left; width:220px;">
+	<label style="width:120px;color:black;padding:10px; margin-top: 6px;">已选择：</label>
+	<label class="select select-multiple">
+		<select id="carmer-select-users" multiple="multiple" placeholder=""  style="width:210px;height:420px;">
+		        
+		</select>
+	</label>
+</div>
+
 </script>
 
 <script src="js/module/msg/webmail.js"></script>

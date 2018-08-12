@@ -12,6 +12,7 @@ import java.util.Map;
 public enum ModuleType {
 	Auth(101001),
 	Msg(102001),
+	Esb(103001),
 	Sys(109001);
 	
 	private int code;
@@ -25,12 +26,13 @@ public enum ModuleType {
 	 * @param code
 	 * @return
 	 */
-	public String getDesc(int code){
+	public static String getDesc(int code){
 		switch (code) {
 			case 101001 : return "权限管理";
 			case 102001 : return "消息管理";
+			case 103001 : return "总线服务";
 			case 109001 : return "系统管理";
-			default : return String.valueOf ( this.code );
+			default : return String.valueOf ( code );
 		}
 	}
 	

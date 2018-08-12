@@ -12,12 +12,23 @@ Auth.CheckLogin = function(userName, passWord){
 			if(code == "200"){
 				var str = '';
 				var data = JSON.parse(result).data;
+
 				if(data !=null){
-					for(var i=0;i<data.length;i++){
-						str+='['+data[i]+']';
+					//载入权限
+					if(data.auth != null){
+						for(var i=0;i<data.auth.length;i++){
+							str+='['+data.auth[i]+']';
+						}
+						sessionStorage.setItem('auth', str);
+					}
+					sessionStorage.setItem('username', data.userName);
+					
+					//载入系统参数
+					if(data.params != null){
+						sessionStorage.setItem('ESB_PATH', data.params.ESB_PATH);
 					}
 				}
-				sessionStorage.setItem('auth', str);
+
 				location.href=CTX_PATH+'/index';
 			} else {
 				alert('Login fail!');

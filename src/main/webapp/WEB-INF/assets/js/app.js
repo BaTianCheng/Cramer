@@ -12,34 +12,40 @@ function runAllForms(){$.fn.slider&&$(".slider").slider(),$.fn.select2&&$(".sele
 /*权限校验*/
 $(document).ready(function(){
 	var authStr = sessionStorage.getItem("auth");
-	if(authStr == null){
+	var userInfo = sessionStorage.getItem("username");
+	
+	if(authStr == null || authStr == '' || userInfo == null){
 		$.post(CTX_PATH+'/auth/authorities/current',
-				{},
-				function(result){
-					var code = JSON.parse(result).resultCode;
-					if(code == "200"){
-						var str = '';
-						var data = JSON.parse(result).data;
-						if(data !=null){
-							for(var i=0;i<data.length;i++){
-								str+='['+data[i]+']';
-							}
+			{},
+			function(result){
+				var code = JSON.parse(result).resultCode;
+				if(code == "200"){
+					var str = '';
+					var data = JSON.parse(result).data.auth;
+					var user = JSON.parse(result).data.user;
+					$("#login-user-name").text(user.name);
+					
+					if(data !=null){
+						for(var i=0;i<data.length;i++){
+							str+='['+data[i]+']';
 						}
-						sessionStorage.setItem('auth', str);
-						authStr = str;
-						$(".auth").each(function(index,element){
-							if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
-								$(this).show();
-							} else {
-								$(this).remove();
-							}
-						})
-					} else {
-						sessionStorage.clear();
-						$(".auth").remove();
 					}
+					sessionStorage.setItem('auth', str);
+					sessionStorage.setItem('username', user.name);
+					authStr = str;
+					$(".auth").each(function(index,element){
+						if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
+							$(this).show();
+						} else {
+							$(this).remove();
+						}
+					})
+				} else {
+					sessionStorage.clear();
+					$(".userInfo").remove();
 				}
-			);
+			}
+		);
 	} else {
 		$(".auth").each(function(index,element){
 			if(authStr.indexOf(element.attributes["data-auth"].value)>=0){
@@ -48,9 +54,9 @@ $(document).ready(function(){
 				$(this).remove();
 			}
 		})
+		$("#login-user-name").text(userInfo);
 	}
 });
-
 
 function editRow(cl){
 	$("#td-edit-"+cl).hide();
@@ -116,42 +122,25 @@ function getTimeDesc(time){
 	}
 }
 
-/*自定义组件*/
-(function ($) {  
-    $.fn.departmentZtree = function (options) {
-    	$sel = $(this);
-    	var defualts = {
-    		callback : null
-    	}
-    	options = $.extend({}, defualts, options);
-    	
-    	var callback = options.callback;
-    	this.init = function(){
-    		var zTreeObj;
-    		var setting = {};
-    		setting.callback = {};
-    		setting.callback.onClick = callback;
-    		
-    		$.post(CTX_PATH+'/auth/departments/tree',{},
-    			function(result){
-    				var data = JSON.parse(result).data;
-    				zTreeObj = $.fn.zTree.init($sel, setting, data);
-    				var nodes = zTreeObj.getNodes();
-    				if (nodes.length>0) {
-    					zTreeObj.selectNode(nodes[0]);
-    					zTreeObj.setting.callback.onClick(null, zTreeObj.setting.treeId, nodes[0]);
-    				}
-    			}
-    		);
-    		
-    	}
-    	this.init();
-    	return this;
-    }
-})(jQuery);
+//获得日期描述
+function getDateDesc(time){
+	if(time >0){
+		var newDate = new Date();
+		newDate.setTime(time);
+		return newDate.format('yyyy-MM-dd')
+	} else {
+		return "";
+	}
+}
 
+//获取参数
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var paramStr = window.location.href.substr(window.location.href.indexOf('?')+1,window.location.href.length);
+     var r = paramStr.match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
 
-
-
-
-
+//ESB地址
+var ESB_PATH = sessionStorage.getItem("ESB_PATH");

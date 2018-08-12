@@ -79,7 +79,7 @@ User.List = function (){
             for ( var i = 0; i < ids.length; i++) {
               var cl = ids[i];
               be = "<a id=\"td-edit-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:User.OpenEdit('"+ cl + "');\">编辑</a>";
-              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:delTableRow('"+cl+"');\">删除</a>";
+              de = "<a id=\"td-del-"+cl+"\" style=\"padding-left:5px;padding-right:5px;\" href=\"javascript:User.Delete('"+cl+"');\">删除</a>";
               jQuery("#main-table").jqGrid('setRowData', ids[i],
                   {
             	  	actions : be + de 
@@ -126,11 +126,6 @@ User.List = function (){
 	});
 }
 
-function delTableRow(cl){
-	$("#main-table").jqGrid('delGridRow', cl);
-	$("#main-table").trigger("reloadGrid");
-}
-
 //打开添加用户
 User.OpenAdd = function(){
 	var data = {};
@@ -150,7 +145,7 @@ User.OpenAdd = function(){
 			});
 			User.ShowDepartmentRoles($('#departmentId').val(),[]);
 		} else {
-			alert("程序异常");
+			layer.msg('程序异常', {icon: 2});
 		}
 	});
 }
@@ -177,7 +172,7 @@ User.OpenEdit = function(userId){
 					});
 					User.ShowDepartmentRoles($('#departmentId').val(),data.user.roleIds);
 				} else {
-					alert("程序异常");
+					layer.msg('程序异常', {icon: 2});
 				}
 		});
 	} else {
@@ -210,7 +205,7 @@ User.UpdateInfo = function (serialize){
 				layer.msg('修改成功', {icon: 1});
 				$("#main-table").trigger("reloadGrid");
 			} else {
-				layer.msg('程序异常', {icon: 2});
+				layer.msg('操作失败', {icon: 2});
 			}
 	}).error(function(xhr,errorText,errorType){
 		layer.msg('系统错误', {icon: 2});
@@ -227,7 +222,7 @@ User.AddInfo = function (serialize){
 				layer.msg('添加成功', {icon: 1});
 				$("#main-table").trigger("reloadGrid");
 			} else {
-				layer.msg('程序异常', {icon: 2});
+				layer.msg('操作失败', {icon: 2});
 			}
 	}).error(function(xhr,errorText,errorType){
 		layer.msg('系统错误', {icon: 2});
@@ -241,9 +236,9 @@ User.UpdatePassword = function (newPassword){
 	},function(msg) {
 			var result = JSON.parse(msg);
 			if(result.resultCode == '200'){
-				console.log(result.data);
+				layer.msg('修改成功', {icon: 1});
 			} else {
-				alert("程序异常");
+				layer.msg('修改失败', {icon: 2});
 			}
 	}).error(function(xhr,errorText,errorType){
 		alert("系统错误");
@@ -251,7 +246,6 @@ User.UpdatePassword = function (newPassword){
 }
 
 //删除用户
-/*
 User.Delete = function (userId){
 	layer.confirm('确定要删除用户吗?', {icon: 3, title:'提示'}, function(index){
 		$.post(CTX_PATH + "/auth/users/delete", {
@@ -259,9 +253,9 @@ User.Delete = function (userId){
 		},function(msg) {
 			var result = JSON.parse(msg);
 			if(result.resultCode == '200'){
-				console.log(result.data);
+				$("#main-table").trigger("reloadGrid");
 			} else {
-				alert("程序异常");
+				layer.msg('操作失败', {icon: 2});
 			}
 		}).error(function(xhr,errorText,errorType){
 			alert("系统错误");
@@ -269,4 +263,3 @@ User.Delete = function (userId){
 		layer.close(index);
 	});
 }
-*/

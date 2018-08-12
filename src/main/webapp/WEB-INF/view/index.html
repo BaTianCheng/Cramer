@@ -7,6 +7,7 @@
 		<!-- 插件样式 -->
 		<link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/LayerUI/css/layui.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/ZTree/css/metroStyle/metroStyle.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/DatePicker/css/bootstrap-datepicker.css">
 		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
 		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 		<!-- 基本样式 -->
@@ -54,7 +55,7 @@
 				<span>
 					<a href="javascript:void(0);" id="show-shortcut">
                         <img src="img/avatars/male.png" alt="me" class="online">
-						<span>wicks</span>
+						<span id="login-user-name"></span>
 						<!-- <i class="fa fa-angle-down"></i> -->
 					</a>
 				</span>
@@ -65,29 +66,39 @@
 					<li>
 						<a href="sys/platform" title="个人工作台"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">个人工作台</span></a>
 					</li>
+					<li class="auth" data-auth="[workflow]">
+						<a href="#" title="工作流管理"><i class="fa fa-lg fa-fw fa-random"></i> <span class="menu-item-parent">工作流管理</span></a>
+						<ul>
+							<li class="auth" data-auth="[workflow-templates]"><a href="workflow/templates"><i class="fa fa-lg fa-fw fa-plus-square"></i> 发起新流程</a></li>
+							<li class="auth" data-auth="[workflow-undos]"><a href="workflow/undos"><i class="fa fa-lg fa-fw fa-list"></i> 待办列表</a></li>
+							<li class="auth" data-auth="[workflow-dones]"><a href="workflow/dones"><i class="fa fa-lg fa-fw fa-list"></i> 已办列表</a></li>
+							<li class="auth" data-auth="[workflow-createds]"><a href="workflow/createds"><i class="fa fa-lg fa-fw fa-list"></i> 我的流程</a></li>
+						</ul>
+					</li>
 					<li class="auth" data-auth="[auth]">
 						<a href="#" title="权限管理"><i class="fa fa-lg fa-fw fa-drivers-license"></i> <span class="menu-item-parent">权限管理</span></a>
-							<ul>
-								<li class="auth" data-auth="[user]"><a href="auth/users"><i class="fa fa-lg fa-fw fa-user"></i> 用户管理</a></li>
-								<li class="auth" data-auth="[role]"><a href="auth/roles"><i class="fa fa-lg fa-fw fa-user"></i> 角色管理</a></li>
-								<li class="auth" data-auth="[department]"><a href="auth/departments"><i class="fa fa-lg fa-fw fa-user"></i> 部门管理</a></li>
-							</ul>
+						<ul>
+							<li class="auth" data-auth="[user]"><a href="auth/users"><i class="fa fa-lg fa-fw fa-user"></i> 用户管理</a></li>
+							<li class="auth" data-auth="[role]"><a href="auth/roles"><i class="fa fa-lg fa-fw fa-user"></i> 角色管理</a></li>
+							<li class="auth" data-auth="[department]"><a href="auth/departments"><i class="fa fa-lg fa-fw fa-user"></i> 部门管理</a></li>
+						</ul>
 					</li>
 					<li class="auth" data-auth="[msg]">
 						<a href="#" title="消息管理"><i class="fa fa-lg fa-fw fa-comments"></i> <span class="menu-item-parent">消息管理</span></a>
-							<ul>
-								<li class="auth" data-auth="[notify]"><a href="msg/notifys"><i class="fa fa-lg fa-fw fa-newspaper-o"></i> 通知公告</a></li>
-								<li class="auth" data-auth="[webmail]"><a href="msg/webmails"><i class="fa fa-lg fa-fw fa-inbox"></i> 站内信</a></li>
-							</ul>
+						<ul>
+							<li class="auth" data-auth="[notify]"><a href="msg/notifys"><i class="fa fa-lg fa-fw fa-newspaper-o"></i> 通知公告</a></li>
+							<li class="auth" data-auth="[webmail]"><a href="msg/webmails"><i class="fa fa-lg fa-fw fa-inbox"></i> 站内信</a></li>
+						</ul>
 					</li>
 					<li class="auth" data-auth="[esb]">
 						<a href="#" title="总线服务"><i class="fa fa-lg fa-fw fa-cloud"></i> <span class="menu-item-parent">服务总线</span></a>
-							<ul>
-								<li class="auth" data-auth="[esb-invoke-sap]"><a href="esb/invokes?type=sap"><i class="fa fa-lg fa-fw fa-cube"></i> 服务调用</a></li>
-								<li class="auth" data-auth="[esb-job]"><a href="esb/jobs"><i class="fa fa-lg fa-fw fa-clock-o"></i> 计划任务</a></li>
-								<li class="auth" data-auth="[esb-monitor]"><a href="esb/monitor"><i class="fa fa-lg fa-fw fa-dashboard"></i> 服务监控</a></li>
-								<li class="auth" data-auth="[esb-history]"><a href="esb/history"><i class="fa fa-lg fa-fw fa-list"></i> 历史记录</a></li>
-							</ul>
+						<ul>
+							<li class="auth" data-auth="[esb-invoke]"><a href="esb/invokes"><i class="fa fa-lg fa-fw fa-cube"></i> 服务调用</a></li>
+							<li class="auth" data-auth="[esb-planningjob]"><a href="esb/planningjobs"><i class="fa fa-lg fa-fw fa-calendar"></i> 计划任务</a></li>
+							<li class="auth" data-auth="[esb-regularjob]"><a href="esb/regularjobs"><i class="fa fa-lg fa-fw fa-clock-o"></i> 实时任务</a></li>
+							<li class="auth" data-auth="[esb-monitor]"><a href="esb/monitor"><i class="fa fa-lg fa-fw fa-dashboard"></i> 服务监控</a></li>
+							<li class="auth" data-auth="[esb-history]"><a href="esb/history"><i class="fa fa-lg fa-fw fa-list"></i> 历史记录</a></li>
+						</ul>
 					</li>
 					<li class="auth" data-auth="[sys]">
 						<a href="#" title="系统功能"><i class="fa fa-lg fa-fw fa-wrench"></i> <span class="menu-item-parent">系统功能</span></a>
@@ -97,6 +108,7 @@
 							<li class="auth" data-auth="[statistic]"><a href="sys/statistics" title="使用统计"><i class="fa fa-lg fa-fw fa-bar-chart"></i> <span class="menu-item-parent">使用统计</span></a></li>
 						</ul>
 					</li>
+					<!--  
 					<li>
 						<a href="#" title="测试页面"><i class="fa fa-lg fa-fw fa-rocket"></i> <span class="menu-item-parent">测试页面</span></a>
 							<ul>
@@ -105,9 +117,7 @@
 								<li><a href="ajax/inbox.html" ><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">收件箱</span><span class="badge pull-right inbox-badge">14</span></a></li>
 							</ul>
 					</li>
-					<li>
-						<a href="#" title="注销"><i class="fa fa-lg fa-fw fa-sign-out"></i> <span class="menu-item-parent">注销</span></a>
-					</li>
+					-->
 				</ul>
 			</nav>
 		</aside>
@@ -155,13 +165,20 @@
 		<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
 		<script src="js/plugin/fastclick/fastclick.min.js"></script>
 		<script src="assets/plugins/ZTree/js/jquery.ztree.core.min.js"></script>
-
+		<script src="js/common/jquery.serializejson.js"></script>
+		
 		<!-- todo预加载 -->
-		<script src="js/app.js"></script>
 		<script type="text/javascript" src="assets/plugins/JqGrid/js/i18n/grid.locale-cn.js"></script>
 		<script type="text/javascript" src="assets/plugins/JqGrid/js/jquery.jqGrid.src.js"></script>
 		<script src="assets/plugins/LayerUI/layui.js"></script>
 		<script src="assets/plugins/LayerUI/lay/modules/layer.js"></script>
+		<script src="assets/plugins/DatePicker/js/bootstrap-datepicker.js"></script>
+		<script src="assets/plugins/DatePicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+
+		<!-- 自身组件 -->
+		<script src="js/app.js"></script>
+		<script src="js/component/component.js"></script>
+
 		
 		<!--[if IE 8]>
 			<h1>你的浏览器版本太旧，无法使用本系统的部分功能，建议下载新版的Chrome浏览器，地址：http://www.google.cn/chrome/browser/desktop/index.html</h1>

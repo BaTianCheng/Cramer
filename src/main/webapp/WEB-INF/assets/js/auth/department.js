@@ -64,7 +64,7 @@ Department.List = function (postData){
 	            for ( var i = 0; i < ids.length; i++) {
 	              var cl = ids[i];
 	              be = "<a id=\"td-edit-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:Department.OpenEdit('"+ cl + "');\">编辑</a>";
-	              de = "<a id=\"td-del-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:delRow('"+ cl + "');\">删除</a>";
+	              de = "<a id=\"td-del-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:Department.Delete('"+ cl + "');\">删除</a>";
 	              ae = "<a id=\"td-role-"+cl+"\" style=\"margin-left:5px;margin-right:5px;\" href=\"javascript:Department.OpenRole('"+ cl + "');\">角色</a>";
 	              jQuery("#main-table").jqGrid('setRowData', ids[i],
 	                  {
@@ -259,5 +259,24 @@ Department.UpdateRole = function(serialize){
 			}
 	}).error(function(xhr,errorText,errorType){
 		layer.msg('系统错误', {icon: 2});
+	});
+}
+
+//删除部门
+Department.Delete = function (departmentId){
+	layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
+		$.post(CTX_PATH + "/auth/departments/delete", {
+			departmentId : departmentId
+		},function(msg) {
+			var result = JSON.parse(msg);
+			if(result.resultCode == '200'){
+				$("#main-table").trigger("reloadGrid");
+			} else {
+				alert("程序异常");
+			}
+		}).error(function(xhr,errorText,errorType){
+			alert("系统错误");
+		});
+		layer.close(index);
 	});
 }

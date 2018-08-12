@@ -10,10 +10,21 @@ WebMail.List = function (postData){
 		height:'auto',
 		colNames : [ '类型', '标题', '发件人','发件时间', '操作'],
 		colModel : 
-			[{name : 'type',index : 'web_mail_storage_type',width : 80}, 
-			 {name : 'title',index : 'web_mail_storage_title',width : 400,editable :true}, 
+			[{name : 'type',index : 'web_mail_storage_type',width : 80,
+				formatter:function(cellvalue, options, rowObject){
+				 	switch(cellvalue){
+				 		case 1 : return "发件";
+				 		case 2 : return "收件";
+				 		case 3 : return "草稿";
+				 		default : return "";
+				 	}
+			 }},
+			 {name : 'msgWebMail.title',index : 'web_mail_storage_title',width : 400,editable :true}, 
 			 {name : 'msgWebMail.senderName',index : 'web_mail_sender',width : 80},
-			 {name : 'msgWebMail.sendTime',index : 'web_mail_send_time',width : 80,datefmt:'yyyy-MM-dd HH:mm:ss', align:'center'},
+			 {name : 'msgWebMail.sendTime',index : 'web_mail_send_time',width : 80,datefmt:'yyyy-MM-dd HH:mm:ss', align:'center',
+				 formatter:function(cellvalue, options, rowObject){
+			 		return getTimeDesc(cellvalue);
+			 	}},
 			 {name : 'actions',width : 80, align:'center', title:false,sortable:false}],
 		jsonReader : {   
 			id: "id",
@@ -78,6 +89,7 @@ WebMail.OpenSend = function() {
 		closeBtn : 1,
 		content : html
 	});
+	$("#receiver").cramerSelUsers();
 }
 
 // 发送站内信
@@ -103,15 +115,15 @@ WebMail.Send = function(serialize) {
 }
 
 // 打开查看站内信
-WebMail.OpenView = function(notifyId) {
+WebMail.OpenView = function(id) {
 	var data = {};
-	if (notifyId > 0) {
+	if (id > 0) {
 		$.when($.post(CTX_PATH + "/msg/webmails/get", {
-			notifyId : notifyId
+			id : id
 		})).done(function(d1) {
 			var result = JSON.parse(d1);
 			if (result.resultCode == '200') {
-				data = result.data;
+				data = result.data.msgWebMail;
 				var html = template('webmail_view_tpl', data);
 				layer.open({
 					type : 1,
@@ -125,7 +137,5 @@ WebMail.OpenView = function(notifyId) {
 				alert("程序异常");
 			}
 		});
-	} else {
-		WebMail.OpenSend();
 	}
 }
