@@ -13,8 +13,8 @@
 	<repositories>
 	
 		<repository>
-			<id>jeesite-repos</id>
-			<name>Jeesite Repository</name>
+			<id>ali-repos</id>
+			<name>ali Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 		
@@ -24,8 +24,8 @@
 	<pluginRepositories> 
 	
 		<pluginRepository>
-			<id>jeesite-repos</id>
-			<name>Jeesite Repository</name>
+			<id>ali-repos</id>
+			<name>ali Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		
