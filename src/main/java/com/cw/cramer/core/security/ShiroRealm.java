@@ -1,7 +1,5 @@
 package com.cw.cramer.core.security;
 
-import javax.annotation.Resource;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,6 +16,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.service.SysUserService;
@@ -26,9 +25,10 @@ import com.cw.cramer.auth.service.SysUserService;
  * 安全身份管理类
  * @author wicks
  */
+@Component
 public class ShiroRealm extends AuthorizingRealm{
 	
-	@Resource
+	@Autowired
 	private SysUserService sysUserService;
 	
 	@Autowired

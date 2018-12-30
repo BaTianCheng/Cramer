@@ -102,7 +102,7 @@ Invoke.sendService = function (){
 		params[$(".input-param")[i].id.toString()]=$(".input-param")[i].value;
 	}
 	
-	$.post(ESB_PATH + "/services/get",
+	$.post(ESB_PATH + "/services/access",
 		{
 			"serviceCode" : $("#sel-service").val(),
 			"data" : JSON.stringify(params),
