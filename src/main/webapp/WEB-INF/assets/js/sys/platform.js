@@ -3,7 +3,7 @@ Platform = {}
 Platform.NoticeList = function(){
 	var ii = layer.load();
 	$.post(CTX_PATH + "/msg/notifys/list", {
-		pageSize : 2,
+		pageSize : 4,
 		pageNum : 1
 	}, function(msg) {
 		var result = JSON.parse(msg);
@@ -18,8 +18,8 @@ Platform.NoticeList = function(){
 						result.data.list[i].content = result.data.list[i].content.substr(0,200) + "...";
 					}
 				}
-				
-				var html = template('notice_list_tpl', result.data);
+				var render = template.compile($('#notice_list_tpl')[0].innerHTML,{escape: false});
+				var html = render(result.data);
 				document.getElementById('notice_list_panel').innerHTML = html;
 			}
 		} else {

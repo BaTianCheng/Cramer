@@ -91,6 +91,11 @@ Notify.OpenAdd = function() {
 		closeBtn : 1,
 		content : html
 	});
+	
+	layui.use('layedit', function(){
+		var index = layui.layedit.build('notify-content');
+		$("#notify-content")[0]["data-index"] = index;
+	})
 }
 
 // 打开修改通知公告
@@ -112,6 +117,10 @@ Notify.OpenEdit = function(id) {
 					closeBtn : 1,
 					content : html
 				});
+				layui.use('layedit', function(){
+					var index = layui.layedit.build('notify-content');
+					$("#notify-content")[0]["data-index"] = index;
+				})
 			} else {
 				alert("程序异常");
 			}
@@ -122,11 +131,12 @@ Notify.OpenEdit = function(id) {
 }
 
 // 更新通知公告
-Notify.Update = function(serialize) {
-	$.post(CTX_PATH + "/msg/notifys/update", serialize, function(msg) {
+Notify.Update = function() {
+	layui.layedit.sync($("#notify-content")[0]["data-index"]);
+	$.post(CTX_PATH + "/msg/notifys/update", $('#notify-form').serialize(), function(msg) {
 		var result = JSON.parse(msg);
 		if (result.resultCode == '200') {
-			layer.close(layer.index);
+			layer.closeAll();
 			layer.msg('修改成功', {
 				icon : 1
 			});
@@ -144,11 +154,12 @@ Notify.Update = function(serialize) {
 }
 
 // 新增通知公告
-Notify.Add = function(serialize) {
-	$.post(CTX_PATH + "/msg/notifys/add", serialize, function(msg) {
+Notify.Add = function() {
+	layui.layedit.sync($("#notify-content")[0]["data-index"]);
+	$.post(CTX_PATH + "/msg/notifys/add", $('#notify-form').serialize(), function(msg) {
 		var result = JSON.parse(msg);
 		if (result.resultCode == '200') {
-			layer.close(layer.index);
+			layer.closeAll();
 			layer.msg('添加成功', {
 				icon : 1
 			});
@@ -175,7 +186,8 @@ Notify.OpenView = function(id) {
 			var result = JSON.parse(d1);
 			if (result.resultCode == '200') {
 				data = result.data;
-				var html = template('notify_view_tpl', data);
+				var render = template.compile($('#notify_view_tpl')[0].innerHTML,{escape: false});
+				var html = render(data);
 				layer.open({
 					type : 1,
 					title : '查看通知公告',
@@ -192,7 +204,7 @@ Notify.OpenView = function(id) {
 }
 
 //删除公告
-Notify.Delete = function (userId){
+Notify.Delete = function (notifyId){
 	layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
 		$.post(CTX_PATH + "/msg/notifys/delete", {
 			notifyId : notifyId
