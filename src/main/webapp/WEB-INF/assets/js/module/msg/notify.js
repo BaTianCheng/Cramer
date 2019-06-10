@@ -113,18 +113,14 @@ Notify.OpenEdit = function(id) {
 					type : 1,
 					title : '修改通知公告',
 					skin : 'layui-layer-rim',
-					area : [ '960px', '580px' ],
+					area : [ '800px', 'auto' ],
 					closeBtn : 1,
 					content : html
 				});
-				
-				//建立编辑器
 				layui.use('layedit', function(){
-				  layui.layedit.build('notify-content'); 
-				  var index = layedit.build('notify-content');
-				  layedit.getContent(index);
-				});
-
+					var index = layui.layedit.build('notify-content');
+					$("#notify-content")[0]["data-index"] = index;
+				})
 			} else {
 				alert("程序异常");
 			}

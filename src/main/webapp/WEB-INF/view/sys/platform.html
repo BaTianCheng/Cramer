@@ -19,7 +19,7 @@
 					<span class="widget-icon"><i class="fa fa-check txt-color-white"></i></span>
 					<h2>待办事项</h2>
 				</header>
-				<div style="height:482px;">
+				<div style="height:202px;">
 					<div class="widget-body no-padding smart-form" id="">
 						<!-- content goes here -->
 						<h5 class="todo-group-title">
@@ -97,6 +97,7 @@
 
 			</div>
 			
+			<!-- 
 			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-2"
 				data-widget-editbutton="false" data-widget-colorbutton="false">
 				<header>
@@ -107,22 +108,10 @@
 					
 				</div>
 			</div>
-
+ 			-->
 		</article>
 
 		<article class="col-sm-12 col-md-12 col-lg-6">
-			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-3"
-				data-widget-editbutton="false" data-widget-colorbutton="false">
-				<header>
-					<span class="widget-icon"><i
-						class="fa fa-newspaper-o txt-color-white"></i></span>
-					<h2>通知公告</h2>
-				</header>
-				<div class="tab-content padding-top-10" id="notice_list_panel">
-					
-				</div>
-			</div>
-
 			<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-4"
 				data-widget-colorbutton="false" data-widget-editbutton="false" >
 				<header>
@@ -198,15 +187,16 @@
 			<h6 class="no-margin">
 				<a href="javascript:Notify.OpenView('{{value.id}}');">{{value.title}}</a>
 			</h6>
-			<p style="height:54px;">
+			<div style="max-height:54px;overflow:hidden;">
 				{{value.content}}
-			</p>
+			</div>
 		</div>
 		<div class="col-sm-12 ">
 			<hr>
 		</div>
 	</div>
 	{{/each}}
+	<div style="text-align:right;padding-bottom:5px"><a href="/cramer/index#msg/notifys">更多</a></div>
 </div>
 </script>
 
@@ -230,7 +220,7 @@
 					<label class="label col col-12">公告内容：</label>
 				</section>
 				<section class="col col-10 ">
-					<label class="label col col-12" style="height:240px; overflow:auto;">
+					<label class="label col col-12" style="height:320px; overflow:auto;white-space:inherit;">
 						{{content}}
 					</label>
 				</section>
