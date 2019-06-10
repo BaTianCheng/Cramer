@@ -41,10 +41,10 @@
 	<form action="" id="notify-form" class="smart-form" novalidate="novalidate" style="overflow-x: hidden;" onsubmit="return false;">
 		<fieldset>
 			<div class="row">
-				<section class="col col-3 ">
+				<section class="col col-2 ">
 					<label class="label col col-12" style="float:right">公告标题：</label>
 				</section>
-				<section class="col col-9 ">
+				<section class="col col-10 ">
 					<label class="input"> 
 						<input type="text" id="title" name="title" value="{{title}}" placeholder="公告标题">
 						<input type="hidden" id="id" name="id" value="{{id}}">
@@ -54,12 +54,12 @@
 			</div>
 			
 			<div class="row">
-				<section class="col col-3 ">
+				<section class="col col-2 ">
 					<label class="label col col-12" style="float:right">公告内容：</label>
 				</section>
-				<section class="col col-9 ">
+				<section class="col col-10 ">
 					<label class="textarea">
-						<textarea  id="content" name="content" rows="6">{{content}}</textarea>
+						<textarea  id="notify-content" name="notify-content" rows="6">{{content}}</textarea>
 					</label>
 				</section>
 			</div>

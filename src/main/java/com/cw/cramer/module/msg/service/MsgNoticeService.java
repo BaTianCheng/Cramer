@@ -85,7 +85,7 @@ public class MsgNoticeService extends BaseService{
 	public boolean update(MsgNotice notice){
 		notice.setUpdateBy(this.getCurrentUser().getId());
 		notice.setUpdateTime(DateTimeUtils.getCurrentTime());
-		return msgNoticeDAO.updateByPrimaryKey(notice)>0 ? true : false;
+		return msgNoticeDAO.updateByPrimaryKeyWithBLOBs(notice)>0 ? true : false;
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class MsgNoticeService extends BaseService{
 		MsgNotice notice = getMsgNotice(id);
 		if(notice != null){
 			notice.setStatus(StatusConstant.STATUS_DELETED);
-			return msgNoticeDAO.updateByPrimaryKey(notice)>0 ? true : false;
+			return msgNoticeDAO.updateByPrimaryKeyWithBLOBs(notice)>0 ? true : false;
 		} else {
 			return false;
 		}
