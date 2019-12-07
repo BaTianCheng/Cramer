@@ -1,14 +1,19 @@
-package com.cw.cramer.common.helper;
+package com.cw.cramer.common.util;
 
 /**
  * 四则运算辅助类
  * @author wicks
  */
 public class ArithHelpers {
-	// 默认除法运算精度
+
+    /**
+     * 默认除法运算精度
+     */
     private static final int DEF_DIV_SCALE = 2;
 
-    // 这个类不能实例化
+    /**
+     * 私有构造函数
+     */
     private ArithHelpers() {
     }
 

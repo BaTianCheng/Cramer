@@ -23,6 +23,7 @@ public class OperateLogThread extends Thread{
 	/**
 	 * 开启线程
 	 */
+	@Override
 	public void start(){
 		CommonConstant.logQueue = new ConcurrentLinkedQueue<SysOperateLog>();
 		super.start();

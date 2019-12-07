@@ -10,7 +10,6 @@ import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.ModuleType;
 import com.cw.cramer.common.constant.OperateLogType;
 import com.cw.cramer.common.constant.SequenceConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.core.security.SecurityService;
 import com.cw.cramer.sys.dao.SysOperateLogDAO;
 import com.cw.cramer.sys.entity.SysOperateLog;
@@ -19,6 +18,8 @@ import com.cw.cramer.sys.entity.SysOperateLogExample.Criteria;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 操作日志服务类
@@ -65,7 +66,7 @@ public class SysOperateLogService {
 		sysOperateLog.setRemarks(remarks);
 		sysOperateLog.setOperateIp(securityService.getCurrentSession().getHost());
 		sysOperateLog.setOperateBy(securityService.getCurrentUser().getId());
-		sysOperateLog.setOperateTime(DateTimeUtils.getCurrentTime());
+		sysOperateLog.setOperateTime(DateUtil.date());
 		CommonConstant.logThread.insertQueue(sysOperateLog);
 	}
 	

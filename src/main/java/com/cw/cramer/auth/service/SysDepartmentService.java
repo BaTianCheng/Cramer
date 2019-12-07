@@ -17,11 +17,12 @@ import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 部门服务类
@@ -54,14 +55,14 @@ public class SysDepartmentService extends BaseService{
 	 * @param DepartmentName
 	 * @return
 	 */
-	public PageInfo<SysDepartment> getSysDepartments(int pageNum, int pageSize, String DepartmentName, Integer parentId) {
+	public PageInfo<SysDepartment> getSysDepartments(int pageNum, int pageSize, String departmentName, Integer parentId) {
 		PageHelper.startPage(pageNum, pageSize);
 		SysDepartmentExample example = new SysDepartmentExample();
 		String sortStr = "department.sort asc, department.id asc";
 		Criteria criteria = example.createCriteria();
 		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
-		if(!Strings.isNullOrEmpty(DepartmentName)){
-			criteria.andNameLike(DepartmentName);
+		if(!Strings.isNullOrEmpty(departmentName)){
+			criteria.andNameLike(departmentName);
 		} else if(parentId != null){
 			criteria.andIdEqualTo(parentId);
 			Criteria criteria2 = example.createCriteria();
@@ -80,8 +81,8 @@ public class SysDepartmentService extends BaseService{
 			return new PageInfo<SysDepartment>(new ArrayList<SysDepartment>());
 		}
 		exampleId.setOrderByClause(sortStr);
-		List<SysDepartment> Departments = sysDepartmentDAO.selectByExample(exampleId);
-		return new PageInfo<SysDepartment>(Departments);
+		List<SysDepartment> departments = sysDepartmentDAO.selectByExample(exampleId);
+		return new PageInfo<SysDepartment>(departments);
 	}
 	
 	/**
@@ -89,12 +90,12 @@ public class SysDepartmentService extends BaseService{
 	 * @param Department
 	 * @return
 	 */
-	public boolean insert(SysDepartment Department){
-		Department.setId(getNextSeq(SequenceConstant.SEQ_SYSDEPARTMENTID));
-		if(Department.getSort() == null){
-			Department.setSort(sysDepartmentDAO.selectNextSortId());
+	public boolean insert(SysDepartment department){
+	    department.setId(getNextSeq(SequenceConstant.SEQ_SYSDEPARTMENTID));
+		if(department.getSort() == null){
+		    department.setSort(sysDepartmentDAO.selectNextSortId());
 		}
-		return sysDepartmentDAO.insert(Department)>0 ? true : false;
+		return sysDepartmentDAO.insert(department)>0 ? true : false;
 	}
 	
 	/**
@@ -102,10 +103,10 @@ public class SysDepartmentService extends BaseService{
 	 * @param Department
 	 * @return
 	 */
-	public boolean update(SysDepartment Department){
-		Department.setUpdateBy(this.getCurrentUser().getId());
-		Department.setUpdateTime(DateTimeUtils.getCurrentTime());
-		return sysDepartmentDAO.updateByPrimaryKey(Department)>0 ? true : false;
+	public boolean update(SysDepartment department){
+	    department.setUpdateBy(this.getCurrentUser().getId());
+		department.setUpdateTime(DateUtil.date());
+		return sysDepartmentDAO.updateByPrimaryKey(department)>0 ? true : false;
 	}
 	
 	/**
@@ -114,13 +115,13 @@ public class SysDepartmentService extends BaseService{
 	 * @return
 	 */
 	public boolean updateInfo(SysDepartment editedDepartment){
-		SysDepartment Department = getSysDepartment(editedDepartment.getId());
-		Department.setName(editedDepartment.getName());
-		Department.setCode(editedDepartment.getCode());
-		Department.setStatus(editedDepartment.getStatus());
-		Department.setParentId(editedDepartment.getParentId());
-		Department.setRemarks(editedDepartment.getRemarks());
-		return update(Department);
+		SysDepartment department = getSysDepartment(editedDepartment.getId());
+		department.setName(editedDepartment.getName());
+		department.setCode(editedDepartment.getCode());
+		department.setStatus(editedDepartment.getStatus());
+		department.setParentId(editedDepartment.getParentId());
+		department.setRemarks(editedDepartment.getRemarks());
+		return update(department);
 	}
 	
 	/**
@@ -129,10 +130,10 @@ public class SysDepartmentService extends BaseService{
 	 * @return
 	 */
 	public boolean delete(int id){
-		SysDepartment Department = getSysDepartment(id);
-		if(Department != null){
-			Department.setStatus(StatusConstant.STATUS_DELETED);
-			return sysDepartmentDAO.updateByPrimaryKey(Department)>0 ? true : false;
+		SysDepartment department = getSysDepartment(id);
+		if(department != null){
+		    department.setStatus(StatusConstant.STATUS_DELETED);
+			return sysDepartmentDAO.updateByPrimaryKey(department)>0 ? true : false;
 		} else {
 			return false;
 		}

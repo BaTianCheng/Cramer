@@ -21,7 +21,7 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.apache.shiro.web.util.WebUtils;
 
-import com.cw.cramer.common.util.StringUtils;
+import com.google.common.base.Strings;
 
 
 /**
@@ -39,7 +39,7 @@ public class SessionManager extends DefaultWebSessionManager {
 	protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
 		// 如果参数中包含“__sid”参数，则使用此sid会话。 例如：http://localhost/project?__sid=xxx&__cookie=true
 		String sid = request.getParameter("__sid");
-		if (StringUtils.isNotBlank(sid)) {
+		if (!Strings.isNullOrEmpty(sid)) {
 			// 是否将sid保存到cookie，浏览器模式下使用此参数。
 			if (WebUtils.isTrue(request, "__cookie")){
 		        HttpServletRequest rq = (HttpServletRequest)request;
@@ -50,7 +50,7 @@ public class SessionManager extends DefaultWebSessionManager {
 			}
 			// 设置当前session状态
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE,
-                    ShiroHttpServletRequest.URL_SESSION_ID_SOURCE); // session来源与url
+                    ShiroHttpServletRequest.URL_SESSION_ID_SOURCE); 
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, sid);
             request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
         	return sid;
@@ -64,6 +64,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		super.validateSessions();
 	}
 	
+	@Override
 	protected Session retrieveSession(SessionKey sessionKey) {
 		try{
 			return super.retrieveSession(sessionKey);
@@ -73,6 +74,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
 	}
 
+    @Override	
     public Date getStartTimestamp(SessionKey key) {
     	try{
     		return super.getStartTimestamp(key);
@@ -82,6 +84,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public Date getLastAccessTime(SessionKey key) {
     	try{
     		return super.getLastAccessTime(key);
@@ -91,6 +94,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public long getTimeout(SessionKey key){
     	try{
     		return super.getTimeout(key);
@@ -100,6 +104,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public void setTimeout(SessionKey key, long maxIdleTimeInMillis) {
     	try{
     		super.setTimeout(key, maxIdleTimeInMillis);
@@ -108,6 +113,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public void touch(SessionKey key) {
     	try{
 	    	super.touch(key);
@@ -116,6 +122,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public String getHost(SessionKey key) {
     	try{
     		return super.getHost(key);
@@ -125,6 +132,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public Collection<Object> getAttributeKeys(SessionKey key) {
     	try{
     		return super.getAttributeKeys(key);
@@ -134,6 +142,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public Object getAttribute(SessionKey sessionKey, Object attributeKey) {
     	try{
     		return super.getAttribute(sessionKey, attributeKey);
@@ -143,6 +152,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public void setAttribute(SessionKey sessionKey, Object attributeKey, Object value) {
     	try{
     		super.setAttribute(sessionKey, attributeKey, value);
@@ -151,6 +161,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public Object removeAttribute(SessionKey sessionKey, Object attributeKey) {
     	try{
     		return super.removeAttribute(sessionKey, attributeKey);
@@ -160,6 +171,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
 
+    @Override
     public void stop(SessionKey key) {
     	try{
     		super.stop(key);
@@ -168,6 +180,7 @@ public class SessionManager extends DefaultWebSessionManager {
 		}
     }
     
+    @Override
     public void checkValid(SessionKey key) {
     	try{
     		super.checkValid(key);

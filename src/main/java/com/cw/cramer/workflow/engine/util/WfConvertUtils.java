@@ -24,12 +24,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.workflow.engine.entity.WfForm;
 import com.cw.cramer.workflow.engine.entity.WfFormField;
 import com.cw.cramer.workflow.engine.entity.WfInstance;
 import com.cw.cramer.workflow.engine.entity.WfTask;
 import com.cw.cramer.workflow.engine.entity.WfTemplate;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 描 述: 转换工具类
@@ -196,8 +197,8 @@ public class WfConvertUtils {
 			wfTask.setInstanceId(task.getProcessInstanceId());
 			wfTask.setTaskId(task.getId());
 			wfTask.setAssigne(task.getAssignee());
-			wfTask.setStartTime(DateTimeUtils.formatDate(task.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
-			wfTask.setEndTime(DateTimeUtils.formatDate(task.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
+			wfTask.setStartTime(DateUtil.formatDateTime(task.getCreateTime()));
+			wfTask.setEndTime(DateUtil.formatDateTime(task.getCreateTime()));
 			wfTask.setTaskKey(task.getTaskDefinitionKey());
 			wfTask.setTaskName(task.getName());
 			
@@ -253,7 +254,7 @@ public class WfConvertUtils {
 			wfTask.setInstanceId(task.getProcessInstanceId());
 			wfTask.setTaskId(task.getId());
 			wfTask.setAssigne(task.getAssignee());
-			wfTask.setStartTime(DateTimeUtils.formatDate(task.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
+			wfTask.setStartTime(DateUtil.formatDateTime(task.getCreateTime()));
 			wfTask.setTaskKey(task.getTaskDefinitionKey());
 			wfTask.setTaskName(task.getName());
 			FormData formData = formService.getTaskFormData(task.getId());
@@ -293,7 +294,7 @@ public class WfConvertUtils {
 			wfInstance.setBusinessKey(processInstance.getBusinessKey());
 			wfInstance.setCreator(processInstance.getStartUserId());
 			wfInstance.setDefinedId(processInstance.getProcessDefinitionId());
-			wfInstance.setStartTime(DateTimeUtils.formatDate(processInstance.getStartTime(),"yyyy-MM-dd HH:mm:ss"));
+			wfInstance.setStartTime(DateUtil.formatDateTime(processInstance.getStartTime()));
 			wfInstance.setTemplateKey(processInstance.getProcessDefinitionKey());
 			wfInstance.setTemplateName(processInstance.getProcessDefinitionName());
 			
@@ -349,10 +350,10 @@ public class WfConvertUtils {
 			wfInstance.setCreator(processInstance.getStartUserId());
 			wfInstance.setDefinedId(processInstance.getProcessDefinitionId());
 			if(processInstance.getStartTime() != null) {
-				wfInstance.setStartTime(DateTimeUtils.formatDate(processInstance.getStartTime(),"yyyy-MM-dd HH:mm:ss"));
+				wfInstance.setStartTime(DateUtil.formatDateTime(processInstance.getStartTime()));
 			}
 			if(processInstance.getEndTime() != null) {
-				wfInstance.setEndTime(DateTimeUtils.formatDate(processInstance.getEndTime(),"yyyy-MM-dd HH:mm:ss"));
+				wfInstance.setEndTime(DateUtil.formatDateTime(processInstance.getEndTime()));
 			}
 			wfInstance.setTemplateKey(processInstance.getProcessDefinitionKey());
 			wfInstance.setTemplateName(processInstance.getProcessDefinitionName());

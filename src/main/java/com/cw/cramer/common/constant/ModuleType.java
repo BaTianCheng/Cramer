@@ -10,9 +10,21 @@ import java.util.Map;
  * @author wicks
  */
 public enum ModuleType {
+	/**
+	 * 权限
+	 */
 	Auth(101001),
+	/**
+	 * 消息
+	 */
 	Msg(102001),
+	/**
+	 * 总线
+	 */
 	Esb(103001),
+	/**
+	 * 系统
+	 */
 	Sys(109001);
 	
 	private int code;

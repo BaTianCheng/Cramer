@@ -9,7 +9,6 @@ import com.alibaba.fastjson.JSON;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.module.msg.dao.MsgWebMailDAO;
 import com.cw.cramer.module.msg.dao.MsgWebMailStorageDAO;
 import com.cw.cramer.module.msg.entity.MsgWebMail;
@@ -18,6 +17,8 @@ import com.cw.cramer.module.msg.entity.MsgWebMailStorageExample;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 站内信服务类
@@ -80,7 +81,7 @@ public class MsgWebMailService extends BaseService{
 		if(mail.getSender() == null){
 			mail.setSender(this.getCurrentUser().getId());
 		}
-		mail.setSendTime(DateTimeUtils.getCurrentTime());
+		mail.setSendTime(DateUtil.date());
 		mail.setReceiverType(1);
 		mail.setMethod(1);
 		boolean isSuccess = msgWebMailDAO.insert(mail) >0 ? true : false;

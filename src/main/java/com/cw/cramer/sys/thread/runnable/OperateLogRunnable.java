@@ -39,7 +39,8 @@ public class OperateLogRunnable implements Runnable{
 		lastTime = System.currentTimeMillis();
 		
 		while(!stopFlag){
-			if(getQueueSize() > 0 && (getQueueSize()>=CommonConstant.LOGQUEUE_SIZE || System.currentTimeMillis()-lastTime>CommonConstant.LOG_TIME)){
+		    boolean isNeedInsert = getQueueSize() > 0 && (getQueueSize()>=CommonConstant.LOGQUEUE_SIZE || System.currentTimeMillis()-lastTime>CommonConstant.LOG_TIME);
+			if(isNeedInsert){
 				lastTime = System.currentTimeMillis();
 				LogUtils.info("线程启动——插入操作记录");
 				synchronized (this) {

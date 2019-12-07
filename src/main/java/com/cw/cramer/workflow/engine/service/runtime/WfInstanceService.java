@@ -23,10 +23,11 @@ import org.springframework.stereotype.Service;
 import com.cw.cramer.workflow.engine.entity.WfInstance;
 import com.cw.cramer.workflow.engine.entity.WfTask;
 import com.cw.cramer.workflow.engine.util.WfConvertUtils;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.workflow.engine.entity.WfQueryInstance;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 
 /**
@@ -183,12 +184,12 @@ public class WfInstanceService {
 		}
 		
 		if(!Strings.isNullOrEmpty(queryCondition.getStartTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getStartTime());
+			Date date = DateUtil.parse(queryCondition.getStartTime());
 			query = query.startedAfter(date);
 		}
 		
 		if(!Strings.isNullOrEmpty(queryCondition.getEndTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getEndTime());
+			Date date = DateUtil.parse(queryCondition.getEndTime());
 			query = query.startedBefore(date);
 		}
 		

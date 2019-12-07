@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.module.msg.dao.MsgNoticeDAO;
 import com.cw.cramer.module.msg.entity.MsgNotice;
 import com.cw.cramer.module.msg.entity.MsgNoticeExample;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 通知公告服务类
@@ -71,9 +72,9 @@ public class MsgNoticeService extends BaseService{
 		notice.setId(getNextSeq(SequenceConstant.SEQ_SYSROLEID));
 		notice.setStatus(StatusConstant.STATUS_ENABLED);
 		notice.setCreateBy(this.getCurrentUser().getId());
-		notice.setCreateTime(DateTimeUtils.getCurrentTime());
+		notice.setCreateTime(DateUtil.date());
 		notice.setUpdateBy(this.getCurrentUser().getId());
-		notice.setUpdateTime(DateTimeUtils.getCurrentTime());
+		notice.setUpdateTime(DateUtil.date());
 		return msgNoticeDAO.insert(notice)>0 ? true : false;
 	}
 	
@@ -84,7 +85,7 @@ public class MsgNoticeService extends BaseService{
 	 */
 	public boolean update(MsgNotice notice){
 		notice.setUpdateBy(this.getCurrentUser().getId());
-		notice.setUpdateTime(DateTimeUtils.getCurrentTime());
+		notice.setUpdateTime(DateUtil.date());
 		return msgNoticeDAO.updateByPrimaryKeyWithBLOBs(notice)>0 ? true : false;
 	}
 	

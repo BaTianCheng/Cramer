@@ -21,11 +21,12 @@ import com.cw.cramer.auth.entity.SysUserRoleExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
-import com.cw.cramer.common.util.EncryptionUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.crypto.SecureUtil;
 
 /**
  * 系统操作用户服务类
@@ -79,7 +80,7 @@ public class SysUserService extends BaseService{
 	public boolean checkPassWord(String userName, String passWord){
 		SysUser user = getSysUser(userName);
 		if(user != null && user.getPassword() != null){
-			if(user.getPassword().equals(EncryptionUtils.EncoderByMd5(passWord))){
+			if(user.getPassword().equals(SecureUtil.md5(passWord))){
 				return true;
 			}
 		}
@@ -129,7 +130,7 @@ public class SysUserService extends BaseService{
 		user.setId(getNextSeq(SequenceConstant.SEQ_SYSUSERID));
 		//密码加密
 		if(!Strings.isNullOrEmpty(user.getPassword())){
-			user.setPassword(EncryptionUtils.EncoderByMd5(user.getPassword()));
+			user.setPassword(SecureUtil.md5(user.getPassword()));
 		}
 		//自动排序
 		if(user.getSort() == null){
@@ -154,7 +155,7 @@ public class SysUserService extends BaseService{
 	@CachePut(value = "SysUserCache", key = "#user.getId()")
 	public boolean update(SysUser user){
 		user.setUpdateBy(this.getCurrentUser().getId());
-		user.setUpdateTime(DateTimeUtils.getCurrentTime());
+		user.setUpdateTime(DateUtil.date());
 		return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
 	}
 	
@@ -166,7 +167,7 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean updatePassword(String newPassword){
 		SysUser user = getSysUser(this.getCurrentUser().getId());
-		user.setPassword(EncryptionUtils.EncoderByMd5(newPassword));
+		user.setPassword(SecureUtil.md5(newPassword));
 		return update(user);
 	}
 	
@@ -178,7 +179,7 @@ public class SysUserService extends BaseService{
 	 */
 	public boolean updatePassword(int userId, String newPassword){
 		SysUser user = getSysUser(userId);
-		user.setPassword(EncryptionUtils.EncoderByMd5(newPassword));
+		user.setPassword(SecureUtil.md5(newPassword));
 		return update(user);
 	}
 	

@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.workflow.engine.entity.WfFormField;
 import com.cw.cramer.workflow.engine.entity.WfInstance;
 import com.cw.cramer.workflow.engine.entity.WfTask;
@@ -26,6 +25,8 @@ import com.cw.cramer.workflow.engine.entity.WfQueryInstance;
 import com.cw.cramer.workflow.engine.entity.WfQueryTask;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 工作流历史服务类
@@ -90,12 +91,12 @@ public class WfHistoryService {
 		}
 
 		if (!Strings.isNullOrEmpty(queryCondition.getStartTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getStartTime());
+			Date date = DateUtil.parse(queryCondition.getStartTime());
 			query = query.taskCompletedAfter(date);
 		}
 
 		if (!Strings.isNullOrEmpty(queryCondition.getEndTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getEndTime());
+			Date date = DateUtil.parse(queryCondition.getEndTime());
 			query = query.taskCompletedBefore(date);
 		}
 
@@ -129,7 +130,7 @@ public class WfHistoryService {
 	 * @return
 	 */
 	public List<WfInstance> getFinishedInstancesByCreator(String creator) {
-		List<WfInstance> WfInstances = new ArrayList<>();
+		List<WfInstance> wfInstances = new ArrayList<>();
 		
 		List<HistoricProcessInstance> historicProcessInstance = historyService
 				.createHistoricProcessInstanceQuery()
@@ -139,8 +140,8 @@ public class WfHistoryService {
 				.desc()
 				.list();
 		
-		WfInstances = WfConvertUtils.convertWfHiscInstances(historicProcessInstance);
-		return WfInstances;
+		wfInstances = WfConvertUtils.convertWfHiscInstances(historicProcessInstance);
+		return wfInstances;
 	}
 	
 	/**
@@ -160,12 +161,12 @@ public class WfHistoryService {
 		}
 		
 		if(!Strings.isNullOrEmpty(queryCondition.getStartTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getStartTime());
+			Date date = DateUtil.parse(queryCondition.getStartTime());
 			query = query.startedAfter(date);
 		}
 		
 		if(!Strings.isNullOrEmpty(queryCondition.getEndTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getEndTime());
+			Date date = DateUtil.parse(queryCondition.getEndTime());
 			query = query.startedBefore(date);
 		}
 		
@@ -210,12 +211,12 @@ public class WfHistoryService {
 		
 		if(historicActivityInstances != null) {
 			for(HistoricActivityInstance historicActivityInstance : historicActivityInstances) {
-				if(historicActivityInstance.getActivityType().equals("startEvent") 
-						|| historicActivityInstance.getActivityType().equals("endEvent")
-						|| historicActivityInstance.getActivityType().equals("userTask")) {
+				if("startEvent".equals(historicActivityInstance.getActivityType())
+						|| "endEvent".equals(historicActivityInstance.getActivityType())
+						|| "userTask".equals(historicActivityInstance.getActivityType())) {
 					WfTask wfTaskInstance = new WfTask();
 					wfTaskInstance.setAssigne(historicActivityInstance.getAssignee());
-					wfTaskInstance.setEndTime(DateTimeUtils.formatDate(historicActivityInstance.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+					wfTaskInstance.setEndTime(DateUtil.formatDateTime(historicActivityInstance.getEndTime()));
 					wfTaskInstance.setInstanceId(instanceId);
 					wfTaskInstance.setTaskKey(historicActivityInstance.getActivityId());
 					wfTaskInstance.setTaskId(historicActivityInstance.getTaskId());

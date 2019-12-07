@@ -10,10 +10,42 @@ import java.util.Map;
  * @author wicks
  */
 public enum OperateLogType {
-	Query(220001),Export(220002),
-	Insert(230001),Update(230002),Delete(230003),Import(230004),
+	/**
+	 * 查询
+	 */
+	Query(220001),
+	/**
+	 * 导出
+	 */
+	Export(220002),
+	/**
+	 * 插入
+	 */
+	Insert(230001),
+	/**
+	 * 更新
+	 */
+	Update(230002),
+	/**
+	 * 删除
+	 */
+	Delete(230003),
+	/**
+	 * 导入
+	 */
+	Import(230004),
+	/**
+	 * 调用
+	 */
 	Invoke(240001),
-	Login_In(291001),Login_Out(291002);
+	/**
+	 * 登录
+	 */
+	Login_In(291001),
+	/**
+	 * 登出
+	 */
+	Login_Out(291002);
 	
 	private int code;
 	

@@ -1,5 +1,10 @@
 package com.cw.cramer.common.constant;
 
+/**
+ * 数据库方言枚举
+ * @author wicks
+ *
+ */
 public enum Dialect
 {
   mysql,  mariadb,  sqlite,  oracle,  hsqldb,  postgresql,  sqlserver,  db2,  informix;

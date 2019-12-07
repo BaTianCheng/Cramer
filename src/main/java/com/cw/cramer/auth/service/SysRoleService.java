@@ -19,10 +19,11 @@ import com.cw.cramer.auth.entity.SysUserRoleExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
 import com.cw.cramer.common.constant.StatusConstant;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 角色服务类
@@ -105,7 +106,7 @@ public class SysRoleService extends BaseService{
 	 */
 	public boolean update(SysRole role){
 		role.setUpdateBy(this.getCurrentUser().getId());
-		role.setUpdateTime(DateTimeUtils.getCurrentTime());
+		role.setUpdateTime(DateUtil.date());
 		return sysRoleDAO.updateByPrimaryKey(role)>0 ? true : false;
 	}
 	

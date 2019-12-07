@@ -12,10 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.cw.cramer.workflow.engine.entity.WfTask;
 import com.cw.cramer.workflow.engine.util.WfConvertUtils;
-import com.cw.cramer.common.util.DateTimeUtils;
 import com.cw.cramer.workflow.engine.entity.WfQueryTask;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
+
+import cn.hutool.core.date.DateUtil;
 
 /**
  * 工作流任务实例服务类
@@ -75,12 +76,12 @@ public class WfTaskService {
 		}
 
 		if (!Strings.isNullOrEmpty(queryCondition.getStartTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getStartTime());
+			Date date = DateUtil.parse(queryCondition.getStartTime());
 			query = query.taskCreatedAfter(date);
 		}
 
 		if (!Strings.isNullOrEmpty(queryCondition.getEndTime())) {
-			Date date = DateTimeUtils.parseDate(queryCondition.getEndTime());
+			Date date = DateUtil.parse(queryCondition.getEndTime());
 			query = query.taskCreatedBefore(date);
 		}
 
