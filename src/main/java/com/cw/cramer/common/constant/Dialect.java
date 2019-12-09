@@ -1,7 +1,7 @@
 package com.cw.cramer.common.constant;
 
 /**
- * 数据库方言枚举
+ * 数据库方言枚举(复制类)
  * @author wicks
  *
  */

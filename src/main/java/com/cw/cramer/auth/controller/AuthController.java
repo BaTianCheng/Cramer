@@ -77,18 +77,17 @@ public class AuthController extends BaseController{
 			result.put("params", CommonConstant.CONFIG_PARAMS);
 			return this.renderSuccessJson(result);
 		}catch (UnknownAccountException e) {
-			LogUtils.error("login fail: " + e);
-			return this.renderFailJson(null);
+			LogUtils.error("用户不存在: ",e);
+			return this.renderFailJson();
 		}catch (LockedAccountException e) {
-			LogUtils.error("login fail: " + e);
-			return this.renderFailJson(null);
+			LogUtils.error("用户被锁定: ",e);
+            return this.renderFailJson();
 		}catch (IncorrectCredentialsException e) {
-			LogUtils.error("login fail: " + e);
-			return this.renderFailJson(null);
+			LogUtils.error("密码错误: ",e);
+            return this.renderFailJson();
 		}catch (Exception e) {
-			LogUtils.error("login fail: " + e);
-			LogUtils.error(e.getStackTrace().toString());
-			return this.renderFailJson(null);
+			LogUtils.error("登陆失败: ",e);
+            return this.renderFailJson();
 		}
 	}
 	

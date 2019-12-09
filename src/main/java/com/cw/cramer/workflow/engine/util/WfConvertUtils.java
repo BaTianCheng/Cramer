@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import com.cw.cramer.workflow.engine.constant.WfStatusConstant;
 import com.cw.cramer.workflow.engine.entity.WfForm;
 import com.cw.cramer.workflow.engine.entity.WfFormField;
 import com.cw.cramer.workflow.engine.entity.WfInstance;
@@ -33,12 +34,14 @@ import com.cw.cramer.workflow.engine.entity.WfTemplate;
 import cn.hutool.core.date.DateUtil;
 
 /**
- * 描 述: 转换工具类
+ * 转换工具类
  * @author wicks
  */
 @Service
 @Lazy(value=false)
 public class WfConvertUtils {
+    
+    // 状态码未提取 000 100 200 201
 	
 	@Autowired
 	FormService autoFormService;
@@ -309,9 +312,9 @@ public class WfConvertUtils {
 			
 			// 判断状态
 			if(processInstance.isSuspended()) {
-				wfInstance.setStatus("100");
+				wfInstance.setStatus(WfStatusConstant.STATUS_SUSPEND);
 			} else {
-				wfInstance.setStatus("000");
+				wfInstance.setStatus(WfStatusConstant.STATUS_RUNNING);
 			}
 		}
 		
@@ -366,10 +369,10 @@ public class WfConvertUtils {
 			if(variables.containsKey("#wf_result#")) {
 				wfInstance.setResult((String)variables.get("#wf_result#"));
 				if("abort".equals(wfInstance.getResult())) {
-					wfInstance.setStatus("200");
-				} else {
-					wfInstance.setStatus("201");
-				}
+                    wfInstance.setStatus(WfStatusConstant.STATUS_ABORT);
+                } else {
+                    wfInstance.setStatus(WfStatusConstant.STATUS_END);
+                }
 			}
 		}
 		

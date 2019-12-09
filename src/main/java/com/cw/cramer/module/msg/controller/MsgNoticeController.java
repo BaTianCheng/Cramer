@@ -1,5 +1,7 @@
 package com.cw.cramer.module.msg.controller;
 
+import java.text.MessageFormat;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +74,7 @@ public class MsgNoticeController extends BaseController{
 	public String updateUser(HttpServletRequest request, Model model, String oper, MsgNotice notice) {
 		boolean isSuccess = msgNoticeService.updateInfo(notice);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Update, "修改公告："+notice.getTitle());
+			this.record(ModuleType.Auth, OperateLogType.Update, MessageFormat.format("修改公告：{0}", notice.getTitle()));
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -88,7 +90,7 @@ public class MsgNoticeController extends BaseController{
 	public String add(HttpServletRequest request, Model model, MsgNotice notice) {
 		boolean isSuccess = msgNoticeService.insert(notice);
 		if(isSuccess){
-			this.record(ModuleType.Auth, OperateLogType.Insert, "新增公告："+notice.getTitle());
+			this.record(ModuleType.Auth, OperateLogType.Insert, MessageFormat.format("新增公告：{0}", notice.getTitle()));
 		}
 		return this.renderJson(isSuccess);
 	}
@@ -104,7 +106,7 @@ public class MsgNoticeController extends BaseController{
 	public String deleteUser(HttpServletRequest request, Model model, int notifyId) {
 		boolean isSuccess = msgNoticeService.delete(notifyId);
 		if(isSuccess){
-			this.record(ModuleType.Msg, OperateLogType.Delete, "删除公告，编号："+notifyId);
+			this.record(ModuleType.Msg, OperateLogType.Delete, MessageFormat.format("删除公告：{0}", notifyId));
 		}
 		return this.renderJson(isSuccess);
 	}

@@ -1,5 +1,6 @@
 package com.cw.cramer.auth.service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import com.cw.cramer.auth.entity.SysUserRole;
 import com.cw.cramer.auth.entity.SysUserRoleExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
-import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.constant.UserStatusConstant;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
@@ -62,7 +63,7 @@ public class SysRoleService extends BaseService{
 		SysRoleExample example = new SysRoleExample();
 		String sortStr = "role.sort asc, role.id asc";
 		Criteria criteria = example.createCriteria();
-		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+		criteria.andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(roleName)){
 			criteria.andNameLike(roleName);
 		}
@@ -70,7 +71,7 @@ public class SysRoleService extends BaseService{
 			criteria.andDepartmentIdEqualTo(departmentId);
 		}
 		if(!Strings.isNullOrEmpty(sortId)){
-			sortStr = sortId+" "+sortType+", "+sortStr;
+		    sortStr = MessageFormat.format("{0} {1}, {2}", sortId, sortType, sortStr);
 		}
 		example.or(criteria);
 		example.setOrderByClause(sortStr);
@@ -133,7 +134,7 @@ public class SysRoleService extends BaseService{
 	public boolean delete(int id){
 		SysRole role = getSysRole(id);
 		if(role != null){
-			role.setStatus(StatusConstant.STATUS_DELETED);
+			role.setStatus(UserStatusConstant.STATUS_DELETED);
 			return sysRoleDAO.updateByPrimaryKey(role)>0 ? true : false;
 		} else {
 			return false;

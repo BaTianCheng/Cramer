@@ -8,6 +8,11 @@ import org.activiti.engine.impl.persistence.entity.UserEntityImpl;
 import com.cw.cramer.auth.entity.SysRole;
 import com.cw.cramer.auth.entity.SysUser;
 
+/**
+ * 自定义用户管理
+ * @author wicks
+ *
+ */
 public class BaseCustomManager {
 
 	/**

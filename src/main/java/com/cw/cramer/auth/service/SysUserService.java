@@ -1,5 +1,6 @@
 package com.cw.cramer.auth.service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import com.cw.cramer.auth.entity.SysUserRole;
 import com.cw.cramer.auth.entity.SysUserRoleExample;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
-import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.constant.UserStatusConstant;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
@@ -101,12 +102,12 @@ public class SysUserService extends BaseService{
 		SysUserExample example = new SysUserExample();
 		String sortStr = "user.sort asc, user.id asc";
 		if(!Strings.isNullOrEmpty(userName)){
-			example.or().andNameEqualTo(userName).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.or().andNameEqualTo(userName).andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		} else {
-			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.or().andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		}
 		if(!Strings.isNullOrEmpty(sortId)){
-			sortStr = sortId+" "+sortType+", " + sortStr;
+			sortStr = MessageFormat.format("{0} {1}, {2}", sortId, sortType, sortStr);
 		}
 		example.setOrderByClause(sortStr);
 		List<Integer> ids = sysUserDAO.selectIdByExample(example);
@@ -216,7 +217,7 @@ public class SysUserService extends BaseService{
 	public boolean delete(int userId){
 		SysUser user = getSysUser(userId);
 		if(user != null){
-			user.setStatus(StatusConstant.STATUS_DELETED);
+			user.setStatus(UserStatusConstant.STATUS_DELETED);
 			return sysUserDAO.updateByPrimaryKey(user)>0 ? true : false;
 		} else {
 			return false;

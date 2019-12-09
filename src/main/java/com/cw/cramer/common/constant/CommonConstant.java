@@ -19,12 +19,12 @@ public class CommonConstant {
 	/**
 	 * 配置文件路径
 	 */
-	private static String XMLPATH = "application.properties";
+	private static final String XMLPATH = "application.properties";
 	
 	/**
 	 * 配置常量
 	 */
-	public static Map<String, String> CONFIG_PARAMS;
+	public static final Map<String, String> CONFIG_PARAMS;
 	
 	/**
 	 * 日志记录线程
@@ -45,12 +45,12 @@ public class CommonConstant {
 	/**
 	 * 升序排序
 	 */
-	public static String SORT_ASC = "asc";
+	public static final String SORT_ASC = "asc";
 	
 	/**
 	 * 降序排序
 	 */
-	public static String SORT_DESC = "desc";
+	public static final String SORT_DESC = "desc";
 	
 	/**
 	 * 日志队列
@@ -60,11 +60,11 @@ public class CommonConstant {
 	/**
 	 * 日志周期
 	 */
-	public static long LOG_TIME = 1000*60*1;
+	public static final long LOG_TIME = 1000*60*1;
 	
 	/**
 	 * 日志队列最大长度
 	 */
-	public static long LOGQUEUE_SIZE = 100;
+	public static final long LOGQUEUE_SIZE = 100;
 
 }

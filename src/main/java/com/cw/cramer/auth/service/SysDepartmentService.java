@@ -1,5 +1,6 @@
 package com.cw.cramer.auth.service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ import com.cw.cramer.auth.entity.SysDepartmentExample.Criteria;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.CommonConstant;
 import com.cw.cramer.common.constant.SequenceConstant;
-import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.constant.UserStatusConstant;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
@@ -60,16 +61,16 @@ public class SysDepartmentService extends BaseService{
 		SysDepartmentExample example = new SysDepartmentExample();
 		String sortStr = "department.sort asc, department.id asc";
 		Criteria criteria = example.createCriteria();
-		criteria.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+		criteria.andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		if(!Strings.isNullOrEmpty(departmentName)){
 			criteria.andNameLike(departmentName);
 		} else if(parentId != null){
 			criteria.andIdEqualTo(parentId);
 			Criteria criteria2 = example.createCriteria();
-			criteria2.andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			criteria2.andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 			criteria2.andParentIdEqualTo(parentId);
 			example.or(criteria2);
-			sortStr = "(case when department.id='"+parentId.toString()+"' then 1 else 2 end), "+sortStr;
+			sortStr = MessageFormat.format("(case when department.id='{0}' then 1 else 2 end), {1}",parentId.toString(),sortStr);
 		} 
 		example.setOrderByClause(sortStr);
 		List<Integer> ids = sysDepartmentDAO.selectIdByExample(example);
@@ -132,7 +133,7 @@ public class SysDepartmentService extends BaseService{
 	public boolean delete(int id){
 		SysDepartment department = getSysDepartment(id);
 		if(department != null){
-		    department.setStatus(StatusConstant.STATUS_DELETED);
+		    department.setStatus(UserStatusConstant.STATUS_DELETED);
 			return sysDepartmentDAO.updateByPrimaryKey(department)>0 ? true : false;
 		} else {
 			return false;
@@ -186,7 +187,7 @@ public class SysDepartmentService extends BaseService{
 		List<DepartmentTreeNode> roots = new ArrayList<DepartmentTreeNode>();
 		Map<Integer, DepartmentTreeNode> map = new HashMap<>();
 		SysDepartmentExample example = new SysDepartmentExample();
-		example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+		example.or().andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		example.setOrderByClause("department_parent_id, department_sort, department_id");
 		List<SysDepartment> departments = sysDepartmentDAO.selectByExample(example);
 		for(SysDepartment department : departments){

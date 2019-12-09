@@ -6,6 +6,6 @@ package com.cw.cramer.workflow.engine.constant;
  */
 public class DeploymentConstants {
 	
-	public final static String BPMN_PATH = "bpmn/";
+	public static final String BPMN_PATH = "bpmn/";
 
 }

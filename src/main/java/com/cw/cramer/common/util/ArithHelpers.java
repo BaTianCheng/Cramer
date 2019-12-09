@@ -101,7 +101,7 @@ public class ArithHelpers {
 
     public static double div(double v1, double v2, int scale) {
         if (scale < 0) {
-            throw new IllegalArgumentException("The   scale   must   be   a   positive   integer   or   zero");
+            throw new IllegalArgumentException("精度无效");
         }
         java.math.BigDecimal b1 = new java.math.BigDecimal(Double.toString(v1));
         java.math.BigDecimal b2 = new java.math.BigDecimal(Double.toString(v2));
@@ -117,7 +117,7 @@ public class ArithHelpers {
 
     public static double round(double v, int scale) {
         if (scale < 0) {
-            throw new IllegalArgumentException("The   scale   must   be   a   positive   integer   or   zero");
+            throw new IllegalArgumentException("精度无效");
         }
         java.math.BigDecimal b = new java.math.BigDecimal(Double.toString(v));
         java.math.BigDecimal one = new java.math.BigDecimal("1");
@@ -126,7 +126,7 @@ public class ArithHelpers {
 
     public static double round(String v, int scale) {
         if (scale < 0) {
-            throw new IllegalArgumentException("The   scale   must   be   a   positive   integer   or   zero");
+            throw new IllegalArgumentException("精度无效");
         }
         java.math.BigDecimal b = new java.math.BigDecimal(v);
         java.math.BigDecimal one = new java.math.BigDecimal("1");

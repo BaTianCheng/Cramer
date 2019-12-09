@@ -39,7 +39,8 @@ public class OperateLogRunnable implements Runnable{
 		lastTime = System.currentTimeMillis();
 		
 		while(!stopFlag){
-		    boolean isNeedInsert = getQueueSize() > 0 && (getQueueSize()>=CommonConstant.LOGQUEUE_SIZE || System.currentTimeMillis()-lastTime>CommonConstant.LOG_TIME);
+		    boolean isNeedInsert = getQueueSize() > 0 && (getQueueSize()>=CommonConstant.LOGQUEUE_SIZE 
+		        || System.currentTimeMillis()-lastTime>CommonConstant.LOG_TIME);
 			if(isNeedInsert){
 				lastTime = System.currentTimeMillis();
 				LogUtils.info("线程启动——插入操作记录");
@@ -51,10 +52,11 @@ public class OperateLogRunnable implements Runnable{
 			} else {
 				try {
 					synchronized(this){
-						this.wait(CommonConstant.LOG_TIME-(System.currentTimeMillis()-lastTime)>0?CommonConstant.LOG_TIME-(System.currentTimeMillis()-lastTime):1000);
+						this.wait(CommonConstant.LOG_TIME-(System.currentTimeMillis()-lastTime)>0
+						    ?CommonConstant.LOG_TIME-(System.currentTimeMillis()-lastTime):1000);
 					}
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+				    LogUtils.error("日志写入失败", e);
 				}
 			}
 		}

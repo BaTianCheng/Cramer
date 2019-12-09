@@ -1,5 +1,6 @@
 package com.cw.cramer.workflow.engine.service.runtime;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,7 +70,8 @@ public class WfInstanceService {
 				.singleResult();
 		identityService.setAuthenticatedUserId(assignee);
 		ProcessInstance instance = formService.submitStartFormData(processDefinition.getId(), form);
-		logger.info("【工作流创建】"+assignee+"创建了工作流-"+processDefinition.getName()+"，实例编号："+instance.getId());
+		logger.info(MessageFormat.format("【工作流创建】{0}创建了工作流-{1}，实例编号：{2}", 
+		    assignee, processDefinition.getName(), instance.getId()));
 		return instance.getId();
 	}
 	
@@ -89,7 +91,8 @@ public class WfInstanceService {
 				.singleResult();
 		identityService.setAuthenticatedUserId(assignee);
 		ProcessInstance instance = formService.submitStartFormData(processDefinition.getId(), bussinessKey, form);
-		logger.info("【工作流创建】"+assignee+"创建了工作流-"+processDefinition.getName()+"，实例编号："+instance.getId()+"，业务编号："+bussinessKey);
+		logger.info(MessageFormat.format("【工作流创建】{0}创建了工作流-{1}，实例编号：{2}，业务编号：{3}", 
+		    assignee, processDefinition.getName(), instance.getId(),bussinessKey));
 		return instance.getId();
 	}
 	
@@ -112,7 +115,8 @@ public class WfInstanceService {
 		}
 		
 		formService.submitTaskFormData(task.getId(), form);
-		logger.info("【工作流处理】"+assignee+"完成了工作流任务-"+task.getId()+"-"+task.getName()+"的处理");
+		logger.info(MessageFormat.format("【工作流处理】{0}完成了工作流任务-{1}-{2}的处理", 
+            assignee, task.getId(), task.getName()));
 	}
 	
 	/**
@@ -128,7 +132,8 @@ public class WfInstanceService {
 				.singleResult();
 		taskService.claim(task.getId(), assignee);
 		taskService.complete(task.getId());
-		logger.info("【工作流处理】"+assignee+"完成了工作流任务-"+task.getId()+"-"+task.getName()+"的处理");
+        logger.info(MessageFormat.format("【工作流处理】{0}完成了工作流任务-{1}-{2}的处理", 
+            assignee, task.getId(), task.getName()));
 	}
 	
 	/**

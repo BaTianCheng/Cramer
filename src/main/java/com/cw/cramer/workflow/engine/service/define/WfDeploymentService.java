@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.cw.cramer.workflow.engine.constant.DeploymentConstants;
 
 /**
- * DeploymentService
+ * 工作流部署服务类
  * @author wicks
  */
 @Service(value = "wfDeploymentService")

@@ -106,13 +106,14 @@ public class WorkflowController extends BaseController{
 	 * @param request
 	 * @param model
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/workflow/manager/deploy")
 	@ResponseBody
-	public String deploy(HttpServletRequest request, Model model) {
+	public String deploy(HttpServletRequest request, Model model) throws Exception {
 		workFlowSystemManagerAPI.deploy();
 		workflowImageService.generateImage(request.getSession().getServletContext().getRealPath("/")+"WEB-INF/");
-		return this.renderSuccessJson(null);
+		return this.renderSuccessJson();
 	}
 	
 	/**
@@ -153,7 +154,7 @@ public class WorkflowController extends BaseController{
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) JSON.parse(formStr);
 		workFlowAPI.start(templateKey, securityService.getCurrentUser().getId().toString(), map);
-		return this.renderSuccessJson(null);
+		return this.renderSuccessJson();
 	}
 	
 	/**
@@ -168,7 +169,7 @@ public class WorkflowController extends BaseController{
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) JSON.parse(formStr);
 		workFlowAPI.complete(taskId, securityService.getCurrentUser().getId().toString(), map);
-		return this.renderSuccessJson(null);
+		return this.renderSuccessJson();
 	}
 	
 	/**

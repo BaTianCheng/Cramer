@@ -31,6 +31,11 @@ public class BaseController {
 	SysAPI sysAPI;
 	
 	/**
+	 * 请求前缀
+	 */
+	private static final String REQ_PREFIX = "REQ_LOG_";
+	
+	/**
 	 * 请求
 	 */
 	protected HttpServletRequest request;
@@ -62,6 +67,19 @@ public class BaseController {
 		return JSON.toJSONString(result);
 	}
 	
+	   /**
+     * 返回结果
+     * @param code
+     * @param message
+     * @return
+     */
+    public String renderJson(String code, String message){
+        Result result = new Result();
+        result.setResultCode(code);
+        result.setMessage(message);
+        return JSON.toJSONString(result);
+    }
+	
 	/**
 	 * 返回成功结果(JSON格式)
 	 * @param data
@@ -89,6 +107,14 @@ public class BaseController {
 	}
 	
 	/**
+     * 返回成功结果
+     * @return
+     */
+    public String renderSuccessJson(){
+        return renderJson(ResultConstant.CODE_SUCCESS, ResultConstant.CODE_SUCCESS_DESC);
+    }
+	
+	/**
 	 * 返回失败结果(JSON格式)
 	 * @param data
 	 * @return
@@ -96,6 +122,14 @@ public class BaseController {
 	public String renderFailJson(Object data){
 		return renderJson(ResultConstant.CODE_FAIL, ResultConstant.CODE_FAIL_DESC, data);
 	}
+	
+	/**
+     * 返回失败
+     * @return
+     */
+    public String renderFailJson(){
+        return renderJson(ResultConstant.CODE_FAIL, ResultConstant.CODE_FAIL_DESC);
+    }
 	
 	/**
 	 * 获取当前用户
@@ -116,7 +150,7 @@ public class BaseController {
 		UUID uuid = UUID.randomUUID();
 		sysAPI.record(moduleType, logType, description, request.getRequestURI(), uuid.toString());
 		StringBuilder sb = new StringBuilder();
-		sb.append("REQ_LOG_");
+		sb.append(REQ_PREFIX);
 		sb.append(uuid.toString());
 		sb.append("   ");
 		sb.append(JSON.toJSONString(request.getParameterMap()));

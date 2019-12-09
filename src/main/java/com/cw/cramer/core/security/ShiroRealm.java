@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import com.cw.cramer.auth.entity.SysUser;
 import com.cw.cramer.auth.service.SysUserService;
+import com.cw.cramer.common.constant.UserStatusConstant;
 
 /**
  * 安全身份管理类
@@ -33,6 +34,11 @@ public class ShiroRealm extends AuthorizingRealm{
 	
 	@Autowired
 	private SecurityService securityService;
+	
+	/**
+	 * SESSION名称
+	 */
+	private static final String SESSIONNAME = "currentUser";
 
 	/**
 	 * 获得权限
@@ -59,18 +65,18 @@ public class ShiroRealm extends AuthorizingRealm{
 		SysUser user = sysUserService.getSysUser(userName);
 		
 		//没找到帐号
-		if(user == null || user.getStatus() == -1) {
+		if(null == user || UserStatusConstant.STATUS_DELETED == user.getStatus()) {
 			throw new UnknownAccountException();
 		} 
 		//帐号锁定
-		if(user.getStatus() == 2) {
+		if(UserStatusConstant.STATUS_LOCKED == user.getStatus()) {
 			throw new LockedAccountException(); 
 		}
 		
 		//验证密码
         if(sysUserService.checkPassWord(token.getUsername(), String.valueOf(token.getPassword()))){  
             AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(token.getUsername(), token.getPassword(), this.getName());  
-            this.setSession("currentUser", token.getUsername());  
+            this.setSession(SESSIONNAME, token.getUsername());  
             return authcInfo;  
         } else {
         	throw new IncorrectCredentialsException();

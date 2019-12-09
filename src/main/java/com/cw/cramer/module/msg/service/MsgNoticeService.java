@@ -1,5 +1,6 @@
 package com.cw.cramer.module.msg.service;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
-import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.constant.UserStatusConstant;
 import com.cw.cramer.module.msg.dao.MsgNoticeDAO;
 import com.cw.cramer.module.msg.entity.MsgNotice;
 import com.cw.cramer.module.msg.entity.MsgNoticeExample;
@@ -50,12 +51,12 @@ public class MsgNoticeService extends BaseService{
 		MsgNoticeExample example = new MsgNoticeExample();
 		String sortStr = "notice.top_flag desc, notice.sort asc, notice.create_time desc, notice.id asc";
 		if(!Strings.isNullOrEmpty(title)){
-			example.or().andTitleLike(title).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.or().andTitleLike(title).andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		} else {
-			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.or().andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		}
 		if(!Strings.isNullOrEmpty(sortId)){
-			sortStr = sortId+" "+sortType+", " + sortStr;
+		    MessageFormat.format("{0} {1}, {2}", sortId, sortType, sortStr);
 		}
 		example.setOrderByClause(sortStr);
 		List<MsgNotice> msgNotices = msgNoticeDAO.selectByExampleWithBLOBs(example);
@@ -70,7 +71,7 @@ public class MsgNoticeService extends BaseService{
 	 */
 	public boolean insert(MsgNotice notice){
 		notice.setId(getNextSeq(SequenceConstant.SEQ_SYSROLEID));
-		notice.setStatus(StatusConstant.STATUS_ENABLED);
+		notice.setStatus(UserStatusConstant.STATUS_ENABLED);
 		notice.setCreateBy(this.getCurrentUser().getId());
 		notice.setCreateTime(DateUtil.date());
 		notice.setUpdateBy(this.getCurrentUser().getId());
@@ -111,7 +112,7 @@ public class MsgNoticeService extends BaseService{
 	public boolean delete(int id){
 		MsgNotice notice = getMsgNotice(id);
 		if(notice != null){
-			notice.setStatus(StatusConstant.STATUS_DELETED);
+			notice.setStatus(UserStatusConstant.STATUS_DELETED);
 			return msgNoticeDAO.updateByPrimaryKeyWithBLOBs(notice)>0 ? true : false;
 		} else {
 			return false;

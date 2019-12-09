@@ -1,5 +1,7 @@
 package com.cw.cramer.module.msg.controller;
 
+import java.text.MessageFormat;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +74,7 @@ public class MsgWebMailController extends BaseController{
 	public String add(HttpServletRequest request, Model model, MsgWebMail mail) {
 		boolean isSuccess = msgWebMailService.sendWebMail(mail);
 		if(isSuccess){
-			this.record(ModuleType.Msg, OperateLogType.Insert, "发送邮件："+mail.getTitle());
+			this.record(ModuleType.Msg, OperateLogType.Insert, MessageFormat.format("发送邮件：{0}", mail.getTitle()));
 		}
 		return this.renderJson(isSuccess);
 	}

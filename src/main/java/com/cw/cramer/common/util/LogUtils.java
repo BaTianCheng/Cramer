@@ -16,6 +16,14 @@ public final class LogUtils {
 	}
 	
 	/**
+     * 记录警告信息
+     * @param info
+     */
+    public static void warn(String info){
+        logger.warn(info);
+    }
+	
+	/**
 	 * 记录错误日志
 	 * @param info
 	 */

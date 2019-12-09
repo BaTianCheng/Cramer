@@ -25,7 +25,7 @@ import com.google.common.base.Strings;
 
 
 /**
- * 自定义WEB会话管理类
+ * 自定义WEB会话管理类（复制类）
  * @author ThinkGem
  * @version 2014-7-20
  */

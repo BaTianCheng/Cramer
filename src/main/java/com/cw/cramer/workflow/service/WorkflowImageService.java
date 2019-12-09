@@ -15,13 +15,8 @@ import com.cw.cramer.workflow.engine.WorkFlowSystemManagerAPI;
 import com.cw.cramer.workflow.engine.entity.WfTemplate;
 
 /**
- * 类 名: WorkflowImageService
- * 描 述: 工作流图像服务类
- * 作 者: wicks
- * 创 建：2018年3月22日
- * 版 本：1.0
- * 
- * 历 史: 1.0 wicks 2018年3月22日 创建
+ * WorkflowImageService
+ * @author wicks
  */
 @Service(value = "workflowImageService")
 public class WorkflowImageService {
@@ -35,14 +30,16 @@ public class WorkflowImageService {
 	WorkFlowAPI workFlowAPI;
 	
 	/**
-	 * 描 述：生成工作流图像
-	 * 作 者：wicks
-	 * 历 史: 1.0 wicks 2018年3月22日 创建 
-	 * @param templateKey
-	 * @return
+	 * 文件路径
 	 */
-	public void generateImage(String path) {
-		path = path + "/files/workflow/images/";
+	private static final String fileURL = "/files/workflow/images/";
+	
+	/**
+	 * 生成工作流图像
+	 * @throws Exception 
+	 */
+	public void generateImage(String path) throws Exception {
+		path = path + fileURL;
 		List<WfTemplate> wfTemplates = workFlowAPI.getTemplates();
 		
 		for(WfTemplate wfTemplate : wfTemplates) {
@@ -52,13 +49,10 @@ public class WorkflowImageService {
 	}
 	
 	/**
-	 * 描 述：生成工作流图像
-	 * 作 者：wicks
-	 * 历 史: 1.0 wicks 2018年3月22日 创建 
-	 * @param templateKey
-	 * @return
+	 * 生成工作流图像
+	 * @throws Exception 
 	 */
-	public String generateImage(String templateKey, String path) {
+	public String generateImage(String templateKey, String path) throws Exception {
 		InputStream inputStream = workFlowSystemManagerAPI.getTemplateImage(templateKey);
 		String fileName = path+templateKey+".png";
 		File file = new File(fileName);
@@ -80,7 +74,8 @@ public class WorkflowImageService {
 		    inputStream.close();  
 		}
 		catch(Exception ex){
-			logger.error("生成工作流图像失败:"+fileName);
+			logger.error("生成工作流图像失败:"+fileName, ex);
+			throw ex;
 		}
 		
 		return fileName;

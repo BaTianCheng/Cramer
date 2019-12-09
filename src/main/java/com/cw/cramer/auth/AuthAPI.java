@@ -22,11 +22,11 @@ public class AuthAPI {
 	 * @return
 	 */
 	public String getUserName(Integer userId){
-		if(userId == null){
+		if(null == userId){
 			return null;
 		}
 		SysUser user = sysUserService.getSysUser(userId);
-		if(user != null){
+		if(null != user){
 			return user.getName();
 		} else {
 			return null;

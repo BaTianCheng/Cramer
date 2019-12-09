@@ -13,7 +13,7 @@ import com.cw.cramer.workflow.engine.entity.WfTemplate;
 import com.cw.cramer.workflow.engine.util.WfConvertUtils;
 
 /**
- * WfAuthorizeService
+ * 工作流全息服务类
  * @author wicks
  */
 @Service

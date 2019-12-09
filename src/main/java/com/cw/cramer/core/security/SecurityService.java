@@ -16,6 +16,11 @@ import com.cw.cramer.auth.service.SysAuthorityService;
 import com.cw.cramer.auth.service.SysUserService;
 import com.google.common.collect.Lists;
 
+/**
+ * 安全服务类
+ * @author wicks
+ *
+ */
 @Service(value = "securityService")
 public class SecurityService {
 	

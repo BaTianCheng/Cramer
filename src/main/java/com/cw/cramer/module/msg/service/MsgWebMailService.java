@@ -1,5 +1,6 @@
 package com.cw.cramer.module.msg.service;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.cw.cramer.common.base.BaseService;
 import com.cw.cramer.common.constant.SequenceConstant;
-import com.cw.cramer.common.constant.StatusConstant;
+import com.cw.cramer.common.constant.UserStatusConstant;
 import com.cw.cramer.module.msg.dao.MsgWebMailDAO;
 import com.cw.cramer.module.msg.dao.MsgWebMailStorageDAO;
 import com.cw.cramer.module.msg.entity.MsgWebMail;
@@ -57,12 +58,12 @@ public class MsgWebMailService extends BaseService{
 		MsgWebMailStorageExample example = new MsgWebMailStorageExample();
 		String sortStr = "web_mail_storage.tag desc, web_mail.send_time desc";
 		if(!Strings.isNullOrEmpty(title)){
-			example.or().andMailTitleLike(title).andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.or().andMailTitleLike(title).andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		} else {
-			example.or().andStatusNotEqualTo(StatusConstant.STATUS_DELETED);
+			example.or().andStatusNotEqualTo(UserStatusConstant.STATUS_DELETED);
 		}
 		if(!Strings.isNullOrEmpty(sortId)){
-			sortStr = sortId+" "+sortType+", " + sortStr;
+		    MessageFormat.format("{0} {1}, {2}", sortId, sortType, sortStr);
 		}
 		example.setOrderByClause(sortStr);
 		List<MsgWebMailStorage> msgWebMailStorages = msgWebMailStorageDAO.selectByExample(example);
@@ -77,7 +78,7 @@ public class MsgWebMailService extends BaseService{
 	 */
 	public boolean sendWebMail(MsgWebMail mail){
 		mail.setId(getNextSeq(SequenceConstant.SEQ_MSGWEBMAILID));
-		mail.setStatus(StatusConstant.STATUS_ENABLED);
+		mail.setStatus(UserStatusConstant.STATUS_ENABLED);
 		if(mail.getSender() == null){
 			mail.setSender(this.getCurrentUser().getId());
 		}
@@ -90,7 +91,7 @@ public class MsgWebMailService extends BaseService{
 		MsgWebMailStorage senderStorage = new MsgWebMailStorage();
 		senderStorage.setId(getNextSeq(SequenceConstant.SEQ_MSGWEBMAILSTORAGEID));
 		senderStorage.setType(1);
-		senderStorage.setStatus(StatusConstant.STATUS_ENABLED);
+		senderStorage.setStatus(UserStatusConstant.STATUS_ENABLED);
 		senderStorage.setOwner(mail.getSender());
 		senderStorage.setMailId(mail.getId());
 		senderStorage.setMethod(mail.getMethod());
@@ -103,7 +104,7 @@ public class MsgWebMailService extends BaseService{
 				MsgWebMailStorage storage = new MsgWebMailStorage();
 				storage.setId(getNextSeq(SequenceConstant.SEQ_MSGWEBMAILSTORAGEID));
 				storage.setType(2);
-				storage.setStatus(StatusConstant.STATUS_ENABLED);
+				storage.setStatus(UserStatusConstant.STATUS_ENABLED);
 				storage.setOwner(userId);
 				storage.setMailId(mail.getId());
 				storage.setMethod(1);

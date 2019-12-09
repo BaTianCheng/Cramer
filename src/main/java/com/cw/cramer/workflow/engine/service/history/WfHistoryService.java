@@ -1,5 +1,6 @@
 package com.cw.cramer.workflow.engine.service.history;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -226,11 +227,11 @@ public class WfHistoryService {
 					// 添加描述
 					StringBuilder desc = new StringBuilder();
 					switch(historicActivityInstance.getActivityType()) {
-						case "startEvent" : desc.append("工作流开始，["+wfTaskInstance.getTaskName()+"]；");
+						case "startEvent" : desc.append(MessageFormat.format("工作流开始，[{0}]；", wfTaskInstance.getTaskName()));
 							break;
-						case "endEvent" : desc.append("工作流结束，["+wfTaskInstance.getTaskName()+"]；");
+						case "endEvent" : desc.append(MessageFormat.format("工作流结束，[{0}]；", wfTaskInstance.getTaskName()));
 							break;
-						default: desc.append("处理了任务["+wfTaskInstance.getTaskName()+"]；");
+						default: desc.append(MessageFormat.format("处理了任务[{0}]；",wfTaskInstance.getTaskName()));
 					}
 								
 					if(wfTaskInstance.getFormFields().size() > 0){

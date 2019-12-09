@@ -22,14 +22,28 @@ public class BaseService {
 	@Autowired
 	private SecurityService securityService;
 	
+	/**
+	 * 获取当前用户
+	 * @return
+	 */
 	public SysUser getCurrentUser(){
 		return securityService.getCurrentUser();
 	}
 	
+	/**
+	 * 获取下一个序列
+	 * @param seqName
+	 * @return
+	 */
 	public int getNextSeq(String seqName){
 		return sysAPI.getNextSeq(seqName);
 	}
 	
+	/**
+	 * 获取用户名称
+	 * @param userId
+	 * @return
+	 */
 	public String getUserName(Integer userId){
 		return authAPI.getUserName(userId);
 	}
